@@ -1,0 +1,12 @@
+{
+  canonicalUrl: 'www.briserLaChaine.org',
+  // FIXME(cyrille): Use a real app ID.
+  facebookSSOAppId: '',
+  followUpMail: 'suivi@briserlachaine.org',
+  mailjetProxyUrl: 'https://mailjet-proxy.briserlachaine.org',
+  numDaysContagious: 35,
+  numDaysContagiousBeforeSymptoms: 2,
+  numDaysSymptoms: 21,
+  productName: 'Briser la chaîne',
+  sentryDsn: 'https://1423edf320fe498a8b3e5326737e3f06@o87797.ingest.sentry.io/5223962',
+}

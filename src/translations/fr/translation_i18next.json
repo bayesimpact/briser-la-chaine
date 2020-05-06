@@ -1,0 +1,17 @@
+{
+  "+{{count}} personne_plural": "+{{count}} personnes",
+  "Ajouter {{count}} personne_plural": "Ajouter {{count}} personnes",
+  "Alerter mon cas contact_plural": "Alerter mes cas contact",
+  "Autre personne_plural": "Autres personnes",
+  "Grâce à vous nous avons pu prévenir {{numAlert}} personne !_plural": "Grâce à vous nous avons pu prévenir {{numAlert}} personnes !",
+  "Il ne vous reste plus qu'à alerter cette personne._plural": "Il ne vous reste plus qu'à alerter ces personnes.",
+  "La prévenir_plural": "Les prévenir",
+  "Personne croisée ce jour_plural": "Personnes croisées ce jour",
+  "Personne déjà croisée_plural": "Personnes déjà croisées",
+  "Prévenir mes {{count}} cas contacts": "Prévenir mon cas contact",
+  "Prévenir mes {{count}} cas contacts_plural": "Prévenir mes {{count}} cas contacts",
+  "{{count}} personne retrouvée_plural": "{{count}} personnes retrouvées",
+  "{{count}} personne croisée ce jour_plural": "{{count}} personnes croisées ce jour",
+  "{{numAlertedPeople}}/{{numTotalPeople}} personne alertée_plural": "{{numAlertedPeople}}/{{numTotalPeople}} personnes alertées",
+  "{{numDaysValidated}}/{{count}} jour à vérifier_plural": "{{numDaysValidated}}/{{count}} jours à vérifier"
+}

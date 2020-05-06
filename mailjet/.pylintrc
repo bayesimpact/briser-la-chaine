@@ -1,0 +1,31 @@
+[MASTER]
+load-plugins=pylint_quotes,pylint_doc_spacing,pylint_import_modules
+
+# TODO(pascal): Find a way to enforce import order of module before specific classes.
+
+[REPORTS]
+output=colorized
+disable=I,R
+reports=no
+enable=useless-suppression
+
+[FORMAT]
+# Ignore any lines containing an URL longer than ~60 chars long.
+ignore-long-lines=https?://\S{50}
+
+[MISCELLANEOUS]
+notes=FIXME,XXX
+string-quote=single-avoid-escape
+allowed-direct-imports=typing.{
+    AbstractSet,Any,Callable,Dict,Generator,ItemsView,Iterable,Iterator,KeysView,List,Literal,
+    Mapping,MutableMapping,NoReturn,Optional,Pattern,Sequence,Set,TextIO,Tuple,Type,TypedDict,Union},
+    typing_extensions.Literal
+
+[VARIABLES]
+dummy-variables-rgx=_?unused_.*
+
+[DESIGN]
+ignored-argument-names=unused_.*
+
+# Override default regex to allow long method names in tests.
+method-rgx=([a-z_][a-z0-9_]{4,30}|test_[a-z0-9_]+)$

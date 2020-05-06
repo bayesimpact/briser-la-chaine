@@ -1,0 +1,161 @@
+{
+  "DistributionConfig": {
+    "Aliases": {
+      "Items": [
+        "www.cas-contact.bayes.org",
+        "cas-contact.bayes.org"
+      ],
+      "Quantity": 2
+    },
+    "CacheBehaviors": {
+      "Items": [
+        {
+          "AllowedMethods": {
+            "CachedMethods": {
+              "Items": [
+                "HEAD",
+                "GET"
+              ],
+              "Quantity": 2
+            },
+            "Items": [
+              "HEAD",
+              "GET"
+            ],
+            "Quantity": 2
+          },
+          "Compress": true,
+          "DefaultTTL": 86400,
+          "FieldLevelEncryptionId": "",
+          "ForwardedValues": {
+            "Cookies": {
+              "Forward": "none"
+            },
+            "Headers": {
+              "Quantity": 0
+            },
+            "QueryString": false,
+            "QueryStringCacheKeys": {
+              "Quantity": 0
+            }
+          },
+          "LambdaFunctionAssociations": {
+            "Quantity": 0
+          },
+          "MaxTTL": 31536000,
+          "MinTTL": 0,
+          "PathPattern": "assets/*",
+          "SmoothStreaming": false,
+          "TargetOriginId": "S3-cas-contact-client",
+          "TrustedSigners": {
+            "Enabled": false,
+            "Quantity": 0
+          },
+          "ViewerProtocolPolicy": "redirect-to-https"
+        }
+      ],
+      "Quantity": 1
+    },
+    "CallerReference": "1587461772317",
+    "Comment": "",
+    "CustomErrorResponses": {
+      "Items": [
+        {
+          "ErrorCachingMinTTL": 300,
+          "ErrorCode": 403,
+          "ResponseCode": "200",
+          "ResponsePagePath": "/index.html"
+        }
+      ],
+      "Quantity": 1
+    },
+    "DefaultCacheBehavior": {
+      "AllowedMethods": {
+        "CachedMethods": {
+          "Items": [
+            "HEAD",
+            "GET"
+          ],
+          "Quantity": 2
+        },
+        "Items": [
+          "HEAD",
+          "GET"
+        ],
+        "Quantity": 2
+      },
+      "Compress": false,
+      "DefaultTTL": 600,
+      "FieldLevelEncryptionId": "",
+      "ForwardedValues": {
+        "Cookies": {
+          "Forward": "none"
+        },
+        "Headers": {
+          "Quantity": 0
+        },
+        "QueryString": false,
+        "QueryStringCacheKeys": {
+          "Quantity": 0
+        }
+      },
+      "LambdaFunctionAssociations": {
+        "Quantity": 0
+      },
+      "MaxTTL": 600,
+      "MinTTL": 0,
+      "SmoothStreaming": false,
+      "TargetOriginId": "S3-cas-contact-client",
+      "TrustedSigners": {
+        "Enabled": false,
+        "Quantity": 0
+      },
+      "ViewerProtocolPolicy": "redirect-to-https"
+    },
+    "DefaultRootObject": "index.html",
+    "Enabled": true,
+    "HttpVersion": "http2",
+    "IsIPV6Enabled": true,
+    "Logging": {
+      "Bucket": "",
+      "Enabled": false,
+      "IncludeCookies": false,
+      "Prefix": ""
+    },
+    "OriginGroups": {
+      "Quantity": 0
+    },
+    "Origins": {
+      "Items": [
+        {
+          "CustomHeaders": {
+            "Quantity": 0
+          },
+          "DomainName": "cas-contact-client.s3.amazonaws.com",
+          "Id": "S3-cas-contact-client",
+          "OriginPath": "",
+          "S3OriginConfig": {
+            "OriginAccessIdentity": "origin-access-identity/cloudfront/E18EZCUC01ULI2"
+          }
+        }
+      ],
+      "Quantity": 1
+    },
+    "PriceClass": "PriceClass_100",
+    "Restrictions": {
+      "GeoRestriction": {
+        "Quantity": 0,
+        "RestrictionType": "none"
+      }
+    },
+    "ViewerCertificate": {
+      "ACMCertificateArn": "arn:aws:acm:us-east-1:951168128976:certificate/a25f41ab-6e81-4dc2-8b20-e88c3008f9c2",
+      "Certificate": "arn:aws:acm:us-east-1:951168128976:certificate/a25f41ab-6e81-4dc2-8b20-e88c3008f9c2",
+      "CertificateSource": "acm",
+      "MinimumProtocolVersion": "TLSv1.1_2016",
+      "SSLSupportMethod": "sni-only"
+    },
+    "WebACLId": ""
+  },
+  "ETag": "E2DFCQN6TK4EYH"
+}

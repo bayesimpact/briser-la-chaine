@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["dom", "dom.iterable", "es5", "es6"],
+    "module": "esNext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "paths": {
+      "components/*": [
+        "src/components/*"
+      ],
+      "images/*": [
+        "src/images/*"
+      ],
+      "hooks/*": [
+        "src/hooks/*"
+      ],
+      "store/*": [
+        "src/store/*"
+      ],
+      "translations/*": [
+        "src/translations/*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "esNext"
+  },
+  "include": [
+    "custom.d.ts",
+    "src",
+    "test"
+  ]
+}

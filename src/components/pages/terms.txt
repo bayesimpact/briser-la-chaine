@@ -1,0 +1,229 @@
+# Conditions générales d'utilisation au 4 mai 2020
+
+### Préambule
+
+Le 4 mai 2020
+
+L'objectif du projet et le fonctionnement de l'association sont dédiés à l'intérêt général. Le Code Source du logiciel est mis à disposition en logiciel libre.
+
+Aucune donnée personnelle n'est stockée en dehors de l'interface de l'utilisateur. Aucun traçage de l'utilisateur n'est effectué, par GPS ou par bluetooth. Les informations d'utilisations de l'application (XXXX) ne seront jamais utilisées pour un autre usage que d'améliorer les recommandations du site et de l'application. Elles resteront sous le contrôle de leurs usagers et ne permettent pas son identification. Elles ne seront ni utilisées commercialement, ni cédées à des tiers.
+
+## 1. Définitions
+
+« {{productName}} » ou « LE SERVICE » correspond à une interface permettant de diagnostiquer non médicalement son infection au coronavirus, de connaître sa période de contagiosité, de se rappeler simplement des personnes rencontrées et de les contacter anonymement ou non.
+
+L'association « {{owner}} » est le développeur et l'hébergeur de la plate-forme est OVH.
+
+Les « usagers » sont les personnes qui utilisent la plate-forme.
+
+Le service est accessible sur « LE SITE » à l'adresse : {{canonicalUrl}}
+
+## 2. Validité et acceptation
+
+Ces conditions générales sont communiquées à chaque usager qui en prend connaissance et qui l'accepte en utilisant la plate-forme, ainsi qu'en cochant une case manifestant son acceptation lors de la création de son compte.
+
+Les présentes conditions sont accessibles à tout moment sur le site.
+
+Elles régissent les relations entre les usagers et {{productName}} dans le cadre de l'utilisation du service.
+
+Les usagers reconnaissent avoir le droit d'exploiter le service.
+
+L'utilisation du service et l'exploitation des informations implique leur acceptation entière et sans réserve. Leur non-acceptation entraîne la renonciation à l'utilisation du service ainsi qu'à l'exploitation des informations.
+
+## 3. Champ d'application
+
+Le présent contrat régit exclusivement l'usage de {{productName}} par les usagers.
+
+Cette prestation est effectuée par {{owner}} gratuitement et sans autre contrepartie que le respect des présentes conditions d'utilisation.
+
+La responsabilité de {{owner}} se limite exclusivement à faciliter l'accès à la plate-forme.
+
+
+## 4. Description du service
+
+{{productName}} est une plate-forme indépendante développée par l'association {{owner}}. 
+
+### 4.1. Diagnostic non médical des symptômes
+
+{{productName}} étudie les symptômes présents chez l'usager et à partir de ces derniers émet un diagnostic consultatif et non médical sur lXXXX par le coronavirus chez l'usager . Cet avis ne remplace pas celui d'un médecin ou une procédure de test certifiée.
+
+Si l'individu a déjà été testé positif via un dispositif médical ou par le diagnostic d'un professionnel de santé, il n'a pas besoin d'effectuer cette étape.
+
+### 4.2. Indication de la période de contagiosité
+
+Suite à cette étape, le service dresse la période de contagiosité de l'individu afin de l'aider à se rappeler des personnes croisées durant ces quelques jours.
+
+### 4.3. Aide à la recherche des personnes croisées durant la période de contagiosité
+
+Le service {{productName}} va par la suite aider l'usager à se rappeler de chaque personne croisée durant cette période de contagion. Le service propose pour cela des aides-mémoires et des questions récurrentes sur les activités de la journée. L'usager, si il le souhaite et l'approuve uniquement, peut donner accès à certains informations personnelles (comme le calendrier, les contacts téléphoniques…) via des systèmes d'API. Le service permet également d'évaluer via deux questions le niveau de XXX du contact, en se basant sur la durée du contact et la distance déclarée par l'usager entre les deux personnes.
+
+### 4.3. Aide à la notification des personnes croisées durant la période de contagiosité
+
+Le service propose ensuite de notifier les personnes identifiées. L'usager peut pour cela copier le message généré automatiquement par le service et l'envoyer en le copiant dans la plateforme de messagerie son choix. L'usager peut aussi demander au service un envoi anonyme de ce message à la personne en question.
+
+## 5. Usage de XXX
+
+### 5.1. Utilisation de Briser la chaîne
+
+Dans le cadre de leur utilisation de la plate-forme, les usagers s'engagent à respecter les lois et règlements en vigueur et à ne pas porter atteinte aux droits de tiers ou à l'ordre public.
+
+Les usagers sont seuls responsables du bon accomplissement de toutes les formalités administratives ou médicales nécessaires concernant leur état de santé. Concernant les procédures d'assistance ou de test médicales,, il est de leur seule responsabilité d'obtenir les garanties et les moyens de les effectuer. La responsabilité de {{owner}} ne pourra en aucun cas être engagée à ce titre.
+
+Les usagers reconnaissent avoir pris connaissance des caractéristiques et contraintes, notamment techniques, de la plate-forme. Il sont seuls responsables de son utilisation. Les usagers sont informés et acceptent que la mise en œuvre de la plate-forme nécessite une connexion à internet dont ils sont seuls responsables, et que la qualité du service puisse en dépendre directement.
+
+Les usagers sont également seuls responsables des relations qu'ils pourront nouer avec les responsables des services, notamment les organismes d'assistance médicale ou de test, auxquels ils feront appel en suivant les suggestions du service.
+
+Le cas échéant, il est de la responsabilité des usagers de conclure des accords de confidentialité, de non-concurrence ou de respecter le secret professionnel quand cela est nécessaire pour qu'ils puissent exploiter des facilités ou des services proposés sur le service. La responsabilité de {{productName}} ne pourra en aucun cas être engagée à ce titre.
+
+Les usagers s'engagent à faire un usage strictement personnel de {{productName}}. Ils s'interdisent en conséquence de céder, concéder ou transférer tout ou partie de leurs droits ou obligations au titre des présentes à un tiers, de quelque manière que ce soit.
+
+Les usagers s'interdisent également tout référencement, scan, aspiration, etc. des informations de {{productName}}.
+
+Le cas échéant, les usagers s'engagent à fournir à {{owner}} toutes les informations nécessaires à la bonne exécution de {{productName}}.
+
+Plus généralement, les usagers s'engagent à coopérer activement avec {{productName}} en vue de la bonne exécution des présentes conditions.
+
+La consultation des formations est un service gratuit pour les usagers.
+
+### 5.2. Les comptes usagers
+
+Les usagers ne peuvent avoir qu'un unique compte {{productName}}. Ils sont entièrement et pleinement responsables de l'activité de leur compte {{productName}}, de sa confidentialité, ainsi que de la licéité des actions pour lesquelles il est utilisé.
+
+Les comptes {{productName}} sont protégés par un mot de passe choisi par l'usager. {{productName}} s'engage à ne pas révéler ce mot de passe à des tiers. Les usagers sont entièrement et pleinement responsable de la sécurité de leur compte à cet égard. Ils s'engagent notamment à communiquer le plus rapidement possible à {{owner}} toute utilisation non autorisée qui en serait faite.
+
+Les usagers s'engagent à fournir des informations exactes, à jour et complètes au moment de la procédure d'enregistrement. Ils s'engagent également à les mettre à jour au fur et à mesure de leur évolution.
+
+{{owner}} se réserve le droit de suspendre ou de supprimer ad nutum tout compte usager à tout moment et pour toute raison, notamment pour avoir créé plusieurs comptes, pour avoir transmis de fausses informations, pour avoir laissé des informations obsolètes, ou pour exploiter un compte à des fins illicites.
+
+### 5.3. Gratuité de l'usage de {{productName}}
+
+L'usage de la plate-forme {{productName}} est gratuit.
+
+## 6. Responsabilités et garanties
+
+### 6.1. Absence de responsabilité au regard des recommandations et du diagnostic non médical
+
+{{productName}} se base sur des recommandations cliniques établies sous l'égide de l'Institut Pasteur et de la coordination du Ministère de la Santé, auxquelles ont contribué des spécialistes d'établissements universitaires publics (AP-HP, CHU Rennes, CHRU Lille), privés (Institut Pasteur - Paris, Centre Jean Bernard - Le Mans), des spécialistes de médecine générale et des ingénieurs experts en e-santé réunis au sein du groupe de travail COVIDTELE coordonné par l'Institut Pasteur.
+
+Au vu de la crise sanitaire en cours, les recommandations affichées sont amenées à évoluer suivant l'état de l'art clinique et l'avis des autorités de santé. Un résultat affiché à un moment peut différer d'un résultat affiché à un autre moment, même si les données d'entrée sont identiques.
+
+{{productName}} n'est pas un dispositif médical, il ne délivre pas d'avis médical, il ne remplace pas une consultation ni l'avis d'un médecin ou d'un pharmacien. {{productName}} est un service d'information conçu pour répondre à une alerte sanitaire. Il ne ne doit pas être utilisé dans le cadre d'une télésurveillance à domicile.
+
+### 6.2. Absence de responsabilité au regard du fonctionnement de Bob Emploi
+
+{{productName}} ne peut garantir que son service ne subira aucune interruption. {{productName}} s'engage à fournir son service avec diligence et selon les règles de l'art, étant précisé qu'il ne s'agit que d'une obligation de moyens, à l'exclusion de toute obligation de résultat, ce que les usagers reconnaissent et acceptent expressément. {{productName}} ne saurait être tenu responsable des difficultés ou impossibilités momentanées d'accès à la plate-forme qui auraient pour origine des circonstances qui lui sont extérieures, la force majeure, ou encore qui seraient dues à des perturbations des réseaux de télécommunication.
+
+{{productName}} ne peut garantir les usagers en cas de perte éventuelle des informations de leur compte. Il appartient aux usagers de sauvegarder une copie de leurs informations. Ils ne peuvent prétendre à aucun dédommagement en raison de quelque perte de données que ce soit.
+
+Le service est fourni en l'état. {{productName}} ne peut garantir aux usagers qu'elle soit totalement exempte d'erreurs, de vices, de défauts. Le service est développé de façon standardisée pour l'ensemble des usagers. Elle n'est nullement conçue pour s'adapter à leurs contraintes personnelles.
+
+En tout état de cause, la responsabilité susceptible d'être encourue par {{productName}} serait expressément limitée aux seuls dommages directs avérés subis par les usagers.
+
+{{productName}} se réserve expressément la faculté d'interrompre momentanément l'accès à son service pour des raisons de maintenance.
+
+### 6.3. Comportements interdits
+
+Au-delà des autres interdictions prévues dans les présentes conditions, les usagers s'engagent à utiliser la plate-forme de façon vertueuse. Ils s'interdisent notamment d'utiliser la plate-forme aux fins suivantes : l'exercice d'activités illégales, frauduleuses ou portant atteinte aux droits ou à la sécurité des tiers ; l'atteinte à l'ordre public ou la violation des lois et règlements en vigueur ; l'intrusion dans le système informatique d'un tiers ou toute activité de nature à nuire, contrôler, interférer, ou intercepter tout ou partie du système informatique d'un tiers, en violer l'intégrité ou la sécurité ; l'envoi d'emails ou de sollicitations commerciales non sollicités ; les manipulations destinées à améliorer le référencement d'un site tiers ; l'aide ou l'incitation, sous quelque forme et de quelque manière que ce soit, à un ou plusieurs des actes et activités décrits ci-dessus ; et plus généralement toute pratique détournant le service à des fins autres que celles pour lesquelles il a été conçu.
+
+Les usagers s'engagent à respecter la continuité de service de la plate-forme. Ils s'interdisent notamment : tous comportements de nature à interrompre, suspendre, ralentir ou empêcher la continuité du service ; toutes intrusions ou tentatives d'intrusion dans le service ; tous détournements des ressources système du service ; toutes actions de nature à imposer une charge disproportionnée sur les infrastructures du service ; toutes atteintes aux mesures de sécurité et d'authentification ; tous actes de nature à porter atteinte aux droits et intérêts financiers, commerciaux ou moraux de {{productName}} ou des usagers du service.
+
+Les usagers s'engagent à respecter la valeur de la plate-forme. Ils s'interdisent de monnayer, vendre ou concéder tout ou partie de l'accès à la plate-forme.
+
+### 6.4. Garantie des usagers envers Bayes Impact France
+
+Les usagers garantissent {{owner}} contre toutes plaintes, réclamations, actions, revendications quelconque que {{owner}} pourrait subir du fait de la violation par eux de l'une quelconque de leurs obligations ou garanties aux termes des présentes conditions générales.
+
+Les usagers s'engagent à indemniser {{owner}} de tout préjudice subi et à payer tous les frais, charges, condamnations supportés de ce fait.
+
+## 7. Liens vers d'autres sites
+
+{{productName}} peut proposer des liens vers des sites internet de tiers. Les sites liés ne sont pas sous le contrôle de {{owner}} qui n'est pas responsable de leur contenu et n'offre aucune garantie à leur égard. Il appartient aux usagers de faire toutes les vérifications nécessaires ou opportunes avant de procéder à une quelconque transaction avec l'un de ces tiers.
+
+## 8. Notification et retrait de contenus illicites
+
+{{productName}} permet aux usagers de notifier les contenus ou les comportements illicites en envoyant un email à contact@briserlachaine.org.
+
+{{owner}} s'efforcera raisonnablement de retirer le contenu illicite, ou de supprimer les comptes délictueux, dans les meilleurs délais et dans le cadre de la loi existante.
+
+## 9. Licence et propriété intellectuelle
+
+Les usagers reconnaissent expressément la propriété de {{owner}} sur l'ensemble de la plate-forme, et notamment sur les systèmes, logiciels, structures, infrastructures, bases de données et contenus de toute nature (textes, images, visuels, musiques, logos, marques, base de données, etc.) qui sont exploités par {{owner}} pour le service et sont protégés par les droits d'auteur, les droits de propriété intellectuelle, les droits de propriété industrielle ou les droits des producteurs de bases de données en vigueur.
+
+Mais les contenus du site et de la plateforme sont mis à disposition en licence Creative Commons. Le Code Source du logiciel est mis à disposition en logiciel libre.
+
+Les usagers s'interdisent de copier et de détourner à leurs fins ou à celles de tiers le concept, les technologies ou tout autre élément de la plate-forme. Tous désassemblages, décompilations, décryptages, extractions, réutilisations, copies et plus généralement, tous actes de reproduction, représentation, diffusion et utilisation de l'un quelconque de ces éléments, en tout ou partie, sans l'autorisation de {{owner}} sont strictement interdits et pourront faire l'objet de poursuites judiciaires.
+
+{{owner}} ne revendique aucune propriété sur les éventuels contenus mis en ligne par les usagers sur la plate-forme, ni sur leurs données personnelles. En revanche, mais pour les seuls besoins du fonctionnement de {{productName}} et de sa promotion, les usagers concèdent expressément à {{owner}} et à ses affiliés le droit irrévocable de les rendre disponibles, et de librement les utiliser, copier, publier, traduire et diffuser sans autre forme d'accord supplémentaire, sur quelque support et sous quelque forme que ce soit. Ils autorisent également {{owner}} à concéder ce droit à des partenaires dans les mêmes conditions et pour les mêmes finalités.
+
+## 10. Données personnelles
+
+L'association {{owner}} est soucieuse de la protection des données personnelles. Elle s'engage à respecter le meilleur niveau de protection en conformité avec la réglementation Informatique et Libertés.
+
+Le responsable du traitement est l'association {{owner}}.
+
+Afin de proposer le service, {{owner}} recueille des données personnelles sur les usagers, notamment : e-mail, nom facultatif, prénom, pseudonyme, données de connexion, et plus généralement toute donnée les concernant et ayant un caractère personnel au sens de la législation en vigueur et qui est collectée par l'intermédiaire du service. Ces données sont également conservées à des fins de sécurité dans le cadre des obligations légales et réglementaires. Elles ne seront ni cédées à des tiers, ni exploitées à des fins commerciales.
+
+Les usagers acceptent de communiquer leurs données personnelles afin de permettre l'exploitation du service. Ils acceptent notamment d'être contactés pour recevoir des informations de {{productName}} et de ses partenaires à propos de la plate-forme.
+
+Les usagers disposent à tout moment d'un droit d'accès, de rectification et de suppression des données les concernant par e-mail : donnees@briserlachaine.org
+
+Les usagers peuvent se désinscrire de {{productName}} à tout moment, en adressant une demande à cet effet à : desinscription@briserlachaine.org
+
+La désinscription est effective immédiatement, et sera effective dès que le processus informatique de suppression sera achevé, ce qui peut prendre plusieurs semaines. Elle entraîne la suppression automatique du compte de l'usager.
+
+Afin de garantir au mieux la protection des données personnelles de ses usagers, l'association {{owner}} est dotée d'un Correspondant Informatique et Libertés.
+
+## 11. Dispositions générales
+
+Au cas où des dispositions des présentes conditions seraient déclarées invalides ou inapplicables, les autres resteraient en vigueur et de plein effet.
+
+{{owner}} aura le droit de céder, transmettre, sous-traiter ou déléguer des droits, des devoirs ou des obligations au titre des présentes conditions.
+
+Les usagers conviennent que ni les présentes conditions, ni l'usage du service ne créent de société ou d'entreprise commune, de contrat de travail ou de mandat entre eux et {{owner}}.
+
+Dans l'hypothèse d'une traduction des présentes conditions dans une ou plusieurs langues, la langue d'interprétation sera la langue française en cas de contradiction ou de contestation sur la signification d'un terme ou d'une disposition.
+
+Les présentes conditions sont souscrites pour une durée indéterminée.
+
+## 12. Modification
+
+{{owner}} se réserve le droit de modifier les présentes conditions générales à tout moment.
+
+Les usagers seront informés de ces modifications par tout moyen utile, dont notamment la publication sur {{productName}}.
+
+La date de mise à jour sera toujours indiquée en haut et en bas des présentes conditions.
+
+L'utilisation du service après que l'affichage d'une modification sur {{productName}} implique l'acceptation pleine et entière des présentes conditions modifiées.
+
+La seule façon de refuser l'acceptation d'une modification des présentes conditions est de cesser d'utiliser {{productName}}.
+
+L'usager qui n'accepte pas les conditions générales modifiées doit se désinscrire du service.
+
+Tout usager qui a recours au service postérieurement à l'entrée en vigueur des conditions générales modifiées est réputé avoir accepté ces modifications.
+
+## 13. Litiges
+
+{{owner}} se réserve le droit de prendre toute mesure appropriée en cas de manquement par les usagers aux présentes conditions, ou d'infraction aux lois et règlements en vigueur, et notamment :
+
+ * suspendre ou résilier l'accès au service ;
+ * publier tout message d'information utile ;
+ * avertir toute autorité concernée ; 
+ * engager toute action judiciaire.
+
+L'utilisation du service est soumise à la loi française.
+
+En cas de litige, les tribunaux du ressort de Paris sont seuls compétents.
+
+Préalablement à tout recours au juge arbitral ou étatique, les usagers s'obligent à négocier avec {{owner}} dans un esprit de loyauté et de bonne foi un accord amiable en cas de survenance de tout conflit relatif à la plate-forme ou aux présentes conditions, y compris portant sur leur validité.
+
+Les usagers souhaitant mettre en œuvre le processus de négociation devront en informer {{owner}} par lettre recommandée avec accusé de réception en indiquant les éléments du conflit. Une réunion au minimum sera alors organisée entre les usagers et {{owner}}. Si, au terme d'un délai de six mois, les usagers et {{owner}} ne parvenaient pas à s'entendre, le différend sera soumis à la juridiction compétente désignée ci-dessus. Le cours de la prescription sera suspendu à compter de la mise en œuvre du processus de négociation soit la date de réception de l'acte d'information envoyé par lettre recommandée avec accusé de réception. La suspension du cours de la prescription prendra fin à la date de la signature du procès-verbal de conciliation ou de non-conciliation. En cas de refus des usagers ou de {{owner}} de signer ledit procès-verbal, l'autre partie peut prendre acte de ce refus en l'informant qu'à défaut de réaction de sa part dans un délai d'un mois, la saisine du juge compétent sera possible. Durant tout le processus de négociation et jusqu'à son issue, les usagers s'interdisent d'exercer toute action en justice contre {{owner}} pour le conflit objet de la négociation.
+
+## 14. Coordonnées du responsable et de l'hébergeur
+
+{{productName}} est édité par l'association {{owner}} Le responsable de la publication est : Paul DUAN Adresse : 9 rue d'Alexandrie, 75002, Paris Contact mail : contact@briserlachaine.org
+
+{{productName}} est hébergé par la société OVH, située à 2 rue Kellermann, 59100, Roubaix, téléphone 09 72 10 10 07.
+
+## 15. Date
+
+Les présentes conditions générales sont entrées en vigueur le : 4 mai 2020
