@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head data-suburl="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>fanruan/fair-web - static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg at a38618dfc83d4e85a2b48d0c9c9279d0d62250f1 -  fair-web - 帆软第三方插件仓库</title>
+	<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+
+	<script>
+		if ('serviceWorker' in navigator) {
+  			window.addEventListener('load', function() {
+    			navigator.serviceWorker.register('/serviceworker.js').then(function(registration) {
+      				
+      				console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function(err) {
+					
+      				console.log('ServiceWorker registration failed: ', err);
+    			});
+  			});
+		}
+
+	</script>
+
+	<meta name="theme-color" content="#6cc644">
+	<meta name="author" content="fanruan" />
+	<meta name="description" content="fair-web" />
+	<meta name="keywords" content="go,git,self-hosted,gitea">
+	<meta name="referrer" content="no-referrer" />
+	<meta name="_csrf" content="uYAfJyUTxvfu7gPzjF_enJt641g6MTU4NzM3MzA2MDIzMzU5Mjk3MA" />
+	<meta name="_suburl" content="" />
+	
+	
+	
+
+
+	<script>
+	/*
+	@licstart  The following is the entire license notice for the
+        JavaScript code in this page.
+
+	Copyright (c) 2016 The Gitea Authors
+	Copyright (c) 2015 The Gogs Authors
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.
+	---
+	Licensing information for additional javascript libraries can be found at:
+	  {{AppSubUrl}}/vendor/librejs.html
+
+	@licend  The above is the entire license notice
+        for the JavaScript code in this page.
+	*/
+	</script>
+
+	<link rel="shortcut icon" href="/img/favicon.png" />
+	<link rel="mask-icon" href="/img/gitea-safari.svg" color="#609926">
+	<link rel="preload" href="/vendor/assets/font-awesome/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="/vendor/assets/font-awesome/css/font-awesome.min.css"></noscript>
+	<link rel="stylesheet" href="/vendor/assets/octicons/octicons.min.css">
+
+
+
+
+
+
+
+	
+	<link rel="stylesheet" href="/vendor/plugins/semantic/semantic.min.css">
+	<link rel="stylesheet" href="/css/index.css?v=525e7eceb72fe7131ebb17c5c0b1f9bb">
+	<noscript>
+		<style>
+			.dropdown:hover > .menu { display: block; }
+			.ui.secondary.menu .dropdown.item > .menu { margin-top: 0; }
+		</style>
+	</noscript>
+
+
+	<link rel="stylesheet" href="/vendor/plugins/highlight/github.css">
+
+
+
+
+
+	<style class="list-search-style"></style>
+
+	<script src="/vendor/plugins/promise-polyfill/polyfill.min.js"></script>
+	<script src="/vendor/plugins/cssrelpreload/loadCSS.min.js"></script>
+	<script src="/vendor/plugins/cssrelpreload/cssrelpreload.min.js"></script>
+
+	<meta property="og:title" content="fair-web" />
+	<meta property="og:type" content="object" />
+	<meta property="og:image" content="https://git.fanruan.com/img/avatar_default.png" />
+	<meta property="og:url" content="https://git.fanruan.com/fanruan/fair-web" />
+	
+	<meta property="og:site_name" content="帆软第三方插件仓库" />
+
+
+<style>
+.code-view * {
+    font-family:'SF Mono',Consolas,Menlo,'Liberation Mono',Monaco,'Lucida Console',monospace,Octicons
+}
+</style>
+</head>
+<body>
+	
+
+	<div class="full height">
+		<noscript>Ce site fonctionne mieux avec JavaScript.</noscript>
+
+		
+
+		
+			<div class="ui top secondary stackable main menu following bar light">
+				<div class="ui container" id="navbar">
+	<div class="item brand" style="justify-content: space-between;">
+		<a href="/">
+			<img class="ui mini image" src="/img/gitea-sm.png">
+		</a>
+		<div class="ui basic icon button mobile-only" id="navbar-expand-toggle">
+			<i class="sidebar icon"></i>
+		</div>
+	</div>
+
+	
+		<a class="item " href="/">Accueil</a>
+		<a class="item " href="/explore/repos">Explorateur</a>
+	
+
+	
+
+	
+
+	
+
+		<a class="item" target="_blank" rel="noopener noreferrer" href="https://docs.gitea.io">Aide</a>
+		<div class="right stackable menu">
+			
+				<a class="item" href="/user/sign_up">
+					<i class="octicon octicon-person"></i> S&#39;inscrire
+				</a>
+			
+			<a class="item" href="/user/login?redirect_to=%2ffanruan%2ffair-web%2fsrc%2fcommit%2fa38618dfc83d4e85a2b48d0c9c9279d0d62250f1%2fstatic%2fgoogle-fonts%2ffonts%2flato-v14-latin_latin-ext-italic.svg">
+				<i class="octicon octicon-sign-in"></i> Connexion
+			</a>
+		</div>
+
+	
+</div>
+
+			</div>
+		
+
+
+<div class="repository file list">
+	<div class="header-wrapper">
+
+	<div class="ui container">
+		<div class="repo-header">
+			<div class="ui huge breadcrumb repo-title">
+				
+				<i class="mega-octicon octicon-repo"></i>
+				
+				<a href="/fanruan">fanruan</a>
+				<div class="divider"> / </div>
+				<a href="/fanruan/fair-web">fair-web</a>
+				
+				
+				
+			</div>
+			<div class="repo-buttons">
+				<div class="ui labeled button" tabindex="0">
+					<a class="ui compact basic button" href="/fanruan/fair-web/action/watch?redirect_to=%2ffanruan%2ffair-web%2fsrc%2fcommit%2fa38618dfc83d4e85a2b48d0c9c9279d0d62250f1%2fstatic%2fgoogle-fonts%2ffonts%2flato-v14-latin_latin-ext-italic.svg">
+						<i class="icon fa-eye-slash"></i>Suivre
+					</a>
+					<a class="ui basic label" href="/fanruan/fair-web/watchers">
+						3
+					</a>
+				</div>
+				<div class="ui labeled button" tabindex="0">
+					<a class="ui compact basic button" href="/fanruan/fair-web/action/star?redirect_to=%2ffanruan%2ffair-web%2fsrc%2fcommit%2fa38618dfc83d4e85a2b48d0c9c9279d0d62250f1%2fstatic%2fgoogle-fonts%2ffonts%2flato-v14-latin_latin-ext-italic.svg">
+						<i class="icon star outline"></i>Ajouter aux favoris
+					</a>
+					<a class="ui basic label" href="/fanruan/fair-web/stars">
+						1
+					</a>
+				</div>
+				
+					<div class="ui labeled button " tabindex="0">
+						<a class="ui compact basic button poping up"  data-content="Connectez vous pour forker ce dépôt." href="/user/login?redirect_to=/repo/fork/149"  data-position="top center" data-variation="tiny">
+							<i class="octicon octicon-repo-forked"></i>Bifurcation
+						</a>
+						<a class="ui basic label" href="/fanruan/fair-web/forks">
+							1
+						</a>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+
+	<div class="ui tabs container">
+		<div class="ui tabular stackable menu navbar">
+			
+			<a class="active item" href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1">
+				<i class="octicon octicon-code"></i> Code
+			</a>
+			
+
+			
+				<a class=" item" href="/fanruan/fair-web/issues">
+					<i class="octicon octicon-issue-opened"></i> Tickets <span class="ui gray small label">0</span>
+				</a>
+			
+
+			
+
+			
+				<a class=" item" href="/fanruan/fair-web/pulls">
+					<i class="octicon octicon-git-pull-request"></i> Demandes d&#39;ajout <span class="ui gray small label">0</span>
+				</a>
+			
+
+			
+			<a class=" item" href="/fanruan/fair-web/releases">
+				<i class="octicon octicon-tag"></i> Versions <span class="ui gray small label">0</span>
+			</a>
+			
+
+			
+
+			
+				<a class=" item" href="/fanruan/fair-web/activity">
+					<i class="octicon octicon-pulse"></i> Activité
+				</a>
+			
+
+			
+
+			
+		</div>
+	</div>
+	<div class="ui tabs divider"></div>
+
+</div>
+
+	<div class="ui container">
+		
+
+
+
+		<div class="ui repo-description">
+			<div id="repo-desc">
+				
+				<a class="link" href=""></a>
+			</div>
+			
+		</div>
+		<div class="ui" id="repo-topics">
+		
+		
+		</div>
+		
+		<div class="hide" id="validate_prompt">
+			<span id="count_prompt">Vous ne pouvez pas sélectionner plus de 25 sujets</span>
+			<span id="format_prompt">Les noms de sujets doivent commencer par une lettre ou un nombre, peuvent contenir des tirets (&#39;-&#39;) et peuvent comporter jusqu&#39;à 35 caractères.</span>
+		</div>
+		
+		<div class="ui segment sub-menu">
+	<div class="ui two horizontal center link list">
+		
+			<div class="item">
+				<a class="ui" href="/fanruan/fair-web/commits/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1"><i class="octicon octicon-history"></i> <b>918</b> Révisions</a>
+			</div>
+		
+		
+			<div class="item">
+				<a class="ui" href="/fanruan/fair-web/branches/"><i class="octicon octicon-git-branch"></i> <b>1</b> Branche</a>
+			</div>
+		
+	</div>
+</div>
+
+		<div class="ui stackable secondary menu mobile--margin-between-items mobile--no-negative-margins">
+			<div class="fitted item choose reference">
+	<div class="ui floating filter dropdown custom" data-can-create-branch="false" data-no-results="Aucun résultat trouvé.">
+		<div class="ui basic small compact button" @click="menuVisible = !menuVisible" @keyup.enter="menuVisible = !menuVisible">
+			<span class="text">
+				<i class="octicon octicon-git-branch"></i>
+				Aborescence:
+				<strong>a38618dfc8</strong>
+			</span>
+			<i class="dropdown icon"></i>
+		</div>
+		<div class="data" style="display: none" data-mode="branches">
+			
+				<div class="item branch " data-url="/fanruan/fair-web/src/branch/master/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg">master</div>
+			
+			
+		</div>
+		<div class="menu transition" :class="{visible: menuVisible}" v-if="menuVisible" v-cloak>
+			<div class="ui icon search input">
+				<i class="filter icon"></i>
+				<input name="search" ref="searchField" v-model="searchTerm" @keydown="keydown($event)" placeholder="Filtrer une branche ou un tag...">
+			</div>
+			<div class="header branch-tag-choice">
+				<div class="ui grid">
+					<div class="two column row">
+						<a class="reference column" href="#" @click="mode = 'branches'; focusSearchField()">
+							<span class="text" :class="{black: mode == 'branches'}">
+								<i class="octicon octicon-git-branch"></i> Branches
+							</span>
+						</a>
+						<a class="reference column" href="#" @click="mode = 'tags'; focusSearchField()">
+							<span class="text" :class="{black: mode == 'tags'}">
+								<i class="reference tags icon"></i> Tags
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="scrolling menu" ref="scrollContainer">
+				<div v-for="(item, index) in filteredItems" :key="item.name" class="item" :class="{selected: item.selected, active: active == index}" @click="selectItem(item)" :ref="'listItem' + index">${ item.name }</div>
+				<div class="item" v-if="showCreateNewBranch" :class="{active: active == filteredItems.length}" :ref="'listItem' + filteredItems.length">
+					<a href="#" @click="createNewBranch()">
+						<div>
+							<i class="octicon octicon-git-branch"></i>
+							Créer la branche <strong>${ searchTerm }</strong>
+						</div>
+						<div class="text small">
+							
+								de &#39;a38618dfc8&#39;
+							
+						</div>
+					</a>
+					<form ref="newBranchForm" action="/fanruan/fair-web/branches/_new/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1" method="post">
+						<input type="hidden" name="_csrf" value="uYAfJyUTxvfu7gPzjF_enJt641g6MTU4NzM3MzA2MDIzMzU5Mjk3MA">
+						<input type="hidden" name="new_branch_name" v-model="searchTerm">
+					</form>
+				</div>
+			</div>
+			<div class="message" v-if="showNoResults">${ noResults }</div>
+		</div>
+	</div>
+</div>
+
+			
+			
+			
+			
+				<div class="fitted item"><span class="ui breadcrumb repo-path"><a class="section" href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1" title="fair-web">fair-web</a><span class="divider">/</span><span class="section"><a href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static" title="static">static</a></span><span class="divider">/</span><span class="section"><a href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts" title="google-fonts">google-fonts</a></span><span class="divider">/</span><span class="section"><a href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts" title="fonts">fonts</a></span><span class="divider">/</span><span class="active section" title="lato-v14-latin_latin-ext-italic.svg">lato-v14-latin_latin-ext-it...</span></span></div>
+			
+			<div class="right fitted item" id="file-buttons">
+				<div class="ui tiny blue buttons">
+					
+						
+						
+					
+					
+				</div>
+
+			</div>
+			<div class="fitted item">
+
+				
+				
+			</div>
+		</div>
+		
+			<div class="tab-size-2 non-diff-file-content">
+	<h4 class="ui top attached header" id="repo-read-file">
+		<div class="ui stackable grid">
+			<div class="eight wide column">
+				
+					<i class="file text outline icon ui left"></i>
+					<strong>lato-v14-latin_latin-ext-italic.svg</strong> <span class="text grey normal">81KB</span>
+				
+			</div>
+			<div class="eight wide right aligned column">
+				
+					<div class="ui right file-actions">
+						<div class="ui buttons">
+							<a class="ui button" href="/fanruan/fair-web/raw/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg">Brut</a>
+							
+							
+								<a class="ui button" href="/fanruan/fair-web/blame/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg">Annotations</a>
+							
+							<a class="ui button" href="/fanruan/fair-web/commits/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg">Historique</a>
+						</div>
+						
+							
+								<i class="octicon octicon-pencil btn-octicon poping up disabled" data-content="Vous devez être sur une branche pour appliquer ou proposer des modifications à ce fichier." data-position="bottom center" data-variation="tiny inverted"></i>
+							
+							
+								<i class="octicon octicon-trashcan btn-octicon poping up disabled" data-content="Vous devez être sur une branche pour appliquer ou proposer des modifications à ce fichier." data-position="bottom center" data-variation="tiny inverted"></i>
+							
+						
+					</div>
+				
+			</div>
+		</div>
+	</h4>
+	<div class="ui attached table unstackable segment">
+		<div class="file-view code-view has-emoji">
+			
+				<table>
+					<tbody>
+						<tr>
+						
+							<td class="lines-num"><span id="L1" data-line-number="1"></span><span id="L2" data-line-number="2"></span><span id="L3" data-line-number="3"></span><span id="L4" data-line-number="4"></span><span id="L5" data-line-number="5"></span><span id="L6" data-line-number="6"></span><span id="L7" data-line-number="7"></span><span id="L8" data-line-number="8"></span><span id="L9" data-line-number="9"></span><span id="L10" data-line-number="10"></span><span id="L11" data-line-number="11"></span><span id="L12" data-line-number="12"></span><span id="L13" data-line-number="13"></span><span id="L14" data-line-number="14"></span><span id="L15" data-line-number="15"></span><span id="L16" data-line-number="16"></span><span id="L17" data-line-number="17"></span><span id="L18" data-line-number="18"></span><span id="L19" data-line-number="19"></span><span id="L20" data-line-number="20"></span><span id="L21" data-line-number="21"></span><span id="L22" data-line-number="22"></span><span id="L23" data-line-number="23"></span><span id="L24" data-line-number="24"></span><span id="L25" data-line-number="25"></span><span id="L26" data-line-number="26"></span><span id="L27" data-line-number="27"></span><span id="L28" data-line-number="28"></span><span id="L29" data-line-number="29"></span><span id="L30" data-line-number="30"></span><span id="L31" data-line-number="31"></span><span id="L32" data-line-number="32"></span><span id="L33" data-line-number="33"></span><span id="L34" data-line-number="34"></span><span id="L35" data-line-number="35"></span><span id="L36" data-line-number="36"></span><span id="L37" data-line-number="37"></span><span id="L38" data-line-number="38"></span><span id="L39" data-line-number="39"></span><span id="L40" data-line-number="40"></span><span id="L41" data-line-number="41"></span><span id="L42" data-line-number="42"></span><span id="L43" data-line-number="43"></span><span id="L44" data-line-number="44"></span><span id="L45" data-line-number="45"></span><span id="L46" data-line-number="46"></span><span id="L47" data-line-number="47"></span><span id="L48" data-line-number="48"></span><span id="L49" data-line-number="49"></span><span id="L50" data-line-number="50"></span><span id="L51" data-line-number="51"></span><span id="L52" data-line-number="52"></span><span id="L53" data-line-number="53"></span><span id="L54" data-line-number="54"></span><span id="L55" data-line-number="55"></span><span id="L56" data-line-number="56"></span><span id="L57" data-line-number="57"></span><span id="L58" data-line-number="58"></span><span id="L59" data-line-number="59"></span><span id="L60" data-line-number="60"></span><span id="L61" data-line-number="61"></span><span id="L62" data-line-number="62"></span><span id="L63" data-line-number="63"></span><span id="L64" data-line-number="64"></span><span id="L65" data-line-number="65"></span><span id="L66" data-line-number="66"></span><span id="L67" data-line-number="67"></span><span id="L68" data-line-number="68"></span><span id="L69" data-line-number="69"></span><span id="L70" data-line-number="70"></span><span id="L71" data-line-number="71"></span><span id="L72" data-line-number="72"></span><span id="L73" data-line-number="73"></span><span id="L74" data-line-number="74"></span><span id="L75" data-line-number="75"></span><span id="L76" data-line-number="76"></span><span id="L77" data-line-number="77"></span><span id="L78" data-line-number="78"></span><span id="L79" data-line-number="79"></span><span id="L80" data-line-number="80"></span><span id="L81" data-line-number="81"></span><span id="L82" data-line-number="82"></span><span id="L83" data-line-number="83"></span><span id="L84" data-line-number="84"></span><span id="L85" data-line-number="85"></span><span id="L86" data-line-number="86"></span><span id="L87" data-line-number="87"></span><span id="L88" data-line-number="88"></span><span id="L89" data-line-number="89"></span><span id="L90" data-line-number="90"></span><span id="L91" data-line-number="91"></span><span id="L92" data-line-number="92"></span><span id="L93" data-line-number="93"></span><span id="L94" data-line-number="94"></span><span id="L95" data-line-number="95"></span><span id="L96" data-line-number="96"></span><span id="L97" data-line-number="97"></span><span id="L98" data-line-number="98"></span><span id="L99" data-line-number="99"></span><span id="L100" data-line-number="100"></span><span id="L101" data-line-number="101"></span><span id="L102" data-line-number="102"></span><span id="L103" data-line-number="103"></span><span id="L104" data-line-number="104"></span><span id="L105" data-line-number="105"></span><span id="L106" data-line-number="106"></span><span id="L107" data-line-number="107"></span><span id="L108" data-line-number="108"></span><span id="L109" data-line-number="109"></span><span id="L110" data-line-number="110"></span><span id="L111" data-line-number="111"></span><span id="L112" data-line-number="112"></span><span id="L113" data-line-number="113"></span><span id="L114" data-line-number="114"></span><span id="L115" data-line-number="115"></span><span id="L116" data-line-number="116"></span><span id="L117" data-line-number="117"></span><span id="L118" data-line-number="118"></span><span id="L119" data-line-number="119"></span><span id="L120" data-line-number="120"></span><span id="L121" data-line-number="121"></span><span id="L122" data-line-number="122"></span><span id="L123" data-line-number="123"></span><span id="L124" data-line-number="124"></span><span id="L125" data-line-number="125"></span><span id="L126" data-line-number="126"></span><span id="L127" data-line-number="127"></span><span id="L128" data-line-number="128"></span><span id="L129" data-line-number="129"></span><span id="L130" data-line-number="130"></span><span id="L131" data-line-number="131"></span><span id="L132" data-line-number="132"></span><span id="L133" data-line-number="133"></span><span id="L134" data-line-number="134"></span><span id="L135" data-line-number="135"></span><span id="L136" data-line-number="136"></span><span id="L137" data-line-number="137"></span><span id="L138" data-line-number="138"></span><span id="L139" data-line-number="139"></span><span id="L140" data-line-number="140"></span><span id="L141" data-line-number="141"></span><span id="L142" data-line-number="142"></span><span id="L143" data-line-number="143"></span><span id="L144" data-line-number="144"></span><span id="L145" data-line-number="145"></span><span id="L146" data-line-number="146"></span><span id="L147" data-line-number="147"></span><span id="L148" data-line-number="148"></span><span id="L149" data-line-number="149"></span><span id="L150" data-line-number="150"></span><span id="L151" data-line-number="151"></span><span id="L152" data-line-number="152"></span><span id="L153" data-line-number="153"></span><span id="L154" data-line-number="154"></span><span id="L155" data-line-number="155"></span><span id="L156" data-line-number="156"></span><span id="L157" data-line-number="157"></span><span id="L158" data-line-number="158"></span><span id="L159" data-line-number="159"></span><span id="L160" data-line-number="160"></span><span id="L161" data-line-number="161"></span><span id="L162" data-line-number="162"></span><span id="L163" data-line-number="163"></span><span id="L164" data-line-number="164"></span><span id="L165" data-line-number="165"></span><span id="L166" data-line-number="166"></span><span id="L167" data-line-number="167"></span><span id="L168" data-line-number="168"></span><span id="L169" data-line-number="169"></span><span id="L170" data-line-number="170"></span><span id="L171" data-line-number="171"></span><span id="L172" data-line-number="172"></span><span id="L173" data-line-number="173"></span><span id="L174" data-line-number="174"></span><span id="L175" data-line-number="175"></span><span id="L176" data-line-number="176"></span><span id="L177" data-line-number="177"></span><span id="L178" data-line-number="178"></span><span id="L179" data-line-number="179"></span><span id="L180" data-line-number="180"></span><span id="L181" data-line-number="181"></span><span id="L182" data-line-number="182"></span><span id="L183" data-line-number="183"></span><span id="L184" data-line-number="184"></span><span id="L185" data-line-number="185"></span><span id="L186" data-line-number="186"></span><span id="L187" data-line-number="187"></span><span id="L188" data-line-number="188"></span><span id="L189" data-line-number="189"></span><span id="L190" data-line-number="190"></span><span id="L191" data-line-number="191"></span><span id="L192" data-line-number="192"></span><span id="L193" data-line-number="193"></span><span id="L194" data-line-number="194"></span><span id="L195" data-line-number="195"></span><span id="L196" data-line-number="196"></span><span id="L197" data-line-number="197"></span><span id="L198" data-line-number="198"></span><span id="L199" data-line-number="199"></span><span id="L200" data-line-number="200"></span><span id="L201" data-line-number="201"></span><span id="L202" data-line-number="202"></span><span id="L203" data-line-number="203"></span><span id="L204" data-line-number="204"></span><span id="L205" data-line-number="205"></span><span id="L206" data-line-number="206"></span><span id="L207" data-line-number="207"></span><span id="L208" data-line-number="208"></span><span id="L209" data-line-number="209"></span><span id="L210" data-line-number="210"></span><span id="L211" data-line-number="211"></span><span id="L212" data-line-number="212"></span><span id="L213" data-line-number="213"></span><span id="L214" data-line-number="214"></span><span id="L215" data-line-number="215"></span><span id="L216" data-line-number="216"></span><span id="L217" data-line-number="217"></span><span id="L218" data-line-number="218"></span><span id="L219" data-line-number="219"></span><span id="L220" data-line-number="220"></span><span id="L221" data-line-number="221"></span><span id="L222" data-line-number="222"></span><span id="L223" data-line-number="223"></span><span id="L224" data-line-number="224"></span><span id="L225" data-line-number="225"></span><span id="L226" data-line-number="226"></span><span id="L227" data-line-number="227"></span><span id="L228" data-line-number="228"></span><span id="L229" data-line-number="229"></span><span id="L230" data-line-number="230"></span><span id="L231" data-line-number="231"></span><span id="L232" data-line-number="232"></span><span id="L233" data-line-number="233"></span><span id="L234" data-line-number="234"></span><span id="L235" data-line-number="235"></span><span id="L236" data-line-number="236"></span><span id="L237" data-line-number="237"></span><span id="L238" data-line-number="238"></span><span id="L239" data-line-number="239"></span><span id="L240" data-line-number="240"></span><span id="L241" data-line-number="241"></span><span id="L242" data-line-number="242"></span><span id="L243" data-line-number="243"></span><span id="L244" data-line-number="244"></span><span id="L245" data-line-number="245"></span><span id="L246" data-line-number="246"></span><span id="L247" data-line-number="247"></span><span id="L248" data-line-number="248"></span><span id="L249" data-line-number="249"></span><span id="L250" data-line-number="250"></span><span id="L251" data-line-number="251"></span><span id="L252" data-line-number="252"></span><span id="L253" data-line-number="253"></span><span id="L254" data-line-number="254"></span><span id="L255" data-line-number="255"></span><span id="L256" data-line-number="256"></span><span id="L257" data-line-number="257"></span><span id="L258" data-line-number="258"></span><span id="L259" data-line-number="259"></span><span id="L260" data-line-number="260"></span><span id="L261" data-line-number="261"></span><span id="L262" data-line-number="262"></span><span id="L263" data-line-number="263"></span><span id="L264" data-line-number="264"></span><span id="L265" data-line-number="265"></span><span id="L266" data-line-number="266"></span><span id="L267" data-line-number="267"></span><span id="L268" data-line-number="268"></span><span id="L269" data-line-number="269"></span><span id="L270" data-line-number="270"></span><span id="L271" data-line-number="271"></span><span id="L272" data-line-number="272"></span><span id="L273" data-line-number="273"></span><span id="L274" data-line-number="274"></span><span id="L275" data-line-number="275"></span><span id="L276" data-line-number="276"></span><span id="L277" data-line-number="277"></span><span id="L278" data-line-number="278"></span><span id="L279" data-line-number="279"></span><span id="L280" data-line-number="280"></span><span id="L281" data-line-number="281"></span><span id="L282" data-line-number="282"></span><span id="L283" data-line-number="283"></span><span id="L284" data-line-number="284"></span><span id="L285" data-line-number="285"></span><span id="L286" data-line-number="286"></span><span id="L287" data-line-number="287"></span><span id="L288" data-line-number="288"></span><span id="L289" data-line-number="289"></span><span id="L290" data-line-number="290"></span><span id="L291" data-line-number="291"></span><span id="L292" data-line-number="292"></span><span id="L293" data-line-number="293"></span><span id="L294" data-line-number="294"></span><span id="L295" data-line-number="295"></span><span id="L296" data-line-number="296"></span><span id="L297" data-line-number="297"></span><span id="L298" data-line-number="298"></span><span id="L299" data-line-number="299"></span><span id="L300" data-line-number="300"></span><span id="L301" data-line-number="301"></span><span id="L302" data-line-number="302"></span><span id="L303" data-line-number="303"></span><span id="L304" data-line-number="304"></span><span id="L305" data-line-number="305"></span><span id="L306" data-line-number="306"></span><span id="L307" data-line-number="307"></span><span id="L308" data-line-number="308"></span><span id="L309" data-line-number="309"></span><span id="L310" data-line-number="310"></span><span id="L311" data-line-number="311"></span><span id="L312" data-line-number="312"></span><span id="L313" data-line-number="313"></span><span id="L314" data-line-number="314"></span><span id="L315" data-line-number="315"></span><span id="L316" data-line-number="316"></span><span id="L317" data-line-number="317"></span><span id="L318" data-line-number="318"></span><span id="L319" data-line-number="319"></span><span id="L320" data-line-number="320"></span><span id="L321" data-line-number="321"></span><span id="L322" data-line-number="322"></span><span id="L323" data-line-number="323"></span><span id="L324" data-line-number="324"></span><span id="L325" data-line-number="325"></span><span id="L326" data-line-number="326"></span><span id="L327" data-line-number="327"></span><span id="L328" data-line-number="328"></span><span id="L329" data-line-number="329"></span><span id="L330" data-line-number="330"></span><span id="L331" data-line-number="331"></span><span id="L332" data-line-number="332"></span><span id="L333" data-line-number="333"></span><span id="L334" data-line-number="334"></span><span id="L335" data-line-number="335"></span><span id="L336" data-line-number="336"></span><span id="L337" data-line-number="337"></span><span id="L338" data-line-number="338"></span><span id="L339" data-line-number="339"></span><span id="L340" data-line-number="340"></span><span id="L341" data-line-number="341"></span><span id="L342" data-line-number="342"></span><span id="L343" data-line-number="343"></span><span id="L344" data-line-number="344"></span><span id="L345" data-line-number="345"></span><span id="L346" data-line-number="346"></span><span id="L347" data-line-number="347"></span><span id="L348" data-line-number="348"></span><span id="L349" data-line-number="349"></span><span id="L350" data-line-number="350"></span><span id="L351" data-line-number="351"></span><span id="L352" data-line-number="352"></span><span id="L353" data-line-number="353"></span><span id="L354" data-line-number="354"></span><span id="L355" data-line-number="355"></span><span id="L356" data-line-number="356"></span><span id="L357" data-line-number="357"></span><span id="L358" data-line-number="358"></span><span id="L359" data-line-number="359"></span><span id="L360" data-line-number="360"></span><span id="L361" data-line-number="361"></span><span id="L362" data-line-number="362"></span><span id="L363" data-line-number="363"></span><span id="L364" data-line-number="364"></span><span id="L365" data-line-number="365"></span><span id="L366" data-line-number="366"></span><span id="L367" data-line-number="367"></span><span id="L368" data-line-number="368"></span><span id="L369" data-line-number="369"></span><span id="L370" data-line-number="370"></span><span id="L371" data-line-number="371"></span><span id="L372" data-line-number="372"></span><span id="L373" data-line-number="373"></span><span id="L374" data-line-number="374"></span><span id="L375" data-line-number="375"></span><span id="L376" data-line-number="376"></span><span id="L377" data-line-number="377"></span><span id="L378" data-line-number="378"></span><span id="L379" data-line-number="379"></span><span id="L380" data-line-number="380"></span><span id="L381" data-line-number="381"></span><span id="L382" data-line-number="382"></span><span id="L383" data-line-number="383"></span><span id="L384" data-line-number="384"></span><span id="L385" data-line-number="385"></span><span id="L386" data-line-number="386"></span><span id="L387" data-line-number="387"></span><span id="L388" data-line-number="388"></span><span id="L389" data-line-number="389"></span><span id="L390" data-line-number="390"></span><span id="L391" data-line-number="391"></span><span id="L392" data-line-number="392"></span><span id="L393" data-line-number="393"></span><span id="L394" data-line-number="394"></span><span id="L395" data-line-number="395"></span><span id="L396" data-line-number="396"></span><span id="L397" data-line-number="397"></span><span id="L398" data-line-number="398"></span><span id="L399" data-line-number="399"></span><span id="L400" data-line-number="400"></span><span id="L401" data-line-number="401"></span><span id="L402" data-line-number="402"></span><span id="L403" data-line-number="403"></span><span id="L404" data-line-number="404"></span><span id="L405" data-line-number="405"></span><span id="L406" data-line-number="406"></span><span id="L407" data-line-number="407"></span><span id="L408" data-line-number="408"></span><span id="L409" data-line-number="409"></span><span id="L410" data-line-number="410"></span><span id="L411" data-line-number="411"></span><span id="L412" data-line-number="412"></span><span id="L413" data-line-number="413"></span><span id="L414" data-line-number="414"></span><span id="L415" data-line-number="415"></span><span id="L416" data-line-number="416"></span><span id="L417" data-line-number="417"></span><span id="L418" data-line-number="418"></span><span id="L419" data-line-number="419"></span><span id="L420" data-line-number="420"></span><span id="L421" data-line-number="421"></span><span id="L422" data-line-number="422"></span><span id="L423" data-line-number="423"></span><span id="L424" data-line-number="424"></span><span id="L425" data-line-number="425"></span><span id="L426" data-line-number="426"></span><span id="L427" data-line-number="427"></span><span id="L428" data-line-number="428"></span><span id="L429" data-line-number="429"></span><span id="L430" data-line-number="430"></span><span id="L431" data-line-number="431"></span><span id="L432" data-line-number="432"></span><span id="L433" data-line-number="433"></span><span id="L434" data-line-number="434"></span><span id="L435" data-line-number="435"></span><span id="L436" data-line-number="436"></span><span id="L437" data-line-number="437"></span><span id="L438" data-line-number="438"></span><span id="L439" data-line-number="439"></span><span id="L440" data-line-number="440"></span><span id="L441" data-line-number="441"></span><span id="L442" data-line-number="442"></span><span id="L443" data-line-number="443"></span><span id="L444" data-line-number="444"></span><span id="L445" data-line-number="445"></span><span id="L446" data-line-number="446"></span><span id="L447" data-line-number="447"></span><span id="L448" data-line-number="448"></span><span id="L449" data-line-number="449"></span><span id="L450" data-line-number="450"></span></td>
+							<td class="lines-code"><pre><code class=""><ol class="linenums"><li class="L1" rel="L1">&lt;?xml version=&#34;1.0&#34; standalone=&#34;no&#34;?&gt;
+</li><li class="L2" rel="L2">&lt;!DOCTYPE svg PUBLIC &#34;-//W3C//DTD SVG 1.1//EN&#34; &#34;http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd&#34;&gt;
+</li><li class="L3" rel="L3">&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34;&gt;
+</li><li class="L4" rel="L4">&lt;defs &gt;
+</li><li class="L5" rel="L5">&lt;font id=&#34;Lato&#34; horiz-adv-x=&#34;978&#34; &gt;&lt;font-face
+</li><li class="L6" rel="L6">    font-family=&#34;Lato&#34;
+</li><li class="L7" rel="L7">    units-per-em=&#34;2000&#34;
+</li><li class="L8" rel="L8">    panose-1=&#34;2 15 5 2 2 2 4 3 2 3&#34;
+</li><li class="L9" rel="L9">    ascent=&#34;1974&#34;
+</li><li class="L10" rel="L10">    descent=&#34;-426&#34;
+</li><li class="L11" rel="L11">    alphabetic=&#34;0&#34; /&gt;
+</li><li class="L12" rel="L12">&lt;glyph unicode=&#34; &#34; glyph-name=&#34;space&#34; horiz-adv-x=&#34;386&#34; /&gt;
+</li><li class="L13" rel="L13">&lt;glyph unicode=&#34;!&#34; glyph-name=&#34;exclam&#34; horiz-adv-x=&#34;635&#34; d=&#34;M518 1433L448 859Q442 814 435 772T420 686T402 597T380 499H263Q264 551 265 597T269 686T275 771T285 859L355 1433H518ZM159 110Q159 136 168 159T194 199T233 226T283 236Q309 236 332 226T372
+</li><li class="L14" rel="L14">199T398 159T408 110Q408 83 399 61T372 21T332 -5T283 -15Q256 -15 234 -6T195 21T169 60T159 110Z&#34; /&gt;
+</li><li class="L15" rel="L15">&lt;glyph unicode=&#34;&amp;quot;&#34; glyph-name=&#34;quotedbl&#34; horiz-adv-x=&#34;736&#34; d=&#34;M403 1431L367 1142L333 987Q326 956 311 939T266 922Q240 922 229 939T218 987V1142L255 1431H403ZM715 1431L679 1142L645 987Q638 956 623 939T578 922Q552 922 541 939T530 987V1142L567
+</li><li class="L16" rel="L16">1431H715Z&#34; /&gt;
+</li><li class="L17" rel="L17">&lt;glyph unicode=&#34;#&#34; glyph-name=&#34;numbersign&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M780 424L643 0H565Q545 0 533 13T520 49Q520 63 524 75L637 424H387L271 66Q260 31 236 16T184 0H107L244 424H97Q54 424 54 464Q54 471 55 478T59 496L74 551H279L385 882H152L173 953Q181
+</li><li class="L18" rel="L18">981 200 994T258 1007H419L537 1370Q547 1399 569 1415T621 1431H699L561 1007H811L949 1431H1026Q1048 1431 1062 1419T1076 1387Q1076 1376 1072 1367L954 1007H1168L1146 936Q1138 908 1119 895T1063 882H920L814 551H996Q1016 551 1028 542T1040 511Q1040 504
+</li><li class="L19" rel="L19">1039 497T1035 479L1019 424H780ZM421 551H672L778 882H528L421 551Z&#34; /&gt;
+</li><li class="L20" rel="L20">&lt;glyph unicode=&#34;$&#34; glyph-name=&#34;dollar&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M440 -12Q321 -1 228 47T71 171L132 249Q151 274 181 274Q199 274 220 255T274 212T353 164T467 132L570 672Q508 691 449 715T343 777T268 870T239 1008Q239 1091 272 1168T367 1305T517 1403T717
+</li><li class="L21" rel="L21">1445L745 1590Q749 1609 764 1623T799 1638H863L825 1441Q928 1429 999 1389T1122 1289L1074 1225Q1063 1210 1052 1203T1026 1196Q1012 1196 994 1209T948 1239T885 1272T798 1296L705 805Q769 784 832 759T944 698T1025 607T1056 474Q1056 379 1021 294T920 142T760
+</li><li class="L22" rel="L22">34T549 -15L515 -193Q511 -211 497 -225T461 -239H397L440 -12ZM887 432Q887 476 870 508T824 565T756 606T673 639L577 131Q651 138 708 163T806 227T866 319T887 432ZM405 1047Q405 1005 420 974T462 918T525 875T602 840L689 1298Q617 1292 564 1270T475 1213T422
+</li><li class="L23" rel="L23">1137T405 1047Z&#34; /&gt;
+</li><li class="L24" rel="L24">&lt;glyph unicode=&#34;%&#34; glyph-name=&#34;percent&#34; horiz-adv-x=&#34;1452&#34; d=&#34;M732 1144Q732 1045 703 968T625 838T516 758T389 730Q333 730 286 750T206 809T154 903T135 1029Q135 1128 162 1205T235 1336T344 1418T477 1446Q533 1446 580 1426T660 1366T713 1271T732 1144ZM597
+</li><li class="L25" rel="L25">1143Q597 1193 587 1229T558 1288T516 1322T463 1333Q423 1333 388 1316T326 1262T285 1168T269 1029Q269 980 279 946T307 889T349 856T403 845Q442 845 477 861T539 913T581 1005T597 1143ZM1228 1403Q1239 1414 1253 1422T1291 1431H1415L275 28Q265 15 251
+</li><li class="L26" rel="L26">8T216 0H90L1228 1403ZM1372 397Q1372 298 1343 221T1266 91T1156 11T1029 -17Q973 -17 927 3T847 62T795 156T776 281Q776 380 803 457T876 589T985 671T1118 699Q1174 699 1220 679T1301 619T1353 524T1372 397ZM1238 396Q1238 446 1228 481T1199 540T1157 573T1104
+</li><li class="L27" rel="L27">584Q1064 584 1029 567T967 513T925 419T909 281Q909 232 919 197T947 140T989 107T1043 96Q1082 96 1117 112T1180 165T1222 258T1238 396Z&#34; /&gt;
+</li><li class="L28" rel="L28">&lt;glyph unicode=&#34;&amp;amp;&#34; glyph-name=&#34;ampersand&#34; horiz-adv-x=&#34;1297&#34; d=&#34;M724 1447Q794 1447 851 1425T949 1364T1012 1272T1035 1157Q1035 1154 1035 1151T1034 1143L933 1124Q928 1123 925 1123T917 1122Q888 1122 881 1155Q875 1184 863 1212T831 1262T780 1299T709
+</li><li class="L29" rel="L29">1313Q658 1313 617 1294T547 1242T501 1163T485 1065Q485 1008 508 948T582 825L904 416Q945 482 972 552T1013 694Q1017 712 1026 723T1054 734H1173Q1157 619 1112 508T995 301L1233 0H1085Q1064 0 1049 2T1021 11T999 27T976 51L880 173Q786 86 671 35T427 -16Q345
+</li><li class="L30" rel="L30">-16 277 8T160 78T84 189T57 335Q57 414 83 484T156 612T265 717T400 795Q361 861 343 925T324 1052Q324 1134 352 1206T433 1332T560 1416T724 1447ZM235 357Q235 301 252 258T300 184T373 139T464 123Q559 123 643 166T797 279L464 704Q349 642 292 553T235 357Z&#34;
+</li><li class="L31" rel="L31">/&gt;
+</li><li class="L32" rel="L32">&lt;glyph unicode=&#34;&amp;apos;&#34; glyph-name=&#34;quotesingle&#34; horiz-adv-x=&#34;426&#34; d=&#34;M403 1431L367 1142L333 987Q326 956 311 939T266 922Q240 922 229 939T218 987V1142L255 1431H403Z&#34; /&gt;
+</li><li class="L33" rel="L33">&lt;glyph unicode=&#34;(&#34; glyph-name=&#34;parenleft&#34; horiz-adv-x=&#34;552&#34; d=&#34;M274 441Q274 367 281 288T301 128T336 -29T384 -173Q390 -188 390 -200Q390 -217 381 -227T360 -245L279 -291Q237 -205 208 -114T159 70T131 252T122 425Q122 565 138 697T196 965T313 1243T504
+</li><li class="L34" rel="L34">1549L575 1502Q583 1497 589 1489T595 1468Q595 1452 581 1431Q507 1317 450 1204T354 970T295 720T274 441Z&#34; /&gt;
+</li><li class="L35" rel="L35">&lt;glyph unicode=&#34;)&#34; glyph-name=&#34;parenright&#34; horiz-adv-x=&#34;552&#34; d=&#34;M313 817Q313 890 306 970T285 1130T250 1287T202 1431Q196 1446 196 1457Q196 1474 205 1484T226 1502L308 1549Q349 1462 378 1371T427 1188T455 1006T464 832Q464 692 448 560T390 292T274
+</li><li class="L36" rel="L36">14T82 -291L12 -245Q4 -239 -2 -231T-8 -212Q-8 -195 6 -173Q79 -59 136 57T233 295T292 547T313 817Z&#34; /&gt;
+</li><li class="L37" rel="L37">&lt;glyph unicode=&#34;*&#34; glyph-name=&#34;asterisk&#34; horiz-adv-x=&#34;736&#34; d=&#34;M361 865L386 1063Q388 1081 392 1097T404 1129Q393 1116 380 1107T350 1087L181 987L148 1060L317 1161Q353 1182 389 1185Q353 1188 323 1209L178 1311L229 1384L374 1283Q390 1272 401 1261T421
+</li><li class="L38" rel="L38">1234Q413 1258 413 1281Q413 1287 413 1293T415 1306L440 1505H524L500 1307Q498 1288 493 1272T479 1238Q490 1252 504 1262T536 1283L705 1383L737 1310L568 1209Q533 1188 501 1185Q518 1183 532 1178T562 1161L707 1059L657 987L512 1087Q497 1097 485 1107T465
+</li><li class="L39" rel="L39">1131Q472 1111 472 1089Q472 1083 472 1077T470 1064L446 865H361Z&#34; /&gt;
+</li><li class="L40" rel="L40">&lt;glyph unicode=&#34;+&#34; glyph-name=&#34;plus&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M732 1165L679 736H1089L1073 606H663L610 175H469L522 606H115L131 736H538L592 1165H732Z&#34; /&gt;
+</li><li class="L41" rel="L41">&lt;glyph unicode=&#34;,&#34; glyph-name=&#34;comma&#34; horiz-adv-x=&#34;425&#34; d=&#34;M50 123Q50 170 82 203T169 236Q199 236 222 225T260 195T284 150T292 94Q292 49 280 1T243 -95T183 -188T103 -271L72 -242Q59 -230 59 -214Q59 -202 75 -183T112 -138T152 -77T179 0H167Q115 0 83
+</li><li class="L42" rel="L42">34T50 123Z&#34; /&gt;
+</li><li class="L43" rel="L43">&lt;glyph unicode=&#34;-&#34; glyph-name=&#34;hyphen&#34; horiz-adv-x=&#34;641&#34; d=&#34;M115 672H572L553 526H97L115 672Z&#34; /&gt;
+</li><li class="L44" rel="L44">&lt;glyph unicode=&#34;.&#34; glyph-name=&#34;period&#34; horiz-adv-x=&#34;425&#34; d=&#34;M45 110Q45 136 54 159T81 199T120 226T170 236Q196 236 218 226T258 199T285 159T295 110Q295 83 285 61T258 21T219 -5T170 -15Q143 -15 121 -6T81 21T55 60T45 110Z&#34; /&gt;
+</li><li class="L45" rel="L45">&lt;glyph unicode=&#34;/&#34; glyph-name=&#34;slash&#34; horiz-adv-x=&#34;695&#34; d=&#34;M93 -25Q77 -57 48 -74T-8 -91H-81L643 1388Q657 1418 683 1434T741 1451H814L93 -25Z&#34; /&gt;
+</li><li class="L46" rel="L46">&lt;glyph unicode=&#34;0&#34; glyph-name=&#34;zero&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M695 1447Q790 1447 870 1411T1007 1302T1097 1120T1130 864Q1130 641 1081 476T948 201T753 39T515 -15Q419 -15 339 21T202 130T112 312T79 569Q79 792 128 957T261 1231T457 1393T695 1447ZM537
+</li><li class="L47" rel="L47">130Q621 130 696 174T828 309T918 536T951 860Q951 980 929 1064T868 1202T780 1279T673 1303Q589 1303 514 1259T382 1124T292 896T259 572Q259 452 281 368T342 231T430 154T537 130Z&#34; /&gt;
+</li><li class="L48" rel="L48">&lt;glyph unicode=&#34;1&#34; glyph-name=&#34;one&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M244 132H554L677 1137L695 1214L402 985Q384 971 364 971Q349 971 337 977T320 992L276 1067L746 1436H886L726 132H1010L994 0H229L244 132Z&#34; /&gt;
+</li><li class="L49" rel="L49">&lt;glyph unicode=&#34;2&#34; glyph-name=&#34;two&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M715 1447Q798 1447 868 1424T990 1355T1069 1246T1098 1099Q1098 1008 1070 933T992 791T878 661T738 531L307 139Q348 150 389 156T468 162H958Q984 162 998 148T1012 111Q1012 101 1010 84T1006
+</li><li class="L50" rel="L50">53L999 0H47L54 59Q56 76 66 96T94 133L612 596Q685 661 742 719T838 835T898 953T919 1082Q919 1136 902 1177T853 1245T780 1286T687 1300Q575 1300 497 1242T381 1081Q370 1052 353 1040T310 1028Q305 1028 299 1028T287 1030L200 1045Q225 1143 274 1218T391
+</li><li class="L51" rel="L51">1344T540 1421T715 1447Z&#34; /&gt;
+</li><li class="L52" rel="L52">&lt;glyph unicode=&#34;3&#34; glyph-name=&#34;three&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M737 1447Q821 1447 890 1424T1009 1359T1085 1256T1112 1123Q1112 1044 1091 984T1032 878T939 804T817 756Q939 721 1000 644T1062 454Q1062 346 1019 260T903 112T734 17T531 -16Q431 -16 356
+</li><li class="L53" rel="L53">7T228 76T142 192T93 357L173 387Q195 395 213 395Q232 395 245 387T264 363Q280 305 302 262T357 189T436 146T547 131Q629 131 693 159T800 232T867 334T890 450Q890 498 875 538T821 608T716 655T548 672L564 795Q754 799 847 876T940 1088Q940 1141 923 1181T875
+</li><li class="L54" rel="L54">1247T802 1287T710 1300Q596 1300 518 1241T402 1081Q391 1052 374 1040T332 1028Q327 1028 322 1028T311 1030L223 1045Q248 1143 297 1218T414 1344T563 1421T737 1447Z&#34; /&gt;
+</li><li class="L55" rel="L55">&lt;glyph unicode=&#34;4&#34; glyph-name=&#34;four&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M909 514H1126L1112 416Q1110 401 1100 390T1069 379H892L846 0H690L737 379H107Q87 379 70 390T51 418L45 505L856 1433H1022L909 514ZM828 1117Q830 1141 836 1168T850 1225L235 514H753L828 1117Z&#34; /&gt;
+</li><li class="L56" rel="L56">&lt;glyph unicode=&#34;5&#34; glyph-name=&#34;five&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M1084 1357Q1079 1321 1054 1298T973 1274H518L403 889Q514 913 606 913Q711 913 789 885T920 806T999 688T1025 538Q1025 412 979 310T853 135T669 24T446 -16Q383 -16 327 -4T224 28T137 76T68 133L129
+</li><li class="L57" rel="L57">207Q150 231 178 231Q197 231 220 216T277 182T358 148T473 132Q556 132 625 160T745 238T822 359T850 516Q850 573 832 619T778 699T687 751T557 769Q507 769 450 761T324 734L221 765L418 1433H1094L1084 1357Z&#34; /&gt;
+</li><li class="L58" rel="L58">&lt;glyph unicode=&#34;6&#34; glyph-name=&#34;six&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M697 876Q776 876 844 851T963 778T1043 661T1072 505Q1072 394 1030 299T914 134T740 24T521 -16Q423 -16 346 14T215 99T133 231T104 403Q104 465 118 524T160 644T232 767T336 899L763 1390Q778
+</li><li class="L59" rel="L59">1407 803 1419T859 1431H1012L520 894Q474 843 437 799Q492 835 557 855T697 876ZM267 397Q267 338 285 289T337 203T421 147T535 127Q614 127 680 153T795 227T871 338T898 478Q898 539 879 588T824 672T738 725T625 744Q546 744 480 716T367 641T294 530T267
+</li><li class="L60" rel="L60">397Z&#34; /&gt;
+</li><li class="L61" rel="L61">&lt;glyph unicode=&#34;7&#34; glyph-name=&#34;seven&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M1200 1433L1193 1365Q1190 1340 1184 1318T1168 1281L402 44Q391 26 372 13T329 0H187L940 1190Q955 1214 970 1234T1005 1274H252Q235 1274 225 1285T214 1312V1316L229 1433H1200Z&#34; /&gt;
+</li><li class="L62" rel="L62">&lt;glyph unicode=&#34;8&#34; glyph-name=&#34;eight&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M518 -16Q419 -16 339 9T201 82T113 195T82 343Q82 504 168 605T411 747Q314 785 266 858T217 1029Q217 1117 253 1193T352 1326T504 1415T697 1447Q787 1447 859 1421T981 1350T1059 1243T1086 1111Q1086
+</li><li class="L63" rel="L63">980 1017 885T813 745Q929 710 991 633T1053 439Q1053 334 1013 250T901 107T731 16T518 -16ZM534 121Q612 121 675 144T783 208T852 307T876 435Q876 499 854 544T793 617T706 659T603 673Q537 673 476 655T368 599T292 502T263 359Q263 306 281 263T334 188T419
+</li><li class="L64" rel="L64">139T534 121ZM619 811Q700 811 756 837T848 904T900 997T916 1099Q916 1144 902 1183T858 1251T785 1298T682 1315Q610 1315 555 1293T461 1232T404 1142T384 1032Q384 989 397 949T438 879T511 830T619 811Z&#34; /&gt;
+</li><li class="L65" rel="L65">&lt;glyph unicode=&#34;9&#34; glyph-name=&#34;nine&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M565 589Q490 589 425 613T312 683T237 795T209 946Q209 1051 250 1142T362 1301T531 1408T740 1447Q834 1447 908 1418T1035 1335T1115 1208T1143 1046Q1143 974 1128 912T1084 790T1012 672T916
+</li><li class="L66" rel="L66">547L503 41Q488 23 464 12T410 0H252L757 572Q783 601 806 628T849 681Q788 636 716 613T565 589ZM979 1047Q979 1105 961 1152T908 1234T827 1286T721 1305Q648 1305 587 1280T480 1211T410 1105T384 969Q384 852 450 787T637 722Q716 722 779 748T886 820T955
+</li><li class="L67" rel="L67">924T979 1047Z&#34; /&gt;
+</li><li class="L68" rel="L68">&lt;glyph unicode=&#34;:&#34; glyph-name=&#34;colon&#34; horiz-adv-x=&#34;425&#34; d=&#34;M45 110Q45 136 54 159T81 199T120 226T170 236Q196 236 218 226T258 199T285 159T295 110Q295 83 285 61T258 21T219 -5T170 -15Q143 -15 121 -6T81 21T55 60T45 110ZM145 860Q145 886 154 909T181
+</li><li class="L69" rel="L69">949T220 976T270 986Q296 986 318 976T358 949T385 909T395 860Q395 833 385 811T358 771T319 745T270 735Q243 735 221 744T181 771T155 810T145 860Z&#34; /&gt;
+</li><li class="L70" rel="L70">&lt;glyph unicode=&#34;;&#34; glyph-name=&#34;semicolon&#34; horiz-adv-x=&#34;425&#34; d=&#34;M46 123Q46 170 78 203T165 236Q195 236 218 225T256 195T280 150T288 94Q288 49 276 1T239 -95T179 -188T99 -271L68 -242Q55 -230 55 -214Q55 -202 71 -183T108 -138T148 -77T175 0H163Q111
+</li><li class="L71" rel="L71">0 79 34T46 123ZM151 860Q151 886 160 909T187 949T226 976T276 986Q302 986 324 976T364 949T391 909T401 860Q401 833 391 811T364 771T325 745T276 735Q249 735 227 744T187 771T161 810T151 860Z&#34; /&gt;
+</li><li class="L72" rel="L72">&lt;glyph unicode=&#34;&amp;lt;&#34; glyph-name=&#34;less&#34; horiz-adv-x=&#34;1067&#34; d=&#34;M168 710L990 1111L974 984Q972 967 962 955T932 932L455 704Q434 693 411 686T361 672Q385 667 406 659T447 641L869 414Q884 406 891 395T899 372Q899 371 898 358T894 326T888 282T882 234L159
+</li><li class="L73" rel="L73">636L168 710Z&#34; /&gt;
+</li><li class="L74" rel="L74">&lt;glyph unicode=&#34;=&#34; glyph-name=&#34;equal&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M157 573H1015L999 442H141L157 573ZM199 906H1055L1040 775H183L199 906Z&#34; /&gt;
+</li><li class="L75" rel="L75">&lt;glyph unicode=&#34;&amp;gt;&#34; glyph-name=&#34;greater&#34; horiz-adv-x=&#34;1067&#34; d=&#34;M947 636L125 235L141 362Q143 379 153 391T183 414L660 642Q681 653 704 660T754 674Q730 679 709 687T668 705L246 932Q231 940 224 951T216 974Q216 975 217 988T221 1020T227 1064T233 1112L956
+</li><li class="L76" rel="L76">710L947 636Z&#34; /&gt;
+</li><li class="L77" rel="L77">&lt;glyph unicode=&#34;?&#34; glyph-name=&#34;question&#34; horiz-adv-x=&#34;737&#34; d=&#34;M132 1303Q165 1332 202 1358T283 1404T376 1435T482 1447Q552 1447 608 1426T705 1368T766 1281T787 1171Q787 1087 764 1028T704 926T625 851T542 790T472 728T431 653L394 499H275L286 665Q289
+</li><li class="L78" rel="L78">713 315 750T380 819T461 883T541 950T602 1031T627 1138Q627 1216 580 1261T451 1306Q395 1306 354 1291T284 1258T235 1225T202 1210Q178 1210 168 1232L132 1303ZM183 110Q183 136 192 159T218 199T257 226T307 236Q333 236 356 226T396 199T422 159T432 110Q432
+</li><li class="L79" rel="L79">83 423 61T396 21T356 -5T307 -15Q280 -15 258 -6T219 21T193 60T183 110Z&#34; /&gt;
+</li><li class="L80" rel="L80">&lt;glyph unicode=&#34;@&#34; glyph-name=&#34;at&#34; horiz-adv-x=&#34;1497&#34; d=&#34;M1026 186Q956 186 915 223T870 337Q807 257 740 223T601 188Q553 188 518 205T459 253T425 324T413 413Q413 473 429 536T476 657T553 768T658 859T790 920T946 943Q1009 943 1054 933T1141 903L1009
+</li><li class="L81" rel="L81">543Q990 491 982 453T973 387Q973 360 980 343T999 315T1028 300T1064 296Q1115 296 1163 331T1249 429T1310 581T1333 774Q1333 890 1299 978T1204 1125T1059 1214T873 1244Q738 1244 617 1186T404 1022T258 773T204 458Q204 317 244 208T355 26T526 -86T743 -124Q884
+</li><li class="L82" rel="L82">-124 991 -93T1174 -14Q1185 -7 1193 -5T1209 -3Q1224 -3 1233 -12T1246 -34L1258 -85Q1151 -157 1021 -198T730 -239Q585 -239 465 -192T259 -55T125 162T77 450Q77 577 107 693T190 910T319 1093T484 1234T676 1325T887 1357Q1004 1357 1107 1318T1288 1203T1411
+</li><li class="L83" rel="L83">1020T1456 774Q1456 647 1422 540T1328 354T1191 231T1026 186ZM650 303Q677 303 707 313T766 348T823 417T875 528L982 824Q947 833 906 833Q833 833 768 798T655 705T578 577T549 432Q549 375 574 339T650 303Z&#34; /&gt;
+</li><li class="L84" rel="L84">&lt;glyph unicode=&#34;A&#34; glyph-name=&#34;A&#34; horiz-adv-x=&#34;1237&#34; d=&#34;M1180 0H1036Q1011 0 997 12T978 45L900 395H316L152 45Q143 27 125 14T83 0H-63L640 1433H829L1180 0ZM379 531H870L738 1124Q732 1150 725 1183T713 1254Q699 1216 685 1183T657 1123L379 531Z&#34; /&gt;
+</li><li class="L85" rel="L85">&lt;glyph unicode=&#34;B&#34; glyph-name=&#34;B&#34; horiz-adv-x=&#34;1191&#34; d=&#34;M97 0L274 1433H698Q810 1433 890 1411T1023 1347T1100 1246T1125 1113Q1125 1049 1107 991T1051 884T959 797T829 736Q958 707 1023 635T1088 450Q1088 351 1053 269T950 126T787 33T569 0H97ZM365 655L302
+</li><li class="L86" rel="L86">148H584Q663 148 723 169T823 229T883 323T903 447Q903 542 839 598T646 655H365ZM381 787H612Q693 787 753 808T854 868T915 961T935 1080Q935 1183 873 1234T681 1286H443L381 787Z&#34; /&gt;
+</li><li class="L87" rel="L87">&lt;glyph unicode=&#34;C&#34; glyph-name=&#34;C&#34; horiz-adv-x=&#34;1234&#34; d=&#34;M679 145Q745 145 796 156T886 183T952 218T1000 254T1035 281T1060 292Q1069 292 1075 289T1085 280L1150 199Q1056 97 934 41T648 -16Q520 -16 418 30T246 158T138 355T100 606Q100 793 158 948T317
+</li><li class="L88" rel="L88">1214T556 1387T851 1449Q927 1449 989 1436T1102 1398T1194 1338T1272 1260L1208 1182Q1200 1172 1190 1166T1165 1159Q1147 1159 1127 1179T1073 1222T984 1266T842 1286Q726 1286 625 1240T450 1107T334 897T291 621Q291 510 320 422T400 273T523 178T679 145Z&#34;
+</li><li class="L89" rel="L89">/&gt;
+</li><li class="L90" rel="L90">&lt;glyph unicode=&#34;D&#34; glyph-name=&#34;D&#34; horiz-adv-x=&#34;1385&#34; d=&#34;M1341 817Q1341 634 1285 484T1129 226T892 59T592 0H97L274 1433H768Q900 1433 1006 1388T1187 1262T1301 1067T1341 817ZM1149 813Q1149 921 1122 1008T1043 1155T917 1248T750 1281H444L304 151H610Q730
+</li><li class="L91" rel="L91">151 829 196T999 327T1109 535T1149 813Z&#34; /&gt;
+</li><li class="L92" rel="L92">&lt;glyph unicode=&#34;E&#34; glyph-name=&#34;E&#34; horiz-adv-x=&#34;1067&#34; d=&#34;M1070 1280H443L383 797H891L872 650H365L304 152H933L914 0H97L274 1433H1089L1070 1280Z&#34; /&gt;
+</li><li class="L93" rel="L93">&lt;glyph unicode=&#34;F&#34; glyph-name=&#34;F&#34; horiz-adv-x=&#34;1041&#34; d=&#34;M1070 1280H443L380 770H917L896 618H362L286 0H97L274 1433H1089L1070 1280Z&#34; /&gt;
+</li><li class="L94" rel="L94">&lt;glyph unicode=&#34;G&#34; glyph-name=&#34;G&#34; horiz-adv-x=&#34;1349&#34; d=&#34;M704 135Q756 135 801 140T885 157T961 183T1034 219L1073 543H874Q857 543 848 552T838 575Q838 575 838 580T839 591T840 602T841 607L850 686H1260L1193 139Q1139 100 1082 71T960 23T825 -6T672 -16Q542
+</li><li class="L95" rel="L95">-16 437 30T256 160T141 360T100 614Q100 799 157 952T316 1216T557 1388T862 1449Q945 1449 1013 1435T1136 1396T1235 1337T1317 1263L1257 1185Q1247 1172 1237 1165T1212 1158Q1195 1158 1179 1168Q1157 1181 1131 1201T1067 1240T976 1272T848 1286Q725 1286
+</li><li class="L96" rel="L96">623 1239T447 1105T332 895T291 621Q291 508 320 418T404 265T534 169T704 135Z&#34; /&gt;
+</li><li class="L97" rel="L97">&lt;glyph unicode=&#34;H&#34; glyph-name=&#34;H&#34; horiz-adv-x=&#34;1392&#34; d=&#34;M1173 0H984L1065 654H366L286 0H97L274 1433H462L383 790H1082L1161 1433H1349L1173 0Z&#34; /&gt;
+</li><li class="L98" rel="L98">&lt;glyph unicode=&#34;I&#34; glyph-name=&#34;I&#34; horiz-adv-x=&#34;566&#34; d=&#34;M317 0H129L304 1433H492L317 0Z&#34; /&gt;
+</li><li class="L99" rel="L99">&lt;glyph unicode=&#34;J&#34; glyph-name=&#34;J&#34; horiz-adv-x=&#34;817&#34; d=&#34;M657 475Q628 237 509 111T191 -16Q137 -16 90 -9T-5 12L9 121Q11 136 20 147T50 158Q60 158 73 156T102 150T140 144T190 141Q242 141 288 158T371 214T433 316T470 471L587 1433H774L657 475Z&#34; /&gt;
+</li><li class="L100" rel="L100">&lt;glyph unicode=&#34;K&#34; glyph-name=&#34;K&#34; horiz-adv-x=&#34;1257&#34; d=&#34;M398 802H464Q499 802 521 811T565 844L1061 1388Q1084 1414 1106 1423T1158 1433H1317L745 813Q724 790 706 775T667 750Q691 740 708 723T743 679L1175 0H1014Q996 0 984 3T963 11T948 23T936 40L560
+</li><li class="L101" rel="L101">612Q544 636 525 647T462 658H381L300 0H114L289 1433H476L398 802Z&#34; /&gt;
+</li><li class="L102" rel="L102">&lt;glyph unicode=&#34;L&#34; glyph-name=&#34;L&#34; horiz-adv-x=&#34;947&#34; d=&#34;M303 158H870L851 0H97L274 1433H461L303 158Z&#34; /&gt;
+</li><li class="L103" rel="L103">&lt;glyph unicode=&#34;M&#34; glyph-name=&#34;M&#34; horiz-adv-x=&#34;1696&#34; d=&#34;M820 500Q826 479 831 460T842 419Q860 461 884 500L1447 1401Q1461 1424 1475 1428T1515 1433H1654L1478 0H1314L1445 1059Q1447 1079 1451 1102T1461 1150L904 252Q878 209 831 209H805Q759 209 742
+</li><li class="L104" rel="L104">252L397 1152Q396 1128 395 1105T392 1062L262 0H97L274 1433H411Q436 1433 450 1429T473 1401L820 500V500Z&#34; /&gt;
+</li><li class="L105" rel="L105">&lt;glyph unicode=&#34;N&#34; glyph-name=&#34;N&#34; horiz-adv-x=&#34;1391&#34; d=&#34;M370 1433Q395 1433 406 1427T430 1401L1048 306Q1050 329 1052 349T1056 389L1184 1433H1349L1173 0H1079Q1056 0 1041 7T1015 35L398 1131Q398 1126 398 1117T396 1098T394 1078T392 1060L262 0H97L274
+</li><li class="L106" rel="L106">1433H370V1433Z&#34; /&gt;
+</li><li class="L107" rel="L107">&lt;glyph unicode=&#34;O&#34; glyph-name=&#34;O&#34; horiz-adv-x=&#34;1465&#34; d=&#34;M1422 818Q1422 696 1396 587T1323 386T1208 219T1057 93T876 13T671 -15Q539 -15 434 32T254 162T140 361T100 613Q100 796 157 949T314 1214T552 1387T851 1449Q983 1449 1088 1402T1268 1270T1382
+</li><li class="L108" rel="L108">1071T1422 818ZM1230 814Q1230 923 1202 1011T1123 1162T997 1258T829 1292Q711 1292 612 1245T442 1109T331 897T291 618Q291 509 319 421T398 271T524 176T691 142Q811 142 910 189T1080 323T1190 535T1230 814Z&#34; /&gt;
+</li><li class="L109" rel="L109">&lt;glyph unicode=&#34;P&#34; glyph-name=&#34;P&#34; horiz-adv-x=&#34;1128&#34; d=&#34;M366 538L300 0H114L289 1433H684Q798 1433 882 1406T1020 1329T1102 1209T1129 1053Q1129 940 1092 846T985 683T811 577T574 538H366ZM458 1286L384 686H592Q677 686 742 712T851 784T918 895T941 1036Q941
+</li><li class="L110" rel="L110">1094 924 1140T873 1218T787 1268T666 1286H458Z&#34; /&gt;
+</li><li class="L111" rel="L111">&lt;glyph unicode=&#34;Q&#34; glyph-name=&#34;Q&#34; horiz-adv-x=&#34;1464&#34; d=&#34;M1422 818Q1422 697 1397 589T1324 389T1211 223T1062 96L1351 -297H1200Q1166 -297 1140 -288T1095 -253L898 20Q844 3 788 -6T671 -15Q539 -15 434 32T254 162T140 361T100 613Q100 796 157 949T314
+</li><li class="L112" rel="L112">1214T552 1387T851 1449Q983 1449 1088 1402T1268 1270T1382 1071T1422 818ZM1230 814Q1230 923 1202 1011T1123 1162T997 1258T829 1292Q711 1292 612 1245T442 1109T331 897T291 618Q291 509 319 421T398 271T524 176T691 142Q811 142 910 189T1080 323T1190
+</li><li class="L113" rel="L113">535T1230 814Z&#34; /&gt;
+</li><li class="L114" rel="L114">&lt;glyph unicode=&#34;R&#34; glyph-name=&#34;R&#34; horiz-adv-x=&#34;1188&#34; d=&#34;M374 601L300 0H114L289 1433H666Q780 1433 863 1409T1001 1341T1082 1233T1109 1091Q1109 1004 1083 929T1008 795T890 694T734 632Q766 610 787 572L1096 0H930Q881 0 860 40L590 556Q577 581 560 591T506
+</li><li class="L115" rel="L115">601H374ZM459 1286L391 737H574Q659 737 724 761T833 828T900 931T923 1062Q923 1171 855 1228T649 1286H459Z&#34; /&gt;
+</li><li class="L116" rel="L116">&lt;glyph unicode=&#34;S&#34; glyph-name=&#34;S&#34; horiz-adv-x=&#34;977&#34; d=&#34;M926 1211Q915 1197 905 1190T881 1182Q864 1182 845 1199T797 1237T725 1275T620 1293Q556 1293 506 1273T422 1219T369 1138T351 1039Q351 987 375 952T438 891T527 846T630 806T732 760T822 698T885
+</li><li class="L117" rel="L117">609T909 483Q909 381 874 291T774 132T615 24T406 -16Q278 -16 178 34T12 171L78 260Q86 271 98 278T124 285Q143 285 165 263T221 213T305 163T430 140Q499 140 554 162T648 223T708 316T729 437Q729 492 705 528T642 590T554 633T452 671T350 714T261 775T198
+</li><li class="L118" rel="L118">866T174 999Q174 1087 206 1168T298 1311T444 1410T638 1447Q748 1447 836 1405T981 1290L926 1211Z&#34; /&gt;
+</li><li class="L119" rel="L119">&lt;glyph unicode=&#34;T&#34; glyph-name=&#34;T&#34; horiz-adv-x=&#34;1087&#34; d=&#34;M1177 1433L1157 1276H734L578 0H392L548 1276H123L142 1433H1177Z&#34; /&gt;
+</li><li class="L120" rel="L120">&lt;glyph unicode=&#34;U&#34; glyph-name=&#34;U&#34; horiz-adv-x=&#34;1343&#34; d=&#34;M630 147Q710 147 777 178T895 263T978 394T1022 560L1129 1433H1316L1210 560Q1195 437 1146 332T1018 149T837 27T610 -17Q499 -17 413 19T268 119T177 273T146 468Q146 513 152 560L258 1433H445L338
+</li><li class="L121" rel="L121">561Q336 541 335 522T333 485Q333 410 352 348T409 241T502 172T630 147Z&#34; /&gt;
+</li><li class="L122" rel="L122">&lt;glyph unicode=&#34;V&#34; glyph-name=&#34;V&#34; horiz-adv-x=&#34;1259&#34; d=&#34;M124 1433H273Q298 1433 312 1420T331 1388L570 364Q578 332 585 294T598 213Q612 255 627 293T659 364L1148 1388Q1156 1404 1174 1418T1217 1433H1367L654 0H485L124 1433Z&#34; /&gt;
+</li><li class="L123" rel="L123">&lt;glyph unicode=&#34;W&#34; glyph-name=&#34;W&#34; horiz-adv-x=&#34;1882&#34; d=&#34;M129 1433H275Q300 1433 315 1421T333 1388L487 374Q489 360 490 340T494 301Q495 279 496 256Q506 288 516 318T538 374L967 1388Q975 1405 993 1419T1035 1433H1078Q1103 1433 1118 1421T1137 1388L1316
+</li><li class="L124" rel="L124">374Q1321 348 1324 319T1329 258Q1339 290 1347 319T1366 374L1769 1388Q1776 1405 1795 1419T1839 1433H1985L1398 0H1229L1035 1103Q1032 1119 1030 1138T1025 1177Q1018 1157 1012 1138T998 1103L533 0H365L129 1433Z&#34; /&gt;
+</li><li class="L125" rel="L125">&lt;glyph unicode=&#34;X&#34; glyph-name=&#34;X&#34; horiz-adv-x=&#34;1192&#34; d=&#34;M500 765L163 1433H332Q353 1433 362 1426T378 1405L634 865Q643 884 656 902L1020 1404Q1031 1418 1041 1425T1067 1433H1260L759 773L1137 0H969Q949 0 938 11T920 36L628 661Q620 644 610 631L179
+</li><li class="L126" rel="L126">36Q153 0 117 0H-70L500 765Z&#34; /&gt;
+</li><li class="L127" rel="L127">&lt;glyph unicode=&#34;Y&#34; glyph-name=&#34;Y&#34; horiz-adv-x=&#34;1165&#34; d=&#34;M686 573L615 0H428L499 571L121 1433H287Q312 1433 325 1421T346 1389L584 815Q594 786 601 760T613 708Q625 734 639 760T671 815L1052 1389Q1063 1405 1079 1419T1120 1433H1275L686 573Z&#34; /&gt;
+</li><li class="L128" rel="L128">&lt;glyph unicode=&#34;Z&#34; glyph-name=&#34;Z&#34; horiz-adv-x=&#34;1148&#34; d=&#34;M1195 1433L1187 1373Q1185 1359 1179 1348T1164 1324L288 152H1026L1006 0H16L24 59Q26 73 31 84T46 107L922 1280H209L228 1433H1195Z&#34; /&gt;
+</li><li class="L129" rel="L129">&lt;glyph unicode=&#34;[&#34; glyph-name=&#34;bracketleft&#34; horiz-adv-x=&#34;552&#34; d=&#34;M33 -287L256 1532H599L591 1465Q589 1445 574 1432T538 1419H387L190 -173H343Q362 -173 373 -184T385 -212Q385 -213 385 -219T383 -233T381 -251T378 -270L376 -287H33Z&#34; /&gt;
+</li><li class="L130" rel="L130">&lt;glyph unicode=&#34;\&#34; glyph-name=&#34;backslash&#34; horiz-adv-x=&#34;694&#34; d=&#34;M108 1451H181Q213 1451 234 1434T264 1388L625 -91H553Q525 -91 500 -74T467 -25L108 1451Z&#34; /&gt;
+</li><li class="L131" rel="L131">&lt;glyph unicode=&#34;]&#34; glyph-name=&#34;bracketright&#34; horiz-adv-x=&#34;552&#34; d=&#34;M209 1532H553L329 -287H-15L-6 -220Q-4 -200 10 -187T47 -173H199L395 1419H243Q223 1419 212 1430T200 1459L206 1507L209 1532Z&#34; /&gt;
+</li><li class="L132" rel="L132">&lt;glyph unicode=&#34;^&#34; glyph-name=&#34;asciicircum&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M574 1433H688L1047 787H917Q900 787 888 797T868 821L672 1173Q659 1196 650 1217T633 1260Q619 1216 596 1173L403 821Q395 807 383 797T351 787H215L574 1433Z&#34; /&gt;
+</li><li class="L133" rel="L133">&lt;glyph unicode=&#34;_&#34; glyph-name=&#34;underscore&#34; horiz-adv-x=&#34;726&#34; d=&#34;M645 -168L630 -284H-95L-81 -168H645Z&#34; /&gt;
+</li><li class="L134" rel="L134">&lt;glyph unicode=&#34;`&#34; glyph-name=&#34;grave&#34; horiz-adv-x=&#34;568&#34; d=&#34;M240 1447Q271 1447 285 1437T309 1405L416 1163H317Q297 1163 285 1169T262 1190L77 1447H240Z&#34; /&gt;
+</li><li class="L135" rel="L135">&lt;glyph unicode=&#34;a&#34; glyph-name=&#34;a&#34; horiz-adv-x=&#34;1010&#34; d=&#34;M816 0H724Q689 0 677 18T664 62L682 267Q646 203 605 151T517 63T419 6T313 -14Q253 -14 204 9T121 78T67 190T48 343Q48 433 70 518T134 680T234 819T363 929T517 1001T689 1027Q754 1027 815 1017T937
+</li><li class="L136" rel="L136">980L816 0ZM380 134Q429 134 476 164T565 249T643 377T708 541L751 889Q729 894 708 895T665 897Q605 897 549 878T444 823T355 740T287 633T242 510T226 375Q226 134 380 134Z&#34; /&gt;
+</li><li class="L137" rel="L137">&lt;glyph unicode=&#34;b&#34; glyph-name=&#34;b&#34; horiz-adv-x=&#34;1050&#34; d=&#34;M79 0L257 1473H432L344 757Q382 818 426 868T518 954T618 1008T724 1028Q853 1028 925 934T997 659Q997 577 980 495T932 339T856 200T757 88T638 13T504 -14Q423 -14 358 20T250 117L237 52Q229 26
+</li><li class="L138" rel="L138">217 13T174 0H79ZM657 885Q609 885 560 855T466 772T380 646T311 486L279 223Q317 169 370 147T478 124Q530 124 576 146T660 205T728 293T778 401T810 520T821 642Q821 761 778 823T657 885Z&#34; /&gt;
+</li><li class="L139" rel="L139">&lt;glyph unicode=&#34;c&#34; glyph-name=&#34;c&#34; horiz-adv-x=&#34;866&#34; d=&#34;M819 182Q767 125 721 87T627 27T530 -5T421 -14Q333 -14 266 16T153 100T84 231T60 400Q60 523 98 636T206 836T370 975T579 1027Q679 1027 747 992T866 888L810 821Q804 813 795 808T775 803Q761 803
+</li><li class="L140" rel="L140">748 815T713 843T659 871T575 884Q506 884 445 847T337 744T265 590T238 399Q238 337 252 287T294 201T362 146T457 126Q502 126 537 135T599 159T646 189T683 220T713 243T741 253Q761 253 775 236L819 182V182Z&#34; /&gt;
+</li><li class="L141" rel="L141">&lt;glyph unicode=&#34;d&#34; glyph-name=&#34;d&#34; horiz-adv-x=&#34;1052&#34; d=&#34;M756 0Q721 0 709 18T696 62L715 273Q677 208 632 155T538 65T435 7T326 -14Q196 -14 125 80T53 355Q53 437 70 519T118 676T194 815T293 927T412 1001T546 1028Q620 1028 681 999T786 916L855 1473H1030L848
+</li><li class="L142" rel="L142">0H756ZM393 129Q441 129 489 158T583 240T668 365T737 524L770 792Q732 845 679 867T572 889Q493 889 430 842T322 721T253 554T229 373Q229 254 272 192T393 129Z&#34; /&gt;
+</li><li class="L143" rel="L143">&lt;glyph unicode=&#34;e&#34; glyph-name=&#34;e&#34; horiz-adv-x=&#34;922&#34; d=&#34;M881 796Q881 730 854 675T755 575T557 497T233 444Q232 433 232 423T232 401Q232 267 290 197T467 126Q515 126 552 136T619 160T671 192T713 224T748 249T780 259Q798 259 813 242L857 187Q806 134 758
+</li><li class="L144" rel="L144">97T658 34T552 -2T432 -14Q345 -14 276 15T159 97T85 227T59 397Q59 475 75 552T123 700T200 830T304 933T433 1002T585 1027Q662 1027 718 1005T810 949T863 874T881 796ZM575 899Q512 899 459 873T365 802T295 695T250 562Q404 581 497 605T640 658T706 720T722
+</li><li class="L145" rel="L145">789Q722 807 714 826T689 862T643 888T575 899Z&#34; /&gt;
+</li><li class="L146" rel="L146">&lt;glyph unicode=&#34;f&#34; glyph-name=&#34;f&#34; horiz-adv-x=&#34;605&#34; d=&#34;M374 865L273 33L227 -174Q210 -249 135 -249H65L200 862L100 875Q83 880 73 889T63 915L71 993H216L228 1091Q239 1178 271 1245T353 1359T466 1430T603 1454Q665 1454 716 1434L699 1342Q697 1328 686
+</li><li class="L147" rel="L147">1325T656 1321Q647 1321 637 1321T614 1322Q571 1322 535 1310T470 1269T423 1196T396 1086L384 993H637L620 865H374Z&#34; /&gt;
+</li><li class="L148" rel="L148">&lt;glyph unicode=&#34;g&#34; glyph-name=&#34;g&#34; horiz-adv-x=&#34;929&#34; d=&#34;M816 732Q815 682 804 642T775 568T738 504T701 444T673 383T661 314Q661 272 681 238T726 168T771 90T792 -11Q792 -82 759 -145T665 -258T517 -335T320 -364Q233 -364 162 -346T40 -295T-38 -216T-66
+</li><li class="L149" rel="L149">-113Q-66 -34 -25 23T83 117T235 171T410 188Q446 188 481 185T552 177Q543 196 538 216T532 261Q532 292 541 325T573 399Q535 373 488 359T381 345Q323 345 273 364T184 420T124 512T102 642Q102 714 128 783T206 907T332 995T505 1028Q615 1028 696 976H971L963
+</li><li class="L150" rel="L150">917Q961 900 952 886T923 869L797 847Q806 821 811 793T816 732ZM430 457Q484 457 525 480T594 542T638 629T653 726Q653 814 609 859T486 904Q432 904 391 882T322 823T280 739T265 641Q265 551 308 504T430 457ZM630 -25Q630 1 625 23T612 66Q558 75 511 79T421
+</li><li class="L151" rel="L151">83Q339 83 279 69T180 30T122 -25T103 -91Q103 -163 163 -201T335 -239Q401 -239 455 -222T548 -175T608 -107T630 -25Z&#34; /&gt;
+</li><li class="L152" rel="L152">&lt;glyph unicode=&#34;h&#34; glyph-name=&#34;h&#34; horiz-adv-x=&#34;1060&#34; d=&#34;M79 0L257 1473H435L352 789Q431 907 527 967T725 1028Q840 1028 902 952T964 731Q964 711 963 690T959 645L883 0H705L781 645Q783 665 784 683T786 719Q786 801 756 841T659 881Q614 881 567 857T474
+</li><li class="L153" rel="L153">787T390 679T322 537L257 0H79Z&#34; /&gt;
+</li><li class="L154" rel="L154">&lt;glyph unicode=&#34;i&#34; glyph-name=&#34;i&#34; horiz-adv-x=&#34;487&#34; d=&#34;M392 1013L270 0H95L217 1013H392ZM459 1331Q459 1305 449 1283T421 1243T381 1215T335 1205Q312 1205 290 1215T252 1242T225 1282T215 1331Q215 1357 225 1380T252 1420T291 1448T336 1459Q360 1459
+</li><li class="L155" rel="L155">382 1449T421 1422T449 1381T459 1331Z&#34; /&gt;
+</li><li class="L156" rel="L156">&lt;glyph unicode=&#34;j&#34; glyph-name=&#34;j&#34; horiz-adv-x=&#34;475&#34; d=&#34;M391 1013L257 -75Q249 -136 227 -188T166 -280T76 -341T-44 -364Q-79 -364 -104 -359T-153 -344L-135 -248Q-130 -235 -123 -232T-102 -228Q-95 -228 -87 -228T-67 -229Q4 -229 38 -193T83 -75L216 1013H391ZM454
+</li><li class="L157" rel="L157">1331Q454 1305 444 1283T416 1243T376 1215T330 1205Q306 1205 285 1215T247 1242T220 1282T210 1331Q210 1357 220 1380T247 1420T285 1448T331 1459Q355 1459 377 1449T416 1422T444 1381T454 1331Z&#34; /&gt;
+</li><li class="L158" rel="L158">&lt;glyph unicode=&#34;k&#34; glyph-name=&#34;k&#34; horiz-adv-x=&#34;959&#34; d=&#34;M434 1473L328 606H359Q379 606 392 611T421 634L756 977Q772 993 787 1003T826 1013H983L592 616Q577 600 563 587T531 563Q547 551 558 535T580 500L884 0H731Q709 0 696 8T671 35L413 450Q400 470 388
+</li><li class="L159" rel="L159">477T347 484H313L254 0H78L259 1473H434Z&#34; /&gt;
+</li><li class="L160" rel="L160">&lt;glyph unicode=&#34;l&#34; glyph-name=&#34;l&#34; horiz-adv-x=&#34;475&#34; d=&#34;M88 0L267 1473H442L263 0H88Z&#34; /&gt;
+</li><li class="L161" rel="L161">&lt;glyph unicode=&#34;m&#34; glyph-name=&#34;m&#34; horiz-adv-x=&#34;1567&#34; d=&#34;M71 0L193 1014H282Q342 1014 342 954L328 773Q403 899 492 963T680 1028Q783 1028 832 958T881 756Q957 895 1051 961T1250 1028Q1362 1028 1417 955T1473 745Q1473 722 1471 697T1466 645L1390 0H1215L1291
+</li><li class="L162" rel="L162">645Q1297 694 1297 734Q1297 809 1272 844T1188 880Q1145 880 1102 859T1019 796T945 693T883 551L818 0H642L719 645Q722 672 724 696T726 741Q726 812 703 846T620 880Q572 880 528 856T444 787T370 676T308 528L245 0H71Z&#34; /&gt;
+</li><li class="L163" rel="L163">&lt;glyph unicode=&#34;n&#34; glyph-name=&#34;n&#34; horiz-adv-x=&#34;1052&#34; d=&#34;M71 0L192 1014H281Q341 1014 341 954L326 758Q407 892 508 960T719 1028Q832 1028 894 952T957 730Q957 710 956 689T952 645L876 0H698L774 645Q776 665 777 683T779 719Q779 801 749 840T653 880Q605
+</li><li class="L164" rel="L164">880 556 854T460 781T375 666T307 515L249 0H71Z&#34; /&gt;
+</li><li class="L165" rel="L165">&lt;glyph unicode=&#34;o&#34; glyph-name=&#34;o&#34; horiz-adv-x=&#34;1005&#34; d=&#34;M448 125Q521 125 581 165T683 271T748 425T771 607Q771 747 716 818T557 889Q483 889 424 850T322 744T257 590T234 408Q234 268 288 197T448 125ZM432 -14Q349 -14 280 14T161 97T83 229T55 407Q55
+</li><li class="L166" rel="L166">535 95 648T204 846T368 980T573 1029Q656 1029 725 1001T844 918T922 786T950 608Q950 481 910 368T801 170T636 36T432 -14Z&#34; /&gt;
+</li><li class="L167" rel="L167">&lt;glyph unicode=&#34;p&#34; glyph-name=&#34;p&#34; horiz-adv-x=&#34;1036&#34; d=&#34;M28 -343L193 1014H282Q342 1014 342 954L325 738Q363 804 408 857T502 949T606 1007T716 1028Q845 1028 917 934T989 659Q989 577 972 495T924 339T848 200T749 88T630 13T496 -14Q421 -14 359 15T255
+</li><li class="L168" rel="L168">100L201 -343H28ZM649 885Q601 885 552 855T456 771T371 643T302 482L270 224Q308 169 361 147T470 124Q522 124 568 146T652 205T720 293T770 401T802 520T813 642Q813 761 770 823T649 885Z&#34; /&gt;
+</li><li class="L169" rel="L169">&lt;glyph unicode=&#34;q&#34; glyph-name=&#34;q&#34; horiz-adv-x=&#34;1010&#34; d=&#34;M773 -343H661Q629 -343 616 -325T603 -281Q603 -278 604 -270T606 -254T608 -238T609 -229L668 242Q633 183 593 136T508 56T414 4T313 -14Q253 -14 204 9T121 78T67 190T48 343Q48 433 70 518T134 680T234
+</li><li class="L170" rel="L170">819T363 929T517 1001T689 1027Q754 1027 815 1017T937 980L773 -343ZM380 134Q428 134 474 164T563 247T641 373T705 534L750 889Q729 894 708 895T665 897Q605 897 549 878T444 823T355 740T287 633T242 510T226 375Q226 134 380 134Z&#34; /&gt;
+</li><li class="L171" rel="L171">&lt;glyph unicode=&#34;r&#34; glyph-name=&#34;r&#34; horiz-adv-x=&#34;702&#34; d=&#34;M71 0L193 1014H282Q310 1014 326 1001T342 961Q342 957 342 950T341 934T340 920T339 913L325 729Q390 869 470 945T640 1021Q682 1021 724 1003L692 832Q645 851 601 851Q504 851 428 757T301 470L245 0H71Z&#34; /&gt;
+</li><li class="L172" rel="L172">&lt;glyph unicode=&#34;s&#34; glyph-name=&#34;s&#34; horiz-adv-x=&#34;778&#34; d=&#34;M723 851Q715 839 707 834T687 828Q673 828 657 839T617 863T559 888T477 900Q432 900 395 888T331 853T290 802T275 739Q275 692 306 664T384 616T485 576T587 528T665 454T696 337Q696 267 669 203T590
+</li><li class="L173" rel="L173">91T466 13T303 -16Q206 -16 132 18T10 107L54 175Q62 188 73 195T101 202Q117 202 133 188T173 157T233 125T326 111Q375 111 414 126T481 166T523 224T538 296Q538 347 507 377T429 427T328 464T227 509T149 581T118 698Q118 762 143 821T217 927T333 1000T488
+</li><li class="L174" rel="L174">1028Q579 1028 648 998T768 915L723 851Z&#34; /&gt;
+</li><li class="L175" rel="L175">&lt;glyph unicode=&#34;t&#34; glyph-name=&#34;t&#34; horiz-adv-x=&#34;685&#34; d=&#34;M159 191Q159 197 159 206T161 234T166 281T175 357L238 864H125Q112 864 104 871T95 895Q95 898 96 907T98 927T101 951T104 974L260 995L335 1308Q339 1323 350 1332T377 1342H471L427 993H693L678 864H411L350
+</li><li class="L176" rel="L176">366Q345 325 343 300T339 260T337 239T336 230Q336 179 359 155T424 130Q450 130 470 137T504 154T529 170T547 178Q555 178 559 174T569 161L606 76Q558 33 496 9T370 -16Q273 -16 217 37T159 191Z&#34; /&gt;
+</li><li class="L177" rel="L177">&lt;glyph unicode=&#34;u&#34; glyph-name=&#34;u&#34; horiz-adv-x=&#34;1050&#34; d=&#34;M354 1013L278 369Q276 349 275 331T273 296Q273 214 303 174T400 134Q446 134 494 159T588 230T673 341T741 486L804 1013H981L859 0H771Q740 0 723 14T706 57Q706 58 707 75T709 112T712 149T714 167L721
+</li><li class="L178" rel="L178">248Q640 119 540 53T334 -14Q221 -14 159 63T96 284Q96 304 97 325T101 369L177 1013H354Z&#34; /&gt;
+</li><li class="L179" rel="L179">&lt;glyph unicode=&#34;v&#34; glyph-name=&#34;v&#34; horiz-adv-x=&#34;952&#34; d=&#34;M75 1013H219Q239 1013 251 1002T266 976L417 324Q425 287 428 250T434 177Q445 213 457 249T487 324L801 976Q809 992 823 1002T854 1013H993L485 0H336L75 1013Z&#34; /&gt;
+</li><li class="L180" rel="L180">&lt;glyph unicode=&#34;w&#34; glyph-name=&#34;w&#34; horiz-adv-x=&#34;1419&#34; d=&#34;M81 1013H214Q234 1013 246 1003T261 976L354 324Q359 289 359 257T361 192Q373 224 385 256T412 324L689 980Q695 995 708 1005T739 1015H813Q833 1015 844 1005T857 980L970 324Q976 289 979 256T986
+</li><li class="L181" rel="L181">190Q996 222 1005 255T1029 324L1285 976Q1291 992 1305 1002T1337 1013H1465L1040 0H905Q882 0 876 34L753 721Q750 737 748 753T744 786Q739 769 734 753T722 720L429 34Q415 0 389 0H259L81 1013Z&#34; /&gt;
+</li><li class="L182" rel="L182">&lt;glyph unicode=&#34;x&#34; glyph-name=&#34;x&#34; horiz-adv-x=&#34;937&#34; d=&#34;M360 545L117 1013H276Q296 1013 304 1008T320 988L490 640Q495 651 500 661T514 682L743 985Q754 999 763 1006T785 1013H946L584 544L854 0H695Q675 0 664 10T646 35L455 440Q445 418 434 402L158 34Q148
+</li><li class="L183" rel="L183">20 136 10T106 0H-50L360 545Z&#34; /&gt;
+</li><li class="L184" rel="L184">&lt;glyph unicode=&#34;y&#34; glyph-name=&#34;y&#34; horiz-adv-x=&#34;952&#34; d=&#34;M316 -302Q295 -343 254 -343H124L343 60L81 1013H228Q249 1013 259 1003T274 976L437 338Q442 317 445 296T450 254Q459 275 467 296T487 339L807 978Q815 994 829 1003T859 1013H1000L316 -302Z&#34; /&gt;
+</li><li class="L185" rel="L185">&lt;glyph unicode=&#34;z&#34; glyph-name=&#34;z&#34; horiz-adv-x=&#34;858&#34; d=&#34;M848 937Q846 918 837 901T817 869L233 139H733L717 0H3L12 74Q14 87 22 104T43 138L630 873H138L155 1013H857L848 937Z&#34; /&gt;
+</li><li class="L186" rel="L186">&lt;glyph unicode=&#34;{&#34; glyph-name=&#34;braceleft&#34; horiz-adv-x=&#34;552&#34; d=&#34;M158 453Q158 505 130 538T49 571L62 675Q136 675 172 734T209 918Q209 940 208 966T205 1020T202 1074T200 1123Q200 1220 222 1296T289 1424T400 1504T552 1532H601L592 1455Q590 1435 575 1427T549
+</li><li class="L187" rel="L187">1419H531Q492 1419 459 1404T403 1355T366 1265T353 1128Q353 1108 353 1079T353 1018T354 956T354 907Q354 830 337 779T295 695T240 646T185 622Q238 605 270 560T302 451Q302 391 287 334T255 220T222 104T207 -18Q207 -88 240 -130T335 -173H354Q364 -173 375
+</li><li class="L188" rel="L188">-180T387 -205Q387 -208 386 -215T385 -229T383 -243T382 -250L378 -287H328Q259 -287 208 -267T124 -212T73 -127T56 -20Q56 46 72 106T107 223T142 337T158 453Z&#34; /&gt;
+</li><li class="L189" rel="L189">&lt;glyph unicode=&#34;|&#34; glyph-name=&#34;bar&#34; horiz-adv-x=&#34;600&#34; d=&#34;M171 1533H309V-343H171V1533Z&#34; /&gt;
+</li><li class="L190" rel="L190">&lt;glyph unicode=&#34;}&#34; glyph-name=&#34;braceright&#34; horiz-adv-x=&#34;552&#34; d=&#34;M427 793Q427 741 455 708T536 675L523 571Q449 571 413 512T376 328Q376 306 377 280T380 226T383 172T385 123Q385 26 363 -50T296 -178T185 -258T33 -286H-16L-7 -209Q-6 -199 -1 -193T10
+</li><li class="L191" rel="L191">-182T24 -175T36 -173H54Q93 -173 126 -158T182 -109T219 -19T232 118Q232 137 232 167T232 228T231 289T231 339Q231 415 248 467T290 551T345 600T400 624Q347 641 315 686T283 795Q283 855 298 912T330 1026T363 1142T378 1264Q378 1334 345 1376T250 1419H231Q221
+</li><li class="L192" rel="L192">1419 210 1426T198 1451Q198 1454 199 1461T200 1475T202 1489T203 1496L207 1533H257Q326 1533 377 1513T461 1458T512 1373T529 1266Q529 1200 513 1140T478 1023T443 909T427 793Z&#34; /&gt;
+</li><li class="L193" rel="L193">&lt;glyph unicode=&#34;~&#34; glyph-name=&#34;asciitilde&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M700 613Q765 613 801 655T839 768H983Q983 701 965 645T912 549T826 487T711 465Q659 465 608 481T510 516T419 552T340 569Q275 569 239 527T201 414H57Q57 481 75 537T128 633T213 695T329
+</li><li class="L194" rel="L194">718Q381 718 432 702T530 666T621 630T700 613Z&#34; /&gt;
+</li><li class="L195" rel="L195">&lt;glyph unicode=&#34;&amp;#xa0;&#34; glyph-name=&#34;uni00A0&#34; horiz-adv-x=&#34;386&#34; /&gt;
+</li><li class="L196" rel="L196">&lt;glyph unicode=&#34;&amp;#xa1;&#34; glyph-name=&#34;exclamdown&#34; horiz-adv-x=&#34;635&#34; d=&#34;M148 -344L215 198Q221 243 227 285T241 371T258 461T277 559H381Q379 506 377 460T371 371T365 286T355 198L289 -344H148ZM243 903Q243 929 252 952T279 992T318 1019T368 1029Q394 1029
+</li><li class="L197" rel="L197">416 1019T456 992T483 952T493 903Q493 876 483 854T456 814T417 788T368 778Q341 778 319 787T279 814T253 853T243 903Z&#34; /&gt;
+</li><li class="L198" rel="L198">&lt;glyph unicode=&#34;&amp;#xa2;&#34; glyph-name=&#34;cent&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M503 -10Q421 -1 354 33T238 123T164 257T138 431Q138 557 176 664T287 851T463 976T700 1025L734 1206Q738 1225 753 1239T788 1254H852L807 1020Q889 1009 951 978T1062 897L1010 837Q1002
+</li><li class="L199" rel="L199">826 994 822T971 817Q959 817 944 826T908 847T856 871T783 890L636 119Q700 123 745 138T822 171T875 201T912 215Q934 215 943 200L982 140Q949 105 908 78T818 32T718 2T611 -12L578 -189Q574 -208 560 -222T524 -237H460L503 -10ZM307 439Q307 307 365 227T529
+</li><li class="L200" rel="L200">125L675 893Q585 887 517 853T402 760T331 620T307 439Z&#34; /&gt;
+</li><li class="L201" rel="L201">&lt;glyph unicode=&#34;&amp;#xa3;&#34; glyph-name=&#34;sterling&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M890 661Q888 644 873 630T834 615H411L380 359Q371 284 344 231T269 136Q298 142 328 145T387 149H1073L1064 76Q1062 63 1056 50T1038 25T1012 7T980 0H15L29 112Q64 122 92 137T142 176T177
+</li><li class="L202" rel="L202">233T197 313L233 615H70L78 685Q80 703 95 717T134 731H247L280 996Q292 1090 332 1172T436 1316T589 1412T786 1447Q870 1447 931 1428T1037 1376T1109 1298T1156 1199L1081 1155Q1061 1145 1041 1145Q1027 1145 1015 1150T995 1169Q978 1196 961 1220T918 1262T857
+</li><li class="L203" rel="L203">1290T769 1300Q704 1300 651 1279T557 1218T491 1122T457 997L425 731H897L890 661V661Z&#34; /&gt;
+</li><li class="L204" rel="L204">&lt;glyph unicode=&#34;&amp;#xa4;&#34; glyph-name=&#34;currency&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M262 672Q262 729 278 779T324 874L171 1027L262 1117L413 965Q457 996 509 1013T619 1030Q676 1030 727 1014T821 967L974 1120L1063 1029L912 877Q943 833 960 782T977 672Q977 615 961
+</li><li class="L205" rel="L205">564T915 470L1067 319L976 227L824 379Q780 348 728 332T619 315Q562 315 512 331T417 377L264 224L174 315L326 467Q295 511 279 562T262 672ZM394 672Q394 626 411 586T460 515T531 466T619 448Q666 448 707 466T779 514T828 585T846 672Q846 719 828 760T780
+</li><li class="L206" rel="L206">832T708 880T619 898Q572 898 532 881T460 832T412 760T394 672Z&#34; /&gt;
+</li><li class="L207" rel="L207">&lt;glyph unicode=&#34;&amp;#xa5;&#34; glyph-name=&#34;yen&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M163 624H473L163 1431H307Q331 1431 345 1420T366 1388L577 815Q589 782 594 753T603 696Q612 724 623 753T655 815L1006 1388Q1017 1405 1034 1418T1075 1431H1220L710 624H1020L1009 525H666L653
+</li><li class="L208" rel="L208">420H995L983 321H641L602 0H430L469 321H126L139 420H481L494 525H151L163 624Z&#34; /&gt;
+</li><li class="L209" rel="L209">&lt;glyph unicode=&#34;&amp;#xa6;&#34; glyph-name=&#34;brokenbar&#34; horiz-adv-x=&#34;600&#34; d=&#34;M171 1533H309V739H171V1533ZM171 452H309V-343H171V452Z&#34; /&gt;
+</li><li class="L210" rel="L210">&lt;glyph unicode=&#34;&amp;#xa7;&#34; glyph-name=&#34;section&#34; horiz-adv-x=&#34;927&#34; d=&#34;M850 1267Q835 1245 812 1245Q797 1245 781 1256T741 1281T684 1306T603 1318Q556 1318 519 1304T454 1267T413 1213T398 1148Q398 1102 432 1070T517 1009T627 953T737 888T822 801T856 679Q856
+</li><li class="L211" rel="L211">588 812 517T672 404Q709 371 731 329T754 229Q754 155 727 91T649 -22T525 -97T357 -125Q260 -125 184 -91T59 -3L107 63Q116 76 127 82T156 88Q174 88 190 74T231 43T291 12T386 -2Q436 -2 475 12T542 52T584 112T599 188Q599 229 579 259T525 313T450 357T363
+</li><li class="L212" rel="L212">398T276 443T200 498T147 571T126 668Q126 757 174 827T326 936Q289 970 266 1014T243 1120Q243 1185 268 1244T342 1348T460 1419T617 1446Q708 1446 778 1415T895 1330L850 1267ZM283 711Q283 664 312 631T386 570T486 517T592 462Q650 491 675 534T700 630Q700
+</li><li class="L213" rel="L213">679 673 713T604 774T510 826T409 878Q340 843 312 803T283 711Z&#34; /&gt;
+</li><li class="L214" rel="L214">&lt;glyph unicode=&#34;&amp;#xa8;&#34; glyph-name=&#34;dieresis&#34; horiz-adv-x=&#34;568&#34; d=&#34;M319 1311Q319 1288 310 1268T285 1233T249 1209T205 1200Q182 1200 162 1209T127 1233T103 1268T94 1311Q94 1334 103 1355T127 1391T162 1416T205 1425Q228 1425 248 1416T285 1392T310
+</li><li class="L215" rel="L215">1355T319 1311ZM678 1311Q678 1288 669 1268T645 1233T609 1209T565 1200Q542 1200 522 1209T486 1233T462 1268T453 1311Q453 1334 462 1355T486 1391T521 1416T565 1425Q588 1425 608 1416T644 1392T669 1355T678 1311Z&#34; /&gt;
+</li><li class="L216" rel="L216">&lt;glyph unicode=&#34;&amp;#xa9;&#34; glyph-name=&#34;copyright&#34; horiz-adv-x=&#34;1597&#34; d=&#34;M1083 474Q1092 474 1096 471T1106 463L1166 399Q1109 333 1027 297T828 260Q730 260 650 294T512 389T423 534T391 718Q391 819 425 903T520 1048T664 1142T846 1176Q955 1176 1030 1143T1163
+</li><li class="L217" rel="L217">1053L1117 988Q1112 982 1104 976T1085 970Q1071 970 1056 981T1015 1005T952 1030T855 1042Q784 1042 728 1020T632 955T571 853T550 718Q550 641 571 581T629 479T718 417T832 395Q895 395 938 407T1009 434T1054 461T1083 474ZM93 716Q93 817 119 910T193 1085T307
+</li><li class="L218" rel="L218">1233T455 1348T629 1422T823 1448Q924 1448 1017 1422T1192 1348T1340 1234T1454 1086T1528 911T1554 716Q1554 616 1528 523T1455 348T1340 201T1192 86T1018 12T823 -14Q723 -14 630 12T455 86T308 200T193 348T119 522T93 716ZM194 716Q194 627 216 545T278
+</li><li class="L219" rel="L219">392T376 262T503 163T654 99T823 76Q911 76 992 98T1144 162T1272 262T1371 391T1434 545T1457 716Q1457 850 1408 967T1273 1172T1071 1310T823 1361Q735 1361 654 1338T504 1274T377 1173T279 1043T216 888T194 716Z&#34; /&gt;
+</li><li class="L220" rel="L220">&lt;glyph unicode=&#34;&amp;#xaa;&#34; glyph-name=&#34;ordfeminine&#34; horiz-adv-x=&#34;632&#34; d=&#34;M536 840Q519 840 509 844T497 868L492 917Q467 896 444 880T397 853T347 837T290 831Q225 831 184 865T143 968Q143 1008 161 1045T223 1112T337 1161T514 1183L519 1221Q520 1228 520
+</li><li class="L221" rel="L221">1234T520 1246Q520 1292 500 1319T432 1346Q398 1346 374 1337T332 1318T299 1298T269 1289Q255 1289 247 1296T235 1313L218 1353Q272 1403 332 1426T460 1449Q504 1449 538 1434T595 1392T631 1331T643 1255Q643 1247 643 1238T641 1221L594 840H536ZM339 920Q385
+</li><li class="L222" rel="L222">920 420 939T492 993L505 1102Q439 1100 393 1091T319 1067T278 1031T265 984Q265 950 286 935T339 920Z&#34; /&gt;
+</li><li class="L223" rel="L223">&lt;glyph unicode=&#34;&amp;#xab;&#34; glyph-name=&#34;guillemotleft&#34; horiz-adv-x=&#34;875&#34; d=&#34;M133 518L136 540L414 928L466 901Q489 889 489 867Q489 847 474 828L299 565Q283 540 267 529Q277 519 290 493L401 230Q407 216 407 203Q407 171 375 156L316 129L133 518ZM409 518L412
+</li><li class="L224" rel="L224">540L690 928L742 901Q765 889 765 867Q765 847 750 828L575 565Q559 540 543 529Q553 519 566 493L677 230Q683 216 683 203Q683 171 651 156L592 129L409 518Z&#34; /&gt;
+</li><li class="L225" rel="L225">&lt;glyph unicode=&#34;&amp;#xac;&#34; glyph-name=&#34;logicalnot&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M180 736H1039L987 318H840L876 606H165L180 736Z&#34; /&gt;
+</li><li class="L226" rel="L226">&lt;glyph unicode=&#34;&amp;#xad;&#34; glyph-name=&#34;uni00AD&#34; horiz-adv-x=&#34;641&#34; d=&#34;M115 672H572L553 526H97L115 672Z&#34; /&gt;
+</li><li class="L227" rel="L227">&lt;glyph unicode=&#34;&amp;#xae;&#34; glyph-name=&#34;registered&#34; horiz-adv-x=&#34;1597&#34; d=&#34;M94 716Q94 817 120 910T194 1085T308 1233T456 1348T631 1422T825 1448Q926 1448 1019 1422T1193 1348T1341 1234T1456 1086T1530 911T1556 716Q1556 616 1530 523T1456 348T1342 201T1194
+</li><li class="L228" rel="L228">86T1019 12T825 -14Q724 -14 631 12T457 86T309 200T194 348T120 522T94 716ZM195 716Q195 627 217 545T280 392T378 262T505 163T656 99T825 76Q913 76 994 98T1145 162T1273 262T1372 391T1435 545T1458 716Q1458 850 1409 967T1274 1172T1073 1310T825 1361Q693
+</li><li class="L229" rel="L229">1361 578 1311T378 1173T244 968T195 716ZM681 626V272H525V1164H813Q985 1164 1068 1102T1151 917Q1151 823 1098 757T938 666Q955 656 967 641T992 606L1219 272H1071Q1038 272 1022 297L821 599Q812 613 800 619T761 626H681ZM681 740H796Q852 740 890 750T952
+</li><li class="L230" rel="L230">781T986 830T997 897Q997 934 988 962T957 1008T900 1035T813 1044H681V740Z&#34; /&gt;
+</li><li class="L231" rel="L231">&lt;glyph unicode=&#34;&amp;#xaf;&#34; glyph-name=&#34;overscore&#34; horiz-adv-x=&#34;568&#34; d=&#34;M126 1345H656L642 1232H112L126 1345Z&#34; /&gt;
+</li><li class="L232" rel="L232">&lt;glyph unicode=&#34;&amp;#xb0;&#34; glyph-name=&#34;degree&#34; horiz-adv-x=&#34;773&#34; d=&#34;M142 1128Q142 1195 167 1254T237 1356T340 1425T467 1450Q536 1450 595 1425T699 1357T768 1254T793 1128Q793 1062 768 1004T699 902T596 833T467 807Q399 807 340 832T237 901T168 1003T142
+</li><li class="L233" rel="L233">1128ZM267 1127Q267 1085 282 1049T325 985T388 943T467 927Q509 927 545 942T609 985T651 1048T666 1127Q666 1169 651 1206T609 1270T546 1313T467 1329Q425 1329 389 1314T325 1271T283 1206T267 1127Z&#34; /&gt;
+</li><li class="L234" rel="L234">&lt;glyph unicode=&#34;&amp;#xb1;&#34; glyph-name=&#34;plusminus&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M735 1199L688 820H1099L1083 689H672L627 319H487L532 689H126L141 820H548L595 1199H735ZM66 211H1023L1007 80H51L66 211Z&#34; /&gt;
+</li><li class="L235" rel="L235">&lt;glyph unicode=&#34;&amp;#xb2;&#34; glyph-name=&#34;twosuperior&#34; horiz-adv-x=&#34;664&#34; d=&#34;M482 1636Q578 1636 632 1586T687 1453Q687 1409 673 1373T635 1305T580 1242T514 1181L315 1000Q365 1014 407 1014H609Q627 1014 636 1005T646 981Q646 970 645 956T642 929Q640 914
+</li><li class="L236" rel="L236">638 900H129L134 942Q136 954 142 968T161 993L411 1213Q442 1240 469 1268T516 1324T547 1382T559 1441Q559 1486 532 1510T463 1534Q421 1534 389 1513T333 1441Q319 1411 286 1411Q282 1411 278 1411T269 1413L202 1425Q231 1531 305 1583T482 1636Z&#34; /&gt;
+</li><li class="L237" rel="L237">&lt;glyph unicode=&#34;&amp;#xb3;&#34; glyph-name=&#34;threesuperior&#34; horiz-adv-x=&#34;664&#34; d=&#34;M502 1636Q548 1636 585 1623T649 1588T690 1534T704 1467Q704 1327 565 1282Q622 1265 650 1231T678 1141Q678 1081 654 1035T591 957T502 909T400 892Q344 892 304 904T236 941T191
+</li><li class="L238" rel="L238">1001T165 1084L223 1108Q238 1114 251 1114Q279 1114 287 1091Q291 1077 298 1061T318 1030T352 1007T407 997Q441 997 467 1008T512 1037T541 1080T551 1130Q551 1179 516 1203T395 1228L406 1317Q497 1319 538 1349T580 1442Q580 1486 554 1508T483 1531Q433
+</li><li class="L239" rel="L239">1531 403 1508T352 1442Q338 1411 309 1411Q305 1411 301 1411T292 1413L228 1425Q242 1477 268 1517T331 1583T410 1622T502 1636Z&#34; /&gt;
+</li><li class="L240" rel="L240">&lt;glyph unicode=&#34;&amp;#xb4;&#34; glyph-name=&#34;acute&#34; horiz-adv-x=&#34;568&#34; d=&#34;M676 1447L428 1190Q414 1175 400 1169T365 1163H263L429 1405Q443 1427 460 1437T508 1447H676Z&#34; /&gt;
+</li><li class="L241" rel="L241">&lt;glyph unicode=&#34;&amp;#xb5;&#34; glyph-name=&#34;mu&#34; horiz-adv-x=&#34;1026&#34; d=&#34;M348 1011L265 332Q263 321 263 312T263 292Q263 210 306 166T430 121Q500 121 566 158T693 261L786 1011H957L833 0H730Q712 0 701 9T689 36V144Q619 72 552 39T404 5Q339 5 292 28T215 95V79Q215
+</li><li class="L242" rel="L242">43 213 7T206 -61L171 -344H86Q54 -344 36 -328T17 -283Q17 -280 17 -277T18 -270L176 1011H348Z&#34; /&gt;
+</li><li class="L243" rel="L243">&lt;glyph unicode=&#34;&amp;#xb6;&#34; glyph-name=&#34;paragraph&#34; horiz-adv-x=&#34;1339&#34; d=&#34;M1417 1433L1398 1280H1178L997 -201H840L1022 1280H745L563 -201H406L512 660Q419 660 344 685T217 755T136 863T107 1003Q107 1093 143 1171T244 1308T402 1399T607 1433H1417Z&#34; /&gt;
+</li><li class="L244" rel="L244">&lt;glyph unicode=&#34;&amp;#xb7;&#34; glyph-name=&#34;middot&#34; horiz-adv-x=&#34;547&#34; d=&#34;M148 593Q148 624 159 652T191 700T239 732T296 744Q327 744 354 732T402 700T434 652T446 593Q446 563 434 536T402 489T355 457T296 445Q266 445 239 456T192 488T160 536T148 593Z&#34; /&gt;
+</li><li class="L245" rel="L245">&lt;glyph unicode=&#34;&amp;#xb8;&#34; glyph-name=&#34;cedilla&#34; horiz-adv-x=&#34;568&#34; d=&#34;M69 -249Q75 -249 82 -253T99 -261T122 -270T155 -274Q195 -274 216 -254T238 -204Q238 -169 203 -155T101 -131L159 10H266L234 -72Q308 -89 341 -120T375 -198Q375 -234 359 -262T313 -310T243
+</li><li class="L246" rel="L246">-340T154 -351Q116 -351 83 -343T23 -319L46 -266Q54 -249 69 -249Z&#34; /&gt;
+</li><li class="L247" rel="L247">&lt;glyph unicode=&#34;&amp;#xb9;&#34; glyph-name=&#34;onesuperior&#34; horiz-adv-x=&#34;664&#34; d=&#34;M240 993H387L441 1429L451 1473L330 1381Q318 1372 304 1372Q293 1372 286 1376T274 1387L242 1441L487 1630H591L513 993H634L623 900H228L240 993Z&#34; /&gt;
+</li><li class="L248" rel="L248">&lt;glyph unicode=&#34;&amp;#xba;&#34; glyph-name=&#34;ordmasculine&#34; horiz-adv-x=&#34;704&#34; d=&#34;M470 1448Q528 1448 574 1430T653 1377T703 1294T720 1185Q720 1103 696 1037T630 925T527 853T395 828Q336 828 289 846T210 899T160 983T142 1092Q142 1173 166 1239T233 1351T337 1423T470
+</li><li class="L249" rel="L249">1448ZM408 931Q498 931 542 999T587 1185Q587 1260 555 1302T459 1345Q409 1345 375 1326T319 1274T287 1193T277 1090Q277 1015 309 973T408 931Z&#34; /&gt;
+</li><li class="L250" rel="L250">&lt;glyph unicode=&#34;&amp;#xbb;&#34; glyph-name=&#34;guillemotright&#34; horiz-adv-x=&#34;875&#34; d=&#34;M474 540L472 518L195 129L142 156Q119 167 119 191Q119 207 132 230L310 493Q326 517 340 528Q327 540 318 565L206 828Q200 841 200 854Q200 886 233 901L292 928L474 540ZM750 540L748
+</li><li class="L251" rel="L251">518L471 129L418 156Q395 167 395 191Q395 207 408 230L586 493Q602 517 616 528Q603 540 594 565L482 828Q476 841 476 854Q476 886 509 901L568 928L750 540Z&#34; /&gt;
+</li><li class="L252" rel="L252">&lt;glyph unicode=&#34;&amp;#xbc;&#34; glyph-name=&#34;onequarter&#34; horiz-adv-x=&#34;1475&#34; d=&#34;M1277 276H1387L1379 203Q1377 192 1370 185T1350 177H1265L1244 0H1138L1160 177H853Q836 177 827 185T816 205L812 267L1214 728H1333L1277 276ZM441 53Q420 21 397 11T344 0H274L1198
+</li><li class="L253" rel="L253">1371Q1218 1400 1242 1415T1300 1431H1371L441 53ZM208 796H355L409 1232L419 1276L298 1184Q284 1175 272 1175Q261 1175 254 1179T242 1190L210 1244L455 1433H559L481 796H602L591 703H196L208 796ZM1202 514Q1204 533 1208 555T1218 601L940 276H1172L1202
+</li><li class="L254" rel="L254">514Z&#34; /&gt;
+</li><li class="L255" rel="L255">&lt;glyph unicode=&#34;&amp;#xbd;&#34; glyph-name=&#34;onehalf&#34; horiz-adv-x=&#34;1475&#34; d=&#34;M403 53Q382 21 359 11T306 0H236L1160 1371Q1180 1400 1204 1415T1262 1431H1333L403 53ZM1167 736Q1263 736 1317 686T1372 553Q1372 508 1357 470T1316 399T1257 334T1187 270L1000 100Q1050
+</li><li class="L256" rel="L256">114 1092 114H1294Q1312 114 1321 105T1331 81Q1331 79 1331 76T1329 56L1323 0H814L819 42Q821 54 827 68T846 93L1096 313Q1127 340 1154 368T1201 424T1232 482T1244 541Q1244 586 1217 610T1148 634Q1101 634 1071 608T1018 541Q1009 525 998 519T970 512Q966
+</li><li class="L257" rel="L257">512 960 512T930 517L887 525Q916 631 990 683T1167 736ZM213 796H360L414 1232L424 1276L303 1184Q291 1175 277 1175Q266 1175 259 1179T247 1190L215 1244L460 1433H564L486 796H607L596 703H201L213 796Z&#34; /&gt;
+</li><li class="L258" rel="L258">&lt;glyph unicode=&#34;&amp;#xbe;&#34; glyph-name=&#34;threequarters&#34; horiz-adv-x=&#34;1475&#34; d=&#34;M1292 276H1402L1394 203Q1392 192 1385 185T1365 177H1280L1259 0H1153L1175 177H868Q851 177 842 185T831 205L827 267L1229 728H1348L1292 276ZM461 53Q440 21 417 11T364 0H294L1218
+</li><li class="L259" rel="L259">1371Q1238 1400 1262 1415T1320 1431H1391L461 53ZM484 1439Q530 1439 567 1426T631 1391T672 1337T686 1270Q686 1130 547 1085Q604 1068 632 1034T660 944Q660 884 636 838T573 760T484 712T382 695Q326 695 286 707T218 744T173 804T147 887L205 911Q220 917
+</li><li class="L260" rel="L260">233 917Q261 917 269 894Q283 850 309 825T389 800Q423 800 449 811T494 840T523 883T533 933Q533 982 498 1006T377 1031L388 1120Q479 1122 520 1152T562 1245Q562 1289 536 1311T465 1334Q415 1334 383 1310T336 1249Q328 1229 316 1222T290 1215Q286 1215 281
+</li><li class="L261" rel="L261">1215T259 1219L210 1228Q224 1280 250 1320T313 1386T392 1425T484 1439ZM1217 514Q1219 533 1223 555T1233 601L955 276H1187L1217 514Z&#34; /&gt;
+</li><li class="L262" rel="L262">&lt;glyph unicode=&#34;&amp;#xbf;&#34; glyph-name=&#34;questiondown&#34; horiz-adv-x=&#34;737&#34; d=&#34;M629 -213Q596 -242 558 -268T477 -313T384 -345T279 -357Q211 -357 156 -338T60 -282T-3 -195T-25 -78Q-25 3 -2 60T58 159T138 231T221 287T289 341T327 404L363 559H480L471 391Q468
+</li><li class="L263" rel="L263">346 444 313T383 251T306 194T229 133T171 56T147 -46Q147 -87 160 -118T195 -171T247 -204T310 -215Q365 -215 406 -200T478 -167T527 -134T559 -119Q581 -119 592 -140L629 -213ZM335 903Q335 929 344 952T370 992T409 1019T459 1029Q485 1029 508 1019T548 992T574
+</li><li class="L264" rel="L264">952T584 903Q584 876 575 854T548 814T508 788T459 778Q432 778 410 787T371 814T345 853T335 903Z&#34; /&gt;
+</li><li class="L265" rel="L265">&lt;glyph unicode=&#34;&amp;#xc0;&#34; glyph-name=&#34;Agrave&#34; horiz-adv-x=&#34;1237&#34; d=&#34;M1180 0H1036Q1011 0 997 12T978 45L900 395H316L152 45Q143 27 125 14T83 0H-63L640 1433H829L1180 0ZM379 531H870L738 1124Q732 1150 725 1183T713 1254Q699 1216 685 1183T657 1123L379
+</li><li class="L266" rel="L266">531ZM614 1781Q645 1781 659 1775T689 1749L856 1546H712Q692 1546 681 1552T655 1571L420 1781H614Z&#34; /&gt;
+</li><li class="L267" rel="L267">&lt;glyph unicode=&#34;&amp;#xc1;&#34; glyph-name=&#34;Aacute&#34; horiz-adv-x=&#34;1237&#34; d=&#34;M1180 0H1036Q1011 0 997 12T978 45L900 395H316L152 45Q143 27 125 14T83 0H-63L640 1433H829L1180 0ZM379 531H870L738 1124Q732 1150 725 1183T713 1254Q699 1216 685 1183T657 1123L379
+</li><li class="L268" rel="L268">531ZM1125 1781L837 1571Q820 1559 808 1553T775 1546H630L848 1749Q858 1758 866 1764T884 1774T904 1779T931 1781H1125Z&#34; /&gt;
+</li><li class="L269" rel="L269">&lt;glyph unicode=&#34;&amp;#xc2;&#34; glyph-name=&#34;Acircumflex&#34; horiz-adv-x=&#34;1237&#34; d=&#34;M1180 0H1036Q1011 0 997 12T978 45L900 395H316L152 45Q143 27 125 14T83 0H-63L640 1433H829L1180 0ZM379 531H870L738 1124Q732 1150 725 1183T713 1254Q699 1216 685 1183T657 1123L379
+</li><li class="L270" rel="L270">531ZM1046 1546H915Q904 1546 892 1549T871 1559L757 1666L615 1559Q606 1552 593 1549T567 1546H437L683 1755H852L1046 1546Z&#34; /&gt;
+</li><li class="L271" rel="L271">&lt;glyph unicode=&#34;&amp;#xc3;&#34; glyph-name=&#34;Atilde&#34; horiz-adv-x=&#34;1237&#34; d=&#34;M1180 0H1036Q1011 0 997 12T978 45L900 395H316L152 45Q143 27 125 14T83 0H-63L640 1433H829L1180 0ZM379 531H870L738 1124Q732 1150 725 1183T713 1254Q699 1216 685 1183T657 1123L379
+</li><li class="L272" rel="L272">531ZM874 1660Q904 1660 924 1681T950 1739H1044Q1039 1697 1024 1662T986 1600T932 1559T864 1544Q832 1544 804 1557T751 1587T703 1616T659 1630Q629 1630 610 1608T585 1548H488Q493 1590 508 1626T547 1688T601 1729T669 1744Q702 1744 730 1731T783 1702T830
+</li><li class="L273" rel="L273">1673T874 1660Z&#34; /&gt;
+</li><li class="L274" rel="L274">&lt;glyph unicode=&#34;&amp;#xc4;&#34; glyph-name=&#34;Adieresis&#34; horiz-adv-x=&#34;1237&#34; d=&#34;M1180 0H1036Q1011 0 997 12T978 45L900 395H316L152 45Q143 27 125 14T83 0H-63L640 1433H829L1180 0ZM379 531H870L738 1124Q732 1150 725 1183T713 1254Q699 1216 685 1183T657 1123L379
+</li><li class="L275" rel="L275">531ZM671 1665Q671 1645 663 1627T640 1596T608 1575T568 1567Q548 1567 531 1574T499 1595T477 1627T469 1665Q469 1686 477 1704T499 1737T530 1760T568 1768Q589 1768 607 1760T640 1738T662 1705T671 1665ZM1015 1665Q1015 1645 1007 1627T985 1596T953 1575T914
+</li><li class="L276" rel="L276">1567Q893 1567 875 1574T843 1595T821 1627T813 1665Q813 1686 821 1704T843 1737T875 1760T914 1768Q935 1768 953 1760T985 1738T1007 1705T1015 1665Z&#34; /&gt;
+</li><li class="L277" rel="L277">&lt;glyph unicode=&#34;&amp;#xc5;&#34; glyph-name=&#34;Aring&#34; horiz-adv-x=&#34;1237&#34; d=&#34;M1180 0H1036Q1011 0 997 12T978 45L900 395H316L152 45Q143 27 125 14T83 0H-63L640 1433H829L1180 0ZM379 531H870L738 1124Q732 1150 725 1183T713 1254Q699 1216 685 1183T657 1123L379
+</li><li class="L278" rel="L278">531ZM555 1659Q555 1698 570 1731T611 1787T671 1824T743 1837Q782 1837 816 1824T877 1788T918 1731T934 1659Q934 1621 919 1589T877 1534T817 1498T743 1485Q705 1485 671 1498T611 1534T570 1589T555 1659ZM644 1659Q644 1616 671 1588T745 1559Q790 1559 817
+</li><li class="L279" rel="L279">1587T845 1659Q845 1704 818 1732T745 1760Q698 1760 671 1732T644 1659Z&#34; /&gt;
+</li><li class="L280" rel="L280">&lt;glyph unicode=&#34;&amp;#xc6;&#34; glyph-name=&#34;AE&#34; horiz-adv-x=&#34;1705&#34; d=&#34;M772 1433H1726L1708 1280H1016V796H1528L1509 649H1016V152H1570L1550 0H840V395H335L130 45Q119 27 100 14T57 0H-88L772 1433ZM415 531H840V1280Q826 1244 811 1212T779 1151L415 531Z&#34; /&gt;
+</li><li class="L281" rel="L281">&lt;glyph unicode=&#34;&amp;#xc7;&#34; glyph-name=&#34;Ccedilla&#34; horiz-adv-x=&#34;1234&#34; d=&#34;M507 -249Q513 -249 520 -253T537 -261T560 -270T593 -274Q633 -274 654 -254T676 -204Q676 -169 641 -155T539 -131L587 -13Q473 -2 383 48T229 179T133 369T100 606Q100 793 158 948T317
+</li><li class="L282" rel="L282">1214T556 1387T851 1449Q927 1449 989 1436T1102 1398T1194 1338T1272 1260L1208 1182Q1200 1172 1190 1166T1165 1159Q1147 1159 1127 1179T1073 1222T984 1266T842 1286Q726 1286 625 1240T450 1107T334 897T291 621Q291 510 320 422T400 273T523 178T679 145Q745
+</li><li class="L283" rel="L283">145 796 156T886 183T952 218T1000 254T1035 281T1060 292Q1069 292 1075 289T1085 280L1150 199Q1063 105 952 50T694 -14L672 -72Q746 -89 779 -120T813 -198Q813 -234 797 -262T751 -310T681 -340T592 -351Q554 -351 521 -343T461 -319L484 -266Q492 -249 507
+</li><li class="L284" rel="L284">-249Z&#34; /&gt;
+</li><li class="L285" rel="L285">&lt;glyph unicode=&#34;&amp;#xc8;&#34; glyph-name=&#34;Egrave&#34; horiz-adv-x=&#34;1067&#34; d=&#34;M1070 1280H443L383 797H891L872 650H365L304 152H933L914 0H97L274 1433H1089L1070 1280ZM571 1781Q602 1781 616 1775T646 1749L813 1546H669Q649 1546 638 1552T612 1571L377 1781H571Z&#34; /&gt;
+</li><li class="L286" rel="L286">&lt;glyph unicode=&#34;&amp;#xc9;&#34; glyph-name=&#34;Eacute&#34; horiz-adv-x=&#34;1067&#34; d=&#34;M1070 1280H443L383 797H891L872 650H365L304 152H933L914 0H97L274 1433H1089L1070 1280ZM1066 1781L778 1571Q761 1559 749 1553T716 1546H571L789 1749Q799 1758 807 1764T825 1774T845
+</li><li class="L287" rel="L287">1779T872 1781H1066Z&#34; /&gt;
+</li><li class="L288" rel="L288">&lt;glyph unicode=&#34;&amp;#xca;&#34; glyph-name=&#34;Ecircumflex&#34; horiz-adv-x=&#34;1067&#34; d=&#34;M1070 1280H443L383 797H891L872 650H365L304 152H933L914 0H97L274 1433H1089L1070 1280ZM1003 1546H872Q861 1546 849 1549T828 1559L714 1666L572 1559Q563 1552 550 1549T524 1546H394L640
+</li><li class="L289" rel="L289">1755H809L1003 1546Z&#34; /&gt;
+</li><li class="L290" rel="L290">&lt;glyph unicode=&#34;&amp;#xcb;&#34; glyph-name=&#34;Edieresis&#34; horiz-adv-x=&#34;1067&#34; d=&#34;M1070 1280H443L383 797H891L872 650H365L304 152H933L914 0H97L274 1433H1089L1070 1280ZM628 1665Q628 1645 620 1627T597 1596T565 1575T525 1567Q505 1567 488 1574T456 1595T434 1627T426
+</li><li class="L291" rel="L291">1665Q426 1686 434 1704T456 1737T487 1760T525 1768Q546 1768 564 1760T597 1738T619 1705T628 1665ZM972 1665Q972 1645 964 1627T942 1596T910 1575T871 1567Q850 1567 832 1574T800 1595T778 1627T770 1665Q770 1686 778 1704T800 1737T832 1760T871 1768Q892
+</li><li class="L292" rel="L292">1768 910 1760T942 1738T964 1705T972 1665Z&#34; /&gt;
+</li><li class="L293" rel="L293">&lt;glyph unicode=&#34;&amp;#xcc;&#34; glyph-name=&#34;Igrave&#34; horiz-adv-x=&#34;566&#34; d=&#34;M317 0H129L304 1433H492L317 0ZM280 1781Q311 1781 325 1775T355 1749L522 1546H378Q358 1546 347 1552T321 1571L86 1781H280Z&#34; /&gt;
+</li><li class="L294" rel="L294">&lt;glyph unicode=&#34;&amp;#xcd;&#34; glyph-name=&#34;Iacute&#34; horiz-adv-x=&#34;566&#34; d=&#34;M317 0H129L304 1433H492L317 0ZM775 1781L487 1571Q470 1559 458 1553T425 1546H280L498 1749Q508 1758 516 1764T534 1774T554 1779T581 1781H775Z&#34; /&gt;
+</li><li class="L295" rel="L295">&lt;glyph unicode=&#34;&amp;#xce;&#34; glyph-name=&#34;Icircumflex&#34; horiz-adv-x=&#34;566&#34; d=&#34;M317 0H129L304 1433H492L317 0ZM712 1546H581Q570 1546 558 1549T537 1559L423 1666L281 1559Q272 1552 259 1549T233 1546H103L349 1755H518L712 1546Z&#34; /&gt;
+</li><li class="L296" rel="L296">&lt;glyph unicode=&#34;&amp;#xcf;&#34; glyph-name=&#34;Idieresis&#34; horiz-adv-x=&#34;566&#34; d=&#34;M317 0H129L304 1433H492L317 0ZM337 1665Q337 1645 329 1627T306 1596T274 1575T234 1567Q214 1567 197 1574T165 1595T143 1627T135 1665Q135 1686 143 1704T165 1737T196 1760T234 1768Q255
+</li><li class="L297" rel="L297">1768 273 1760T306 1738T328 1705T337 1665ZM681 1665Q681 1645 673 1627T651 1596T619 1575T580 1567Q559 1567 541 1574T509 1595T487 1627T479 1665Q479 1686 487 1704T509 1737T541 1760T580 1768Q601 1768 619 1760T651 1738T673 1705T681 1665Z&#34; /&gt;
+</li><li class="L298" rel="L298">&lt;glyph unicode=&#34;&amp;#xd0;&#34; glyph-name=&#34;Eth&#34; horiz-adv-x=&#34;1452&#34; d=&#34;M83 777H262L342 1433H836Q968 1433 1074 1388T1254 1262T1368 1067T1408 817Q1408 634 1352 484T1196 226T960 59T661 0H167L248 667H69L83 777ZM1216 813Q1216 921 1189 1008T1110 1155T985
+</li><li class="L299" rel="L299">1248T818 1281H511L449 777H797L784 667H436L373 151H679Q799 151 897 196T1067 327T1177 535T1216 813Z&#34; /&gt;
+</li><li class="L300" rel="L300">&lt;glyph unicode=&#34;&amp;#xd1;&#34; glyph-name=&#34;Ntilde&#34; horiz-adv-x=&#34;1391&#34; d=&#34;M370 1433Q395 1433 406 1427T430 1401L1048 306Q1050 329 1052 349T1056 389L1184 1433H1349L1173 0H1079Q1056 0 1041 7T1015 35L398 1131Q398 1126 398 1117T396 1098T394 1078T392 1060L262
+</li><li class="L301" rel="L301">0H97L274 1433H370V1433ZM949 1660Q979 1660 999 1681T1025 1739H1119Q1114 1697 1099 1662T1061 1600T1007 1559T939 1544Q907 1544 879 1557T826 1587T778 1616T734 1630Q704 1630 685 1608T660 1548H563Q568 1590 583 1626T622 1688T676 1729T744 1744Q777 1744
+</li><li class="L302" rel="L302">805 1731T858 1702T905 1673T949 1660Z&#34; /&gt;
+</li><li class="L303" rel="L303">&lt;glyph unicode=&#34;&amp;#xd2;&#34; glyph-name=&#34;Ograve&#34; horiz-adv-x=&#34;1465&#34; d=&#34;M1422 818Q1422 696 1396 587T1323 386T1208 219T1057 93T876 13T671 -15Q539 -15 434 32T254 162T140 361T100 613Q100 796 157 949T314 1214T552 1387T851 1449Q983 1449 1088 1402T1268
+</li><li class="L304" rel="L304">1270T1382 1071T1422 818ZM1230 814Q1230 923 1202 1011T1123 1162T997 1258T829 1292Q711 1292 612 1245T442 1109T331 897T291 618Q291 509 319 421T398 271T524 176T691 142Q811 142 910 189T1080 323T1190 535T1230 814ZM725 1781Q756 1781 770 1775T800 1749L967
+</li><li class="L305" rel="L305">1546H823Q803 1546 792 1552T766 1571L531 1781H725Z&#34; /&gt;
+</li><li class="L306" rel="L306">&lt;glyph unicode=&#34;&amp;#xd3;&#34; glyph-name=&#34;Oacute&#34; horiz-adv-x=&#34;1465&#34; d=&#34;M1422 818Q1422 696 1396 587T1323 386T1208 219T1057 93T876 13T671 -15Q539 -15 434 32T254 162T140 361T100 613Q100 796 157 949T314 1214T552 1387T851 1449Q983 1449 1088 1402T1268
+</li><li class="L307" rel="L307">1270T1382 1071T1422 818ZM1230 814Q1230 923 1202 1011T1123 1162T997 1258T829 1292Q711 1292 612 1245T442 1109T331 897T291 618Q291 509 319 421T398 271T524 176T691 142Q811 142 910 189T1080 323T1190 535T1230 814ZM1220 1781L932 1571Q915 1559 903 1553T870
+</li><li class="L308" rel="L308">1546H725L943 1749Q953 1758 961 1764T979 1774T999 1779T1026 1781H1220Z&#34; /&gt;
+</li><li class="L309" rel="L309">&lt;glyph unicode=&#34;&amp;#xd4;&#34; glyph-name=&#34;Ocircumflex&#34; horiz-adv-x=&#34;1465&#34; d=&#34;M1422 818Q1422 696 1396 587T1323 386T1208 219T1057 93T876 13T671 -15Q539 -15 434 32T254 162T140 361T100 613Q100 796 157 949T314 1214T552 1387T851 1449Q983 1449 1088 1402T1268
+</li><li class="L310" rel="L310">1270T1382 1071T1422 818ZM1230 814Q1230 923 1202 1011T1123 1162T997 1258T829 1292Q711 1292 612 1245T442 1109T331 897T291 618Q291 509 319 421T398 271T524 176T691 142Q811 142 910 189T1080 323T1190 535T1230 814ZM1157 1546H1026Q1015 1546 1003 1549T982
+</li><li class="L311" rel="L311">1559L868 1666L726 1559Q717 1552 704 1549T678 1546H548L794 1755H963L1157 1546Z&#34; /&gt;
+</li><li class="L312" rel="L312">&lt;glyph unicode=&#34;&amp;#xd5;&#34; glyph-name=&#34;Otilde&#34; horiz-adv-x=&#34;1465&#34; d=&#34;M1422 818Q1422 696 1396 587T1323 386T1208 219T1057 93T876 13T671 -15Q539 -15 434 32T254 162T140 361T100 613Q100 796 157 949T314 1214T552 1387T851 1449Q983 1449 1088 1402T1268
+</li><li class="L313" rel="L313">1270T1382 1071T1422 818ZM1230 814Q1230 923 1202 1011T1123 1162T997 1258T829 1292Q711 1292 612 1245T442 1109T331 897T291 618Q291 509 319 421T398 271T524 176T691 142Q811 142 910 189T1080 323T1190 535T1230 814ZM985 1660Q1015 1660 1035 1681T1061
+</li><li class="L314" rel="L314">1739H1155Q1150 1697 1135 1662T1097 1600T1043 1559T975 1544Q943 1544 915 1557T862 1587T814 1616T770 1630Q740 1630 721 1608T696 1548H599Q604 1590 619 1626T658 1688T712 1729T780 1744Q813 1744 841 1731T894 1702T941 1673T985 1660Z&#34; /&gt;
+</li><li class="L315" rel="L315">&lt;glyph unicode=&#34;&amp;#xd6;&#34; glyph-name=&#34;Odieresis&#34; horiz-adv-x=&#34;1465&#34; d=&#34;M1422 818Q1422 696 1396 587T1323 386T1208 219T1057 93T876 13T671 -15Q539 -15 434 32T254 162T140 361T100 613Q100 796 157 949T314 1214T552 1387T851 1449Q983 1449 1088 1402T1268
+</li><li class="L316" rel="L316">1270T1382 1071T1422 818ZM1230 814Q1230 923 1202 1011T1123 1162T997 1258T829 1292Q711 1292 612 1245T442 1109T331 897T291 618Q291 509 319 421T398 271T524 176T691 142Q811 142 910 189T1080 323T1190 535T1230 814ZM782 1665Q782 1645 774 1627T751 1596T719
+</li><li class="L317" rel="L317">1575T679 1567Q659 1567 642 1574T610 1595T588 1627T580 1665Q580 1686 588 1704T610 1737T641 1760T679 1768Q700 1768 718 1760T751 1738T773 1705T782 1665ZM1126 1665Q1126 1645 1118 1627T1096 1596T1064 1575T1025 1567Q1004 1567 986 1574T954 1595T932
+</li><li class="L318" rel="L318">1627T924 1665Q924 1686 932 1704T954 1737T986 1760T1025 1768Q1046 1768 1064 1760T1096 1738T1118 1705T1126 1665Z&#34; /&gt;
+</li><li class="L319" rel="L319">&lt;glyph unicode=&#34;&amp;#xd7;&#34; glyph-name=&#34;multiply&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M1081 1016L693 671L1005 316L903 223L590 579L188 221L108 314L509 671L205 1018L308 1111L612 763L1000 1109L1081 1016Z&#34; /&gt;
+</li><li class="L320" rel="L320">&lt;glyph unicode=&#34;&amp;#xd8;&#34; glyph-name=&#34;Oslash&#34; horiz-adv-x=&#34;1464&#34; d=&#34;M1422 818Q1422 696 1396 587T1323 386T1208 219T1057 93T876 13T671 -15Q574 -15 492 10T343 82L234 -55Q210 -85 180 -97T122 -109H48L259 156Q182 240 141 356T100 613Q100 796 157 949T314
+</li><li class="L321" rel="L321">1214T552 1387T851 1449Q955 1449 1042 1420T1199 1336L1288 1448Q1299 1462 1308 1471T1326 1486T1347 1494T1375 1497H1471L1279 1257Q1348 1173 1385 1062T1422 818ZM291 618Q291 521 312 442T375 302L1088 1197Q1038 1243 973 1267T829 1292Q711 1292 612 1245T442
+</li><li class="L322" rel="L322">1109T331 897T291 618ZM1230 814Q1230 902 1212 975T1160 1108L452 219Q500 181 559 162T691 142Q811 142 910 189T1080 323T1190 535T1230 814Z&#34; /&gt;
+</li><li class="L323" rel="L323">&lt;glyph unicode=&#34;&amp;#xd9;&#34; glyph-name=&#34;Ugrave&#34; horiz-adv-x=&#34;1343&#34; d=&#34;M630 147Q710 147 777 178T895 263T978 394T1022 560L1129 1433H1316L1210 560Q1195 437 1146 332T1018 149T837 27T610 -17Q499 -17 413 19T268 119T177 273T146 468Q146 513 152 560L258
+</li><li class="L324" rel="L324">1433H445L338 561Q336 541 335 522T333 485Q333 410 352 348T409 241T502 172T630 147ZM669 1781Q700 1781 714 1775T744 1749L911 1546H767Q747 1546 736 1552T710 1571L475 1781H669Z&#34; /&gt;
+</li><li class="L325" rel="L325">&lt;glyph unicode=&#34;&amp;#xda;&#34; glyph-name=&#34;Uacute&#34; horiz-adv-x=&#34;1343&#34; d=&#34;M630 147Q710 147 777 178T895 263T978 394T1022 560L1129 1433H1316L1210 560Q1195 437 1146 332T1018 149T837 27T610 -17Q499 -17 413 19T268 119T177 273T146 468Q146 513 152 560L258
+</li><li class="L326" rel="L326">1433H445L338 561Q336 541 335 522T333 485Q333 410 352 348T409 241T502 172T630 147ZM1164 1781L876 1571Q859 1559 847 1553T814 1546H669L887 1749Q897 1758 905 1764T923 1774T943 1779T970 1781H1164Z&#34; /&gt;
+</li><li class="L327" rel="L327">&lt;glyph unicode=&#34;&amp;#xdb;&#34; glyph-name=&#34;Ucircumflex&#34; horiz-adv-x=&#34;1343&#34; d=&#34;M630 147Q710 147 777 178T895 263T978 394T1022 560L1129 1433H1316L1210 560Q1195 437 1146 332T1018 149T837 27T610 -17Q499 -17 413 19T268 119T177 273T146 468Q146 513 152 560L258
+</li><li class="L328" rel="L328">1433H445L338 561Q336 541 335 522T333 485Q333 410 352 348T409 241T502 172T630 147ZM1101 1546H970Q959 1546 947 1549T926 1559L812 1666L670 1559Q661 1552 648 1549T622 1546H492L738 1755H907L1101 1546Z&#34; /&gt;
+</li><li class="L329" rel="L329">&lt;glyph unicode=&#34;&amp;#xdc;&#34; glyph-name=&#34;Udieresis&#34; horiz-adv-x=&#34;1343&#34; d=&#34;M630 147Q710 147 777 178T895 263T978 394T1022 560L1129 1433H1316L1210 560Q1195 437 1146 332T1018 149T837 27T610 -17Q499 -17 413 19T268 119T177 273T146 468Q146 513 152 560L258
+</li><li class="L330" rel="L330">1433H445L338 561Q336 541 335 522T333 485Q333 410 352 348T409 241T502 172T630 147ZM726 1665Q726 1645 718 1627T695 1596T663 1575T623 1567Q603 1567 586 1574T554 1595T532 1627T524 1665Q524 1686 532 1704T554 1737T585 1760T623 1768Q644 1768 662 1760T695
+</li><li class="L331" rel="L331">1738T717 1705T726 1665ZM1070 1665Q1070 1645 1062 1627T1040 1596T1008 1575T969 1567Q948 1567 930 1574T898 1595T876 1627T868 1665Q868 1686 876 1704T898 1737T930 1760T969 1768Q990 1768 1008 1760T1040 1738T1062 1705T1070 1665Z&#34; /&gt;
+</li><li class="L332" rel="L332">&lt;glyph unicode=&#34;&amp;#xdd;&#34; glyph-name=&#34;Yacute&#34; horiz-adv-x=&#34;1165&#34; d=&#34;M686 573L615 0H428L499 571L121 1433H287Q312 1433 325 1421T346 1389L584 815Q594 786 601 760T613 708Q625 734 639 760T671 815L1052 1389Q1063 1405 1079 1419T1120 1433H1275L686 573ZM1090
+</li><li class="L333" rel="L333">1780L802 1570Q785 1558 773 1552T740 1545H595L813 1748Q823 1757 831 1763T849 1773T869 1778T896 1780H1090Z&#34; /&gt;
+</li><li class="L334" rel="L334">&lt;glyph unicode=&#34;&amp;#xde;&#34; glyph-name=&#34;Thorn&#34; horiz-adv-x=&#34;1128&#34; d=&#34;M503 1165H712Q826 1165 909 1138T1048 1062T1130 943T1157 788Q1157 675 1120 581T1012 418T838 311T602 273H393L360 0H174L349 1433H536L503 1165ZM485 1018L411 421H620Q705 421 770 447T879
+</li><li class="L335" rel="L335">519T946 630T969 771Q969 887 901 952T693 1018H485Z&#34; /&gt;
+</li><li class="L336" rel="L336">&lt;glyph unicode=&#34;&amp;#xdf;&#34; glyph-name=&#34;germandbls&#34; horiz-adv-x=&#34;1097&#34; d=&#34;M728 1453Q817 1453 880 1426T983 1358T1043 1266T1062 1168Q1062 1100 1039 1052T980 968T905 905T829 853T771 799T747 733Q747 698 768 675T822 631T891 589T961 537T1014 462T1036
+</li><li class="L337" rel="L337">353Q1036 267 1005 199T922 83T799 10T650 -16Q561 -16 492 18T374 107L422 173Q431 185 442 192T471 199Q488 199 505 185T544 153T599 122T679 107Q721 107 756 122T817 165T857 228T872 307Q872 355 849 386T792 441T718 484T643 530T586 592T563 684Q563 746
+</li><li class="L338" rel="L338">587 790T649 868T729 932T810 993T871 1065T896 1161Q896 1189 886 1218T853 1272T794 1311T705 1326Q643 1326 589 1293T492 1201T420 1067T381 905L273 33L227 -174Q210 -249 135 -249H65L201 862L91 876Q51 881 51 914L59 991H222Q245 1083 292 1166T405 1314T553
+</li><li class="L339" rel="L339">1415T728 1453Z&#34; /&gt;
+</li><li class="L340" rel="L340">&lt;glyph unicode=&#34;&amp;#xe0;&#34; glyph-name=&#34;agrave&#34; horiz-adv-x=&#34;1010&#34; d=&#34;M816 0H724Q689 0 677 18T664 62L682 267Q646 203 605 151T517 63T419 6T313 -14Q253 -14 204 9T121 78T67 190T48 343Q48 433 70 518T134 680T234 819T363 929T517 1001T689 1027Q754 1027
+</li><li class="L341" rel="L341">815 1017T937 980L816 0ZM380 134Q429 134 476 164T565 249T643 377T708 541L751 889Q729 894 708 895T665 897Q605 897 549 878T444 823T355 740T287 633T242 510T226 375Q226 134 380 134ZM601 1447Q632 1447 646 1437T670 1405L777 1163H678Q658 1163 646 1169T623
+</li><li class="L342" rel="L342">1190L438 1447H601Z&#34; /&gt;
+</li><li class="L343" rel="L343">&lt;glyph unicode=&#34;&amp;#xe1;&#34; glyph-name=&#34;aacute&#34; horiz-adv-x=&#34;1010&#34; d=&#34;M816 0H724Q689 0 677 18T664 62L682 267Q646 203 605 151T517 63T419 6T313 -14Q253 -14 204 9T121 78T67 190T48 343Q48 433 70 518T134 680T234 819T363 929T517 1001T689 1027Q754 1027
+</li><li class="L344" rel="L344">815 1017T937 980L816 0ZM380 134Q429 134 476 164T565 249T643 377T708 541L751 889Q729 894 708 895T665 897Q605 897 549 878T444 823T355 740T287 633T242 510T226 375Q226 134 380 134ZM975 1447L727 1190Q713 1175 699 1169T664 1163H562L728 1405Q742 1427
+</li><li class="L345" rel="L345">759 1437T807 1447H975Z&#34; /&gt;
+</li><li class="L346" rel="L346">&lt;glyph unicode=&#34;&amp;#xe2;&#34; glyph-name=&#34;acircumflex&#34; horiz-adv-x=&#34;1010&#34; d=&#34;M816 0H724Q689 0 677 18T664 62L682 267Q646 203 605 151T517 63T419 6T313 -14Q253 -14 204 9T121 78T67 190T48 343Q48 433 70 518T134 680T234 819T363 929T517 1001T689 1027Q754
+</li><li class="L347" rel="L347">1027 815 1017T937 980L816 0ZM380 134Q429 134 476 164T565 249T643 377T708 541L751 889Q729 894 708 895T665 897Q605 897 549 878T444 823T355 740T287 633T242 510T226 375Q226 134 380 134ZM943 1169H829Q818 1169 808 1173T793 1183L693 1311Q690 1314 687
+</li><li class="L348" rel="L348">1317T680 1326Q675 1321 671 1318T663 1311L530 1183Q524 1178 513 1174T490 1169H371L610 1431H770L943 1169Z&#34; /&gt;
+</li><li class="L349" rel="L349">&lt;glyph unicode=&#34;&amp;#xe3;&#34; glyph-name=&#34;atilde&#34; horiz-adv-x=&#34;1010&#34; d=&#34;M816 0H724Q689 0 677 18T664 62L682 267Q646 203 605 151T517 63T419 6T313 -14Q253 -14 204 9T121 78T67 190T48 343Q48 433 70 518T134 680T234 819T363 929T517 1001T689 1027Q754 1027
+</li><li class="L350" rel="L350">815 1017T937 980L816 0ZM380 134Q429 134 476 164T565 249T643 377T708 541L751 889Q729 894 708 895T665 897Q605 897 549 878T444 823T355 740T287 633T242 510T226 375Q226 134 380 134ZM778 1321Q843 1321 857 1409H962Q956 1362 940 1324T898 1258T840 1215T770
+</li><li class="L351" rel="L351">1199Q738 1199 712 1213T663 1245T620 1277T578 1292Q546 1292 526 1270T500 1203H394Q400 1249 417 1288T459 1355T517 1398T587 1414Q620 1414 646 1400T694 1368T737 1336T778 1321Z&#34; /&gt;
+</li><li class="L352" rel="L352">&lt;glyph unicode=&#34;&amp;#xe4;&#34; glyph-name=&#34;adieresis&#34; horiz-adv-x=&#34;1010&#34; d=&#34;M816 0H724Q689 0 677 18T664 62L682 267Q646 203 605 151T517 63T419 6T313 -14Q253 -14 204 9T121 78T67 190T48 343Q48 433 70 518T134 680T234 819T363 929T517 1001T689 1027Q754 1027
+</li><li class="L353" rel="L353">815 1017T937 980L816 0ZM380 134Q429 134 476 164T565 249T643 377T708 541L751 889Q729 894 708 895T665 897Q605 897 549 878T444 823T355 740T287 633T242 510T226 375Q226 134 380 134ZM609 1311Q609 1288 600 1268T575 1233T539 1209T495 1200Q472 1200 452
+</li><li class="L354" rel="L354">1209T417 1233T393 1268T384 1311Q384 1334 393 1355T417 1391T452 1416T495 1425Q518 1425 538 1416T575 1392T600 1355T609 1311ZM968 1311Q968 1288 959 1268T935 1233T899 1209T855 1200Q832 1200 812 1209T776 1233T752 1268T743 1311Q743 1334 752 1355T776
+</li><li class="L355" rel="L355">1391T811 1416T855 1425Q878 1425 898 1416T934 1392T959 1355T968 1311Z&#34; /&gt;
+</li><li class="L356" rel="L356">&lt;glyph unicode=&#34;&amp;#xe5;&#34; glyph-name=&#34;aring&#34; horiz-adv-x=&#34;1010&#34; d=&#34;M816 0H724Q689 0 677 18T664 62L682 267Q646 203 605 151T517 63T419 6T313 -14Q253 -14 204 9T121 78T67 190T48 343Q48 433 70 518T134 680T234 819T363 929T517 1001T689 1027Q754 1027
+</li><li class="L357" rel="L357">815 1017T937 980L816 0ZM380 134Q429 134 476 164T565 249T643 377T708 541L751 889Q729 894 708 895T665 897Q605 897 549 878T444 823T355 740T287 633T242 510T226 375Q226 134 380 134ZM495 1315Q495 1357 511 1391T554 1450T618 1488T694 1502Q735 1502 771
+</li><li class="L358" rel="L358">1489T836 1450T880 1391T896 1315Q896 1274 880 1240T836 1182T772 1145T694 1131Q654 1131 618 1144T555 1182T511 1240T495 1315ZM595 1315Q595 1271 622 1243T696 1215Q741 1215 768 1243T796 1315Q796 1360 769 1388T696 1416Q649 1416 622 1388T595 1315Z&#34;
+</li><li class="L359" rel="L359">/&gt;
+</li><li class="L360" rel="L360">&lt;glyph unicode=&#34;&amp;#xe6;&#34; glyph-name=&#34;ae&#34; horiz-adv-x=&#34;1446&#34; d=&#34;M1117 1027Q1177 1027 1228 1009T1316 957T1375 880T1396 784Q1396 727 1369 673T1273 577T1087 507T792 476Q791 466 791 456T791 436Q791 281 852 204T1021 126Q1070 126 1107 136T1174 160T1226
+</li><li class="L361" rel="L361">192T1268 224T1302 249T1334 259Q1354 259 1368 242L1412 187Q1361 135 1313 97T1213 35T1107 -2T987 -14Q882 -14 803 43T684 214Q652 152 608 109T513 37T410 -3T308 -16Q175 -16 103 43T31 223Q31 294 63 358T167 471T356 552T644 588Q648 619 650 639T654 672T655
+</li><li class="L362" rel="L362">694T656 710Q656 889 502 889Q442 889 400 873T326 836T270 799T224 782Q206 782 194 791T176 814L153 869Q240 950 328 990T521 1030Q629 1030 690 982T773 849Q833 933 919 980T1117 1027ZM631 479Q511 474 428 456T294 407T220 337T197 246Q197 174 236 140T340
+</li><li class="L363" rel="L363">105Q392 105 438 123T522 179T586 271T621 401L631 479ZM1095 900Q1035 900 986 878T901 813T839 712T802 581Q932 588 1016 606T1150 649T1220 707T1240 775Q1240 832 1203 866T1095 900Z&#34; /&gt;
+</li><li class="L364" rel="L364">&lt;glyph unicode=&#34;&amp;#xe7;&#34; glyph-name=&#34;ccedilla&#34; horiz-adv-x=&#34;866&#34; d=&#34;M280 -249Q286 -249 293 -253T310 -261T333 -270T366 -274Q406 -274 427 -254T449 -204Q449 -169 414 -155T312 -131L362 -10Q288 0 232 33T137 120T80 245T60 400Q60 523 98 636T206 836T370
+</li><li class="L365" rel="L365">975T579 1027Q679 1027 747 992T866 888L810 821Q804 813 795 808T775 803Q761 803 748 815T713 843T659 871T575 884Q506 884 445 847T337 744T265 590T238 399Q238 337 252 287T294 201T362 146T457 126Q502 126 537 135T599 159T646 189T683 220T713 243T741
+</li><li class="L366" rel="L366">253Q761 253 775 236L819 182Q772 131 730 95T646 37T561 3T468 -12L445 -72Q519 -89 552 -120T586 -198Q586 -234 570 -262T524 -310T454 -340T365 -351Q327 -351 294 -343T234 -319L257 -266Q265 -249 280 -249Z&#34; /&gt;
+</li><li class="L367" rel="L367">&lt;glyph unicode=&#34;&amp;#xe8;&#34; glyph-name=&#34;egrave&#34; horiz-adv-x=&#34;922&#34; d=&#34;M881 796Q881 730 854 675T755 575T557 497T233 444Q232 433 232 423T232 401Q232 267 290 197T467 126Q515 126 552 136T619 160T671 192T713 224T748 249T780 259Q798 259 813 242L857 187Q806
+</li><li class="L368" rel="L368">134 758 97T658 34T552 -2T432 -14Q345 -14 276 15T159 97T85 227T59 397Q59 475 75 552T123 700T200 830T304 933T433 1002T585 1027Q662 1027 718 1005T810 949T863 874T881 796ZM575 899Q512 899 459 873T365 802T295 695T250 562Q404 581 497 605T640 658T706
+</li><li class="L369" rel="L369">720T722 789Q722 807 714 826T689 862T643 888T575 899ZM492 1447Q523 1447 537 1437T561 1405L668 1163H569Q549 1163 537 1169T514 1190L329 1447H492Z&#34; /&gt;
+</li><li class="L370" rel="L370">&lt;glyph unicode=&#34;&amp;#xe9;&#34; glyph-name=&#34;eacute&#34; horiz-adv-x=&#34;922&#34; d=&#34;M881 796Q881 730 854 675T755 575T557 497T233 444Q232 433 232 423T232 401Q232 267 290 197T467 126Q515 126 552 136T619 160T671 192T713 224T748 249T780 259Q798 259 813 242L857 187Q806
+</li><li class="L371" rel="L371">134 758 97T658 34T552 -2T432 -14Q345 -14 276 15T159 97T85 227T59 397Q59 475 75 552T123 700T200 830T304 933T433 1002T585 1027Q662 1027 718 1005T810 949T863 874T881 796ZM575 899Q512 899 459 873T365 802T295 695T250 562Q404 581 497 605T640 658T706
+</li><li class="L372" rel="L372">720T722 789Q722 807 714 826T689 862T643 888T575 899ZM897 1447L649 1190Q635 1175 621 1169T586 1163H484L650 1405Q664 1427 681 1437T729 1447H897Z&#34; /&gt;
+</li><li class="L373" rel="L373">&lt;glyph unicode=&#34;&amp;#xea;&#34; glyph-name=&#34;ecircumflex&#34; horiz-adv-x=&#34;922&#34; d=&#34;M881 796Q881 730 854 675T755 575T557 497T233 444Q232 433 232 423T232 401Q232 267 290 197T467 126Q515 126 552 136T619 160T671 192T713 224T748 249T780 259Q798 259 813 242L857
+</li><li class="L374" rel="L374">187Q806 134 758 97T658 34T552 -2T432 -14Q345 -14 276 15T159 97T85 227T59 397Q59 475 75 552T123 700T200 830T304 933T433 1002T585 1027Q662 1027 718 1005T810 949T863 874T881 796ZM575 899Q512 899 459 873T365 802T295 695T250 562Q404 581 497 605T640
+</li><li class="L375" rel="L375">658T706 720T722 789Q722 807 714 826T689 862T643 888T575 899ZM874 1169H760Q749 1169 739 1173T724 1183L624 1311Q621 1314 618 1317T611 1326Q606 1321 602 1318T594 1311L461 1183Q455 1178 444 1174T421 1169H302L541 1431H701L874 1169Z&#34; /&gt;
+</li><li class="L376" rel="L376">&lt;glyph unicode=&#34;&amp;#xeb;&#34; glyph-name=&#34;edieresis&#34; horiz-adv-x=&#34;922&#34; d=&#34;M881 796Q881 730 854 675T755 575T557 497T233 444Q232 433 232 423T232 401Q232 267 290 197T467 126Q515 126 552 136T619 160T671 192T713 224T748 249T780 259Q798 259 813 242L857
+</li><li class="L377" rel="L377">187Q806 134 758 97T658 34T552 -2T432 -14Q345 -14 276 15T159 97T85 227T59 397Q59 475 75 552T123 700T200 830T304 933T433 1002T585 1027Q662 1027 718 1005T810 949T863 874T881 796ZM575 899Q512 899 459 873T365 802T295 695T250 562Q404 581 497 605T640
+</li><li class="L378" rel="L378">658T706 720T722 789Q722 807 714 826T689 862T643 888T575 899ZM540 1311Q540 1288 531 1268T506 1233T470 1209T426 1200Q403 1200 383 1209T348 1233T324 1268T315 1311Q315 1334 324 1355T348 1391T383 1416T426 1425Q449 1425 469 1416T506 1392T531 1355T540
+</li><li class="L379" rel="L379">1311ZM899 1311Q899 1288 890 1268T866 1233T830 1209T786 1200Q763 1200 743 1209T707 1233T683 1268T674 1311Q674 1334 683 1355T707 1391T742 1416T786 1425Q809 1425 829 1416T865 1392T890 1355T899 1311Z&#34; /&gt;
+</li><li class="L380" rel="L380">&lt;glyph unicode=&#34;&amp;#xec;&#34; glyph-name=&#34;igrave&#34; horiz-adv-x=&#34;487&#34; d=&#34;M392 1013L270 0H95L217 1013H392ZM480 1447Q511 1447 525 1437T549 1405L656 1163H557Q537 1163 525 1169T502 1190L317 1447H480Z&#34; /&gt;
+</li><li class="L381" rel="L381">&lt;glyph unicode=&#34;&amp;#xed;&#34; glyph-name=&#34;iacute&#34; horiz-adv-x=&#34;487&#34; d=&#34;M392 1013L270 0H95L217 1013H392ZM885 1447L637 1190Q623 1175 609 1169T574 1163H472L638 1405Q652 1427 669 1437T717 1447H885Z&#34; /&gt;
+</li><li class="L382" rel="L382">&lt;glyph unicode=&#34;&amp;#xee;&#34; glyph-name=&#34;icircumflex&#34; horiz-adv-x=&#34;487&#34; d=&#34;M392 1013L270 0H95L217 1013H392ZM862 1169H748Q737 1169 727 1173T712 1183L612 1311Q609 1314 606 1317T599 1326Q594 1321 590 1318T582 1311L449 1183Q443 1178 432 1174T409 1169H290L529
+</li><li class="L383" rel="L383">1431H689L862 1169Z&#34; /&gt;
+</li><li class="L384" rel="L384">&lt;glyph unicode=&#34;&amp;#xef;&#34; glyph-name=&#34;idieresis&#34; horiz-adv-x=&#34;487&#34; d=&#34;M392 1013L270 0H95L217 1013H392ZM528 1311Q528 1288 519 1268T494 1233T458 1209T414 1200Q391 1200 371 1209T336 1233T312 1268T303 1311Q303 1334 312 1355T336 1391T371 1416T414 1425Q437
+</li><li class="L385" rel="L385">1425 457 1416T494 1392T519 1355T528 1311ZM887 1311Q887 1288 878 1268T854 1233T818 1209T774 1200Q751 1200 731 1209T695 1233T671 1268T662 1311Q662 1334 671 1355T695 1391T730 1416T774 1425Q797 1425 817 1416T853 1392T878 1355T887 1311Z&#34; /&gt;
+</li><li class="L386" rel="L386">&lt;glyph unicode=&#34;&amp;#xf0;&#34; glyph-name=&#34;eth&#34; horiz-adv-x=&#34;1020&#34; d=&#34;M457 1065Q454 1070 453 1074T452 1084Q452 1103 467 1112L596 1206Q555 1230 507 1248T404 1284Q367 1295 367 1325Q367 1338 375 1357L400 1412Q488 1396 569 1364T721 1281L895 1405L924 1348Q930
+</li><li class="L387" rel="L387">1339 930 1327Q930 1311 911 1297L798 1214Q879 1130 926 1010T973 724Q973 559 938 424T835 191T667 41T437 -13Q355 -13 286 15T167 97T88 226T60 397Q60 505 94 601T191 770T341 884T533 927Q630 927 708 882T834 744Q832 880 794 978T680 1146L490 1008L457
+</li><li class="L388" rel="L388">1065ZM457 121Q522 121 577 146T677 226T752 364T799 567Q790 611 771 651T722 723T650 774T550 793Q475 793 416 763T315 681T253 558T231 406Q231 339 248 286T295 197T367 141T457 121Z&#34; /&gt;
+</li><li class="L389" rel="L389">&lt;glyph unicode=&#34;&amp;#xf1;&#34; glyph-name=&#34;ntilde&#34; horiz-adv-x=&#34;1052&#34; d=&#34;M71 0L192 1014H281Q341 1014 341 954L326 758Q407 892 508 960T719 1028Q832 1028 894 952T957 730Q957 710 956 689T952 645L876 0H698L774 645Q776 665 777 683T779 719Q779 801 749 840T653
+</li><li class="L390" rel="L390">880Q605 880 556 854T460 781T375 666T307 515L249 0H71ZM745 1323Q810 1323 824 1411H929Q923 1364 907 1326T865 1260T807 1217T737 1201Q705 1201 679 1215T630 1247T587 1279T545 1294Q513 1294 493 1272T467 1205H361Q367 1251 384 1290T426 1357T484 1400T554
+</li><li class="L391" rel="L391">1416Q587 1416 613 1402T661 1370T704 1338T745 1323Z&#34; /&gt;
+</li><li class="L392" rel="L392">&lt;glyph unicode=&#34;&amp;#xf2;&#34; glyph-name=&#34;ograve&#34; horiz-adv-x=&#34;1005&#34; d=&#34;M448 125Q521 125 581 165T683 271T748 425T771 607Q771 747 716 818T557 889Q483 889 424 850T322 744T257 590T234 408Q234 268 288 197T448 125ZM432 -14Q349 -14 280 14T161 97T83 229T55
+</li><li class="L393" rel="L393">407Q55 535 95 648T204 846T368 980T573 1029Q656 1029 725 1001T844 918T922 786T950 608Q950 481 910 368T801 170T636 36T432 -14ZM485 1449Q516 1449 530 1439T554 1407L661 1165H562Q542 1165 530 1171T507 1192L322 1449H485Z&#34; /&gt;
+</li><li class="L394" rel="L394">&lt;glyph unicode=&#34;&amp;#xf3;&#34; glyph-name=&#34;oacute&#34; horiz-adv-x=&#34;1005&#34; d=&#34;M448 125Q521 125 581 165T683 271T748 425T771 607Q771 747 716 818T557 889Q483 889 424 850T322 744T257 590T234 408Q234 268 288 197T448 125ZM432 -14Q349 -14 280 14T161 97T83 229T55
+</li><li class="L395" rel="L395">407Q55 535 95 648T204 846T368 980T573 1029Q656 1029 725 1001T844 918T922 786T950 608Q950 481 910 368T801 170T636 36T432 -14ZM889 1449L641 1192Q627 1177 613 1171T578 1165H476L642 1407Q656 1429 673 1439T721 1449H889Z&#34; /&gt;
+</li><li class="L396" rel="L396">&lt;glyph unicode=&#34;&amp;#xf4;&#34; glyph-name=&#34;ocircumflex&#34; horiz-adv-x=&#34;1005&#34; d=&#34;M448 125Q521 125 581 165T683 271T748 425T771 607Q771 747 716 818T557 889Q483 889 424 850T322 744T257 590T234 408Q234 268 288 197T448 125ZM432 -14Q349 -14 280 14T161 97T83
+</li><li class="L397" rel="L397">229T55 407Q55 535 95 648T204 846T368 980T573 1029Q656 1029 725 1001T844 918T922 786T950 608Q950 481 910 368T801 170T636 36T432 -14ZM866 1171H752Q741 1171 731 1175T716 1185L616 1313Q613 1316 610 1319T603 1328Q598 1323 594 1320T586 1313L453 1185Q447
+</li><li class="L398" rel="L398">1180 436 1176T413 1171H294L533 1433H693L866 1171Z&#34; /&gt;
+</li><li class="L399" rel="L399">&lt;glyph unicode=&#34;&amp;#xf5;&#34; glyph-name=&#34;otilde&#34; horiz-adv-x=&#34;1005&#34; d=&#34;M448 125Q521 125 581 165T683 271T748 425T771 607Q771 747 716 818T557 889Q483 889 424 850T322 744T257 590T234 408Q234 268 288 197T448 125ZM432 -14Q349 -14 280 14T161 97T83 229T55
+</li><li class="L400" rel="L400">407Q55 535 95 648T204 846T368 980T573 1029Q656 1029 725 1001T844 918T922 786T950 608Q950 481 910 368T801 170T636 36T432 -14ZM701 1323Q766 1323 780 1411H885Q879 1364 863 1326T821 1260T763 1217T693 1201Q661 1201 635 1215T586 1247T543 1279T501
+</li><li class="L401" rel="L401">1294Q469 1294 449 1272T423 1205H317Q323 1251 340 1290T382 1357T440 1400T510 1416Q543 1416 569 1402T617 1370T660 1338T701 1323Z&#34; /&gt;
+</li><li class="L402" rel="L402">&lt;glyph unicode=&#34;&amp;#xf6;&#34; glyph-name=&#34;odieresis&#34; horiz-adv-x=&#34;1005&#34; d=&#34;M448 125Q521 125 581 165T683 271T748 425T771 607Q771 747 716 818T557 889Q483 889 424 850T322 744T257 590T234 408Q234 268 288 197T448 125ZM432 -14Q349 -14 280 14T161 97T83 229T55
+</li><li class="L403" rel="L403">407Q55 535 95 648T204 846T368 980T573 1029Q656 1029 725 1001T844 918T922 786T950 608Q950 481 910 368T801 170T636 36T432 -14ZM532 1313Q532 1290 523 1270T498 1235T462 1211T418 1202Q395 1202 375 1211T340 1235T316 1270T307 1313Q307 1336 316 1357T340
+</li><li class="L404" rel="L404">1393T375 1418T418 1427Q441 1427 461 1418T498 1394T523 1357T532 1313ZM891 1313Q891 1290 882 1270T858 1235T822 1211T778 1202Q755 1202 735 1211T699 1235T675 1270T666 1313Q666 1336 675 1357T699 1393T734 1418T778 1427Q801 1427 821 1418T857 1394T882
+</li><li class="L405" rel="L405">1357T891 1313Z&#34; /&gt;
+</li><li class="L406" rel="L406">&lt;glyph unicode=&#34;&amp;#xf7;&#34; glyph-name=&#34;divide&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M131 736H1089L1073 606H115L131 736ZM522 1012Q522 1040 533 1065T563 1109T607 1139T660 1150Q684 1150 703 1141T737 1117T760 1082T768 1039Q768 1010 757 986T726 943T682 915T630 904Q581
+</li><li class="L407" rel="L407">904 552 935T522 1012ZM434 300Q434 328 445 353T475 397T519 427T572 438Q596 438 615 429T649 405T672 370T680 327Q680 298 669 274T638 231T594 203T542 192Q494 192 464 223T434 300Z&#34; /&gt;
+</li><li class="L408" rel="L408">&lt;glyph unicode=&#34;&amp;#xf8;&#34; glyph-name=&#34;oslash&#34; horiz-adv-x=&#34;1005&#34; d=&#34;M432 -14Q308 -14 218 47L182 -2Q160 -32 131 -44T73 -57H6L138 124Q98 177 77 248T55 407Q55 535 95 648T204 846T368 980T573 1029Q698 1029 789 965L823 1011Q842 1039 858 1050T906 1061H996L868
+</li><li class="L409" rel="L409">888Q907 835 928 765T950 608Q950 481 910 368T801 170T636 36T432 -14ZM223 408Q223 319 249 253L691 855Q635 900 557 900Q483 900 422 862T317 758T248 601T223 408ZM448 114Q521 114 582 152T688 257T757 414T782 607Q782 651 776 688T757 758L315 158Q370
+</li><li class="L410" rel="L410">114 448 114Z&#34; /&gt;
+</li><li class="L411" rel="L411">&lt;glyph unicode=&#34;&amp;#xf9;&#34; glyph-name=&#34;ugrave&#34; horiz-adv-x=&#34;1050&#34; d=&#34;M354 1013L278 369Q276 349 275 331T273 296Q273 214 303 174T400 134Q446 134 494 159T588 230T673 341T741 486L804 1013H981L859 0H771Q740 0 723 14T706 57Q706 58 707 75T709 112T712
+</li><li class="L412" rel="L412">149T714 167L721 248Q640 119 540 53T334 -14Q221 -14 159 63T96 284Q96 304 97 325T101 369L177 1013H354ZM492 1449Q523 1449 537 1439T561 1407L668 1165H569Q549 1165 537 1171T514 1192L329 1449H492Z&#34; /&gt;
+</li><li class="L413" rel="L413">&lt;glyph unicode=&#34;&amp;#xfa;&#34; glyph-name=&#34;uacute&#34; horiz-adv-x=&#34;1050&#34; d=&#34;M354 1013L278 369Q276 349 275 331T273 296Q273 214 303 174T400 134Q446 134 494 159T588 230T673 341T741 486L804 1013H981L859 0H771Q740 0 723 14T706 57Q706 58 707 75T709 112T712
+</li><li class="L414" rel="L414">149T714 167L721 248Q640 119 540 53T334 -14Q221 -14 159 63T96 284Q96 304 97 325T101 369L177 1013H354ZM897 1449L649 1192Q635 1177 621 1171T586 1165H484L650 1407Q664 1429 681 1439T729 1449H897Z&#34; /&gt;
+</li><li class="L415" rel="L415">&lt;glyph unicode=&#34;&amp;#xfb;&#34; glyph-name=&#34;ucircumflex&#34; horiz-adv-x=&#34;1050&#34; d=&#34;M354 1013L278 369Q276 349 275 331T273 296Q273 214 303 174T400 134Q446 134 494 159T588 230T673 341T741 486L804 1013H981L859 0H771Q740 0 723 14T706 57Q706 58 707 75T709 112T712
+</li><li class="L416" rel="L416">149T714 167L721 248Q640 119 540 53T334 -14Q221 -14 159 63T96 284Q96 304 97 325T101 369L177 1013H354ZM874 1171H760Q749 1171 739 1175T724 1185L624 1313Q621 1316 618 1319T611 1328Q606 1323 602 1320T594 1313L461 1185Q455 1180 444 1176T421 1171H302L541
+</li><li class="L417" rel="L417">1433H701L874 1171Z&#34; /&gt;
+</li><li class="L418" rel="L418">&lt;glyph unicode=&#34;&amp;#xfc;&#34; glyph-name=&#34;udieresis&#34; horiz-adv-x=&#34;1050&#34; d=&#34;M354 1013L278 369Q276 349 275 331T273 296Q273 214 303 174T400 134Q446 134 494 159T588 230T673 341T741 486L804 1013H981L859 0H771Q740 0 723 14T706 57Q706 58 707 75T709 112T712
+</li><li class="L419" rel="L419">149T714 167L721 248Q640 119 540 53T334 -14Q221 -14 159 63T96 284Q96 304 97 325T101 369L177 1013H354ZM540 1313Q540 1290 531 1270T506 1235T470 1211T426 1202Q403 1202 383 1211T348 1235T324 1270T315 1313Q315 1336 324 1357T348 1393T383 1418T426 1427Q449
+</li><li class="L420" rel="L420">1427 469 1418T506 1394T531 1357T540 1313ZM899 1313Q899 1290 890 1270T866 1235T830 1211T786 1202Q763 1202 743 1211T707 1235T683 1270T674 1313Q674 1336 683 1357T707 1393T742 1418T786 1427Q809 1427 829 1418T865 1394T890 1357T899 1313Z&#34; /&gt;
+</li><li class="L421" rel="L421">&lt;glyph unicode=&#34;&amp;#xfd;&#34; glyph-name=&#34;yacute&#34; horiz-adv-x=&#34;952&#34; d=&#34;M316 -302Q295 -343 254 -343H124L343 60L81 1013H228Q249 1013 259 1003T274 976L437 338Q442 317 445 296T450 254Q459 275 467 296T487 339L807 978Q815 994 829 1003T859 1013H1000L316
+</li><li class="L422" rel="L422">-302ZM863 1449L615 1192Q601 1177 587 1171T552 1165H450L616 1407Q630 1429 647 1439T695 1449H863Z&#34; /&gt;
+</li><li class="L423" rel="L423">&lt;glyph unicode=&#34;&amp;#xfe;&#34; glyph-name=&#34;thorn&#34; horiz-adv-x=&#34;1045&#34; d=&#34;M37 -343L258 1473H434L345 757Q383 818 427 868T519 954T619 1008T725 1028Q854 1028 926 934T998 659Q998 577 981 495T933 339T857 200T758 88T639 13T505 -14Q430 -14 369 15T264 99L218
+</li><li class="L424" rel="L424">-279Q215 -305 196 -324T146 -343H37ZM658 885Q610 885 561 855T466 772T381 646T312 486L279 222Q317 168 370 146T479 124Q531 124 577 146T661 205T729 293T779 401T811 520T822 642Q822 761 779 823T658 885Z&#34; /&gt;
+</li><li class="L425" rel="L425">&lt;glyph unicode=&#34;&amp;#xff;&#34; glyph-name=&#34;ydieresis&#34; horiz-adv-x=&#34;952&#34; d=&#34;M316 -302Q295 -343 254 -343H124L343 60L81 1013H228Q249 1013 259 1003T274 976L437 338Q442 317 445 296T450 254Q459 275 467 296T487 339L807 978Q815 994 829 1003T859 1013H1000L316
+</li><li class="L426" rel="L426">-302ZM506 1313Q506 1290 497 1270T472 1235T436 1211T392 1202Q369 1202 349 1211T314 1235T290 1270T281 1313Q281 1336 290 1357T314 1393T349 1418T392 1427Q415 1427 435 1418T472 1394T497 1357T506 1313ZM865 1313Q865 1290 856 1270T832 1235T796 1211T752
+</li><li class="L427" rel="L427">1202Q729 1202 709 1211T673 1235T649 1270T640 1313Q640 1336 649 1357T673 1393T708 1418T752 1427Q775 1427 795 1418T831 1394T856 1357T865 1313Z&#34; /&gt;
+</li><li class="L428" rel="L428">&lt;glyph unicode=&#34;&amp;#x2013;&#34; glyph-name=&#34;endash&#34; horiz-adv-x=&#34;1026&#34; d=&#34;M165 652H902L887 527H150L165 652Z&#34; /&gt;
+</li><li class="L429" rel="L429">&lt;glyph unicode=&#34;&amp;#x2014;&#34; glyph-name=&#34;emdash&#34; horiz-adv-x=&#34;1516&#34; d=&#34;M165 652H1391L1375 527H150L165 652Z&#34; /&gt;
+</li><li class="L430" rel="L430">&lt;glyph unicode=&#34;&amp;#x2018;&#34; glyph-name=&#34;quoteleft&#34; horiz-adv-x=&#34;394&#34; d=&#34;M219 1016Q202 1053 195 1090T187 1164Q187 1264 240 1357T387 1526L434 1495Q446 1486 446 1473Q446 1465 442 1458T426 1439Q410 1420 394 1396T364 1344T343 1283T334 1217Q334 1191
+</li><li class="L431" rel="L431">339 1164T357 1109Q360 1101 360 1095Q360 1071 330 1058L219 1016Z&#34; /&gt;
+</li><li class="L432" rel="L432">&lt;glyph unicode=&#34;&amp;#x2019;&#34; glyph-name=&#34;quoteright&#34; horiz-adv-x=&#34;394&#34; d=&#34;M368 1503Q385 1466 392 1429T400 1355Q400 1255 347 1162T200 993L152 1024Q141 1033 141 1046Q141 1054 145 1061T161 1080Q177 1099 193 1123T223 1175T244 1235T253 1302Q253 1328
+</li><li class="L433" rel="L433">248 1355T230 1410Q227 1417 227 1424Q227 1448 257 1461L368 1503Z&#34; /&gt;
+</li><li class="L434" rel="L434">&lt;glyph unicode=&#34;&amp;#x201a;&#34; glyph-name=&#34;quotesinglbase&#34; horiz-adv-x=&#34;427&#34; d=&#34;M228 236Q245 199 252 162T260 88Q260 -12 207 -105T60 -274L12 -243Q1 -234 1 -221Q1 -213 5 -206T21 -187Q37 -168 53 -144T83 -92T104 -32T113 35Q113 61 108 88T90 143Q87 150
+</li><li class="L435" rel="L435">87 157Q87 181 117 194L228 236Z&#34; /&gt;
+</li><li class="L436" rel="L436">&lt;glyph unicode=&#34;&amp;#x201c;&#34; glyph-name=&#34;quotedblleft&#34; horiz-adv-x=&#34;676&#34; d=&#34;M219 1016Q202 1053 195 1090T187 1164Q187 1264 240 1357T387 1526L434 1495Q446 1486 446 1473Q446 1465 442 1458T426 1439Q410 1420 394 1396T364 1344T343 1283T334 1217Q334 1191
+</li><li class="L437" rel="L437">339 1164T357 1109Q360 1101 360 1095Q360 1071 330 1058L219 1016ZM503 1016Q486 1053 479 1090T471 1164Q471 1264 524 1357T671 1526L718 1495Q730 1486 730 1473Q730 1465 726 1458T710 1439Q694 1420 678 1396T648 1344T627 1283T618 1217Q618 1191 623 1164T641
+</li><li class="L438" rel="L438">1109Q644 1101 644 1095Q644 1071 614 1058L503 1016Z&#34; /&gt;
+</li><li class="L439" rel="L439">&lt;glyph unicode=&#34;&amp;#x201d;&#34; glyph-name=&#34;quotedblright&#34; horiz-adv-x=&#34;676&#34; d=&#34;M377 1503Q394 1466 401 1429T409 1355Q409 1255 356 1162T209 993L161 1024Q150 1033 150 1046Q150 1054 154 1061T170 1080Q186 1099 202 1123T232 1175T253 1235T262 1302Q262 1328
+</li><li class="L440" rel="L440">257 1355T239 1410Q236 1417 236 1424Q236 1448 266 1461L377 1503ZM660 1503Q677 1466 684 1429T692 1355Q692 1255 639 1162T492 993L444 1024Q433 1033 433 1046Q433 1054 437 1061T453 1080Q469 1099 485 1123T515 1175T536 1235T545 1302Q545 1328 540 1355T522
+</li><li class="L441" rel="L441">1410Q519 1417 519 1424Q519 1448 549 1461L660 1503Z&#34; /&gt;
+</li><li class="L442" rel="L442">&lt;glyph unicode=&#34;&amp;#x201e;&#34; glyph-name=&#34;quotedblbase&#34; horiz-adv-x=&#34;676&#34; d=&#34;M191 236Q208 199 215 162T223 88Q223 -12 170 -105T23 -274L-25 -243Q-36 -234 -36 -221Q-36 -213 -32 -206T-16 -187Q0 -168 16 -144T46 -92T67 -32T76 35Q76 61 71 88T53 143Q50
+</li><li class="L443" rel="L443">150 50 157Q50 181 80 194L191 236ZM475 236Q492 199 499 162T507 88Q507 -12 454 -105T307 -274L259 -243Q248 -234 248 -221Q248 -213 252 -206T268 -187Q284 -168 300 -144T330 -92T351 -32T360 35Q360 61 355 88T337 143Q334 150 334 157Q334 181 364 194L475
+</li><li class="L444" rel="L444">236Z&#34; /&gt;
+</li><li class="L445" rel="L445">&lt;glyph unicode=&#34;&amp;#x2022;&#34; glyph-name=&#34;bullet&#34; horiz-adv-x=&#34;1160&#34; d=&#34;M231 595Q231 672 260 740T339 858T457 938T600 968Q677 968 745 939T863 859T943 740T973 595Q973 518 944 451T864 333T745 254T600 224Q524 224 457 253T340 333T260 450T231 595Z&#34; /&gt;
+</li><li class="L446" rel="L446">&lt;glyph unicode=&#34;&amp;#x2039;&#34; glyph-name=&#34;guilsinglleft&#34; horiz-adv-x=&#34;598&#34; d=&#34;M133 518L136 540L414 928L466 901Q489 889 489 867Q489 847 474 828L299 565Q283 540 267 529Q277 519 290 493L401 230Q407 216 407 203Q407 171 375 156L316 129L133 518Z&#34; /&gt;
+</li><li class="L447" rel="L447">&lt;glyph unicode=&#34;&amp;#x203a;&#34; glyph-name=&#34;guilsinglright&#34; horiz-adv-x=&#34;598&#34; d=&#34;M474 540L472 518L195 129L142 156Q119 167 119 191Q119 207 132 230L310 493Q326 517 340 528Q327 540 318 565L206 828Q200 841 200 854Q200 886 233 901L292 928L474 540Z&#34; /&gt;
+</li><li class="L448" rel="L448">&lt;/font&gt;
+</li><li class="L449" rel="L449">&lt;/defs&gt;
+</li><li class="L450" rel="L450">&lt;/svg&gt;</li></ol></code></pre></td>
+						
+						</tr>
+					</tbody>
+				</table>
+			
+		</div>
+	</div>
+</div>
+
+<script>
+function submitDeleteForm() {
+    var message = prompt("delete_confirm_message\n\ndelete_commit_summary", "Delete ''");
+    if (message != null) {
+        $("#delete-message").val(message);
+        $("#delete-file-form").submit()
+    }
+}
+</script>
+
+		
+	</div>
+</div>
+
+
+	
+
+	</div>
+
+	
+
+	<footer>
+	<div class="ui container">
+		<div class="ui left">
+			© Gitea  
+		</div>
+		<div class="ui right links">
+			
+			<div class="ui language bottom floating slide up dropdown link item">
+				<i class="world icon"></i>
+				<div class="text">français</div>
+				<div class="menu">
+					
+						<a lang="fr-FR" class="item active selected" href="#">français</a>
+					
+						<a lang="en-US" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=en-US">English</a>
+					
+						<a lang="zh-CN" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=zh-CN">简体中文</a>
+					
+						<a lang="zh-HK" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=zh-HK">繁體中文（香港）</a>
+					
+						<a lang="zh-TW" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=zh-TW">繁體中文（台灣）</a>
+					
+						<a lang="de-DE" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=de-DE">Deutsch</a>
+					
+						<a lang="nl-NL" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=nl-NL">Nederlands</a>
+					
+						<a lang="lv-LV" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=lv-LV">latviešu</a>
+					
+						<a lang="ru-RU" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=ru-RU">русский</a>
+					
+						<a lang="uk-UA" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=uk-UA">Українська</a>
+					
+						<a lang="ja-JP" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=ja-JP">日本語</a>
+					
+						<a lang="es-ES" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=es-ES">español</a>
+					
+						<a lang="pt-BR" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=pt-BR">português do Brasil</a>
+					
+						<a lang="pl-PL" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=pl-PL">polski</a>
+					
+						<a lang="bg-BG" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=bg-BG">български</a>
+					
+						<a lang="it-IT" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=it-IT">italiano</a>
+					
+						<a lang="fi-FI" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=fi-FI">suomi</a>
+					
+						<a lang="tr-TR" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=tr-TR">Türkçe</a>
+					
+						<a lang="cs-CZ" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=cs-CZ">čeština</a>
+					
+						<a lang="sr-SP" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=sr-SP">српски</a>
+					
+						<a lang="sv-SE" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=sv-SE">svenska</a>
+					
+						<a lang="ko-KR" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.svg?lang=ko-KR">한국어</a>
+					
+				</div>
+			</div>
+			<a href="/vendor/librejs.html" data-jslicense="1">JavaScript licenses</a>
+			<a href="/api/swagger">API</a>
+			<a target="_blank" rel="noopener noreferrer" href="https://gitea.io">Site web</a>
+			
+		</div>
+	</div>
+</footer>
+
+
+	<script src="/vendor/plugins/jquery/jquery.min.js?v=3.4.1"></script>
+	<script src="/vendor/plugins/jquery-migrate/jquery-migrate.min.js?v=3.0.1"></script>
+	<script src="/vendor/plugins/jquery.areyousure/jquery.are-you-sure.js"></script>
+
+
+
+
+
+	<script src="/vendor/plugins/highlight/highlight.pack.js"></script>
+
+
+
+
+
+
+
+	<script src="/vendor/plugins/emojify/emojify.min.js"></script>
+	<script src="/vendor/plugins/clipboard/clipboard.min.js"></script>
+	<script src="/vendor/plugins/vue/vue.min.js"></script>
+
+	
+	<script src="/vendor/plugins/semantic/semantic.min.js"></script>
+	<script src="/js/index.js?v=525e7eceb72fe7131ebb17c5c0b1f9bb"></script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head data-suburl="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>fanruan/fair-web - static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf at a38618dfc83d4e85a2b48d0c9c9279d0d62250f1 -  fair-web - 帆软第三方插件仓库</title>
+	<link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+
+	<script>
+		if ('serviceWorker' in navigator) {
+  			window.addEventListener('load', function() {
+    			navigator.serviceWorker.register('/serviceworker.js').then(function(registration) {
+      				
+      				console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}, function(err) {
+					
+      				console.log('ServiceWorker registration failed: ', err);
+    			});
+  			});
+		}
+
+	</script>
+
+	<meta name="theme-color" content="#6cc644">
+	<meta name="author" content="fanruan" />
+	<meta name="description" content="fair-web" />
+	<meta name="keywords" content="go,git,self-hosted,gitea">
+	<meta name="referrer" content="no-referrer" />
+	<meta name="_csrf" content="uYAfJyUTxvfu7gPzjF_enJt641g6MTU4NzM3MzA2MDIzMzU5Mjk3MA" />
+	<meta name="_suburl" content="" />
+	
+	
+	
+
+
+	<script>
+	/*
+	@licstart  The following is the entire license notice for the
+        JavaScript code in this page.
+
+	Copyright (c) 2016 The Gitea Authors
+	Copyright (c) 2015 The Gogs Authors
+
+	Permission is hereby granted, free of charge, to any person obtaining a copy
+	of this software and associated documentation files (the "Software"), to deal
+	in the Software without restriction, including without limitation the rights
+	to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+	copies of the Software, and to permit persons to whom the Software is
+	furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+	THE SOFTWARE.
+	---
+	Licensing information for additional javascript libraries can be found at:
+	  {{AppSubUrl}}/vendor/librejs.html
+
+	@licend  The above is the entire license notice
+        for the JavaScript code in this page.
+	*/
+	</script>
+
+	<link rel="shortcut icon" href="/img/favicon.png" />
+	<link rel="mask-icon" href="/img/gitea-safari.svg" color="#609926">
+	<link rel="preload" href="/vendor/assets/font-awesome/css/font-awesome.min.css" as="style" onload="this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="/vendor/assets/font-awesome/css/font-awesome.min.css"></noscript>
+	<link rel="stylesheet" href="/vendor/assets/octicons/octicons.min.css">
+
+
+
+
+
+
+
+	
+	<link rel="stylesheet" href="/vendor/plugins/semantic/semantic.min.css">
+	<link rel="stylesheet" href="/css/index.css?v=525e7eceb72fe7131ebb17c5c0b1f9bb">
+	<noscript>
+		<style>
+			.dropdown:hover > .menu { display: block; }
+			.ui.secondary.menu .dropdown.item > .menu { margin-top: 0; }
+		</style>
+	</noscript>
+
+
+	<link rel="stylesheet" href="/vendor/plugins/highlight/github.css">
+
+
+
+
+
+	<style class="list-search-style"></style>
+
+	<script src="/vendor/plugins/promise-polyfill/polyfill.min.js"></script>
+	<script src="/vendor/plugins/cssrelpreload/loadCSS.min.js"></script>
+	<script src="/vendor/plugins/cssrelpreload/cssrelpreload.min.js"></script>
+
+	<meta property="og:title" content="fair-web" />
+	<meta property="og:type" content="object" />
+	<meta property="og:image" content="https://git.fanruan.com/img/avatar_default.png" />
+	<meta property="og:url" content="https://git.fanruan.com/fanruan/fair-web" />
+	
+	<meta property="og:site_name" content="帆软第三方插件仓库" />
+
+
+<style>
+.code-view * {
+    font-family:'SF Mono',Consolas,Menlo,'Liberation Mono',Monaco,'Lucida Console',monospace,Octicons
+}
+</style>
+</head>
+<body>
+	
+
+	<div class="full height">
+		<noscript>Ce site fonctionne mieux avec JavaScript.</noscript>
+
+		
+
+		
+			<div class="ui top secondary stackable main menu following bar light">
+				<div class="ui container" id="navbar">
+	<div class="item brand" style="justify-content: space-between;">
+		<a href="/">
+			<img class="ui mini image" src="/img/gitea-sm.png">
+		</a>
+		<div class="ui basic icon button mobile-only" id="navbar-expand-toggle">
+			<i class="sidebar icon"></i>
+		</div>
+	</div>
+
+	
+		<a class="item " href="/">Accueil</a>
+		<a class="item " href="/explore/repos">Explorateur</a>
+	
+
+	
+
+	
+
+	
+
+		<a class="item" target="_blank" rel="noopener noreferrer" href="https://docs.gitea.io">Aide</a>
+		<div class="right stackable menu">
+			
+				<a class="item" href="/user/sign_up">
+					<i class="octicon octicon-person"></i> S&#39;inscrire
+				</a>
+			
+			<a class="item" href="/user/login?redirect_to=%2ffanruan%2ffair-web%2fsrc%2fcommit%2fa38618dfc83d4e85a2b48d0c9c9279d0d62250f1%2fstatic%2fgoogle-fonts%2ffonts%2flato-v14-latin_latin-ext-italic.ttf">
+				<i class="octicon octicon-sign-in"></i> Connexion
+			</a>
+		</div>
+
+	
+</div>
+
+			</div>
+		
+
+
+<div class="repository file list">
+	<div class="header-wrapper">
+
+	<div class="ui container">
+		<div class="repo-header">
+			<div class="ui huge breadcrumb repo-title">
+				
+				<i class="mega-octicon octicon-repo"></i>
+				
+				<a href="/fanruan">fanruan</a>
+				<div class="divider"> / </div>
+				<a href="/fanruan/fair-web">fair-web</a>
+				
+				
+				
+			</div>
+			<div class="repo-buttons">
+				<div class="ui labeled button" tabindex="0">
+					<a class="ui compact basic button" href="/fanruan/fair-web/action/watch?redirect_to=%2ffanruan%2ffair-web%2fsrc%2fcommit%2fa38618dfc83d4e85a2b48d0c9c9279d0d62250f1%2fstatic%2fgoogle-fonts%2ffonts%2flato-v14-latin_latin-ext-italic.ttf">
+						<i class="icon fa-eye-slash"></i>Suivre
+					</a>
+					<a class="ui basic label" href="/fanruan/fair-web/watchers">
+						3
+					</a>
+				</div>
+				<div class="ui labeled button" tabindex="0">
+					<a class="ui compact basic button" href="/fanruan/fair-web/action/star?redirect_to=%2ffanruan%2ffair-web%2fsrc%2fcommit%2fa38618dfc83d4e85a2b48d0c9c9279d0d62250f1%2fstatic%2fgoogle-fonts%2ffonts%2flato-v14-latin_latin-ext-italic.ttf">
+						<i class="icon star outline"></i>Ajouter aux favoris
+					</a>
+					<a class="ui basic label" href="/fanruan/fair-web/stars">
+						1
+					</a>
+				</div>
+				
+					<div class="ui labeled button " tabindex="0">
+						<a class="ui compact basic button poping up"  data-content="Connectez vous pour forker ce dépôt." href="/user/login?redirect_to=/repo/fork/149"  data-position="top center" data-variation="tiny">
+							<i class="octicon octicon-repo-forked"></i>Bifurcation
+						</a>
+						<a class="ui basic label" href="/fanruan/fair-web/forks">
+							1
+						</a>
+					</div>
+				
+			</div>
+		</div>
+	</div>
+
+
+	<div class="ui tabs container">
+		<div class="ui tabular stackable menu navbar">
+			
+			<a class="active item" href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1">
+				<i class="octicon octicon-code"></i> Code
+			</a>
+			
+
+			
+				<a class=" item" href="/fanruan/fair-web/issues">
+					<i class="octicon octicon-issue-opened"></i> Tickets <span class="ui gray small label">0</span>
+				</a>
+			
+
+			
+
+			
+				<a class=" item" href="/fanruan/fair-web/pulls">
+					<i class="octicon octicon-git-pull-request"></i> Demandes d&#39;ajout <span class="ui gray small label">0</span>
+				</a>
+			
+
+			
+			<a class=" item" href="/fanruan/fair-web/releases">
+				<i class="octicon octicon-tag"></i> Versions <span class="ui gray small label">0</span>
+			</a>
+			
+
+			
+
+			
+				<a class=" item" href="/fanruan/fair-web/activity">
+					<i class="octicon octicon-pulse"></i> Activité
+				</a>
+			
+
+			
+
+			
+		</div>
+	</div>
+	<div class="ui tabs divider"></div>
+
+</div>
+
+	<div class="ui container">
+		
+
+
+
+		<div class="ui repo-description">
+			<div id="repo-desc">
+				
+				<a class="link" href=""></a>
+			</div>
+			
+		</div>
+		<div class="ui" id="repo-topics">
+		
+		
+		</div>
+		
+		<div class="hide" id="validate_prompt">
+			<span id="count_prompt">Vous ne pouvez pas sélectionner plus de 25 sujets</span>
+			<span id="format_prompt">Les noms de sujets doivent commencer par une lettre ou un nombre, peuvent contenir des tirets (&#39;-&#39;) et peuvent comporter jusqu&#39;à 35 caractères.</span>
+		</div>
+		
+		<div class="ui segment sub-menu">
+	<div class="ui two horizontal center link list">
+		
+			<div class="item">
+				<a class="ui" href="/fanruan/fair-web/commits/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1"><i class="octicon octicon-history"></i> <b>918</b> Révisions</a>
+			</div>
+		
+		
+			<div class="item">
+				<a class="ui" href="/fanruan/fair-web/branches/"><i class="octicon octicon-git-branch"></i> <b>1</b> Branche</a>
+			</div>
+		
+	</div>
+</div>
+
+		<div class="ui stackable secondary menu mobile--margin-between-items mobile--no-negative-margins">
+			<div class="fitted item choose reference">
+	<div class="ui floating filter dropdown custom" data-can-create-branch="false" data-no-results="Aucun résultat trouvé.">
+		<div class="ui basic small compact button" @click="menuVisible = !menuVisible" @keyup.enter="menuVisible = !menuVisible">
+			<span class="text">
+				<i class="octicon octicon-git-branch"></i>
+				Aborescence:
+				<strong>a38618dfc8</strong>
+			</span>
+			<i class="dropdown icon"></i>
+		</div>
+		<div class="data" style="display: none" data-mode="branches">
+			
+				<div class="item branch " data-url="/fanruan/fair-web/src/branch/master/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf">master</div>
+			
+			
+		</div>
+		<div class="menu transition" :class="{visible: menuVisible}" v-if="menuVisible" v-cloak>
+			<div class="ui icon search input">
+				<i class="filter icon"></i>
+				<input name="search" ref="searchField" v-model="searchTerm" @keydown="keydown($event)" placeholder="Filtrer une branche ou un tag...">
+			</div>
+			<div class="header branch-tag-choice">
+				<div class="ui grid">
+					<div class="two column row">
+						<a class="reference column" href="#" @click="mode = 'branches'; focusSearchField()">
+							<span class="text" :class="{black: mode == 'branches'}">
+								<i class="octicon octicon-git-branch"></i> Branches
+							</span>
+						</a>
+						<a class="reference column" href="#" @click="mode = 'tags'; focusSearchField()">
+							<span class="text" :class="{black: mode == 'tags'}">
+								<i class="reference tags icon"></i> Tags
+							</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="scrolling menu" ref="scrollContainer">
+				<div v-for="(item, index) in filteredItems" :key="item.name" class="item" :class="{selected: item.selected, active: active == index}" @click="selectItem(item)" :ref="'listItem' + index">${ item.name }</div>
+				<div class="item" v-if="showCreateNewBranch" :class="{active: active == filteredItems.length}" :ref="'listItem' + filteredItems.length">
+					<a href="#" @click="createNewBranch()">
+						<div>
+							<i class="octicon octicon-git-branch"></i>
+							Créer la branche <strong>${ searchTerm }</strong>
+						</div>
+						<div class="text small">
+							
+								de &#39;a38618dfc8&#39;
+							
+						</div>
+					</a>
+					<form ref="newBranchForm" action="/fanruan/fair-web/branches/_new/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1" method="post">
+						<input type="hidden" name="_csrf" value="uYAfJyUTxvfu7gPzjF_enJt641g6MTU4NzM3MzA2MDIzMzU5Mjk3MA">
+						<input type="hidden" name="new_branch_name" v-model="searchTerm">
+					</form>
+				</div>
+			</div>
+			<div class="message" v-if="showNoResults">${ noResults }</div>
+		</div>
+	</div>
+</div>
+
+			
+			
+			
+			
+				<div class="fitted item"><span class="ui breadcrumb repo-path"><a class="section" href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1" title="fair-web">fair-web</a><span class="divider">/</span><span class="section"><a href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static" title="static">static</a></span><span class="divider">/</span><span class="section"><a href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts" title="google-fonts">google-fonts</a></span><span class="divider">/</span><span class="section"><a href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts" title="fonts">fonts</a></span><span class="divider">/</span><span class="active section" title="lato-v14-latin_latin-ext-italic.ttf">lato-v14-latin_latin-ext-it...</span></span></div>
+			
+			<div class="right fitted item" id="file-buttons">
+				<div class="ui tiny blue buttons">
+					
+						
+						
+					
+					
+				</div>
+
+			</div>
+			<div class="fitted item">
+
+				
+				
+			</div>
+		</div>
+		
+			<div class="tab-size-2 non-diff-file-content">
+	<h4 class="ui top attached header" id="repo-read-file">
+		<div class="ui stackable grid">
+			<div class="eight wide column">
+				
+					<i class="file text outline icon ui left"></i>
+					<strong>lato-v14-latin_latin-ext-italic.ttf</strong> <span class="text grey normal">64KB</span>
+				
+			</div>
+			<div class="eight wide right aligned column">
+				
+					<div class="ui right file-actions">
+						<div class="ui buttons">
+							<a class="ui button" href="/fanruan/fair-web/raw/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf">Brut</a>
+							
+							
+							<a class="ui button" href="/fanruan/fair-web/commits/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf">Historique</a>
+						</div>
+						
+							
+								<i class="octicon octicon-pencil btn-octicon poping up disabled" data-content="Les fichiers binaires ne peuvent pas être édités dans l&#39;interface web." data-position="bottom center" data-variation="tiny inverted"></i>
+							
+							
+								<i class="octicon octicon-trashcan btn-octicon poping up disabled" data-content="Vous devez être sur une branche pour appliquer ou proposer des modifications à ce fichier." data-position="bottom center" data-variation="tiny inverted"></i>
+							
+						
+					</div>
+				
+			</div>
+		</div>
+	</h4>
+	<div class="ui attached table unstackable segment">
+		<div class="file-view  has-emoji">
+			
+				<div class="view-raw ui center">
+					
+						<a href="/fanruan/fair-web/raw/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf" rel="nofollow" class="btn btn-gray btn-radius">Voir le Raw</a>
+					
+				</div>
+			
+		</div>
+	</div>
+</div>
+
+<script>
+function submitDeleteForm() {
+    var message = prompt("delete_confirm_message\n\ndelete_commit_summary", "Delete ''");
+    if (message != null) {
+        $("#delete-message").val(message);
+        $("#delete-file-form").submit()
+    }
+}
+</script>
+
+		
+	</div>
+</div>
+
+
+	
+
+	</div>
+
+	
+
+	<footer>
+	<div class="ui container">
+		<div class="ui left">
+			© Gitea  
+		</div>
+		<div class="ui right links">
+			
+			<div class="ui language bottom floating slide up dropdown link item">
+				<i class="world icon"></i>
+				<div class="text">français</div>
+				<div class="menu">
+					
+						<a lang="fr-FR" class="item active selected" href="#">français</a>
+					
+						<a lang="en-US" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=en-US">English</a>
+					
+						<a lang="zh-CN" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=zh-CN">简体中文</a>
+					
+						<a lang="zh-HK" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=zh-HK">繁體中文（香港）</a>
+					
+						<a lang="zh-TW" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=zh-TW">繁體中文（台灣）</a>
+					
+						<a lang="de-DE" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=de-DE">Deutsch</a>
+					
+						<a lang="nl-NL" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=nl-NL">Nederlands</a>
+					
+						<a lang="lv-LV" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=lv-LV">latviešu</a>
+					
+						<a lang="ru-RU" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=ru-RU">русский</a>
+					
+						<a lang="uk-UA" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=uk-UA">Українська</a>
+					
+						<a lang="ja-JP" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=ja-JP">日本語</a>
+					
+						<a lang="es-ES" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=es-ES">español</a>
+					
+						<a lang="pt-BR" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=pt-BR">português do Brasil</a>
+					
+						<a lang="pl-PL" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=pl-PL">polski</a>
+					
+						<a lang="bg-BG" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=bg-BG">български</a>
+					
+						<a lang="it-IT" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=it-IT">italiano</a>
+					
+						<a lang="fi-FI" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=fi-FI">suomi</a>
+					
+						<a lang="tr-TR" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=tr-TR">Türkçe</a>
+					
+						<a lang="cs-CZ" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=cs-CZ">čeština</a>
+					
+						<a lang="sr-SP" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=sr-SP">српски</a>
+					
+						<a lang="sv-SE" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=sv-SE">svenska</a>
+					
+						<a lang="ko-KR" class="item " href="/fanruan/fair-web/src/commit/a38618dfc83d4e85a2b48d0c9c9279d0d62250f1/static/google-fonts/fonts/lato-v14-latin_latin-ext-italic.ttf?lang=ko-KR">한국어</a>
+					
+				</div>
+			</div>
+			<a href="/vendor/librejs.html" data-jslicense="1">JavaScript licenses</a>
+			<a href="/api/swagger">API</a>
+			<a target="_blank" rel="noopener noreferrer" href="https://gitea.io">Site web</a>
+			
+		</div>
+	</div>
+</footer>
+
+
+	<script src="/vendor/plugins/jquery/jquery.min.js?v=3.4.1"></script>
+	<script src="/vendor/plugins/jquery-migrate/jquery-migrate.min.js?v=3.0.1"></script>
+	<script src="/vendor/plugins/jquery.areyousure/jquery.are-you-sure.js"></script>
+
+
+
+
+
+	<script src="/vendor/plugins/highlight/highlight.pack.js"></script>
+
+
+
+
+
+
+
+	<script src="/vendor/plugins/emojify/emojify.min.js"></script>
+	<script src="/vendor/plugins/clipboard/clipboard.min.js"></script>
+	<script src="/vendor/plugins/vue/vue.min.js"></script>
+
+	
+	<script src="/vendor/plugins/semantic/semantic.min.js"></script>
+	<script src="/js/index.js?v=525e7eceb72fe7131ebb17c5c0b1f9bb"></script>
+
+
+</body>
+</html>
+

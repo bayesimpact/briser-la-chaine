@@ -1,0 +1,33 @@
+# Politique de confidentialité
+
+Pour notre ONG, le respect de la vie privée et la confidentialité de vos données ne sont pas des détails. La web-application {{productName}} a été construite pour préserver aussi bien la santé de ses utilisateurs que leur droit au respect de leur vie privée. Voici comment :
+
+Vos données personnelles restent dans votre téléphone ou votre ordinateur
+
+Ces données personnelles, notamment votre état de santé et votre liste de contact, restent dans votre téléphone. Elles ne sont ni transmises ni enregistrées à des organismes tiers hors de votre téléphone. Ni votre état de santé ni votre liste de contact sont accessibles par notre organisation et ses salarié·e·s. 
+
+Vos données d'usage sont entièrement anonymisées et ne sont pas partagées
+
+Nous recueillons des données sur les usages de l'application afin de mieux comprendre les éventuels points de blocage de nos utilisateurs et de pouvoir proposer des améliorations utiles pour tous. 
+
+Ces données d'usage sont anonymisées et ne comprennent ni votre état de santé ni vos contacts. Par exemple, nous pouvons savoir combien d'utilisateurs au total ont envoyé un message de prévention à leurs proches mais nous ne pouvons pas savoir qui. 
+
+Ces données d'usage ne sont pas partagées en dehors de notre ONG.
+
+Vos informations sont utilisées de manière transparente
+
+L'application vous demande votre état de santé uniquement pour vous aider à transmettre cette information aux personnes que vous choisissez. Cette information n'est transmise qu'à vos contacts et seulement avec votre accord explicite pour chaque contact.
+
+L'application ne peut plus accéder à vos données une fois celle-ci désinstallée 
+
+Comme vos données ne sont pas partagées hors de votre téléphone, il suffit de désinstaller l'application pour que cette dernière n'accède plus à vos données. Aucun historique sur votre état de santé et les éventuels contacts que vous avez pu informer ne perdure suite à la désinstallation de l'application, pas même sur votre téléphone.
+
+Le code informatique de notre application est consultable par tous 
+
+Le code de notre application et la façon dont elle fonctionne sont 100% transparents. Vous pouvez ainsi retrouver le code source de notre application sur GitHub, afin de vérifier nos engagements.
+
+[GitHub](https://www.github.com/bayesimpact/cas-contact)
+
+Ce qui est partagé sur GitHub n'est que le code de l'application en elle même, aucun des données utilisateurs (personnelles ou d'usage) n'est partagée.
+
+Si vous avez la moindre question sur notre politique de gestion des données, vous pouvez nous contacter à privacy@bayesimpact.org 
