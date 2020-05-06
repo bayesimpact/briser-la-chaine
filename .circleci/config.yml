@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build-test:
+    docker:
+      - image: bayesimpact/circleci
+    steps:
+      - checkout
+      - setup_remote_docker:
+          reusable: true
+      - run:
+          name: Build Docker images
+          command: docker-compose build --pull dev
+      - run:
+          name: Test and lint application
+          command: |
+            docker-compose build --pull test
+      - run:
+          name: Make sure the export can be submitted
+          command: |
+            [[ "$(git log -1 --pretty=%B)" != *"DO NOT SUBMIT"* ]]
+
+workflows:
+  version: 2
+  build-test-publish:
+    jobs:
+      - build-test:
+          filters:
+            tags:
+              only: /.*/
+
+experimental:
+  notify:
+    branches:
+      only:
+        - master
