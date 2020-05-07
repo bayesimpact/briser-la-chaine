@@ -5,9 +5,10 @@ import {useTranslation} from 'react-i18next'
 import termsContent from './terms.txt'
 
 
-const TermsPage = (): React.ReactElement => {
+const TermsPage = (props: {style?: React.CSSProperties}): React.ReactElement => {
   const {t: translate} = useTranslation()
-  return <div style={{padding: '40px 30px'}}>
+  const {style = {padding: '40px 30px'}} = props
+  return <div style={style}>
     <ReactMarkdown source={translate(termsContent, {
       canonicalUrl: config.canonicalUrl,
       owner: 'Bayes Impact France'.toLocaleUpperCase(),

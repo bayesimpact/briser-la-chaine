@@ -52,6 +52,7 @@ const ReactHeight = (props: ReactHeightProps): React.ReactElement => {
 export interface ModalConfig {
   backgroundCoverOpacity?: number
   children: React.ReactNode
+  className?: string
   externalChildren?: React.ReactNode
   isShown?: boolean
   onClose?: () => void
@@ -99,8 +100,8 @@ const closeIconStyle = {
 
 
 const ModalBase = (props: ModalConfig): React.ReactElement => {
-  const {backgroundCoverOpacity = .5, children, externalChildren, isShown, onClose, onHidden, style,
-    title} = props
+  const {backgroundCoverOpacity = .5, children, className, externalChildren, isShown, onClose,
+    onHidden, style, title} = props
   const [closeButtonHeight, setCloseButtonHeight] = useState(0)
   const [isTooBigToBeCentered, setIsTooBigToBeCentered] = useState(false)
   const [modalHeight, setModalHeight] = useState(0)
@@ -204,8 +205,8 @@ const ModalBase = (props: ModalConfig): React.ReactElement => {
     color: colors.DARK_TWO,
     display: isTooBigToBeCentered ? 'inline-block' : 'block',
     fontSize: 15,
-    // TODO(cyrille): Ensure margins on mobile.
-    margin: isTooBigToBeCentered ? `${closeButtonHeight}px auto` : 'initial',
+    // TODO(cyrille): Ensure margins on mobile if too big to be centered.
+    margin: isTooBigToBeCentered ? `${closeButtonHeight}px auto` : '0 20px',
     opacity: isShown ? 1 : 0,
     position: 'relative',
     textAlign: 'left',
@@ -244,7 +245,7 @@ const ModalBase = (props: ModalConfig): React.ReactElement => {
     <div style={backgroundStyle} />
     {externalChildren}
     <ReactHeight
-      onHeightReady={handleUpdatedHeight} style={modalStyle}
+      onHeightReady={handleUpdatedHeight} style={modalStyle} className={className}
       onTransitionEnd={handleTransitionEnd}>
       {title ? <div style={titleStyle}>{title}</div> : null}
       {onClose ? <CloseIcon style={closeIconStyle} onClick={onClose} /> : null}

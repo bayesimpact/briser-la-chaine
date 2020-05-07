@@ -1,10 +1,11 @@
 // eslint-disable-next-line import/no-duplicates
-import {formatDistance} from 'date-fns'
+import {format as dateFormat, formatDistance} from 'date-fns'
 // eslint-disable-next-line import/no-duplicates
 import {fr as frDateLocale} from 'date-fns/locale'
 import i18next, {InitOptions, ReadCallback, ResourceKey, Services, TFunction, TOptions,
   i18n} from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
+import _memoize from 'lodash/memoize'
 import {initReactI18next} from 'react-i18next'
 
 // Backend for i18next to load resources for languages only when they are needed.
@@ -140,4 +141,23 @@ const dateOption = {locale: {
 }}
 
 
-export {init, dateOption, getLanguage, localizeOptions, prepareT, prepareNamespace}
+const extractSeparator = _memoize((listString: string): readonly [string, string] => {
+  const parts = listString.split(/<\d><\/\d>/)
+  if (parts.length !== 4) {
+    return [', ', ' et ']
+  }
+  return parts.slice(1, 3) as [string, string]
+})
+
+
+function joinDays(days: readonly Date[], format: string, t: TFunction): string {
+  const [separator, lastSeparator] = extractSeparator(t('<0></0>, <1></1> et <2></2>'))
+  const formattedDays = days.map((day: Date): string => dateFormat(day, format, dateOption))
+  if (formattedDays.length <= 1) {
+    return formattedDays.join(lastSeparator)
+  }
+  return formattedDays.slice(0, -1).join(separator) + lastSeparator + formattedDays.slice(-1)[0]
+}
+
+
+export {init, dateOption, getLanguage, joinDays, localizeOptions, prepareT, prepareNamespace}

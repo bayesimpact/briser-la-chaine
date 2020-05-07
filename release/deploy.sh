@@ -39,6 +39,16 @@ if [ -z "$(git tag -l "$TAG")" ]; then
   exit 2
 fi
 
+if [ -z "$OS_PASSWORD" ]; then
+  echo_error 'Set up OpenStack credentials first.'
+  echo "* Go to https://www.ovh.com/manager/public-cloud and select: Project Management -> Users"
+  echo "* Create an user if you do not have any, and copy the password"
+  echo "* Click on the little wrench and select 'Downloading an Openstack configuration file'"
+  echo "* Select 'GRA - Gravelines'"
+  echo "* Source this file to export the OpenStack environment variables, it will ask for your password."
+  exit 3
+fi
+
 if ! command -v aws >/dev/null 2>&1; then
   echo 'Install and configure the aws CLI that is necessary for deployment.'
   echo "* Ask your favorite admin for the access to the AWS project if you do not have it yet"
@@ -46,7 +56,29 @@ if ! command -v aws >/dev/null 2>&1; then
   echo "* Log into your AWS console and go to IAM (https://console.aws.amazon.com/iam/home)"
   echo "* Create a new 'Access key ID' and the corresponding 'Secret' if you do not already have one"
   echo "* Run 'aws configure' and add your credentials (make sure to set the region to 'eu-west-3')"
-  exit 3
+  exit 4
+fi
+
+if ! command -v swift >/dev/null 2>&1; then
+  echo_error 'Set up the OpenStack Swift tool first.'
+  echo "* Installation is probably as simple as \`pip install python-swiftclient\`"
+  exit 6
+fi
+
+if ! swift -V 3 list > /dev/null 2>&1; then
+  echo_error 'OpenStack credentials are incorrect.'
+  echo "* Go to https://www.ovh.com/manager/cloud and select: Servers -> OpenStack"
+  echo "* Create an user if you do not have any, and copy the password"
+  echo "* Click on the little wrench and select 'Downloading an Openstack configuration file'"
+  echo "* Select 'GRA1 - Gravelines'"
+  echo "* Source this file to export the OpenStack environment variables, it will ask for your password."
+  exit 7
+fi
+
+if ! pip show python-keystoneclient > /dev/null; then
+  echo_error 'Set up the keystoneclient first.'
+  echo "* Installation is probably as simple as \`pip install python-keystoneclient\`"
+  exit 8
 fi
 
 readonly DOCKER_TAG="tag-$TAG"
@@ -55,6 +87,9 @@ readonly DOCKER_IMAGE="$DOCKER_REPO:$DOCKER_TAG"
 # Our s3 bucket, see
 # https://s3.console.aws.amazon.com/s3/buckets/cas-contact-client/?region=eu-west-3&tab=overview
 readonly S3_BUCKET=cas-contact-client
+# Our OpenStack container, see
+# https://www.ovh.com/manager/cloud/index.html#/iaas/pci/project/7b9ade05d5f84f719adc2cbc76c07eec/storage
+readonly OPEN_STACK_CONTAINER=briser-la-chaine
 
 function docker_tag_exists {
   local image=$1
@@ -89,9 +124,10 @@ readonly TMP_DIR=$(mktemp -d)
 tar -xf $TMP_TAR_FILE -C $TMP_DIR --strip-components 1
 rm -r $TMP_TAR_FILE
 
-echo 'Uploading files to the S3 bucket…'
+echo 'Uploading files to the OpenStack container and to the S3 bucket…'
 pushd $TMP_DIR
 if [ -z "$DRY_RUN" ]; then
+  swift -V 3 upload "$OPEN_STACK_CONTAINER" --skip-identical *
   aws s3 cp "$(pwd)" "s3://$S3_BUCKET/" --recursive
 fi
 popd

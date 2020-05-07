@@ -277,7 +277,8 @@ const FollowUpPageBase = (): React.ReactElement => {
     window.open(
       `mailto:?to=${config.followUpMail}&subject=Suivi&` +
       `body=${mailText}`,
-      '_blank')
+      '_blank',
+      'noopener,noreferrer')
   }, [isHighRisk, history, mailText])
   return <Slider
     bulletColor={colors.MEDIUM_GREY} bulletSelectColor="#000" slideStyle={slideStyle}

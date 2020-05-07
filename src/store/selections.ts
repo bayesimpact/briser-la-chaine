@@ -1,9 +1,8 @@
-import {format as dateFormat, parseISO as parseISODate} from 'date-fns'
+import {parseISO as parseISODate} from 'date-fns'
 import {TFunction} from 'i18next'
-import _memoize from 'lodash/memoize'
 import {useSelector as reactUseSelector} from 'react-redux'
 
-import {dateOption} from 'store/i18n'
+import {joinDays} from 'store/i18n'
 
 const useSelector: <T>(
   selector: ((state: RootState) => T),
@@ -18,14 +17,6 @@ const useAlert = (personId: string): undefined|bayes.casContact.AlertPersonState
 const useSymptomsOnsetDate = (): undefined|Date =>
   useSelector(({user: {symptomsOnsetDate}}) => symptomsOnsetDate)
 
-const extractSeparator = _memoize((listString: string): readonly [string, string] => {
-  const parts = listString.split(/<\d><\/\d>/)
-  if (parts.length !== 4) {
-    return [', ', ' et ']
-  }
-  return parts.slice(1, 3) as [string, string]
-})
-
 // Select a text with all the days a person has been in contact with the user.
 const usePersonContactDays = (person: bayes.casContact.Person, t: TFunction): string =>
   useSelector(({contacts}): string => {
@@ -37,13 +28,7 @@ const usePersonContactDays = (person: bayes.casContact.Person, t: TFunction): st
             personId === person.personId)).
       map(([day]: [string, bayes.casContact.DayContacts]): string => day)
     days.sort()
-    const [separator, lastSeparator] = extractSeparator(t('<0></0>, <1></1> et <2></2>'))
-    const formattedDays = days.
-      map((day: string): string => dateFormat(parseISODate(day), 'EEEE d MMMM', dateOption))
-    if (formattedDays.length <= 1) {
-      return formattedDays.join(lastSeparator)
-    }
-    return formattedDays.slice(0, -1).join(separator) + lastSeparator + formattedDays.slice(-1)[0]
+    return joinDays(days.map((day): Date => parseISODate(day)), 'EEEE d MMMM', t)
   })
 
 const useNumPeopleToAlert = (): number => useSelector(({contacts}): number => {

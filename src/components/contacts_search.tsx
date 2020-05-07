@@ -1,4 +1,4 @@
-import AddCircleFillIcon from 'remixicon-react/AddCircleFillIcon'
+import AddLineIcon from 'remixicon-react/AddLineIcon'
 import {format as dateFormat, formatRelative} from 'date-fns'
 import _groupBy from 'lodash/groupBy'
 import CloseIcon from 'remixicon-react/CloseLineIcon'
@@ -10,6 +10,7 @@ import {components, OptionProps} from 'react-select'
 import {createContact, createNewPerson, dropContact, getNextNoDate, noDate, saveContacts,
   updateContact, useDispatch, useSelector} from 'store/actions'
 import {dateOption, localizeOptions, prepareT} from 'store/i18n'
+import {DISTANCE_OPTIONS, DURATION_OPTIONS} from 'store/options'
 
 import {cancelButtonStyle, darkButtonStyle} from 'components/buttons'
 import {Modal, ModalConfig} from 'components/modal'
@@ -17,20 +18,10 @@ import {BottomDiv} from 'components/navigation'
 import Permissions from 'components/permissions'
 import PrivacyNote from 'components/privacy_note'
 import Select, {SelectOption} from 'components/select'
-import Tab from 'components/tab'
+import Tabs from 'components/tabs'
 
 
 const todayDate = new Date()
-
-const DURATION_OPTIONS = [
-  {name: prepareT('0-15min'), value: 5},
-  {name: prepareT('+15min'), value: 30},
-]
-
-const DISTANCE_OPTIONS: readonly {name: string; value: bayes.casContact.Distance}[] = [
-  {name: prepareT('+ 2 mètres'), value: 'far'},
-  {name: prepareT('- 2 mètres'), value: 'close'},
-]
 
 const MAIN_TIPS: readonly string[] = [
   prepareT('📞  Vos derniers appels'),
@@ -77,7 +68,7 @@ type DeleteModalProps = Omit<ModalConfig, 'children'> & {
   person: bayes.casContact.PersonContact
 }
 const deleteModalStyle: React.CSSProperties = {
-  borderRadius: 0,
+  borderRadius: 5,
 }
 const DeleteUserConfirmationBase = (props: DeleteModalProps): React.ReactElement => {
   const {onCancel, onConfirm, person, ...modalProps} = props
@@ -305,22 +296,25 @@ interface MemoryHelpSectionProps {
 const privacyNoteStyle: React.CSSProperties = {
   margin: '4px 0 27px',
 }
+const tabsStyle: React.CSSProperties = {
+  margin: '0 20px 20px',
+}
 // FIXME(sil): Update permissions UI.
 const MemoryHelpSectionBase = ({date}: MemoryHelpSectionProps): React.ReactElement => {
   const {t} = useTranslation()
   const dateText = dateFormat(date, 'd MMMM', dateOption)
+  const shortDateText = dateFormat(date, 'd MMM', dateOption)
   const [isGeneric, setIsGeneric] = useState(false)
   const handleChangeTab = useCallback(
     () => setIsGeneric(!isGeneric), [isGeneric])
+  const tabs = useMemo((): readonly string[] => [
+    t('Infos du {{date}}', {date: shortDateText}),
+    t('Aide-mémoires'),
+  ], [shortDateText, t])
   return <React.Fragment>
-    <div style={{display: 'flex', margin: '0 20px 20px'}}>
-      <Tab
-        onClick={handleChangeTab} isSelected={!isGeneric}
-        text={t('Infos du {{date}}', {date: dateFormat(date, 'd MMM.', dateOption)})} />
-      <Tab
-        onClick={handleChangeTab} isSelected={isGeneric}
-        text={t('Aide-mémoires')} />
-    </div>
+    <Tabs
+      style={tabsStyle} tabSelected={isGeneric ? 1 : 0} onChangeTab={handleChangeTab}
+      tabs={tabs} />
     {isGeneric ? <React.Fragment>
       <Section
         title={t('Pensez à regarder\u00A0:')} titleStyle={{marginBottom: 15}}
@@ -345,11 +339,17 @@ const MemoryHelpSectionBase = ({date}: MemoryHelpSectionProps): React.ReactEleme
 const MemoryHelpSection = React.memo(MemoryHelpSectionBase)
 
 
-const selectIconStyle: React.CSSProperties = {
-  color: colors.WARM_GREY,
-  flexShrink: 0,
+const selectIconContainerStyle: React.CSSProperties = {
+  alignItems: 'center',
+  backgroundColor: colors.ICE_BLUE,
+  borderRadius: 29,
+  color: colors.AZURE,
+  display: 'flex',
+  flex: 'none',
   height: 29,
+  justifyContent: 'center',
   marginRight: 15,
+  width: 29,
 }
 const {Option} = components
 const IconSelectOptionBase = <T extends {}>(props: OptionProps<T>): React.ReactElement => {
@@ -357,7 +357,7 @@ const IconSelectOptionBase = <T extends {}>(props: OptionProps<T>): React.ReactE
   return <Option {...props}>
     {label}
     <div style={{alignItems: 'center', display: 'flex'}}>
-      {icon ? <AddCircleFillIcon style={selectIconStyle} /> : null}
+      {icon ? <span style={selectIconContainerStyle}><AddLineIcon /></span> : null}
       {name}
     </div>
   </Option>
@@ -505,8 +505,8 @@ const ContactsSearchBase = (props: ContactsSearchProps): React.ReactElement|null
 
   return <div style={containerStyle}>
     <div style={headerStyle}>
-      {hasNoDate ? null : <span style={{fontSize: 12}}>
-        {formatRelative(date, todayDate, dateOption)}</span>}
+      {hasNoDate ? null : <strong style={{fontSize: 12, textTransform: 'uppercase'}}>
+        {formatRelative(date, todayDate, dateOption)}</strong>}
       <h1 style={{fontSize: 20, fontWeight: 'bold'}}>
         {dateString ? t("{{dateString}} j'ai croisé\u00A0:", {dateString}) :
           t('Ajouter un contact')}

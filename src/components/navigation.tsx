@@ -3,6 +3,7 @@ import React, {useEffect, useMemo, useRef, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {RemixiconReactIconComponentType} from 'remixicon-react/dist/typings'
 
+import BurgerMenu from 'components/burger_menu'
 import {darkButtonStyle} from 'components/buttons'
 
 
@@ -10,6 +11,7 @@ interface BottomDivProps {
   children: React.ReactNode
   defaultHeight?: number
   marginSize?: number
+  onClick?: () => void
   onHeightUpdated?: (height: number) => void
   style?: React.CSSProperties
 }
@@ -28,7 +30,7 @@ const bottomFloatingStyle: React.CSSProperties = {
 // A div that is floating at the bottom of the screen and that adds its own space at the end of the
 // main flow so that scrolling can go to the bottom.
 const BottomDivBase = (props: BottomDivProps): React.ReactElement|null => {
-  const {children, defaultHeight = 80, marginSize = 0, onHeightUpdated, style} = props
+  const {children, defaultHeight = 80, marginSize = 0, onClick, onHeightUpdated, style} = props
   const bottomDiv = useRef<HTMLDivElement>(null)
   const [bottomDivSize, setBottomDivSize] = useState(defaultHeight)
   useEffect((): void => {
@@ -40,7 +42,9 @@ const BottomDivBase = (props: BottomDivProps): React.ReactElement|null => {
     }
   }, [children, marginSize, onHeightUpdated])
   return children ? <React.Fragment>
-    <div style={style ? {...bottomFloatingStyle, ...style} : bottomFloatingStyle} ref={bottomDiv}>
+    <div
+      style={style ? {...bottomFloatingStyle, ...style} : bottomFloatingStyle} ref={bottomDiv}
+      onClick={onClick}>
       {children}
     </div>
     <div style={{height: bottomDivSize}} />
@@ -93,6 +97,7 @@ const PageWithNav = (props: PageWithNavProps): React.ReactElement => {
     margin: 20,
   }
   return <div style={style ? {...containerStyle, ...style} : containerStyle}>
+    <BurgerMenu />
     {backTo ? <Link style={backToLinkStyle} to={backTo}>
       <ArrowLeftIcon size={20} color={colors.BUTTON_GREY} />
     </Link> : null}

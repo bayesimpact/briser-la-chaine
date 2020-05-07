@@ -28,11 +28,9 @@ const mainStyle: React.CSSProperties = {
 const closeIconStyle: React.CSSProperties = {
   color: '#fff',
   cursor: 'pointer',
-  height: 15,
   position: 'absolute',
   right: 15,
   top: 15,
-  width: 15,
   zIndex: 3,
 } as const
 

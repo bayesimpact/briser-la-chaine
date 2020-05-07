@@ -1,4 +1,4 @@
-import {format as dateFormat, subDays} from 'date-fns'
+import {format as dateFormat, isSameDay, subDays} from 'date-fns'
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router'
@@ -138,7 +138,7 @@ const waitingPageStyle: React.CSSProperties = {
   color: '#fff',
   display: 'flex',
   flexDirection: 'column',
-  fontSize: 25,
+  fontSize: 15,
   justifyContent: 'center',
   left: 0,
   minHeight: '100vh',
@@ -162,14 +162,21 @@ const legendTextStyle: React.CSSProperties = {
   marginLeft: 4,
   transform: 'translateY(-50%)',
 }
-const todayBarStyle: React.CSSProperties = {
-  backgroundColor: '#000',
-  height: 2,
+const todayContainerStyle: React.CSSProperties = {
   left: 0,
   position: 'absolute',
   right: 0,
   top: 0,
 }
+const basicBarStyle: React.CSSProperties = {
+  backgroundColor: '#000',
+  height: 2,
+}
+const todayBarStyle: React.CSSProperties = {
+  ...todayContainerStyle,
+  ...basicBarStyle,
+}
+
 
 
 const CalendarPage = (): React.ReactElement => {
@@ -181,6 +188,7 @@ const CalendarPage = (): React.ReactElement => {
     ({user: {contagiousPeriodEnd, contagiousPeriodStart}}): boolean =>
       !!(contagiousPeriodEnd && contagiousPeriodStart))
   const firstSymptomsDate = symptomsOnsetDate || subDays(new Date(), 1)
+  const isOnsetToday = isSameDay(new Date(), firstSymptomsDate)
   const contagiousStartDate = subDays(firstSymptomsDate, config.numDaysContagiousBeforeSymptoms)
   // TODO(pascal): Use a router so that browser navigation works between those steps.
   const [step, setStep] = useState(0)
@@ -242,28 +250,32 @@ const CalendarPage = (): React.ReactElement => {
     transition: stepTransition,
   }
   const symptomsOnsetBarStyle: React.CSSProperties = {
-    backgroundColor: '#000',
+    backgroundColor: isOnsetToday ? colors.SALMON : '#000',
     flex: 1,
-    height: 2,
-    maxWidth: step ? 10 : 400,
+    height: isOnsetToday ? 1 : 2,
+    maxWidth: step || isOnsetToday ? 10 : 700,
     transition: stepTransition,
   }
   const symptomsOnsetLegendStyle: React.CSSProperties = {
     ...legendTextStyle,
     color: '#000',
     minWidth: textSize || 'auto',
-    opacity: step ? 0 : 1,
+    opacity: step || isOnsetToday ? 0 : 1,
     transition: stepTransition,
+  }
+  const todaySymptomsOnsetLegendStyle: React.CSSProperties = {
+    ...symptomsOnsetLegendStyle,
+    opacity: 1,
   }
   const symptomsOnsetDateStyle: React.CSSProperties = {
     left: 0,
-    opacity: step ? 0 : 1,
+    opacity: step || isOnsetToday ? 0 : 1,
     padding: '4px 16px',
     position: 'absolute',
     top: '50%',
     transition: stepTransition,
   }
-  // TODO(sil): Fix the UI when symptomsOnsetDate is today.
+
   return <PageWithNav nextButton={t('Suivant')} onNext={gotoNext}>
     <div style={isContagiousPeriodComputed ? hiddenWaitingPageStyle : waitingPageStyle}>
       <CircularProgress style={progressStyle} />
@@ -317,7 +329,11 @@ const CalendarPage = (): React.ReactElement => {
         numTicks={step < 3 ? 5 : 10} ticksColor={colors.MEDIUM_GREY} height={step < 3 ? 80 : 160}
         linesColor={step < 3 ? undefined : colors.REALLY_LIGHT_BLUE}
         title={step < 3 ? '' : t('Confinez-vous')}>
-        <div style={todayBarStyle} />
+        {isOnsetToday && !step ? <div style={{display: 'flex', ...todayContainerStyle}}>
+          <div style={{...basicBarStyle, flex: 1}} />
+          <div style={todaySymptomsOnsetLegendStyle}>
+            {t('Premiers symptômes')}
+          </div></div> : <div style={todayBarStyle} />}
         <strong>{t("aujourd'hui")}</strong>
       </Period>
     </div>

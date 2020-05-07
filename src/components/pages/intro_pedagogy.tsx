@@ -144,7 +144,7 @@ const PedagogyIntroPage = (): React.ReactElement => {
   }
   return <Slider
     bottomComponent={IntroButton} bulletColor={colors.AZURE}
-    bulletSelectColor="#fff" arrowColor={colors.BRIGHT_SKY_BLUE} onFastForward={gotoNext}>
+    bulletSelectColor="#fff" arrowColor={colors.AZURE} onFastForward={gotoNext}>
     {pagesContent.map(({icon, subtitle, title}, index): React.ReactElement =>
       <PedagogyLayout
         key={index} title={translate(title)} subtitle={translate(subtitle)} icon={icon}

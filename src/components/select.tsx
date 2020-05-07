@@ -10,6 +10,7 @@ const typedMemo: <T>(c: T) => T = React.memo
 export interface SelectOption<T> {
   disabled?: boolean
   name: string
+
   options?: never
   value: T
 }
@@ -27,13 +28,17 @@ interface SelectProps<T> extends Omit<ReactSelectProps<SelectOption<T>>, 'onChan
   defaultMenuScroll?: number
   isMulti?: boolean
   onChange: ((value: T) => void) | ((value: readonly T[]) => void)
-  options: (readonly SelectOption<T>[] | readonly SelectOptionGroup<T>[])
+  options: readonly SelectOption<T>[] | readonly SelectOptionGroup<T>[]
   style?: React.CSSProperties
   value?: T | readonly T[]
 }
 
 
-type ReactSelectCSSProperties = React.CSSProperties & {'&:hover': React.CSSProperties}
+interface OptionProps<T> {
+  isFocused: boolean
+  options: readonly (SelectOption<T> | SelectOptionGroup<T>)[]
+  value?: T
+}
 
 
 const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElement => {
@@ -120,6 +125,7 @@ const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElemen
   }
   // TODO(pascal): Fix type of ReactSelect exported component.
   const ref = (subComponent as unknown) as React.Ref<ReactSelect<SelectOption<T>>>
+  const borderRadius = style?.borderRadius || 5
   return <ReactSelect<SelectOption<T>>
     onChange={handleChange}
     value={valueProp}
@@ -127,27 +133,62 @@ const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElemen
     isOptionDisabled={getIsDisabled}
     styles={{
       container: (base): React.CSSProperties => ({...base, ...selectStyle}),
-      control: (base, {isFocused, isSelected}): ReactSelectCSSProperties => ({
+      control: (base, {menuIsOpen}): React.CSSProperties => ({
         ...base,
-        '&:hover': {
-          ...(base as ReactSelectCSSProperties)['&:hover'],
-          borderColor: (isFocused || isSelected) ? colors.BUTTON_GREY : colors.MEDIUM_GREY,
-        },
-        'borderColor': (isFocused || isSelected) ? colors.BUTTON_GREY : colors.MEDIUM_GREY,
-        'borderRadius': style?.borderRadius || 5,
-        'boxShadow': 'initial',
-        'height': selectStyle.height,
+        borderRadius: menuIsOpen ? `${borderRadius}px ${borderRadius}px 0 0` : borderRadius,
+        borderWidth: 0,
+        boxShadow: '0 3px 15px 0 rgba(0, 0, 0, 0.25)',
+        height: selectStyle.height,
+      }),
+      group: (base): React.CSSProperties => ({
+        ...base,
+        paddingBottom: 0,
+        paddingTop: 0,
       }),
       groupHeading: (base): React.CSSProperties => ({
         ...base,
+        backgroundColor: colors.SMOKEY_GREY,
         color: 'inherit',
-        fontSize: 14,
+        fontSize: 11,
         fontWeight: 'bold',
-        textTransform: 'none',
+        marginBottom: 0,
+        paddingBottom: 9,
+        paddingTop: 9,
+        textTransform: 'uppercase',
       }),
+      menu: (base): React.CSSProperties => ({
+        ...base,
+        borderRadius: `0 0 ${borderRadius}px ${borderRadius}px`,
+        borderTop: `solid 1px ${colors.SMOKEY_GREY}`,
+        borderWidth: '1px 0 0 0',
+        boxShadow: '0 10px 10px 0 rgba(0, 0, 0, 0.25)',
+        marginBottom: 0,
+        marginTop: 0,
+      }),
+      menuList: (base): React.CSSProperties => ({
+        ...base,
+        paddingBottom: 0,
+        paddingTop: 0,
+      }),
+      option: (base, {isFocused, options, value}: OptionProps<T>): React.CSSProperties => {
+        const flattenOptions = options?.map(o => o.options || [o])?.
+          reduce((a, b) => a.concat(b), []) || []
+        const isLastOption = value === flattenOptions.slice(-1)[0]?.value
+        return {
+          ...base,
+          backgroundColor: isFocused ? colors.WHITE_TWO : base.backgroundColor,
+          borderRadius: isLastOption ?
+            `0 0 ${borderRadius}px ${borderRadius}px` : base.borderRadius,
+        }
+      },
       placeholder: (base): React.CSSProperties => ({
         ...base,
         color: colors.BUTTON_GREY,
+        fontStyle: 'italic',
+      }),
+      valueContainer: (base): React.CSSProperties => ({
+        ...base,
+        padding: '2px 15px',
       }),
       ...styles,
     }}

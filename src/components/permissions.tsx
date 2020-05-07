@@ -26,7 +26,7 @@ const boxStyle: React.CSSProperties = {
   flexDirection: 'column',
 }
 const borderStyle: React.CSSProperties = {
-  borderTop: `solid 1px ${colors.BUTTON_GREY}`,
+  borderTop: `solid 1px ${colors.MEDIUM_GREY}`,
   margin: '15px 0',
 }
 

@@ -90,7 +90,11 @@ interface SerializedContactState {
 
 const makeDate = (dateString: string): Date => {
   try {
-    return new Date(dateString)
+    const date = new Date(dateString)
+    if (Number.isNaN(date.getTime())) {
+      return noDate
+    }
+    return date
   } catch {
     return noDate
   }

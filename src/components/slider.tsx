@@ -21,6 +21,7 @@ interface SlideProps {
 
 const Slide = (props: SlideProps): React.ReactElement => {
   const {bottomDivSize, children, index, style, transition, ...otherProps} = props
+  // TODO(cyrille): Update on resize, since user might turn their phones.
   const screenWidth = Math.min(700, window.innerWidth)
   const slideStyle = useMemo((): React.CSSProperties => ({
     boxSizing: 'border-box',
@@ -34,7 +35,7 @@ const Slide = (props: SlideProps): React.ReactElement => {
     width: screenWidth,
     ...style,
   }), [bottomDivSize, index, screenWidth, style, transition])
-  return <Swipeable style={slideStyle} {...otherProps}>
+  return <Swipeable className="no-scrollbars" style={slideStyle} {...otherProps}>
     {children}
   </Swipeable>
 }

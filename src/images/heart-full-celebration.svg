@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="97" height="98" viewBox="0 0 97 98">
+    <g fill="none" fill-rule="evenodd">
+        <rect width="2" height="15" x="47.46" fill="#0DB3FD" fill-opacity=".3" rx="1"/>
+        <rect width="2" height="15" x="79.906" y="15.625" fill="#0DB3FD" fill-opacity=".3" rx="1" transform="rotate(51 80.906 23.125)"/>
+        <rect width="2" height="15" x="87.919" y="50.735" fill="#0DB3FD" fill-opacity=".3" rx="1" transform="rotate(103 88.919 58.235)"/>
+        <rect width="2" height="15" x="7" y="50.735" fill="#0DB3FD" fill-opacity=".3" rx="1" transform="rotate(-103 8 58.235)"/>
+        <rect width="2" height="15" x="15.014" y="15.625" fill="#0DB3FD" fill-opacity=".3" rx="1" transform="rotate(-51 16.014 23.125)"/>
+        <rect width="2" height="7" x="63.235" y="11.67" fill="#464646" rx="1" transform="rotate(26 64.235 15.17)"/>
+        <rect width="2" height="7" x="83.397" y="37.212" fill="#464646" rx="1" transform="rotate(77 84.397 40.712)"/>
+        <rect width="2" height="7" x="10.278" y="36.848" fill="#464646" rx="1" transform="rotate(-77 11.278 40.348)"/>
+        <rect width="2" height="7" x="30.694" y="11.507" fill="#464646" rx="1" transform="rotate(-25 31.694 15.007)"/>
+        <path fill="#FF8080" fill-rule="nonzero" d="M64.69 48.378l.023.025L48.46 65 32.206 48.403l.023-.025c-3.915-4.661-3.65-11.616.608-15.952s11.069-4.587 15.623-.577c4.553-4.01 11.364-3.759 15.622.577 4.258 4.336 4.523 11.29.608 15.952z"/>
+        <g transform="matrix(1 0 0 -1 9 98)">
+            <rect width="2" height="15" x="38.46" fill="#0DB3FD" fill-opacity=".3" rx="1"/>
+            <rect width="2" height="15" x="70.906" y="15.625" fill="#0DB3FD" fill-opacity=".3" rx="1" transform="rotate(51 71.906 23.125)"/>
+            <rect width="2" height="15" x="6.014" y="15.625" fill="#0DB3FD" fill-opacity=".3" rx="1" transform="rotate(-51 7.014 23.125)"/>
+            <rect width="2" height="7" x="54.235" y="11.67" fill="#464646" rx="1" transform="rotate(26 55.235 15.17)"/>
+            <rect width="2" height="7" x="21.694" y="11.507" fill="#464646" rx="1" transform="rotate(-25 22.694 15.007)"/>
+        </g>
+    </g>
+</svg>

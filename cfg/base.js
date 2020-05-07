@@ -13,6 +13,14 @@ require('json5/lib/register')
 const srcPath = path.join(__dirname, '../src')
 const sslPath = '/etc/ssl/webpack-dev'
 
+const mainSrcFolders = [
+  'components',
+  'hooks',
+  'images',
+  'store',
+  'styles',
+  'translations',
+]
 module.exports = {
   devServer: {
     contentBase: './',
@@ -118,15 +126,7 @@ module.exports = {
     ]}),
   ],
   resolve: {
-    alias: {
-      components: path.join(srcPath, 'components'),
-      config: path.join(srcPath, 'config', process.env.REACT_WEBPACK_ENV),
-      hooks: path.join(srcPath, 'hooks'),
-      images: path.join(srcPath, 'images'),
-      store: path.join(srcPath, 'store'),
-      styles: path.join(srcPath, 'styles'),
-      translations: path.join(srcPath, 'translations'),
-    },
+    alias: Object.fromEntries(mainSrcFolders.map(name => [name, path.join(srcPath, name)])),
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 }

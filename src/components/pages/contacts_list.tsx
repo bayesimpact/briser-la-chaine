@@ -3,7 +3,6 @@ import {format as dateFormat, subDays} from 'date-fns'
 import AddLineIcon from 'remixicon-react/AddLineIcon'
 import ArrowDownSLineIcon from 'remixicon-react/ArrowDownSLineIcon'
 import ArrowUpSLineIcon from 'remixicon-react/ArrowUpSLineIcon'
-import Chat3LineIcon from 'remixicon-react/Chat3LineIcon'
 import CheckLineIcon from 'remixicon-react/CheckLineIcon'
 import CheckDoubleLineIcon from 'remixicon-react/CheckDoubleLineIcon'
 import ErrorWarningLineIcon from 'remixicon-react/ErrorWarningLineIcon'
@@ -11,11 +10,10 @@ import FileCopyLineIcon from 'remixicon-react/FileCopyLineIcon'
 import InformationLineIcon from 'remixicon-react/InformationLineIcon'
 import MailLineIcon from 'remixicon-react/MailLineIcon'
 import MailSendLineIcon from 'remixicon-react/MailSendLineIcon'
-import MessengerLineIcon from 'remixicon-react/MessengerLineIcon'
 import PhoneLineIcon from 'remixicon-react/PhoneLineIcon'
 import RestartLineIcon from 'remixicon-react/RestartLineIcon'
 import UserAddLineIcon from 'remixicon-react/UserAddLineIcon'
-import WhatsappLineIcon from 'remixicon-react/WhatsappLineIcon'
+
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router'
@@ -29,12 +27,15 @@ import {Routes} from 'store/url'
 import {beautifyPhone, normalizeEmail, normalizePhone, validateEmail,
   validatePhone} from 'store/validation'
 
-import {darkButtonStyle} from 'components/buttons'
+import BurgerMenu from 'components/burger_menu'
+import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import ContactsSearch from 'components/contacts_search'
 import DrawerContainer from 'components/drawer_container'
 import Input, {InputProps, Inputable} from 'components/input'
 import {Modal, ModalConfig} from 'components/modal'
-import Tab from 'components/tab'
+import {BottomDiv} from 'components/navigation'
+import ShareButtons from 'components/share_buttons'
+import Tabs from 'components/tabs'
 import Textarea from 'components/textarea'
 import heartCelebrationImage from 'images/heart_celebration.svg'
 
@@ -220,21 +221,22 @@ interface MessageSectionProps {
 }
 
 const anonymousContainerStyle: React.CSSProperties = {
-  color: colors.WARM_GREY,
   display: 'flex',
   flexDirection: 'column',
-  fontSize: 14,
-  marginTop: 24,
+  fontSize: 15,
+  marginTop: 11,
 }
 const arrowStyle: React.CSSProperties = {
-  alignSelf: 'flex-end',
-  height: 13,
+  height: 16,
 }
 const messageTextStyle: React.CSSProperties = {
-  backgroundColor: colors.MEDIUM_GREY,
-  color: colors.BLUEISH_GREY,
-  fontSize: 12,
+  backgroundColor: colors.WHITE_TWO,
+  border: `solid 1px ${colors.MEDIUM_GREY}`,
+  borderRadius: 5,
+  color: '#000',
+  fontSize: 14,
   marginBottom: 10,
+  marginTop: 15,
   minHeight: 100,
   padding: '16px 8px',
 }
@@ -263,7 +265,7 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
   const alertButtonStyle: React.CSSProperties = {
     ...darkButtonStyle,
     alignItems: 'center',
-    ...newAlertMedium ? {} : {backgroundColor: colors.MEDIUM_GREY},
+    backgroundColor: newAlertMedium ? colors.VIBRANT_GREEN : colors.MEDIUM_GREY,
     display: 'flex',
     fontWeight: 'normal',
     justifyContent: 'center',
@@ -320,24 +322,31 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
 const AnonymousMessageSection = React.memo(AnonymousMessageSectionBase)
 
 
-const chatIconStyle: React.CSSProperties = {
+const interactIconStyle: React.CSSProperties = {
   height: 20,
   margin: '0 5px',
   width: 20,
 }
-const shareButtonStyle: React.CSSProperties = {
-  ...darkButtonStyle,
+const basicButtonStyle: React.CSSProperties = {
+  ...lightButtonStyle,
+  alignItems: 'center',
   display: 'flex',
+  flex: 1,
+  fontSize: 15,
+  fontWeight: 'normal',
   justifyContent: 'center',
   margin: 0,
+  maxWidth: 180,
+  padding: 14,
 }
 const personalAlertContainer: React.CSSProperties = {
   alignItems: 'center',
+  backgroundColor: '#fff',
+  boxShadow: '0 0 15px 0 rgba(0, 0, 0, 0.15)',
   cursor: 'pointer',
   display: 'flex',
   fontSize: 14,
-  justifyContent: 'center',
-  marginTop: 21,
+  padding: '15px 20px',
 }
 const editInstructionsStyle: React.CSSProperties = {
   color: colors.WARM_GREY,
@@ -346,15 +355,13 @@ const editInstructionsStyle: React.CSSProperties = {
   marginBottom: 8,
   textAlign: 'center',
 }
-const refreshInstructionsStyle: React.CSSProperties = {
-  alignItems: 'center',
-  cursor: 'pointer',
+const buttonsContainerStyle: React.CSSProperties = {
   display: 'flex',
-  fontSize: 12,
-  marginBottom: 10,
+  justifyContent: 'center',
 }
 const restartIconStyle: React.CSSProperties = {
-  marginRight: 4,
+  ...interactIconStyle,
+  marginRight: 0,
 }
 const PersonalMessageSectionBase =
   ({onAlert, period, person}: MessageSectionProps): React.ReactElement => {
@@ -366,8 +373,9 @@ const PersonalMessageSectionBase =
       "or on s'est croisé(e)s pendant ma période contagieuse du {{period}}. " +
       'Je te préviens car il est très important que tu prennes les précautions nécessaires ' +
       '(confinement + briserlachaine). ' +
-      'Ce site gratuit te guidera dans toutes les étapes\u00A0: ' +
-      "(c'est celui que j'ai utilisé pour te prévenir)", {period: period}), [period, t])
+      'Ce site gratuit te guidera dans toutes les étapes\u00A0: {{url}} ' +
+      "(c'est celui que j'ai utilisé pour te prévenir)",
+    {period: period, url: encodeURIComponent(config.canonicalUrl)}), [period, t])
     const [isCustomText, setIsCustomText] = useState(false)
     const displayName = person.displayName || person.name
     const radioButtonStyle: React.CSSProperties = {
@@ -390,15 +398,6 @@ const PersonalMessageSectionBase =
       setIsCustomText(true)
       setText(manualText)
     }, [])
-    const handleShare = useCallback(
-      (): void => void navigator.share?.(
-        {text, title: config.productName, url: config.canonicalUrl}),
-      [text])
-    const handleMail = useCallback(
-      (): void => void window.open(
-        `mailto:?subject=${encodeURIComponent(config.productName)}&` +
-        `body=${encodeURIComponent(text)}`, '_blank'),
-      [text])
     const handleAlert = useCallback((): void => {
       onAlert?.()
       dispatch(alertPerson(person.personId))
@@ -423,6 +422,11 @@ const PersonalMessageSectionBase =
       const timeout = window.setTimeout((): void => setIsTextCopied(false), 2000)
       return (): void => clearTimeout(timeout)
     }, [isTextCopied])
+    const refreshButtonStyle: React.CSSProperties = {
+      ...basicButtonStyle,
+      marginRight: 9,
+      opacity: isCustomText ? 1 : .3,
+    }
     const textCopiedStyle: React.CSSProperties = {
       alignItems: 'center',
       backgroundColor: colors.ORANGE,
@@ -440,6 +444,7 @@ const PersonalMessageSectionBase =
       transition: '450ms',
     }
 
+    // TODO(sil): Add logging.
     return <React.Fragment>
       <span onClick={handleEditText} style={editInstructionsStyle}>
         {t('Cliquer pour modifier le message')}
@@ -449,28 +454,19 @@ const PersonalMessageSectionBase =
       <div style={{position: 'relative'}}><div style={textCopiedStyle}>
         <CheckLineIcon size={16} style={{marginRight: 5}} /> {t('Message copié')}
       </div></div>
-      {isCustomText ?
-        <span onClick={backToDefaultText} style={refreshInstructionsStyle}>
-          <RestartLineIcon size={13} style={restartIconStyle} />
-          {t('Réinitialiser le message par défaut')}
-        </span> : null}
-      {navigator.share ? <div style={shareButtonStyle} onClick={handleShare}>
-        {t('Copier et envoyer')}
-        <Chat3LineIcon style={chatIconStyle} />
-        <MessengerLineIcon style={chatIconStyle} />
-        <WhatsappLineIcon style={{...chatIconStyle, marginRight: 0}} />
-      </div> : <React.Fragment>
-        <div style={shareButtonStyle} onClick={handleCopy}>
-          {t('Copier')} <FileCopyLineIcon style={{...chatIconStyle, marginRight: 0}} />
+      <div style={buttonsContainerStyle}>
+        <div style={refreshButtonStyle} onClick={backToDefaultText}>
+          {t('Réinitialiser')} <RestartLineIcon style={restartIconStyle} />
         </div>
-        <div style={{...shareButtonStyle, margin: '16px 0 0'}} onClick={handleMail}>
-          {t('Envoyer')} <MailLineIcon style={{...chatIconStyle, marginRight: 0}} />
+        <div style={basicButtonStyle} onClick={handleCopy}>
+          {t('Copier')} <FileCopyLineIcon style={{...interactIconStyle, marginRight: 0}} />
         </div>
-      </React.Fragment>}
-      <div style={personalAlertContainer} onClick={handleAlert}>
-        <div style={radioButtonStyle} />
-        <Trans>J'ai alerté {{name: displayName}}</Trans>
       </div>
+      <ShareButtons title={t('Envoyer le message via\u00A0:')} sharedText={text} />
+      <BottomDiv style={personalAlertContainer} onClick={handleAlert}>
+        <Trans style={{flex: 1, fontSize: 16}}>J'ai alerté {{name: displayName}}</Trans>
+        <div style={radioButtonStyle} />
+      </BottomDiv>
     </React.Fragment>
   }
 const PersonalMessageSection = React.memo(PersonalMessageSectionBase)
@@ -552,8 +548,11 @@ const contactInListSelectedStyle: React.CSSProperties = {
 }
 const contactInListWasAlertedStyle: React.CSSProperties = {
   backgroundColor: '#fff',
-  borderColor: '#fff',
   color: colors.VIBRANT_GREEN,
+}
+const contactInListWasAlertedSelectedStyle: React.CSSProperties = {
+  backgroundColor: colors.VIBRANT_GREEN,
+  color: '#fff',
 }
 
 
@@ -568,7 +567,8 @@ const ContactInListBase = (props: ContactInListProps): React.ReactElement => {
   }, [isSelected, onSelect, person])
   const displayName = person.displayName || person.name
   const initials = getInitials(displayName)
-  const style = wasAlerted ? contactInListWasAlertedStyle :
+  const style = wasAlerted ?
+    isSelected ? contactInListWasAlertedSelectedStyle : contactInListWasAlertedStyle :
     isSelected ? contactInListSelectedStyle : undefined
   return <NavItem
     title={displayName} style={style} onClick={handleClick}
@@ -637,9 +637,10 @@ const ContactsListBase = (props: ContactsListProps): React.ReactElement => {
   }
   const numAlertedPeople = people.filter(({personId}): boolean => !!alerts[personId]).length
   return <div style={contactsListStyle}>
-    <Trans style={contactsListHeaderStyle} count={numAlertedPeople}>
+    <Trans parent="header" style={contactsListHeaderStyle} count={numAlertedPeople}>
       {{numAlertedPeople}}/{{numTotalPeople: people.length}} personne alertée
     </Trans>
+    <BurgerMenu />
     <div style={contactsListContainerStyle} ref={scrollableListRef} className="no-scrollbars">
       <NavItem
         title={t('Ajouter')} onClick={handleAddContact} style={addContactNavItemStyle}
@@ -661,11 +662,13 @@ interface ContactPersonFormProps {
   onDone: () => void
 }
 
-
 const alertAgainButtonStyle: React.CSSProperties = {
-  ...shareButtonStyle,
+  ...basicButtonStyle,
   margin: '16px auto',
   width: 'fit-content',
+}
+const tabsStyle: React.CSSProperties = {
+  marginBottom: 16,
 }
 
 interface ContagiousPeriod {
@@ -729,7 +732,11 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
     openThanks()
     dispatch(alertPerson(person.personId))
   }, [dispatch, isThanksShown, openThanks, person.personId])
-  return <div style={{margin: '24px 30px'}}>
+  const tabs = useMemo((): readonly string[] => [
+    t('Alerter anonymement'),
+    t('Alerter moi-même'),
+  ], [t])
+  return <div style={{margin: '24px 30px 0'}}>
     <ThankYouPopUp isShown={isThanksShown} name={displayName} onHidden={onDone} />
     <div style={{alignItems: 'center', display: 'flex'}}>
       <span style={{flex: 1, fontSize: 20, fontWeight: 'bold'}}>
@@ -755,14 +762,10 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
     {alerted && !alerted.isAlertedAnonymously && !canBeAlertedAgain ? <Trans
       style={alertAgainButtonStyle} onClick={handleAlertAgain}>
       Alerter à nouveau
-    </Trans> : <div style={{display: 'flex', flexDirection: 'column', margin: '30px 0 24px'}}>
-      <div style={{display: 'flex', marginBottom: 16}}>
-        <Tab
-          onClick={handleChangeTab} isSelected={isSenderAnonymous}
-          text={t('Alerter anonymement')} />
-        <Tab
-          onClick={handleChangeTab} isSelected={!isSenderAnonymous} text={t('Alerter moi-même')} />
-      </div>
+    </Trans> : <div style={{display: 'flex', flexDirection: 'column', margin: '30px 0 0'}}>
+      <Tabs
+        style={tabsStyle} onChangeTab={handleChangeTab} tabSelected={isSenderAnonymous ? 0 : 1}
+        tabs={tabs} />
       {isSenderAnonymous ? <AnonymousMessageSection
         period={period} person={person} onAlert={openThanks} /> :
         <PersonalMessageSection onAlert={openThanks} period={period} person={person} />}
@@ -791,7 +794,7 @@ const ContactsListPage = (): React.ReactElement => {
   const findNextNotAlerted = useCallback(
     () => people.find(({personId}) => !alerts[personId]), [alerts, people])
   const [selectedPersonId, selectPerson] = useState(
-    (): string => findNextNotAlerted()?.personId || '',
+    (): string => findNextNotAlerted()?.personId || people[0]?.personId || '',
   )
   const selectedPerson = people.find(({personId}) => selectedPersonId === personId)
   const [isLeaving, setIsLeaving] = useState(false)

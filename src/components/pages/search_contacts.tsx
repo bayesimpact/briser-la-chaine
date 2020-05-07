@@ -13,9 +13,10 @@ import {useNumPeopleToAlert, useSelector, useSymptomsOnsetDate} from 'store/sele
 import {Routes} from 'store/url'
 import {dateOption} from 'store/i18n'
 
+import BurgerMenu from 'components/burger_menu'
+import {darkButtonStyle} from 'components/buttons'
 import ContactsSearch from 'components/contacts_search'
 import DrawerContainer from 'components/drawer_container'
-import {darkButtonStyle} from 'components/buttons'
 import {BottomDiv} from 'components/navigation'
 
 
@@ -179,6 +180,11 @@ const ContagiousPeriodLineBase = (props: ContagiousPeriodLineProps): React.React
 const ContagiousPeriodLine = React.memo(ContagiousPeriodLineBase)
 
 
+const titleStyle: React.CSSProperties = {
+  fontSize: 19,
+  fontWeight: 'bold',
+  textAlign: 'center',
+}
 const dayProgressStyle: React.CSSProperties = {
   margin: '20px 0',
 }
@@ -243,8 +249,9 @@ const ContagiousPeriodBase = (): React.ReactElement => {
   return <DrawerContainer
     drawer={dateShown && <ContactsSearch date={dateShown} onClose={handleDetailClose} />}
     isOpen={!!dateShown} onClose={handleDetailClose}>
-    <div style={{padding: 20}}>
-      <Trans parent="h1" style={{fontSize: 19, fontWeight: 'bold'}}>
+    <BurgerMenu />
+    <div style={{marginTop: 20, padding: 20}}>
+      <Trans parent="h1" style={titleStyle}>
         Retrouvez les personnes croisées pendant votre période contagieuse
       </Trans>
       <DayProgress

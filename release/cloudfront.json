@@ -2,10 +2,9 @@
   "DistributionConfig": {
     "Aliases": {
       "Items": [
-        "www.cas-contact.bayes.org",
-        "cas-contact.bayes.org"
+        "www.briserlachaine.org"
       ],
-      "Quantity": 2
+      "Quantity": 1
     },
     "CacheBehaviors": {
       "Items": [
@@ -46,7 +45,7 @@
           "MinTTL": 0,
           "PathPattern": "assets/*",
           "SmoothStreaming": false,
-          "TargetOriginId": "S3-cas-contact-client",
+          "TargetOriginId": "OVH-briser-la-chaine",
           "TrustedSigners": {
             "Enabled": false,
             "Quantity": 0
@@ -105,7 +104,7 @@
       "MaxTTL": 600,
       "MinTTL": 0,
       "SmoothStreaming": false,
-      "TargetOriginId": "S3-cas-contact-client",
+      "TargetOriginId": "OVH-briser-la-chaine",
       "TrustedSigners": {
         "Enabled": false,
         "Quantity": 0
@@ -131,6 +130,29 @@
           "CustomHeaders": {
             "Quantity": 0
           },
+          "CustomOriginConfig": {
+            "HTTPPort": 80,
+            "HTTPSPort": 443,
+            "OriginKeepaliveTimeout": 5,
+            "OriginProtocolPolicy": "https-only",
+            "OriginReadTimeout": 30,
+            "OriginSslProtocols": {
+              "Items": [
+                "TLSv1",
+                "TLSv1.1",
+                "TLSv1.2"
+              ],
+              "Quantity": 3
+            }
+          },
+          "DomainName": "storage.gra.cloud.ovh.net",
+          "Id": "OVH-briser-la-chaine",
+          "OriginPath": "/v1/AUTH_7b9ade05d5f84f719adc2cbc76c07eec/briser-la-chaine"
+        },
+        {
+          "CustomHeaders": {
+            "Quantity": 0
+          },
           "DomainName": "cas-contact-client.s3.amazonaws.com",
           "Id": "S3-cas-contact-client",
           "OriginPath": "",
@@ -139,7 +161,7 @@
           }
         }
       ],
-      "Quantity": 1
+      "Quantity": 2
     },
     "PriceClass": "PriceClass_100",
     "Restrictions": {
@@ -149,13 +171,13 @@
       }
     },
     "ViewerCertificate": {
-      "ACMCertificateArn": "arn:aws:acm:us-east-1:951168128976:certificate/a25f41ab-6e81-4dc2-8b20-e88c3008f9c2",
-      "Certificate": "arn:aws:acm:us-east-1:951168128976:certificate/a25f41ab-6e81-4dc2-8b20-e88c3008f9c2",
+      "ACMCertificateArn": "arn:aws:acm:us-east-1:951168128976:certificate/b66295f6-6e39-4d4c-98bf-8c1d2da830d0",
+      "Certificate": "arn:aws:acm:us-east-1:951168128976:certificate/b66295f6-6e39-4d4c-98bf-8c1d2da830d0",
       "CertificateSource": "acm",
       "MinimumProtocolVersion": "TLSv1.1_2016",
       "SSLSupportMethod": "sni-only"
     },
     "WebACLId": ""
   },
-  "ETag": "E2DFCQN6TK4EYH"
+  "ETag": "E2XSM7JW5Y13YK"
 }
