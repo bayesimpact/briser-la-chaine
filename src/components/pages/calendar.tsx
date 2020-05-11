@@ -11,7 +11,7 @@ import {RemixiconReactIconComponentType} from 'remixicon-react/dist/typings'
 
 import {useFastForward} from 'hooks/fast_forward'
 import {computeContagiousPeriodAction, useDispatch} from 'store/actions'
-import {dateOption} from 'store/i18n'
+import {useDateOption} from 'store/i18n'
 import {useSelector, useSymptomsOnsetDate} from 'store/selections'
 import {Routes} from 'store/url'
 
@@ -141,7 +141,7 @@ const waitingPageStyle: React.CSSProperties = {
   fontSize: 15,
   justifyContent: 'center',
   left: 0,
-  minHeight: '100vh',
+  minHeight: window.innerHeight,
   position: 'absolute',
   right: 0,
   textAlign: 'center',
@@ -181,6 +181,7 @@ const todayBarStyle: React.CSSProperties = {
 
 const CalendarPage = (): React.ReactElement => {
   const {t} = useTranslation()
+  const dateOption = useDateOption()
   const history = useHistory()
   const dispatch = useDispatch()
   const symptomsOnsetDate = useSymptomsOnsetDate()
@@ -286,7 +287,7 @@ const CalendarPage = (): React.ReactElement => {
 
     <div style={{alignSelf: 'stretch'}}>
       <h1 style={titleStyle}>
-        {!step ? t("Période pendant laquelle j'étais contagieux(se)") :
+        {!step ? t('Période pendant laquelle vous étiez contagieux(se)') :
           step === 1 ? <Trans parent={null}>
             Toutes les personnes rencontrées pendant cette période
             sont <strong style={{color: colors.SALMON}}>
@@ -297,7 +298,7 @@ const CalendarPage = (): React.ReactElement => {
               les alerter le plus rapidement possible.
             </strong><br /><br />
             Nous sommes là pour ça.
-          </Trans> : t('En résumé')}
+          </Trans> : t('En résumé\u00A0:')}
       </h1>
       {step ? null : <div style={{fontSize: 15}}>
         {t("Les symptômes peuvent apparaître jusqu'à 14 jours après la contamination.")}
@@ -311,7 +312,7 @@ const CalendarPage = (): React.ReactElement => {
         <div style={{display: 'flex', left: 0, position: 'absolute', right: 0, top: 0}}>
           <div style={startPeriodBarStyle} />
           <div style={startPeriodLegendStyle} ref={textRef}>
-            {t('Début de ma période contagieuse')}
+            {t('Début de votre période contagieuse')}
           </div>
         </div>
         <div style={{display: 'flex', left: 0, position: 'absolute', right: 0, top: '50%'}}>

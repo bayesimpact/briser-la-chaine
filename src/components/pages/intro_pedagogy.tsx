@@ -85,8 +85,10 @@ const alertBottomDivStyle: React.CSSProperties = {
   alignItems: 'center',
   backgroundColor: colors.WHITE_TWO,
   display: 'flex',
+  fontSize: 13,
   justifyContent: 'center',
   padding: '20px 70px',
+  textAlign: 'left',
 }
 
 
@@ -125,8 +127,8 @@ const PedagogyIntroPage = (): React.ReactElement => {
       title={<Trans>
         Prêt(e) à <span style={{color: colors.BRIGHT_SKY_BLUE}}>sauver des vies&nbsp;?</span>
       </Trans>}
-      subtitle={t('Nous allons vous aider à contacter chaque personne ' +
-      'croisée pendant votre période contagieuse.')} icon={HeartFillIcon}>
+      subtitle={t('Nous allons vous aider à contacter les personnes ' +
+      'croisées pendant votre période contagieuse.')} icon={HeartFillIcon}>
       <BottomDiv>
         <div style={mobileOnDesktopStyle}>
           <Link to={`${Routes.PEDAGOGY_INTRO}/0`} style={buttonStyle}>
@@ -143,8 +145,8 @@ const PedagogyIntroPage = (): React.ReactElement => {
     </PedagogyLayout>
   }
   return <Slider
-    bottomComponent={IntroButton} bulletColor={colors.AZURE}
-    bulletSelectColor="#fff" arrowColor={colors.AZURE} onFastForward={gotoNext}>
+    bottomComponent={IntroButton} bulletColor={colors.AZURE} arrowColor={colors.BRIGHT_SKY_BLUE}
+    bulletSelectColor="#fff" borderColor={colors.AZURE} onFastForward={gotoNext}>
     {pagesContent.map(({icon, subtitle, title}, index): React.ReactElement =>
       <PedagogyLayout
         key={index} title={translate(title)} subtitle={translate(subtitle)} icon={icon}

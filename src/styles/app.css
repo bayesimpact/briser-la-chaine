@@ -2,11 +2,6 @@ body {
   font-family: Lato, Helvetica;
 }
 
-#app {
-  margin: 0 auto !important;
-  max-width: 700px;
-}
-
 input, select, textarea {
   border: solid 1px #d9d9e0;  /* silver */
 }

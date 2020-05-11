@@ -11,7 +11,7 @@ import UserFillIcon from 'remixicon-react/UserFillIcon'
 import {useFastForward} from 'hooks/fast_forward'
 import {useNumPeopleToAlert, useSelector, useSymptomsOnsetDate} from 'store/selections'
 import {Routes} from 'store/url'
-import {dateOption} from 'store/i18n'
+import {useDateOption} from 'store/i18n'
 
 import BurgerMenu from 'components/burger_menu'
 import {darkButtonStyle} from 'components/buttons'
@@ -39,6 +39,7 @@ const contactCountStyle: React.CSSProperties = {
 
 
 const DayCardBase = ({date, isHidden, onClick, style}: DayCardProps): React.ReactElement => {
+  const dateOption = useDateOption()
   const contactCount = useSelector(
     ({contacts: {[date.toISOString()]: {contacts = []} = {}}}): number => contacts.length,
   )
@@ -83,8 +84,8 @@ const DayCardBase = ({date, isHidden, onClick, style}: DayCardProps): React.Reac
     right: 0,
     width: 24,
   }
-  const weekDay = useMemo(() => dateFormat(date, 'EEE', dateOption), [date])
-  const month = useMemo(() => dateFormat(date, 'MMMM', dateOption), [date])
+  const weekDay = useMemo(() => dateFormat(date, 'EEE', dateOption), [date, dateOption])
+  const month = useMemo(() => dateFormat(date, 'MMMM', dateOption), [date, dateOption])
   const handleClick = useCallback((): void => onClick?.(date), [date, onClick])
   return <div style={containerStyle} onClick={onClick && handleClick}>
     <div style={squareStyle} onClick={onClick && handleClick}>
@@ -96,9 +97,9 @@ const DayCardBase = ({date, isHidden, onClick, style}: DayCardProps): React.Reac
       </div>
     </div>
     <div style={contactCountStyle}>
-      <UserFillIcon size={10} color={colors.PINKISH_GREY} />
-      <div style={{backgroundColor: colors.PINKISH_GREY, height: 10, margin: '0 5px', width: 1}} />
-      <span style={{paddingTop: 2}}>
+      <UserFillIcon size={13} color={colors.PINKISH_GREY} />
+      <div style={{backgroundColor: colors.PINKISH_GREY, height: 13, margin: '0 5px', width: 1}} />
+      <span style={{fontSize: 13, lineHeight: 1}}>
         {contactCount}
       </span>
     </div>
@@ -269,7 +270,7 @@ const ContagiousPeriodBase = (): React.ReactElement => {
           <div>
             <LockFillIcon size={12} />{' '}
             <Trans parent="span" style={{fontSize: 13}}>
-              Nous n’enverrons rien sans <strong>votre autorisation</strong>
+              Nous n'enverrons rien sans <strong>votre autorisation</strong>.
             </Trans>
           </div>
         </div> : null}

@@ -2,7 +2,8 @@ import {parseISO as parseISODate} from 'date-fns'
 import {TFunction} from 'i18next'
 import {useSelector as reactUseSelector} from 'react-redux'
 
-import {joinDays} from 'store/i18n'
+import {joinDays, useDateOption} from 'store/i18n'
+import {Routes} from 'store/url'
 
 const useSelector: <T>(
   selector: ((state: RootState) => T),
@@ -18,7 +19,9 @@ const useSymptomsOnsetDate = (): undefined|Date =>
   useSelector(({user: {symptomsOnsetDate}}) => symptomsOnsetDate)
 
 // Select a text with all the days a person has been in contact with the user.
-const usePersonContactDays = (person: bayes.casContact.Person, t: TFunction): string =>
+const usePersonContactDays = (
+  person: bayes.casContact.Person, t: TFunction, dateOption: ReturnType<typeof useDateOption>,
+): string =>
   useSelector(({contacts}): string => {
     const days = Object.entries(contacts).
       filter(
@@ -28,7 +31,7 @@ const usePersonContactDays = (person: bayes.casContact.Person, t: TFunction): st
             personId === person.personId)).
       map(([day]: [string, bayes.casContact.DayContacts]): string => day)
     days.sort()
-    return joinDays(days.map((day): Date => parseISODate(day)), 'EEEE d MMMM', t)
+    return joinDays(days.map((day): Date => parseISODate(day)), 'EEEE d MMMM', t, dateOption)
   })
 
 const useNumPeopleToAlert = (): number => useSelector(({contacts}): number => {
@@ -39,4 +42,16 @@ const useNumPeopleToAlert = (): number => useSelector(({contacts}): number => {
   return personIds.size
 })
 
-export {useAlert, useNumPeopleToAlert, usePersonContactDays, useSelector, useSymptomsOnsetDate}
+const useIsHighRisk = (personId: string): boolean => useSelector(({contacts}): boolean =>
+  Object.values(contacts).some(({contacts}): boolean =>
+    !!contacts?.some(({distance, duration, personId: otherId}): boolean =>
+      personId === otherId &&
+      !!(duration && duration > 10 || distance && distance !== 'far'))))
+
+const useReferralUrl = (personId: string): string => {
+  const isHighRisk = useIsHighRisk(personId)
+  return config.canonicalUrl + (isHighRisk ? Routes.HIGH_RISK_SPLASH : Routes.MODERATE_RISK_SPLASH)
+}
+
+export {useAlert, useIsHighRisk, useNumPeopleToAlert, usePersonContactDays, useSelector,
+  useReferralUrl, useSymptomsOnsetDate}

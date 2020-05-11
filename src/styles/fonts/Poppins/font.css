@@ -1,0 +1,13 @@
+/* Poppins Extra Bold */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  src: url('Poppins-ExtraBold.eot'); /* IE9 Compat Modes */
+  src: local('Poppins ExtraBold'), local('Poppins-ExtraBold'),
+       url('Poppins-ExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('Poppins-ExtraBold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('Poppins-ExtraBold.woff') format('woff'), /* Modern Browsers */
+       url('Poppins-ExtraBold.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('Poppins-ExtraBold.svg#Poppins') format('svg'); /* Legacy iOS */
+}

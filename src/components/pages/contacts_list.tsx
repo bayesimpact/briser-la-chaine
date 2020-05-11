@@ -3,8 +3,9 @@ import {format as dateFormat, subDays} from 'date-fns'
 import AddLineIcon from 'remixicon-react/AddLineIcon'
 import ArrowDownSLineIcon from 'remixicon-react/ArrowDownSLineIcon'
 import ArrowUpSLineIcon from 'remixicon-react/ArrowUpSLineIcon'
-import CheckLineIcon from 'remixicon-react/CheckLineIcon'
 import CheckDoubleLineIcon from 'remixicon-react/CheckDoubleLineIcon'
+import CheckLineIcon from 'remixicon-react/CheckLineIcon'
+import CheckboxCircleFillIcon from 'remixicon-react/CheckboxCircleFillIcon'
 import ErrorWarningLineIcon from 'remixicon-react/ErrorWarningLineIcon'
 import FileCopyLineIcon from 'remixicon-react/FileCopyLineIcon'
 import InformationLineIcon from 'remixicon-react/InformationLineIcon'
@@ -21,8 +22,9 @@ import {Redirect} from 'react-router-dom'
 
 import {useFastForward} from 'hooks/fast_forward'
 import {alertPerson, noDate, noOp, useDispatch} from 'store/actions'
-import {dateOption} from 'store/i18n'
-import {useAlert, usePersonContactDays, useSelector} from 'store/selections'
+import {useDateOption} from 'store/i18n'
+import {useAlert, useIsHighRisk, usePersonContactDays, useReferralUrl,
+  useSelector} from 'store/selections'
 import {Routes} from 'store/url'
 import {beautifyPhone, normalizeEmail, normalizePhone, validateEmail,
   validatePhone} from 'store/validation'
@@ -33,7 +35,7 @@ import ContactsSearch from 'components/contacts_search'
 import DrawerContainer from 'components/drawer_container'
 import Input, {InputProps, Inputable} from 'components/input'
 import {Modal, ModalConfig} from 'components/modal'
-import {BottomDiv} from 'components/navigation'
+import {BottomDiv, mobileOnDesktopStyle} from 'components/navigation'
 import ShareButtons from 'components/share_buttons'
 import Tabs from 'components/tabs'
 import Textarea from 'components/textarea'
@@ -138,17 +140,16 @@ const PhoneEmailInputBase = (props: PhoneEmailInputProps): React.ReactElement =>
   }
   const rightIconStyle: React.CSSProperties = {
     ...iconContainerStyle,
-    color: isInvalid ? colors.ORANGE_RED : 'inherit',
+    color: isInvalid ? colors.ORANGE_RED : isValid ? colors.VIBRANT_GREEN : 'inherit',
     right: 0,
   }
   const paddedInputStyle = useMemo((): React.CSSProperties => ({
-    ...isDone ? {backgroundColor: colors.MEDIUM_GREY} : {},
     borderRadius: 5,
     ...isInvalid ? {borderColor: colors.ORANGE_RED} : {},
     flex: 1,
     paddingLeft: iconSize + 10,
     paddingRight: RightIcon ? iconSize + 10 : 0,
-  }), [RightIcon, isDone, isInvalid])
+  }), [RightIcon, isInvalid])
   const errorStyle: React.CSSProperties = {
     alignSelf: 'flex-start',
     color: colors.ORANGE_RED,
@@ -158,7 +159,6 @@ const PhoneEmailInputBase = (props: PhoneEmailInputProps): React.ReactElement =>
 
   const {t} = useTranslation()
   const inputContainerStyle: React.CSSProperties = {
-    color: isDone ? colors.BLUEISH_GREY : 'inherit',
     cursor: 'pointer',
     display: 'flex',
     position: 'relative',
@@ -172,6 +172,8 @@ const PhoneEmailInputBase = (props: PhoneEmailInputProps): React.ReactElement =>
         <RightIcon size={iconSize} />
       </div> : null}
       <Input
+      // FIXME(cyrille): Show "Numéro de téléphone" or "Adresse e-mail" above
+      // if done and not focused.
         {...inputProps} value={isValid && !isFocused ? beautify(value) : value}
         onChange={onValueChange} inputMode={inputMode} ref={inputRef} onFocus={onFocus}
         onBlur={onBlur} onChangeDelayMillisecs={500} style={paddedInputStyle}
@@ -215,6 +217,7 @@ const ThankYouPopUp = React.memo(ThankYouPopUpBase)
 
 
 interface MessageSectionProps {
+  isHighRisk: boolean
   period: string
   person: bayes.casContact.Person
   onAlert?: () => void
@@ -249,7 +252,7 @@ const showContentButtonStyle = {
   display: 'flex',
 }
 const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactElement => {
-  const {onAlert, period, person: {personId}} = props
+  const {isHighRisk, onAlert, period, person: {personId}} = props
   const {alertMediums: alertedMediums = []} = useAlert(personId) || {}
   const {t} = useTranslation()
   const [isContentShown, setIsContentShown] = useState(false)
@@ -284,13 +287,18 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
     if (!newAlertMedium) {
       return
     }
-    dispatch(alertPerson(personId, newAlertMedium))
+    dispatch(alertPerson(personId, newAlertMedium, isHighRisk ? 'high' : 'low'))
     setNewAlertMedium(undefined)
     onAlert?.()
-  }, [newAlertMedium, dispatch, onAlert, personId])
+  }, [newAlertMedium, dispatch, isHighRisk, onAlert, personId])
   const buttonCallToAction = isNewAlertMediumShown ?
     newAlertMedium ? sendAlert : validateInput :
     showNewAlertMedium
+  const handleSubmit = useCallback((event?: React.SyntheticEvent): void => {
+    event?.preventDefault()
+    buttonCallToAction()
+  }, [buttonCallToAction])
+  const referralUrl = useReferralUrl(personId)
   return <div style={anonymousContainerStyle}>
     <div style={showContentButtonStyle} onClick={toggleContentShown}>
       {/* TODO(cyrille): Update to 'Voir email envoyé' once alerted (and translate).*/}
@@ -305,13 +313,12 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
       (précaution + confinement).<br />
       Ce site gratuit vous donnera toutes les étapes en fonction de votre degré d'exposition
       au virus&nbsp;:<br />
-      [link referral]</Trans> : null}
-    {alertedMediums.map((alertMedium) => <PhoneEmailInput
-      key={alertMedium.value} isDone={true} value={alertMedium}
-      onChange={noOp} style={phoneInputStyle} />)}
-    {isNewAlertMediumShown ? <PhoneEmailInput
-      value={newAlertMedium} onChange={setNewAlertMedium} style={phoneInputStyle}
-      isValidated={isValidated} placeholder={t('Entrer email ou numéro de téléphone')} /> : null}
+      {{referralUrl}}</Trans> : null}
+    <form onSubmit={handleSubmit}>
+      {isNewAlertMediumShown ? <PhoneEmailInput
+        value={newAlertMedium} onChange={setNewAlertMedium} style={phoneInputStyle}
+        isValidated={isValidated} placeholder={t('Entrer email ou numéro de téléphone')} /> : null}
+    </form>
     <div onClick={buttonCallToAction} style={alertButtonStyle}>
       {isNewAlertMediumShown ? <React.Fragment>
         {t('Alerter anonymement')} <MailSendLineIcon style={{marginLeft: 8}} />
@@ -363,21 +370,33 @@ const restartIconStyle: React.CSSProperties = {
   ...interactIconStyle,
   marginRight: 0,
 }
+const textCopiedCheckStyle: React.CSSProperties = {
+  marginRight: 15,
+  position: 'absolute',
+  right: '100%',
+  top: '50%',
+  transform: 'translateY(-50%)',
+}
 const PersonalMessageSectionBase =
   ({onAlert, period, person}: MessageSectionProps): React.ReactElement => {
     const {t} = useTranslation()
     const dispatch = useDispatch()
-    const isAlerted = useAlert(person.personId)
-    const defaultText = useMemo((): string => t('Bonjour, ' +
-      "j'ai découvert que j'étais probablement atteint(e) du COVID-19 " +
-      "or on s'est croisé(e)s pendant ma période contagieuse du {{period}}. " +
-      'Je te préviens car il est très important que tu prennes les précautions nécessaires ' +
-      '(confinement + briserlachaine). ' +
-      'Ce site gratuit te guidera dans toutes les étapes\u00A0: {{url}} ' +
-      "(c'est celui que j'ai utilisé pour te prévenir)",
-    {period: period, url: encodeURIComponent(config.canonicalUrl)}), [period, t])
+    const {name, displayName = name, personId} = person
+    const referralUrl = useReferralUrl(personId)
+    const isAlerted = useAlert(personId)
+    const defaultText = useMemo((): string => t("Bonjour, j'ai découvert que j'étais " +
+      "probablement atteint(e) du COVID-19. Je t'écris car nous nous sommes croisés pendant " +
+      "ma période contagieuse du {{period}}, et donc je t'ai peut-être contaminé(e). " +
+      'Je tenais donc à te prévenir car il est très important que tu prennes les précautions ' +
+      'nécessaires pour vous protéger toi et tes proches. Même sans symptôme, il est possible ' +
+      'que tu sois déjà contagieux(se). ' +
+      "Pour briser la chaîne de contamination, je te conseille d'aller sur le site que " +
+      "j'ai utilisé pour te prévenir, où tu pourras notamment vérifier tes symptômes et " +
+      'accéder à un suivi personnalisé\u00A0: {{url}} ' +
+      "(c'est ce que j'ai utilisé pour te prévenir) " +
+      "PS\u00A0: Le site a été créé par une ONG citoyenne, c'est entièrement gratuit et anonyme.",
+    {period: period, url: referralUrl}), [period, referralUrl, t])
     const [isCustomText, setIsCustomText] = useState(false)
-    const displayName = person.displayName || person.name
     const radioButtonStyle: React.CSSProperties = {
       backgroundColor: isAlerted ? '#000' : 'initial',
       border: 'solid 2px #000',
@@ -429,18 +448,20 @@ const PersonalMessageSectionBase =
     }
     const textCopiedStyle: React.CSSProperties = {
       alignItems: 'center',
-      backgroundColor: colors.ORANGE,
-      borderRadius: 5,
-      bottom: messageTextStyle.marginBottom,
+      backgroundColor: '#000',
+      borderRadius: 40,
       color: '#fff',
       display: 'flex',
+      fontWeight: 'bold',
       justifyContent: 'center',
-      left: 0,
+      left: 40,
       opacity: isTextCopied ? 1 : 0,
-      padding: 8,
+      padding: 15,
       pointerEvents: 'none',
       position: 'absolute',
-      right: 0,
+      right: 40,
+      top: '50%',
+      transform: 'translateY(-50%)',
       transition: '450ms',
     }
 
@@ -449,11 +470,16 @@ const PersonalMessageSectionBase =
       <span onClick={handleEditText} style={editInstructionsStyle}>
         {t('Cliquer pour modifier le message')}
       </span>
-      <Textarea
-        style={messageTextStyle} value={text} onChange={updateText} ref={textAreaRef} />
-      <div style={{position: 'relative'}}><div style={textCopiedStyle}>
-        <CheckLineIcon size={16} style={{marginRight: 5}} /> {t('Message copié')}
-      </div></div>
+      <div style={{display: 'flex', flexDirection: 'column', position: 'relative'}}>
+        <Textarea
+          style={messageTextStyle} value={text} onChange={updateText} ref={textAreaRef} />
+        <div style={textCopiedStyle}>
+          <span style={{position: 'relative'}}>
+            <CheckLineIcon style={textCopiedCheckStyle} />
+            {t('Message copié')}
+          </span>
+        </div>
+      </div>
       <div style={buttonsContainerStyle}>
         <div style={refreshButtonStyle} onClick={backToDefaultText}>
           {t('Réinitialiser')} <RestartLineIcon style={restartIconStyle} />
@@ -462,9 +488,11 @@ const PersonalMessageSectionBase =
           {t('Copier')} <FileCopyLineIcon style={{...interactIconStyle, marginRight: 0}} />
         </div>
       </div>
-      <ShareButtons title={t('Envoyer le message via\u00A0:')} sharedText={text} />
+      <ShareButtons
+        onMessengerClick={handleCopy}
+        title={t('Envoyer le message via\u00A0:')} sharedText={text} />
       <BottomDiv style={personalAlertContainer} onClick={handleAlert}>
-        <Trans style={{flex: 1, fontSize: 16}}>J'ai alerté {{name: displayName}}</Trans>
+        <Trans style={{flex: 1, fontSize: 16}}>J'ai contacté {{name: displayName}}</Trans>
         <div style={radioButtonStyle} />
       </BottomDiv>
     </React.Fragment>
@@ -610,8 +638,7 @@ const addContactNavItemStyle: React.CSSProperties = {
   backgroundColor: colors.AZURE,
 }
 
-// FIXME(pascal): Properly redirect to final when coming back from final.
-// TODO(pascal): Clean up the transition. Make sure everything disappears at the same time.
+
 const ContactsListBase = (props: ContactsListProps): React.ReactElement => {
   const {onAddContact, onSelectPerson, people, selectedPerson} = props
   const {t} = useTranslation()
@@ -664,11 +691,23 @@ interface ContactPersonFormProps {
 
 const alertAgainButtonStyle: React.CSSProperties = {
   ...basicButtonStyle,
+  ...mobileOnDesktopStyle,
   margin: '16px auto',
-  width: 'fit-content',
 }
 const tabsStyle: React.CSSProperties = {
   marginBottom: 16,
+}
+const alertedStyle: React.CSSProperties = {
+  alignItems: 'center',
+  borderTop: `1px solid ${colors.MEDIUM_GREY}`,
+  display: 'flex',
+  fontSize: 16,
+  marginTop: 20,
+  paddingTop: 15,
+}
+const alertedIconStyle: React.CSSProperties = {
+  color: colors.VIBRANT_GREEN,
+  marginRight: 8,
 }
 
 interface ContagiousPeriod {
@@ -679,6 +718,7 @@ interface ContagiousPeriod {
 const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElement => {
   const {onDone, person} = props
   const {t} = useTranslation()
+  const dateOption = useDateOption()
   const dispatch = useDispatch()
   const {contagiousPeriodEnd = new Date(), contagiousPeriodStart = subDays(new Date(), 1)} =
     useSelector(({user: {contagiousPeriodEnd, contagiousPeriodStart}}): ContagiousPeriod =>
@@ -687,7 +727,7 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
     t('{{start}} au {{end}}', {
       end: dateFormat(contagiousPeriodEnd, 'd MMMM yyyy', dateOption),
       start: dateFormat(contagiousPeriodStart, 'd MMMM', dateOption)}),
-  [contagiousPeriodEnd, contagiousPeriodStart, t])
+  [contagiousPeriodEnd, contagiousPeriodStart, dateOption, t])
   const alerted = useAlert(person.personId)
   const [isSenderAnonymous, setIsSenderAnonymous] =
     useState(alerted?.isAlertedAnonymously !== false)
@@ -710,13 +750,8 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
     () => setIsSenderAnonymous(!isSenderAnonymous), [isSenderAnonymous])
   const openThanks = useCallback((): void => setIsThanksShown(true), [])
   const displayName = person.displayName || person.name
-  const contactDays = usePersonContactDays(person, t)
-  const isHighRisk = useSelector(({contacts}): boolean =>
-    Object.values(contacts).some(({contacts}): boolean =>
-      !!contacts?.some(({distance, duration, personId}): boolean =>
-        personId === person.personId &&
-        // TODO(pascal): Move this logic to a store helper function.
-        !!(duration && duration > 10 || distance && distance !== 'far'))))
+  const contactDays = usePersonContactDays(person, t, dateOption)
+  const isHighRisk = useIsHighRisk(person.personId)
   // TODO(pascal): Maybe do something when the InformationLineIcon is clicked.
   useLayoutEffect((): void => {
     setCanBeenAlertedAgain(false)
@@ -736,6 +771,7 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
     t('Alerter anonymement'),
     t('Alerter moi-même'),
   ], [t])
+  const {alertMediums: alertedMediums = []} = useAlert(person.personId) || {}
   return <div style={{margin: '24px 30px 0'}}>
     <ThankYouPopUp isShown={isThanksShown} name={displayName} onHidden={onDone} />
     <div style={{alignItems: 'center', display: 'flex'}}>
@@ -747,28 +783,34 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
       </span>
       <InformationLineIcon size={15} color={colors.WARM_GREY} />
     </div>
-    {alerted ? <div style={{color: colors.ORANGE, fontSize: 16, marginTop: 4}}>
+    {alerted ? <div style={alertedStyle}>
+      <CheckboxCircleFillIcon style={alertedIconStyle} size={24} />
       {alerted.isAlertedAnonymously ?
         alerted.alertMediums?.every(({medium}) => medium === 'SMS') ?
-          t('Alerté(e) anonymement par SMS') :
+          t('Contacté(e) anonymement par SMS') :
           alerted.alertMediums?.every(({medium}) => medium === 'email') ?
-            t('Alerté(e) anonymement par email') :
-            t('Alerté(e) anonymement') :
-        t('Alerté(e) par vos soins')
+            t('Contacté(e) anonymement par email') :
+            t('Contacté(e) anonymement') :
+        t('Contacté(e) par vos soins')
       }
     </div> : <Trans style={{color: colors.WARM_GREY, fontSize: 12, marginTop: 4}}>
       Croisé(e) {{contactDays}}
     </Trans>}
-    {alerted && !alerted.isAlertedAnonymously && !canBeAlertedAgain ? <Trans
+    <div style={{flex: 1}} />
+    {alertedMediums.map((alertMedium) => <PhoneEmailInput
+      key={alertMedium.value} isDone={true} value={alertMedium}
+      onChange={noOp} style={phoneInputStyle} />)}
+    {alerted && !canBeAlertedAgain ? <BottomDiv
       style={alertAgainButtonStyle} onClick={handleAlertAgain}>
-      Alerter à nouveau
-    </Trans> : <div style={{display: 'flex', flexDirection: 'column', margin: '30px 0 0'}}>
+      {t('Contacter à nouveau')}
+    </BottomDiv> : <div style={{display: 'flex', flexDirection: 'column', margin: '30px 0 0'}}>
       <Tabs
         style={tabsStyle} onChangeTab={handleChangeTab} tabSelected={isSenderAnonymous ? 0 : 1}
         tabs={tabs} />
       {isSenderAnonymous ? <AnonymousMessageSection
-        period={period} person={person} onAlert={openThanks} /> :
-        <PersonalMessageSection onAlert={openThanks} period={period} person={person} />}
+        period={period} person={person} onAlert={openThanks} isHighRisk={isHighRisk} /> :
+        <PersonalMessageSection
+          onAlert={openThanks} period={period} person={person} isHighRisk={isHighRisk} />}
     </div>}
   </div>
 }

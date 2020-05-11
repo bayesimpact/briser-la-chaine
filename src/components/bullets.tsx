@@ -34,6 +34,7 @@ const Bullet = React.memo(BulletBase)
 
 interface BulletsProps {
   arrowColor?: string
+  borderColor?: string
   color?: string
   indexVisible: number
   numBullets: number
@@ -52,12 +53,12 @@ const bulletsContainerStyle: React.CSSProperties = {
 
 
 const Bullets = (props: BulletsProps): React.ReactElement => {
-  const {arrowColor = '#fff', color, indexVisible, numBullets, onSelect, selectColor,
-    transition} = props
+  const {arrowColor = '#fff', borderColor = colors.MEDIUM_GREY, color, indexVisible, numBullets,
+    onSelect, selectColor, transition} = props
   const arrowButtonStyle: React.CSSProperties = {
     alignItems: 'center',
     backgroundColor: arrowColor,
-    border: `solid 1px ${colors.MEDIUM_GREY}`,
+    border: `solid 1px ${borderColor}`,
     borderRadius: 45,
     color: selectColor,
     cursor: 'pointer',

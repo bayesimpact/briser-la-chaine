@@ -18,9 +18,6 @@ const titleStyle: React.CSSProperties = {
   fontSize: 22,
   margin: '0 20px 20px',
 }
-const subTitleStyle: React.CSSProperties = {
-  margin: '0 40px',
-}
 const bottomDivStyle: React.CSSProperties = {
   alignItems: 'center',
   backgroundColor: colors.WHITE_TWO,
@@ -62,27 +59,35 @@ const thankYouStyle: React.CSSProperties = {
   width: '100vw',
 }
 
+// This is a top level page and should never be nested in another one.
+// TOP LEVEL PAGE
 const FinalPageBase = (): React.ReactElement => {
   const {t} = useTranslation()
   const [isVisible, setIsVisible] = useState(false)
-  // FIXME(sil): Fix this text
+  const numAlertedPeople = useSelector(({alerts}: RootState): number => {
+    return [...new Set(Object.keys(alerts))].length
+  })
   const sharedText = t(
-    '{{productName}} {{url}}',
-    {productName: config.productName, url: config.canonicalUrl})
+    'Je viens de briser ma chaîne de contamination en prévenant {{count}} personne de prendre ' +
+    'les précautions nécessaires pour se protéger et protéger son entourage\u00A0! 💪\n\nSi vous ' +
+    "avez des symptômes du Covid-19, je vous recommande d'utiliser ce site gratuit et anonyme " +
+    "qui m'a été très utile\u00A0: {{url}}.\n\n(Site créé par une ONG, il n'y a aucun traçage de " +
+    'données\u00A0!)',
+    {count: numAlertedPeople, url: config.canonicalUrl},
+  )
   useEffect(() => {
     const timeout = window.setTimeout((): void => setIsVisible(true), 300)
     return (): void => clearTimeout(timeout)
   }, [])
   useFastForward(undefined, undefined, Routes.SYMPTOMS_ONSET)
-  const numAlertedPeople = useSelector(({alerts}: RootState): number => {
-    return [...new Set(Object.keys(alerts))].length
-  })
   const downloadPDF = usePDFDownloader()
   const thankYou = numAlertedPeople > 1 ? t('Merci pour eux') : t('Merci')
   const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100vh',
+    margin: '0 auto',
+    maxWidth: 700,
+    minHeight: window.innerHeight,
     opacity: isVisible ? 1 : 0,
     transition: '800ms',
   }
@@ -96,15 +101,10 @@ const FinalPageBase = (): React.ReactElement => {
         <div style={thankYouStyle}>{thankYou}</div>
       </div>
       <Trans style={titleStyle} count={numAlertedPeople}>
-        Grâce à vous nous avons pu prévenir <strong style={{color: colors.VIBRANT_GREEN}}>
+        Grâce à vous, <strong style={{color: colors.VIBRANT_GREEN}}>
           {{numAlert: numAlertedPeople}} personne
-        </strong>&nbsp;!
+        </strong> va pouvoir se protéger et briser la chaîne à son tour&nbsp;!
       </Trans>
-      {numAlertedPeople > 1 ? <Trans style={subTitleStyle}>
-        Si elles appliquent le confinement c'est plus de <strong>
-          {{numSaved: numAlertedPeople * numAlertedPeople}} personnes
-        </strong> potentiellement non contaminées&nbsp;!
-      </Trans> : null}
       <ShareButtons title={t('Partagez la nouvelle\u00A0:')} sharedText={sharedText} />
     </div>
     <BottomDiv>

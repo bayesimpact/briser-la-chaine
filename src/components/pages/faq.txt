@@ -1,6 +1,6 @@
 ### Qui est à l'origine de {{productName}} ?
 
-Ce site web à été conçu par [Bayes Impact](https://www.bayesimpact.org)
+Ce site web à été conçu par l'ONG [Bayes Impact](https://www.bayesimpact.org).
 
 ### Pourquoi prévenir mes proches si je suis malade ?
 

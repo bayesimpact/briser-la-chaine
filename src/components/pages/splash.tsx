@@ -1,88 +1,217 @@
-import CalendarLineIcon from 'remixicon-react/CalendarLineIcon'
-import DoubleQuotesLIcon from 'remixicon-react/DoubleQuotesLIcon'
-import HomeHeartLineIcon from 'remixicon-react/HomeHeartLineIcon'
-import LinksFillIcon from 'remixicon-react/LinksFillIcon'
 import LockFillIcon from 'remixicon-react/LockFillIcon'
-import MailLineIcon from 'remixicon-react/MailLineIcon'
-import MessengerFillIcon from 'remixicon-react/MessengerFillIcon'
-import PinDistanceLineIcon from 'remixicon-react/PinDistanceLineIcon'
-import SpyFillIcon from 'remixicon-react/SpyFillIcon'
-import TwitterFillIcon from 'remixicon-react/TwitterFillIcon'
-import WhatsappFillIcon from 'remixicon-react/WhatsappFillIcon'
-import React, {useCallback, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import ReactMarkdown from 'react-markdown'
 import {Trans, useTranslation} from 'react-i18next'
 import {useLocation} from 'react-router'
 import {Link} from 'react-router-dom'
 
 import {useFastForward} from 'hooks/fast_forward'
+import {useDefaultShareText} from 'hooks/share'
 import {saveKnownRisk, useDispatch} from 'store/actions'
 import {Routes} from 'store/url'
 
 import {darkButtonStyle} from 'components/buttons'
+import ShareButtons from 'components/share_buttons'
 import logoImage from 'images/logo.svg'
-import bayesLogoImage from 'images/bayes-logo.svg'
+import bayesLogoHorizontallImage from 'images/bayes-logo-horizontal.svg'
+import calendarLineImage from 'images/calendar-line-icon.svg'
+import cecileMonteilImage from 'images/cecile-monteil.png'
+import jeremyZeggaghImage from 'images/jeremy-zeggagh.png'
+import liemBinhLuongNguyenImage from 'images/liem-binh-luong-nguyen.png'
+import mapCrossedImage from 'images/map-crossed-icon.svg'
+import spyFillImage from 'images/spy-fill-icon.svg'
 
 import faqContent from './faq.txt'
 
 
-const titleStyle: React.CSSProperties = {
-  alignItems: 'center',
-  display: 'flex',
-  fontSize: 36,
-  fontWeight: 'bold',
-  justifyContent: 'center',
-  margin: '60px 30px',
-  textAlign: 'left',
-}
+const isMobileVersion = window.outerWidth < 800
+const desktopMaxWidth = 960
+const mobileMaxWidth = 700
+
 const riskyContactStyle: React.CSSProperties = {
-  color: colors.TOMATO,
+  color: colors.STRONG_PINK,
 }
 const lowRiskContactStyle: React.CSSProperties = {
-  color: colors.ORANGE,
-}
-const landingTagStyle: React.CSSProperties = {
-  backgroundColor: colors.MEDIUM_GREY,
-  borderRadius: 5,
-  bottom: '100%',
-  color: colors.WARM_GREY,
-  left: '50%',
-  marginBottom: 20,
-  padding: 10,
-  position: 'absolute',
-  transform: 'translate(-50%)',
-}
-const tagNotchStyle: React.CSSProperties = {
-  borderLeft: 'solid 10px transparent',
-  borderRight: 'solid 10px transparent',
-  borderTop: `solid 5px ${landingTagStyle.backgroundColor}`,
-  height: 1,
-  left: '50%',
-  position: 'absolute',
-  top: '100%',
-  transform: 'translate(-50%)',
-  width: 1,
+  color: colors.STRONG_PINK,
 }
 const discreetLink: React.CSSProperties = {
   color: 'inherit',
 }
-const bayesLinkStyle: React.CSSProperties = {
-  display: 'block',
-  margin: '35px 0',
-}
-const bayesLogoStyle: React.CSSProperties = {
+const bayesHorizontalLogoStyle: React.CSSProperties = {
   filter: 'grayscale(1) brightness(0)',
-  opacity: .5,
-  width: 130,
+  opacity: .3,
+  width: 170,
+}
+
+
+interface StepsSectionProps {
+  callToAction: string
+  hasRisk: boolean
+  style?: React.CSSProperties
+  to: string
+}
+
+
+const StepsSectionBase = (props: StepsSectionProps): React.ReactElement => {
+  const {callToAction, hasRisk, style, to} = props
+  const {t} = useTranslation()
+  const ctaButtonStyle: React.CSSProperties = {
+    ...darkButtonStyle,
+    display: 'block',
+    fontFamily: 'Poppins',
+    fontSize: 20,
+    fontWeight: 800,
+    margin: 'auto',
+    maxWidth: 420,
+  }
+  const stepStyle: React.CSSProperties = {
+    alignItems: 'center',
+    color: colors.DARK_GREY_BLUE,
+    display: 'flex',
+    fontFamily: 'Poppins',
+    fontSize: 18,
+    fontWeight: 800,
+  }
+  const bulletStyle: React.CSSProperties = {
+    backgroundColor: colors.MINTY_GREEN,
+    borderRadius: 8,
+    height: 8,
+    marginRight: 26,
+    width: 8,
+  }
+  const lineStyle: React.CSSProperties = {
+    backgroundColor: colors.LIGHT_BLUE_GREY,
+    height: 30,
+    marginLeft: 4,
+    width: 1,
+  }
+  return <div style={style}>
+    <div>
+      {hasRisk ?
+        t('Même sans symptôme, vous êtes peut-être contagieux(se) aussi.') :
+        t(
+          'Nous vous aidons à contacter les personnes croisées pendant votre période ' +
+          'contagieuse en quelques minutes.',
+        )}
+    </div>
+    <div style={{margin: '30px auto', maxWidth: 420}}>
+      <div style={stepStyle}>
+        <div style={bulletStyle} />
+        {t('Analyse')}
+      </div>
+      <div style={lineStyle} />
+      <div style={stepStyle}>
+        <div style={bulletStyle} />
+        {t('Prévention')}
+      </div>
+      <div style={lineStyle} />
+      <div style={stepStyle}>
+        <div style={bulletStyle} />
+        {t('Action')}
+      </div>
+    </div>
+    <Link to={to} style={ctaButtonStyle}>
+      {callToAction}
+    </Link>
+  </div>
+}
+const StepsSection = React.memo(StepsSectionBase)
+
+
+interface TitleProps {
+  isModerateRisk: boolean
+  isHighRisk: boolean
+  style?: React.CSSProperties
 }
 
 
 // NOTE: This is the top of our app and therefore the first text that we put here will be used by
 // Google for its snippet. Make sure to order it as you think it should be.
+const TitleBase = (props: TitleProps): React.ReactElement => {
+  const {isModerateRisk, isHighRisk, style} = props
+  const hasRisk = isModerateRisk || isHighRisk
+  const titleStyle: React.CSSProperties = {
+    fontFamily: 'Poppins',
+    fontSize: isMobileVersion ? hasRisk ? 20 : 38 : hasRisk ? 31 : 60,
+    fontWeight: 800,
+    lineHeight: hasRisk ? 1.35 : 1.11,
+    margin: 0,
+    ...style,
+  }
+  return <h1 style={titleStyle}>
+    <img
+      src={logoImage} alt={config.productName} width={200}
+      style={isMobileVersion ? {display: 'block', marginBottom: 30} : {display: 'none'}} />
+    {isHighRisk ? <Trans parent={null}>
+      Un(e) proche atteint(e) du COVID-19 a indiqué vous
+      avoir <span style={riskyContactStyle}>
+        probablement contaminé(e)
+      </span> pendant sa période contagieuse.
+    </Trans> : isModerateRisk ? <Trans parent={null}>
+      Un(e) proche atteint(e) du COVID-19 a indiqué vous
+      avoir <span style={lowRiskContactStyle}>
+        peut-être contaminé(e)
+      </span> pendant sa période contagieuse.
+    </Trans> : <Trans>
+      Peut-être atteint(e) du <span style={{whiteSpace: 'nowrap'}}>COVID-19&nbsp;?</span>
+    </Trans>}
+    {isMobileVersion ? null : <React.Fragment>
+      <img src={logoImage} alt="" style={{display: 'block', marginTop: 50, width: 285}} />
+      <a
+        href="https://www.bayesimpact.org" style={{display: 'flex', marginTop: 50}} target="_blank"
+        rel="noopener noreferrer">
+        <img src={bayesLogoHorizontallImage} alt="Bayes Impact" style={bayesHorizontalLogoStyle} />
+      </a>
+    </React.Fragment>}
+  </h1>
+}
+const Title = React.memo(TitleBase)
+
+
+interface NoticesProps {
+  callToAction: string
+  style?: React.CSSProperties
+}
+
+
+const NoticesBase = (props: NoticesProps): React.ReactElement => {
+  const {callToAction, style} = props
+  const {t} = useTranslation()
+  const containerStyle: React.CSSProperties = {
+    color: colors.GREYISH_BROWN,
+    fontSize: 12,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    maxWidth: 290,
+    ...style,
+  }
+  return <div style={containerStyle}>
+    <Trans style={{marginBottom: 15, textAlign: 'center'}}>
+      En cliquant sur <strong>{{callToAction}}</strong> vous acceptez
+      nos&nbsp;<a
+        href={Routes.TERMS} style={discreetLink} target="_blank" rel="noopener noreferrer">
+        Conditions Générales d'Utilisation
+      </a>.
+    </Trans>
+    <div style={{alignItems: 'center', display: 'flex', justifyContent: 'center'}}>
+      <LockFillIcon size={16} />
+      <span style={{margin: '0 5px'}}>
+        {t('Nous ne collectons aucune donnée.')}
+      </span>
+      <a href={Routes.PRIVACY} style={discreetLink} target="_blank" rel="noopener noreferrer">
+        {t('En savoir plus')}
+      </a>
+    </div>
+  </div>
+}
+const Notices = React.memo(NoticesBase)
+
+
 const LandingSectionBase = (): React.ReactElement => {
   const {t} = useTranslation()
-  const {pathname} = useLocation()
+
   const dispatch = useDispatch()
+  const {pathname} = useLocation()
   const isModerateRisk = pathname === Routes.MODERATE_RISK_SPLASH
   const isHighRisk = pathname === Routes.HIGH_RISK_SPLASH
   const hasRisk = isHighRisk || isModerateRisk
@@ -97,120 +226,145 @@ const LandingSectionBase = (): React.ReactElement => {
   useFastForward(undefined, undefined, hasRisk ? Routes.DIAGNOSTIC : Routes.HEALTH_STATUS)
 
   const callToAction = hasRisk ?
-    t('Que dois je faire\u00A0?') : t('Briser la chaîne de contamination')
-  return <section style={{padding: '60px 30px', textAlign: 'center'}}>
-    <div style={{marginTop: 90, position: 'relative'}}>
-      <h1 style={titleStyle}>
-        <img src={logoImage} alt="" /> <span>{config.productName}</span>
-      </h1>
-      <div style={{color: colors.GREYISH_BROWN, fontWeight: 'bold', marginBottom: 20}}>
-        {isHighRisk ? <Trans parent={null}>
-          Un(e) proche atteint(e) du COVID-19 a indiqué vous
-          avoir <span style={riskyContactStyle}>
-            probablement contaminé(e)
-          </span> pendant sa période contagieuse.
-        </Trans> : isModerateRisk ? <Trans parent={null}>
-          Un(e) proche atteint(e) du COVID-19 a indiqué vous
-          avoir <span style={lowRiskContactStyle}>
-            peut-être contaminé(e)
-          </span> pendant sa période contagieuse.
-        </Trans> : t('Peut-être atteint(e) du COVID-19\u00A0?')}
+    t('Que dois je faire\u00A0?') : t('Briser la chaîne')
+  const nextPage = hasRisk ? Routes.DIAGNOSTIC : Routes.HEALTH_STATUS
+
+  if (isMobileVersion) {
+    return <section style={{borderTop: `solid 8px ${colors.MINTY_GREEN}`, padding: '45px 30px'}}>
+      <Title isModerateRisk={isModerateRisk} isHighRisk={isHighRisk} />
+      <div style={{marginTop: 30}}>
+        <StepsSection
+          callToAction={callToAction} to={nextPage} hasRisk={hasRisk} />
+        <Notices style={{marginTop: 20}} callToAction={callToAction} />
       </div>
-      <div style={{color: colors.WARM_GREY, padding: 15}}>
-        {hasRisk ?
-          t('Même sans symptôme, vous êtes peut-être contagieux(se) aussi') :
-          t(
-            'Nous vous aidons à contacter les personnes croisées pendant votre période ' +
-            'contagieuse en quelques minutes.',
-          )}
-      </div>
-      <div style={landingTagStyle}>
-        {t('Nous sommes une ONG citoyenne')}
-        <div style={tagNotchStyle} />
+    </section>
+  }
+
+  const sectionStyle: React.CSSProperties = {
+    padding: '80px 20px 30px',
+    position: 'relative',
+    zIndex: 0,
+  }
+  const halfBackgroundStyle: React.CSSProperties = {
+    backgroundColor: colors.MINTY_GREEN,
+    bottom: 0,
+    left: '50%',
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: -1,
+  }
+  const innerStepsSectionStyle: React.CSSProperties = {
+    backgroundColor: '#fff',
+    borderRadius: 35,
+    padding: 35,
+  }
+  const contentStyle: React.CSSProperties = {
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: 'auto',
+    maxWidth: desktopMaxWidth,
+  }
+  return <section style={sectionStyle}>
+    <div style={contentStyle}>
+      <Title isModerateRisk={isModerateRisk} isHighRisk={isHighRisk} style={{maxWidth: 450}} />
+      <div style={{maxWidth: 385}}>
+        <StepsSection
+          style={innerStepsSectionStyle} callToAction={callToAction} to={nextPage}
+          hasRisk={hasRisk} />
+        <Notices style={{marginTop: 20}} callToAction={callToAction} />
       </div>
     </div>
-    <Link
-      to={hasRisk ? Routes.DIAGNOSTIC : Routes.HEALTH_STATUS}
-      style={{...darkButtonStyle, display: 'block', marginTop: 65}}>
-      {callToAction}
-    </Link>
-    <Trans style={{color: colors.WARM_GREY, fontSize: 12, marginBottom: 15}}>
-      En cliquant sur <strong>{{callToAction}}</strong> vous acceptez
-      nos <a href={Routes.TERMS} style={discreetLink} target="_blank" rel="noopener noreferrer">
-        Conditions Générales d'Utilisation
-      </a>
-    </Trans>
-    <div style={{alignItems: 'center', display: 'flex', fontSize: 12, justifyContent: 'center'}}>
-      <LockFillIcon size={16} />
-      <span style={{margin: '0 5px'}}>
-        {t('Nous ne collectons aucune donnée')}
-      </span>
-      <a href={Routes.PRIVACY} style={discreetLink} target="_blank" rel="noopener noreferrer">
-        {t('En savoir plus')}
-      </a>
-    </div>
-    <a
-      href="https://www.bayesimpact.org" style={bayesLinkStyle} target="_blank"
-      rel="noopener noreferrer">
-      <img src={bayesLogoImage} alt="Bayes Impact" style={bayesLogoStyle} />
-    </a>
+    <div style={halfBackgroundStyle} />
   </section>
 }
 const LandingSection = React.memo(LandingSectionBase)
 
 
 const featuresSectionStyle: React.CSSProperties = {
-  backgroundColor: colors.WHITE_TWO,
-  padding: '30px 35px',
-  textAlign: 'center',
+  backgroundColor: colors.PALE_GREY,
+  color: '#000',
+  padding: isMobileVersion ? '30px 35px' : '80px 20px',
+}
+const featuresTitleStyle: React.CSSProperties = {
+  color: colors.BLACK,
+  fontFamily: 'Poppins',
+  fontSize: isMobileVersion ? 35 : 40,
+  fontWeight: 800,
+  lineHeight: 1.18,
+  margin: '0 auto 50px',
+  maxWidth: desktopMaxWidth,
+  textAlign: isMobileVersion ? 'center' : 'left',
 }
 const featureCircleStyle: React.CSSProperties = {
   alignItems: 'center',
   backgroundColor: '#fff',
-  borderRadius: 90,
+  borderRadius: 40,
+  boxShadow: '0 1px 10px 0 rgba(0, 0, 0, 0.16)',
   display: 'flex',
-  height: 90,
+  flex: 'none',
+  height: 110,
   justifyContent: 'center',
-  marginBottom: 8,
-  width: 90,
+  width: 110,
+}
+const featuresContainerStyle: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: isMobileVersion ? 'column' : 'row',
+  margin: 'auto',
+  maxWidth: desktopMaxWidth,
 }
 const featureContainerStyle: React.CSSProperties = {
   alignItems: 'center',
   display: 'flex',
   flex: 'none',
-  flexDirection: 'column',
-  margin: 8,
-  width: 140,
+  marginBottom: isMobileVersion ? 40 : undefined,
+  marginRight: isMobileVersion ? undefined : 'auto',
+  paddingRight: isMobileVersion ? undefined : 10,
+}
+const reverseRowStyle: React.CSSProperties = isMobileVersion ? {
+  flexDirection: 'row-reverse',
+  justifyContent: 'space-between',
+} : {}
+const featureTextStyle: React.CSSProperties = {
+  fontWeight: 600,
+  maxWidth: 125,
 }
 
 const FeaturesSectionBase = (): React.ReactElement => {
   const {t} = useTranslation()
   return <section style={featuresSectionStyle}>
-    <Trans parent="h2">Votre vie privée et votre santé sont nos priorités</Trans>
-    <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center'}}>
+    <Trans parent="h2" style={featuresTitleStyle}>
+      Un <span style={{color: colors.TURQUOISE_GREEN}}>geste civique</span>,<br />
+      en quelques clics
+    </Trans>
+    <div style={featuresContainerStyle}>
       <div style={featureContainerStyle}>
         <div style={featureCircleStyle}>
-          <CalendarLineIcon color={colors.VERY_LIGHT_PURPLE} size={40} />
+          <img src={calendarLineImage} alt="" />
         </div>
-        {t('Basé sur votre mémoire')}
+        <div style={{flex: 'none', width: 25}} />
+        <div style={featureTextStyle}>
+          {t('Basé sur votre mémoire')}
+        </div>
+      </div>
+      <div style={{...featureContainerStyle, ...reverseRowStyle}}>
+        <div style={featureCircleStyle}>
+          <img src={mapCrossedImage} alt="" />
+        </div>
+        <div style={{flex: 'none', width: 25}} />
+        <Trans style={featureTextStyle}>
+          Sans traçage<br />ni géolocalisation
+        </Trans>
       </div>
       <div style={featureContainerStyle}>
         <div style={featureCircleStyle}>
-          <PinDistanceLineIcon color={colors.PALE} size={40} />
+          <img src={spyFillImage} alt="" />
         </div>
-        {t('Sans traçage ni géolocalisation')}
-      </div>
-      <div style={featureContainerStyle}>
-        <div style={featureCircleStyle}>
-          <HomeHeartLineIcon color={colors.PALE} size={40} />
-        </div>
-        {t('Diagnostic et conseils')}
-      </div>
-      <div style={featureContainerStyle}>
-        <div style={featureCircleStyle}>
-          <SpyFillIcon color={colors.VERY_LIGHT_PURPLE} size={40} />
-        </div>
-        {t('Anonyme ou personnel')}
+        <div style={{flex: 'none', width: 25}} />
+        <Trans style={featureTextStyle}>
+          Notification anonyme<br />ou personnelle
+        </Trans>
       </div>
     </div>
   </section>
@@ -218,140 +372,98 @@ const FeaturesSectionBase = (): React.ReactElement => {
 const FeaturesSection = React.memo(FeaturesSectionBase)
 
 
-const userFlowContainerStyle: React.CSSProperties = {
-  alignItems: 'center',
-  display: 'flex',
-  justifyContent: 'center',
-  marginTop: 40,
-}
-const userFlowBulletStyle: React.CSSProperties = {
-  alignItems: 'center',
-  backgroundColor: colors.GREYISH_BROWN,
-  borderRadius: 20,
-  color: '#fff',
-  display: 'flex',
-  fontSize: 12,
-  height: 20,
-  justifyContent: 'center',
-  margin: 5,
-  position: 'relative',
-  width: 20,
-}
-const userFowLineStyle: React.CSSProperties = {
-  backgroundColor: colors.MEDIUM_GREY,
-  borderRadius: 2,
-  flex: 1,
-  height: 4,
-  maxWidth: 150,
-}
-const stepTextStyle: React.CSSProperties = {
-  color: colors.GREYISH_BROWN,
-  fontSize: 14,
-  left: '50%',
-  marginTop: 10,
-  position: 'absolute',
-  top: '100%',
-  transform: 'translateX(-50%)',
-}
-
-
-const UserFlowSectionBase = (): React.ReactElement => {
-  return <section style={{padding: '90px 30px', textAlign: 'center'}}>
-    <Trans parent="h2">Une experience vitale, pensée pour vous</Trans>
-    <div style={userFlowContainerStyle}>
-      <div style={userFlowBulletStyle}>
-        1
-        <Trans style={stepTextStyle}>
-          Diagnostic
-        </Trans>
-      </div>
-      <div style={userFowLineStyle} />
-      <div style={userFlowBulletStyle}>
-        2
-        <Trans style={stepTextStyle}>
-          Prévention
-        </Trans>
-      </div>
-      <div style={userFowLineStyle} />
-      <div style={userFlowBulletStyle}>
-        3
-        <Trans style={stepTextStyle}>
-          Alerter
-        </Trans>
-      </div>
-    </div>
-  </section>
-}
-const UserFlowSection = React.memo(UserFlowSectionBase)
-
-
 const recommendedSectionStyle: React.CSSProperties = {
-  backgroundColor: colors.WHITE_TWO,
-  padding: '60px 35px',
-  textAlign: 'center',
+  backgroundColor: '#000',
+  color: '#fff',
+  padding: isMobileVersion ? '60px 30px 70px' : '80px 20px',
+}
+const doctorsSectionContentStyle: React.CSSProperties = isMobileVersion ? {} : {
+  display: 'flex',
+  margin: 'auto',
+  maxWidth: desktopMaxWidth,
+}
+const recommendedTitleStyle: React.CSSProperties = {
+  flex: 1,
+  fontFamily: 'Poppins',
+  fontSize: isMobileVersion ? 35 : 40,
+  fontWeight: 800,
+  lineHeight: 1.14,
+  marginBottom: isMobileVersion ? undefined : 50,
+  marginLeft: 'auto',
+  marginRight: 'auto',
+  marginTop: 0,
+  maxWidth: desktopMaxWidth,
 }
 const recommendationStyle: React.CSSProperties = {
-  backgroundColor: '#fff',
-  marginTop: 16,
-  padding: 16,
-  textAlign: 'left',
-}
-const authorPictureStyle: React.CSSProperties = {
-  backgroundColor: colors.WARM_GREY,
-  borderRadius: 40,
-  height: 40,
-  marginRight: 8,
-  width: 40,
-}
-const authorContainerStyle: React.CSSProperties = {
-  alignItems: 'center',
   display: 'flex',
-  marginTop: 16,
+  flex: 1,
+  flexDirection: isMobileVersion ? 'row' : 'column-reverse',
+  justifyContent: isMobileVersion ? 'space-between' : 'flex-end',
+  marginTop: isMobileVersion ? 50 : 0,
 }
-const authorNameStyle: React.CSSProperties = {
-  fontSize: 14,
-  fontWeight: 'bold',
+const doctorNameStyle: React.CSSProperties = {
+  fontFamily: 'Poppins',
+  fontSize: 20,
+  fontWeight: 800,
+  lineHeight: 1.2,
+  marginTop: isMobileVersion ? 0 : 33,
 }
-const authorTitleStyle: React.CSSProperties = {
-  color: colors.WARM_GREY,
-  fontSize: 12,
+const doctorPhotoStyle: React.CSSProperties = {
+  borderRadius: 40,
+  height: 110,
+  marginLeft: isMobileVersion ? 25 : undefined,
+  width: 110,
 }
 
 
-const RecommendedSectionBase = (): React.ReactElement => {
-  const {t} = useTranslation()
-  // FIXME(pascal): Add real recommendations.
+const DoctorsSectionBase = (): React.ReactElement => {
   return <section style={recommendedSectionStyle}>
-    <Trans parent="h2">
-      Les médecins nous recommandent&nbsp;!
+    <Trans parent="h2" style={recommendedTitleStyle}>
+      Créé en <span style={{color: colors.MINTY_GREEN}}>collaboration</span><br />
+      avec&nbsp;des médecins
     </Trans>
-    <div style={recommendationStyle}>
-      <DoubleQuotesLIcon color={colors.PALE} /><br />
-      Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
-      ipsum Lorem ipsum Lorem ipsum
-      <div style={authorContainerStyle}>
-        <div style={authorPictureStyle} />
-        <div>
-          <div style={authorNameStyle}>Rob Ford</div>
-          <div style={authorTitleStyle}>{t('Good doctor')}</div>
+    <div style={doctorsSectionContentStyle}>
+      <div style={recommendationStyle}>
+        <div style={isMobileVersion ? {} : {maxWidth: 250}}>
+          <h3 style={doctorNameStyle}>
+            D<sup>r</sup> Jérémy <div style={{color: colors.STRONG_PINK}}>Zeggagh</div>
+          </h3>
+          <Trans>
+            Médecin spécialisé en maladies infectieuses,<br />
+            Hôpital&nbsp;Saint-Louis, APHP
+          </Trans>
         </div>
+        <img style={doctorPhotoStyle} alt="" src={jeremyZeggaghImage} />
       </div>
-    </div>
-    <div style={recommendationStyle}>
-      <DoubleQuotesLIcon color={colors.VERY_LIGHT_PURPLE} /><br />
-      Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem
-      ipsum Lorem ipsum Lorem ipsum
-      <div style={authorContainerStyle}>
-        <div style={authorPictureStyle} />
-        <div style={{fontSize: 12}}>
-          <div style={authorNameStyle}>Jérémie</div>
-          <div style={authorTitleStyle}>{t('Another good doctor')}</div>
+      <div style={recommendationStyle}>
+        <div style={isMobileVersion ? {} : {maxWidth: 250}}>
+          <h3 style={doctorNameStyle}>
+            D<sup>r</sup> Cécile <div style={{color: colors.STRONG_PINK}}>Monteil</div>
+          </h3>
+          <Trans>
+            Médecin urgentiste pédiatre et experte en e-santé,<br />
+            Hôpital&nbsp;Robert&nbsp;Debré, APHP
+          </Trans>
         </div>
+        <img style={doctorPhotoStyle} alt="" src={cecileMonteilImage} />
+      </div>
+      <div style={recommendationStyle}>
+        <div style={isMobileVersion ? {} : {maxWidth: 250}}>
+          <h3 style={doctorNameStyle}>
+            D<sup>r</sup> Liem Binh <div style={{color: colors.STRONG_PINK}}>Luong Nguyen</div>
+          </h3>
+          <Trans>
+            Médecin spécialisé en maladies infectieuses,<br />
+            Centre de Vaccinologie,<br />
+            Hôpital&nbsp;Cochin, APHP
+          </Trans>
+        </div>
+        <img style={doctorPhotoStyle} alt="" src={liemBinhLuongNguyenImage} />
       </div>
     </div>
   </section>
 }
-const RecommendedSection = React.memo(RecommendedSectionBase)
+const DoctorsSection = React.memo(DoctorsSectionBase)
 
 
 const FAQSectionBase = (): React.ReactElement => {
@@ -368,49 +480,43 @@ const FAQSectionBase = (): React.ReactElement => {
 const FAQSection = React.memo(FAQSectionBase)
 
 
-const shareButtonStyle: React.CSSProperties = {
-  alignItems: 'center',
-  backgroundColor: colors.WARM_GREY,
-  borderRadius: 40,
-  cursor: 'pointer',
+const shareSectionStyle: React.CSSProperties = {
+  alignItems: isMobileVersion ? undefined : 'center',
+  borderTop: `solid 2px ${colors.MINTY_GREEN}`,
   display: 'flex',
-  height: 40,
-  justifyContent: 'center',
-  margin: 8,
-  width: 40,
+  flexDirection: isMobileVersion ? 'column' : 'row',
+  margin: 'auto',
+  maxWidth: desktopMaxWidth,
+  padding: isMobileVersion ? '60px 0' : '80px 0',
+}
+const shareTitleStyle: React.CSSProperties = {
+  fontFamily: 'Poppins',
+  fontSize: 40,
+  fontWeight: 800,
+  lineHeight: isMobileVersion ? 1 : 1.15,
+}
+const shareButtonStyle: React.CSSProperties = {
+  background: undefined,
+  backgroundColor: '#fff',
+  border: `solid 1px ${colors.SMOKEY_GREY}`,
+  borderRadius: 60,
+  color: '#000',
+  height: 60,
+  marginRight: 20,
+  width: 60,
 }
 
 
 const ShareSectionBase = (): React.ReactElement => {
-  const {t} = useTranslation()
-  const share = useCallback((): void => {
-    if (navigator.share) {
-      navigator.share({text: config.productName, url: config.canonicalUrl})
-    } else {
-      // FIXME(pascal): Make those buttons actually do something on Desktop.
-      alert(t('Bientôt disponible…'))
-    }
-  }, [t])
-  return <section style={{padding: '60px 0', textAlign: 'center'}}>
-    <Trans parent="h2">À partager sans gêne</Trans>
-    <div style={{display: 'flex', justifyContent: 'center'}}>
-      <div style={shareButtonStyle} aria-label={t('Partager sur Messenger')} onClick={share}>
-        <MessengerFillIcon />
-      </div>
-      <div style={shareButtonStyle} aria-label={t('Partager sur WhatsApp')} onClick={share}>
-        <WhatsappFillIcon />
-      </div>
-      <div
-        style={shareButtonStyle} aria-label={t('Copier le lien dans le presse-papier')}
-        onClick={share}>
-        <LinksFillIcon />
-      </div>
-      <div style={shareButtonStyle} aria-label={t('Envoyer par email')} onClick={share}>
-        <MailLineIcon />
-      </div>
-      <div style={shareButtonStyle} aria-label={t('Partager sur Twitter')} onClick={share}>
-        <TwitterFillIcon />
-      </div>
+  const text = useDefaultShareText()
+  return <section style={{padding: '0 30px'}}>
+    <div style={shareSectionStyle}>
+      <Trans parent="h2" style={shareTitleStyle}>
+        À partager<br />
+        <span style={{color: colors.MINTY_GREEN}}>sans gêne</span>
+      </Trans>
+      <div style={{flex: 1}} />
+      <ShareButtons sharedText={text} buttonStyle={shareButtonStyle} />
     </div>
   </section>
 }
@@ -418,35 +524,92 @@ const ShareSection = React.memo(ShareSectionBase)
 
 
 const footerStyle: React.CSSProperties = {
-  backgroundColor: colors.WHITE_TWO,
-  fontWeight: 'bold',
-  padding: '45px 60px',
-  textAlign: 'center',
+  backgroundColor: '#000',
+  color: colors.GREY,
+  padding: isMobileVersion ? '65px 30px 50px' : '80px 20px 20px',
 }
-const veryDiscreetLinkStyle: React.CSSProperties = {
-  ...discreetLink,
+const footerMenuStyle: React.CSSProperties = {
+  alignItems: isMobileVersion ? undefined : 'center',
+  display: 'flex',
+  flexDirection: isMobileVersion ? 'column' : undefined,
+  marginBottom: isMobileVersion ? 60 : 80,
+}
+const footerLogoStyle: React.CSSProperties = {
+  display: 'block',
+  filter: 'grayscale(1) brightness(100)',
+  height: 35,
+  marginBottom: 10,
+}
+const footerLinkStyle: React.CSSProperties = {
+  color: '#fff',
+  fontWeight: 'bold',
+  margin: '10px 0',
+  padding: '10px 20px 10px 0',
   textDecoration: 'none',
+}
+const finalFooterStyle: React.CSSProperties = {
+  borderTop: 'solid 2px rgba(255, 255, 255, .1)',
+  fontSize: isMobileVersion ? undefined : 13,
+  paddingTop: 14,
+}
+const emFooterStyle: React.CSSProperties = {
+  color: '#fff',
 }
 
 
 const FooterBase = (): React.ReactElement => {
-  return <Trans parent="footer" style={footerStyle}>
-    Une initiative sociale de l'ONG <a
-      href="https://www.bayesimpact.org" target="_blank" rel="noopener noreferrer"
-      style={veryDiscreetLinkStyle}>
-      Bayes Impact
-    </a>
-  </Trans>
+  const {t} = useTranslation()
+  return <footer style={footerStyle}>
+    <div style={{margin: '0 auto', maxWidth: desktopMaxWidth}}>
+      <div style={footerMenuStyle}>
+        <div>
+          <a href="https://www.bayesimpact.org" target="_blank" rel="noopener noreferrer">
+            <img src={bayesLogoHorizontallImage} alt="Bayes Impact" style={footerLogoStyle} />
+          </a>
+          {t('Un service public citoyen développé par Bayes Impact')}
+        </div>
+        <div style={{flex: 1, minHeight: 50}} />
+        <a
+          href="mailto:contact@briserlachaine.org" style={footerLinkStyle} target="_blank"
+          rel="noopener noreferrer">
+          {t('Contact')}
+        </a>
+        <a href={Routes.TERMS} style={footerLinkStyle} target="_blank" rel="noopener noreferrer">
+          {t('CGU')}
+        </a>
+        <a href={Routes.PRIVACY} style={footerLinkStyle} target="_blank" rel="noopener noreferrer">
+          {t('Vie privée')}
+        </a>
+        <a
+          href="https://www.bayesimpact.org" style={footerLinkStyle} target="_blank"
+          rel="noopener noreferrer">
+          {t('Qui sommes nous\u00A0?')}
+        </a>
+      </div>
+      <Trans style={finalFooterStyle}>
+        Ce site a été développé par <span style={emFooterStyle}>Bayes Impact</span>, une association
+        loi 1901 dont la mission est de développer des <span style={emFooterStyle}>services publics
+        citoyens</span>.
+      </Trans>
+    </div>
+  </footer>
 }
 const Footer = React.memo(FooterBase)
 
 
+// This is a top level page and should never be nested in another one.
+// TOP LEVEL PAGE
 const SplashPage = (): React.ReactElement => {
   return <React.Fragment>
-    <LandingSection />
-    <FeaturesSection />
-    <UserFlowSection />
-    <RecommendedSection />
+    {isMobileVersion ? <div style={{margin: '0 auto', maxWidth: mobileMaxWidth}}>
+      <LandingSection />
+      <FeaturesSection />
+      <DoctorsSection />
+    </div> : <React.Fragment>
+      <LandingSection />
+      <FeaturesSection />
+      <DoctorsSection />
+    </React.Fragment>}
     <FAQSection />
     <ShareSection />
     <Footer />

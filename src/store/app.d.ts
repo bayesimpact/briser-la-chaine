@@ -30,6 +30,7 @@ declare namespace bayes {
 
     type PersonContact = Person & Contact
 
+    // FIXME(cyrille): Keep consistent space when alerting through both channels.
     interface AlertPersonState {
       alertMediums?: readonly AlertMedium[]
       isAlertedAnonymously?: boolean

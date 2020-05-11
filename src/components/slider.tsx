@@ -26,7 +26,7 @@ const Slide = (props: SlideProps): React.ReactElement => {
   const slideStyle = useMemo((): React.CSSProperties => ({
     boxSizing: 'border-box',
     left: '50%',
-    minHeight: '100vh',
+    minHeight: window.innerHeight,
     opacity: index ? 0 : 1,
     paddingBottom: bottomDivSize,
     position: 'absolute',
@@ -50,6 +50,7 @@ export interface SliderChildProps {
 
 interface SliderProps {
   arrowColor?: string
+  borderColor?: string
   bottomComponent?: React.ComponentType<SliderChildProps>
   bulletColor?: string
   bulletSelectColor?: string
@@ -66,7 +67,9 @@ interface SlideRouteParams {
 
 
 const pageStyle: React.CSSProperties = {
-  minHeight: '100vh',
+  margin: '0 auto',
+  maxWidth: 700,
+  minHeight: window.innerHeight,
   overflow: 'hidden',
   position: 'relative',
 }
@@ -81,9 +84,11 @@ function maybeParseInt(value: string|undefined, maxNumber: number): number {
 }
 
 
+// This is a top level page and should never be nested in another one.
+// TOP LEVEL PAGE
 const Slider = (props: SliderProps): React.ReactElement => {
-  const {arrowColor = '#fff', bottomComponent: BottomComponent, bulletColor, bulletSelectColor,
-    children, onFastForward, slideStyle, transition = '1s'} = props
+  const {arrowColor, borderColor, bottomComponent: BottomComponent, bulletColor,
+    bulletSelectColor, children, onFastForward, slideStyle, transition = '1s'} = props
   const history = useHistory()
   const {path: route} = useRouteMatch()
   const selectSlide = useCallback((slide: number): void => {
@@ -129,7 +134,7 @@ const Slider = (props: SliderProps): React.ReactElement => {
       <Bullets
         indexVisible={currentSlideIndex} numBullets={numSlides} onSelect={selectSlide}
         color={bulletColor} selectColor={bulletSelectColor} transition={transition}
-        arrowColor={arrowColor} />
+        arrowColor={arrowColor} borderColor={borderColor} />
     </BottomDiv>
   </div>
 }

@@ -157,6 +157,7 @@
     "template-curly-spacing": "error",
     "unicorn/catch-error-name": ["error", {"caughtErrorsIgnorePattern": "^unusedError$"}],
     "unicorn/explicit-length-check": 0,
+    // TODO(cyrille): Add French double punctuation.
     "unicorn/string-content": ["error", {"patterns": {"’": "'"}}],
     "unicorn/filename-case": ["error", {"case": "snakeCase"}],
     // TODO(pascal): Consider reenabling.

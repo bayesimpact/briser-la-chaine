@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 
-const description = `${config.productName} vous aide à retrouver et prévenir les contacts que ` +
-  "vous avez eu. 100% gratuit, rapide et fait par l'ONG Bayes Impact"
+import faviconImage from 'images/favicon.png'
+import snippetImage from 'images/snippet.png'
+
+const description = 'Nous vous aidons à contacter les personnes croisées pendant votre période ' +
+  'contagieuse en quelques minutes.'
 
 export default (): string => '<!doctype html>' + ReactDOMServer.renderToString(
   <html lang="fr">
@@ -15,10 +18,12 @@ export default (): string => '<!doctype html>' + ReactDOMServer.renderToString(
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         id="viewport" />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={config.productName} />
+      <meta property="og:title" content="Briser la chaîne de contamination du Covid-19" />
       <meta property="og:description" name="description" content={description} />
-      {/* TODO(cyrille): add og:image and og:url properties*/}
+      <meta property="og:image" content={`https://${config.canonicalUrl}${snippetImage}`} />
+      <meta property="og:url" content={`https://${config.canonicalUrl}`} />
       <meta property="fb:app_id" content={config.facebookSSOAppId} />
+      <link rel="icon" href={faviconImage} type="image/png" />
     </head>
     <body style={{margin: 0}}>
       <div id="app">{/* TODO(cyrille): Add a static element here. */}</div>

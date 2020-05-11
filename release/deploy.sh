@@ -8,7 +8,8 @@
 # The client gets released by deploying static files on OVH storage.
 #
 # Environment variables required:
-# - None for now.
+# - OS_PASSWORD, OS_USERNAME, etc: OpenStack credentials to push client app to OVH server.
+# - SLACK_INTEGRATION_URL: Webhook to report deploy status to Slack.
 #
 # AWS CLI must be installed, and configured for a user with the cas-contact-deploy policy:
 # https://console.aws.amazon.com/iam/home?region=us-east-1#/policies/arn:aws:iam::951168128976:policy/cas-contact-deploy$serviceLevelSummary
@@ -40,7 +41,7 @@ if [ -z "$(git tag -l "$TAG")" ]; then
 fi
 
 if [ -z "$OS_PASSWORD" ]; then
-  echo_error 'Set up OpenStack credentials first.'
+  echo 'Set up OpenStack credentials first.'
   echo "* Go to https://www.ovh.com/manager/public-cloud and select: Project Management -> Users"
   echo "* Create an user if you do not have any, and copy the password"
   echo "* Click on the little wrench and select 'Downloading an Openstack configuration file'"
@@ -59,14 +60,21 @@ if ! command -v aws >/dev/null 2>&1; then
   exit 4
 fi
 
+if [ -z "$SLACK_INTEGRATION_URL" ]; then
+  echo 'Set up the Slack integration first.'
+  echo "* Find private URL for Slack Integration at https://bayesimpact.slack.com/apps/A0F7XDUAZ-incoming-webhooks"
+  echo "* Add this URL in your bashrc as SLACK_INTEGRATION_URL env var"
+  exit 5
+fi
+
 if ! command -v swift >/dev/null 2>&1; then
-  echo_error 'Set up the OpenStack Swift tool first.'
+  echo 'Set up the OpenStack Swift tool first.'
   echo "* Installation is probably as simple as \`pip install python-swiftclient\`"
   exit 6
 fi
 
 if ! swift -V 3 list > /dev/null 2>&1; then
-  echo_error 'OpenStack credentials are incorrect.'
+  echo 'OpenStack credentials are incorrect.'
   echo "* Go to https://www.ovh.com/manager/cloud and select: Servers -> OpenStack"
   echo "* Create an user if you do not have any, and copy the password"
   echo "* Click on the little wrench and select 'Downloading an Openstack configuration file'"
@@ -76,7 +84,7 @@ if ! swift -V 3 list > /dev/null 2>&1; then
 fi
 
 if ! pip show python-keystoneclient > /dev/null; then
-  echo_error 'Set up the keystoneclient first.'
+  echo 'Set up the keystoneclient first.'
   echo "* Installation is probably as simple as \`pip install python-keystoneclient\`"
   exit 8
 fi
@@ -134,4 +142,17 @@ popd
 
 rm -r $TMP_DIR
 
-# TODO(pascal): Update the GitHub release, change the prod branch, warn slack.
+# TODO(pascal): Update the GitHub release, change the prod branch.
+
+# Ping Slack to say the deployment is done.
+readonly SLACK_MESSAGE="{'text': 'A new version of BriserLaChaine.org has been deployed ($TAG).', 'channel': '#covid-internal'}"
+if [ -z "$DRY_RUN" ]; then
+  curl --data "$SLACK_MESSAGE" "$SLACK_INTEGRATION_URL"
+else
+  echo 'Would send the following message to Slack:'
+  echo "$SLACK_MESSAGE"
+  echo ''
+fi
+
+echo "Success!"
+echo "Please wait ~15 minutes and check that everything works. If needed rollback using: $ROLLBACK_COMMAND."

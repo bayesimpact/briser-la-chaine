@@ -3,9 +3,8 @@ import {format as dateFormat} from 'date-fns'
 import React, {useCallback, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 
-import {dateOption} from 'store/i18n'
+import {useDateOption} from 'store/i18n'
 
-import facebookIcon from 'images/facebook-ico.png'
 import googleAgendaIcon from 'images/google-agenda-ico.png'
 import googleMapIcon from 'images/google-map-ico.png'
 import outlookIcon from 'images/outlook-ico.png'
@@ -57,6 +56,7 @@ interface PermissionsProps {
 
 const Permissions = ({date}: PermissionsProps): React.ReactElement => {
   const {t} = useTranslation()
+  const dateOption = useDateOption()
   const mapUrl = 'https://www.google.com/maps/timeline?pb=!1m2!1m1!1s' +
     `${dateFormat(date, 'yyyy-MM-dd', dateOption)}`
 
@@ -81,13 +81,6 @@ const Permissions = ({date}: PermissionsProps): React.ReactElement => {
     alert(t('Bientôt disponible…'))
   }, [t])
 
-  // FIXME(pascal): Use the API instead.
-  const [hasFacebookEventsPermission, setHasFacebookEventsPermission] = useState(false)
-  const enableFacebookEventsPermission = useCallback((): void => {
-    setHasFacebookEventsPermission(true)
-    alert(t('Bientôt disponible…'))
-  }, [t])
-
   return <div>
     <div style={{flex: 1}} />
     <div style={{alignSelf: 'stretch'}}>
@@ -96,17 +89,13 @@ const Permissions = ({date}: PermissionsProps): React.ReactElement => {
         onClick={enableGoogleAgendaPermission} isDone={hasGoogleAgendaPermission}
         text={t('Synchroniser Google Agenda')} />
       <PermissionBox
-        icon={facebookIcon} hasBorder={true}
-        onClick={enableFacebookEventsPermission} isDone={hasFacebookEventsPermission}
-        text={t('Synchroniser Facebook Event')} />
-      <PermissionBox
         icon={outlookIcon} hasBorder={true}
         onClick={enableOutlookPermission} isDone={hasOutlookPermission}
         text={t('Synchroniser Outlook')} />
       <PermissionBox
         icon={googleMapIcon}
         onClick={enableGoogleMapPermission} isDone={hasGoogleMapPermission}
-        text={t('Voir mes trajets sur Google Map')} />
+        text={t('Voir mes trajets sur Google Maps')} />
     </div>
   </div>
 }

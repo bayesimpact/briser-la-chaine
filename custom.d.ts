@@ -33,6 +33,7 @@ type ReactStylableElement = React.ReactElement<{style?: RadiumCSSProperties}>
 
 declare const colors: {[name: string]: string}
 declare const config: {
+  amplitudeToken: string
   canonicalUrl: string
   clientVersion: string
   environment: string

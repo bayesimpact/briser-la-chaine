@@ -13,11 +13,18 @@ export type AllActions =
   | CreateNewPerson
   | Diagnose
   | DropContact
+  | PageIsLoaded
   | SaveContacts
   | SaveKnownRisk
   | SaveSymptomsOnsetDate
   | UpdateContact
   | UpdatePerson
+
+// FIXME(cyrille): Add actions to log.
+export const ACTIONS_TO_LOG: {[K in AllActions['type']]?: string} = {
+  DIAGNOSE: 'Diagnostic computed',
+  PAGE_IS_LOADED: 'Page is loaded',
+}
 
 type DispatchAllActions =
   // Add actions as required.
@@ -42,8 +49,13 @@ export const getNextNoDate = (state: ContactState): string => {
   return `${NO_DATE}_${completedNoDate}`
 }
 
-function alertPerson(personId: string, alertMedium?: bayes.casContact.AlertMedium):
-ThunkAction<AlertPerson, RootState, {}, AllActions> {
+function alertPerson(personId: string): ThunkAction<AlertPerson, RootState, {}, AllActions>
+function alertPerson(
+  personId: string, alertMedium: bayes.casContact.AlertMedium,
+  risk: ContaminationRisk): ThunkAction<AlertPerson, RootState, {}, AllActions>
+function alertPerson(
+  personId: string, alertMedium?: bayes.casContact.AlertMedium, risk?: ContaminationRisk,
+): ThunkAction<AlertPerson, RootState, {}, AllActions> {
   return (dispatch): AlertPerson => {
     const action = {
       alertMedium,
@@ -52,9 +64,9 @@ ThunkAction<AlertPerson, RootState, {}, AllActions> {
     } as const
     dispatch(action)
     if (alertMedium?.medium === 'email') {
-      sendEmail(alertMedium?.value)
+      sendEmail(alertMedium?.value, risk || 'low')
     } else if (alertMedium?.medium === 'SMS') {
-      sendSMS(alertMedium?.value)
+      sendSMS(alertMedium?.value, risk || 'low')
     }
     return action
   }
@@ -143,6 +155,17 @@ function dropContact(contact: bayes.casContact.Contact): DropContact {
   return {contact, date: contact.date, type: 'DROP_CONTACT'}
 }
 
+interface PageIsLoaded extends Readonly<Action<'PAGE_IS_LOADED'>> {
+  readonly pathname: string
+}
+
+function pageIsLoaded(pathname: string): PageIsLoaded {
+  return {
+    pathname,
+    type: 'PAGE_IS_LOADED',
+  }
+}
+
 type SaveContacts = DateAction<'SAVE_CONTACTS'>
 
 function saveContacts(date: Date): SaveContacts {
@@ -163,4 +186,4 @@ function diagnose(symptoms: readonly bayes.casContact.Symptom[]): Diagnose {
 }
 export {alertPerson, computeContagiousPeriodAction, createContact, createNewPerson, diagnose,
   dropContact, isDateAction, saveContacts, saveSymptomsOnsetDate, updatePerson, updateContact,
-  saveKnownRisk, useDispatch, useSelector, noOp}
+  saveKnownRisk, useDispatch, useSelector, noOp, pageIsLoaded}

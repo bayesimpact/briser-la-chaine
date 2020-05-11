@@ -16,7 +16,9 @@ const pageStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  minHeight: '100vh',
+  margin: '0 auto',
+  maxWidth: 700,
+  minHeight: window.innerHeight,
 }
 const titleStyle: React.CSSProperties = {
   fontSize: 22,
@@ -38,6 +40,7 @@ const mobileOnDesktopStyle: React.CSSProperties = {
 }
 
 
+// TOP LEVEL PAGE
 const ComeBackLaterPage = (): React.ReactElement => {
   const {t} = useTranslation()
   const history = useHistory()

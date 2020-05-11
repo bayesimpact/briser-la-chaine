@@ -86,11 +86,11 @@ module.exports = {
     ),
     new WebpackPwaManifest({
       // eslint-disable-next-line camelcase
-      background_color: '#8e4ae8', // Colors.COVID_PURPLE
+      background_color: colors.MINTY_GREEN,
       lang: 'fr-FR',
-      name: 'CasContact',
+      name: constants.productName,
       // eslint-disable-next-line camelcase
-      theme_color: '#8e4ae8', // Colors.COVID_PURPLE
+      theme_color: colors.MINTY_GREEN,
     }),
     new webpack.NoEmitOnErrorsPlugin(),
   ],

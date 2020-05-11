@@ -16,6 +16,11 @@ const distConstants = require('./const_dist.json5')
 
 const srcDir = path.resolve(__dirname, '../src') + '/'
 
+const finalDistConstants = {
+  ...constants,
+  ...distConstants,
+}
+
 
 const minify = {
   collapseWhitespace: true,
@@ -83,7 +88,7 @@ module.exports = {
     new webpack.DefinePlugin({
       ...mapKeys(mapValues(colors, JSON.stringify), (color, name) => `colors.${name}`),
       ...mapKeys(
-        mapValues({...constants, ...distConstants}, JSON.stringify),
+        mapValues(finalDistConstants, JSON.stringify),
         (value, key) => `config.${key}`),
       'config.clientVersion': JSON.stringify(process.env.CLIENT_VERSION),
       'config.environment': '"production"',
@@ -103,11 +108,11 @@ module.exports = {
     ),
     new WebpackPwaManifest({
       // eslint-disable-next-line camelcase
-      background_color: '#8e4ae8', // Colors.COVID_PURPLE
+      background_color: colors.MINTY_GREEN,
       lang: 'fr-FR',
-      name: 'CasContact',
+      name: finalDistConstants.productName,
       // eslint-disable-next-line camelcase
-      theme_color: '#8e4ae8', // Colors.COVID_PURPLE
+      theme_color: colors.MINTY_GREEN,
     }),
     new RenameOutputWebpackPlugin(fromPairs(
       Object.keys(entrypoints).filter(key => !entrypoints[key].htmlFilename).

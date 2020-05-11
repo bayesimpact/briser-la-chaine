@@ -8,11 +8,17 @@ import {localizeOptions} from 'store/i18n'
 import {SYMPTOMS} from 'store/symptoms'
 import {Routes} from 'store/url'
 
+import {darkButtonStyle} from 'components/buttons'
 import CheckboxList from 'components/checkbox_list'
-import {PageWithNav} from 'components/navigation'
+import {BottomDiv, PageWithNav} from 'components/navigation'
 
 
 const boldStyle: React.CSSProperties = {fontWeight: 'bold'}
+// TODO(pascal): Factorize this style somewhere.
+const mobileOnDesktopStyle: React.CSSProperties = {
+  margin: 'auto',
+  maxWidth: 420,
+}
 
 
 const DiagnosticPageBase = (): React.ReactElement => {
@@ -51,8 +57,13 @@ const DiagnosticPageBase = (): React.ReactElement => {
       return newSelection
     })
   }, [])
-  return <PageWithNav
-    onNext={onNext} nextButton={hasSelection ? t('Continuer') : undefined}>
+  const buttonContainerStyle: React.CSSProperties = {
+    ...mobileOnDesktopStyle,
+    opacity: hasSelection ? 1 : 0,
+    pointerEvents: hasSelection ? undefined : 'none',
+    transition: '200ms',
+  }
+  return <PageWithNav>
     <section style={{alignSelf: 'stretch'}}>
       <header style={{marginBottom: 20}}>
         <h2>{t('Quels sont vos symptômes\u00A0?')}</h2>
@@ -63,6 +74,13 @@ const DiagnosticPageBase = (): React.ReactElement => {
         selectedCheckboxStyle={boldStyle}
         values={selectedOptions} onChange={updateSelected} />
     </section>
+    <BottomDiv>
+      <div style={buttonContainerStyle}>
+        <div style={darkButtonStyle} onClick={onNext}>
+          {t('Continuer')}
+        </div>
+      </div>
+    </BottomDiv>
   </PageWithNav>
 }
 const DiagnosticPage = React.memo(DiagnosticPageBase)

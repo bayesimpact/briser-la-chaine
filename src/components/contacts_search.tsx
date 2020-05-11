@@ -9,7 +9,7 @@ import {components, OptionProps} from 'react-select'
 
 import {createContact, createNewPerson, dropContact, getNextNoDate, noDate, saveContacts,
   updateContact, useDispatch, useSelector} from 'store/actions'
-import {dateOption, localizeOptions, prepareT} from 'store/i18n'
+import {localizeOptions, prepareT, useDateOption} from 'store/i18n'
 import {DISTANCE_OPTIONS, DURATION_OPTIONS} from 'store/options'
 
 import {cancelButtonStyle, darkButtonStyle} from 'components/buttons'
@@ -143,12 +143,14 @@ React.ReactElement => {
   const onClick = useCallback((): void => onChange(value), [onChange, value])
   const selectedStyle: React.CSSProperties = {
     backgroundColor: '#000',
-    border: 'none',
+    borderStyle: 'none',
     color: '#fff',
   }
   const containerStyle: React.CSSProperties = {
-    border: `2px solid ${colors.MEDIUM_GREY}`,
+    borderColor: colors.SMOKEY_GREY,
     borderRadius: 4,
+    borderStyle: 'solid',
+    borderWidth: 1,
     cursor: 'pointer',
     flex: 1,
     padding: '12px 0',
@@ -181,12 +183,12 @@ const DetailChoiceBase = <T extends {}=string>(props: DetailChoiceProps<T>): Rea
     margin: '15px 0 6px',
   }
   const missingFieldStyle: React.CSSProperties = {
-    color: colors.ORANGE_RED,
+    color: colors.SALMON,
     fontSize: 12,
     fontStyle: 'italic',
   }
   const firstChoiceStyle = useMemo(
-    (): React.CSSProperties => isInvalid ? {borderColor: colors.ORANGE_RED} : {}, [isInvalid])
+    (): React.CSSProperties => isInvalid ? {borderColor: colors.SALMON} : {}, [isInvalid])
   const choiceStyle = useMemo(() => ({...firstChoiceStyle, marginLeft: 8}), [firstChoiceStyle])
   return <div>
     <h3 style={titleStyle}>{title}</h3>
@@ -202,6 +204,7 @@ const DetailChoice = typedMemo(DetailChoiceBase)
 
 
 interface ContactDetailsProps {
+  isHighlighted: boolean
   isValidated: boolean
   person: bayes.casContact.PersonContact
   style?: React.CSSProperties
@@ -216,7 +219,7 @@ const dropContactStyle: React.CSSProperties = {
 }
 
 const ContactDetailsBase = (props: ContactDetailsProps): React.ReactElement => {
-  const {isValidated, onDelete, person, style} = props
+  const {isHighlighted, isValidated, onDelete, person, style} = props
   const {date, displayName, distance, duration, name, personId} = person
   const {t} = useTranslation()
   const [isForceExpoShown, setIsForceExpoShown] = useState(false)
@@ -224,10 +227,12 @@ const ContactDetailsBase = (props: ContactDetailsProps): React.ReactElement => {
   useEffect((): void => setIsExpoShown(
     isForceExpoShown || !(distance && duration)), [distance, duration, isForceExpoShown])
   const containerStyle = {
+    backgroundColor: isHighlighted ? colors.ICE_BLUE : 'initial',
     border: `1px solid ${colors.BUTTON_GREY}`,
     borderRadius: 5,
     fontSize: 15,
     padding: isExpoShown ? '20px 20px 50px' : 20,
+    transition: '450ms',
     ...style,
   }
   const dispatch = useDispatch()
@@ -302,6 +307,7 @@ const tabsStyle: React.CSSProperties = {
 // FIXME(sil): Update permissions UI.
 const MemoryHelpSectionBase = ({date}: MemoryHelpSectionProps): React.ReactElement => {
   const {t} = useTranslation()
+  const dateOption = useDateOption()
   const dateText = dateFormat(date, 'd MMMM', dateOption)
   const shortDateText = dateFormat(date, 'd MMM', dateOption)
   const [isGeneric, setIsGeneric] = useState(false)
@@ -331,7 +337,7 @@ const MemoryHelpSectionBase = ({date}: MemoryHelpSectionProps): React.ReactEleme
       <div style={sectionTitle}>
         {t('Ce que vous avez fait le {{date}}\u00A0:', {date: dateText})}
       </div>
-      <PrivacyNote style={privacyNoteStyle} text={t('Nous ne conservons aucune donnée')} />
+      <PrivacyNote style={privacyNoteStyle} text={t('Nous ne stockons aucune de vos données.')} />
       <Permissions date={date} />
     </div>}
   </React.Fragment>
@@ -381,13 +387,15 @@ const getPersonOption = (person: bayes.casContact.Person): SelectOption<bayes.ca
 const ContactsSearchBase = (props: ContactsSearchProps): React.ReactElement|null => {
   const {date, onClose} = props
   const {t} = useTranslation()
+  const dateOption = useDateOption()
   const [input, setInput] = useState('')
   const [contactToDelete, setContactToDelete] =
    useState<bayes.casContact.PersonContact|undefined>(undefined)
   const [key, setKey] = useState(false)
   const [isValidated, setValidated] = useState(false)
+  const [isNewContactAdded, setIsNewContactAdded] = useState(false)
   const noOptionsMessage = useCallback(
-    (): string => t("Entrez le nom d'une personne à ajouter"), [t])
+    (): null => null, [])
   const contactPeople: PeopleState = useSelector(({people}) => people)
   const hasNoDate = date === noDate
   // TODO(cyrille): Use local state and get rid of NO_DATE chenanigans.
@@ -448,12 +456,20 @@ const ContactsSearchBase = (props: ContactsSearchProps): React.ReactElement|null
   const onSelect = useCallback(({name, personId}: bayes.casContact.Person): void => {
     setInput('')
     setValidated(false)
+    setIsNewContactAdded(true)
     setKey(key => !key)
     const {personId: newPersonId} = personId ? {personId} : dispatch(createNewPerson(name))
     dispatch(createContact(newPersonId, date))
   }, [date, dispatch])
   const arePeopleShown = !!peopleToShow.length
   const [areTipsShown, setTipsShown] = useState(!arePeopleShown && !hasNoDate)
+  useEffect((): (() => void) => {
+    if (!isNewContactAdded) {
+      return (): void => void 0
+    }
+    const timeout = window.setTimeout((): void => setIsNewContactAdded(false), 300)
+    return (): void => clearTimeout(timeout)
+  }, [isNewContactAdded])
   useEffect((): void => setTipsShown(!arePeopleShown && !hasNoDate), [arePeopleShown, hasNoDate])
   const showTips = useCallback((): void => setTipsShown(true), [])
   const validateAndClose = useCallback((): void => {
@@ -528,11 +544,13 @@ const ContactsSearchBase = (props: ContactsSearchProps): React.ReactElement|null
         {contactToDelete ? <DeleteUserConfirmation
           onCancel={closeDeletion} onConfirm={deleteContact} isShown={!!contactToDelete}
           person={contactToDelete} /> : null}
-        {peopleToShow.map((person: bayes.casContact.PersonContact) => {
-          return <ContactDetails
-            isValidated={isValidated} onDelete={openDeletionModal} style={{margin: '20px 0'}}
-            key={person.personId} person={person} />
-        })}
+        {peopleToShow.slice().reverse().map(
+          (person: bayes.casContact.PersonContact, index: number) => {
+            return <ContactDetails
+              isHighlighted={!index && isNewContactAdded}
+              isValidated={isValidated} onDelete={openDeletionModal} style={{margin: '20px 0'}}
+              key={person.personId} person={person} />
+          })}
       </div> : null}
       {areTipsShown ? <MemoryHelpSection date={date} /> : hasNoDate ? null :
         <div onClick={showTips} style={tipsButtonStyle}>

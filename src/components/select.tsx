@@ -133,9 +133,10 @@ const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElemen
     isOptionDisabled={getIsDisabled}
     styles={{
       container: (base): React.CSSProperties => ({...base, ...selectStyle}),
-      control: (base, {menuIsOpen}): React.CSSProperties => ({
+      control: (base, {menuIsOpen, options}): React.CSSProperties => ({
         ...base,
-        borderRadius: menuIsOpen ? `${borderRadius}px ${borderRadius}px 0 0` : borderRadius,
+        borderRadius: menuIsOpen && options.length ?
+          `${borderRadius}px ${borderRadius}px 0 0` : borderRadius,
         borderWidth: 0,
         boxShadow: '0 3px 15px 0 rgba(0, 0, 0, 0.25)',
         height: selectStyle.height,

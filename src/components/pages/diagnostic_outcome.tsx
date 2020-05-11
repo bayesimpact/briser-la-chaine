@@ -1,15 +1,17 @@
+import ErrorWarningFillIcon from 'remixicon-react/ErrorWarningFillIcon'
 import Search2LineIcon from 'remixicon-react/Search2LineIcon'
 import ThumbUpFillIcon from 'remixicon-react/ThumbUpFillIcon'
 import UserSearchFillIcon from 'remixicon-react/UserSearchFillIcon'
 import React, {useCallback} from 'react'
 import {useTranslation, Trans} from 'react-i18next'
 import {useHistory} from 'react-router'
+import {Link} from 'react-router-dom'
 
 import {useFastForward} from 'hooks/fast_forward'
 import {useSelector} from 'store/actions'
 import {Routes} from 'store/url'
 
-import {lightButtonStyle} from 'components/buttons'
+import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import {BottomDiv, PedagogyLayout} from 'components/navigation'
 
 
@@ -28,8 +30,30 @@ const centeredTextStyle: React.CSSProperties = {
 }
 const externalLinkStyle: React.CSSProperties = {
   ...lightButtonStyle,
-  display: 'inline-block',
+  color: '#000',
+  display: 'block',
   margin: '20px auto',
+  maxWidth: 420,
+}
+const greenButtonStyle: React.CSSProperties = {
+  ...darkButtonStyle,
+  backgroundColor: colors.VIBRANT_GREEN,
+  display: 'block',
+  margin: '20px auto',
+  maxWidth: 420,
+}
+const alertBottomDivStyle: React.CSSProperties = {
+  alignItems: 'center',
+  backgroundColor: colors.WHITE_TWO,
+  display: 'flex',
+  fontSize: 13,
+  justifyContent: 'center',
+  padding: '20px 70px',
+  textAlign: 'left',
+}
+const warningIconStyle: React.CSSProperties = {
+  flex: 'none',
+  marginRight: 15,
 }
 const DiagnosticOutcomePageBase = (): React.ReactElement => {
   const {t} = useTranslation()
@@ -57,23 +81,43 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
       preniez toutes les précautions nécessaires.
     </Trans> : isNaiveHighRisk || isReferralHighRisk ? <Trans style={normalWeightStyle}>
       Vos symptômes <span style={importantStyle}>pourraient provenir</span> du covid-19.<br /><br />
-      Il est <span style={veryImportantStyle}>vital</span> que vous brisiez la chaîne
+      Il est <span style={veryImportantStyle}>indispensable</span> que vous brisiez la chaîne
       de contamination.
-    </Trans> : t('Votre état ne semble pas préoccupant')
-  const subtitle = isNaiveLowRisk ? t('Revenez si vous avez des symptômes') : ''
+    </Trans> : t('Vos symptômes ne semblent pas être des symptômes principaux du Covid-19')
+  const subtitle = isNaiveLowRisk ?
+    t("N'hésitez pas à consulter un médecin pour plus d'informations") : ''
   const nextText = hasKnownRisk ?
     t('Que dois-je faire\u00A0?') : isNaiveHighRisk ? t('Briser la chaîne') : ''
-  const handleNext = useCallback(
-    (): void => isNaiveLowRisk ? void 0 : history.push(Routes.FOLLOW_UP),
-    [history, isNaiveLowRisk])
+  const handleNext = useCallback((): void => {
+    if (isNaiveLowRisk) {
+      return
+    }
+    if (isNaiveHighRisk) {
+      history.push(Routes.PEDAGOGY_INTRO)
+      return
+    }
+    history.push(Routes.FOLLOW_UP)
+  }, [history, isNaiveLowRisk, isNaiveHighRisk])
   useFastForward(handleNext)
   const nextButtonColor = isReferralHighRisk || isNaiveHighRisk ? colors.VIBRANT_GREEN : undefined
   return <PedagogyLayout
     title={title} icon={icon} subtitle={subtitle}
     nextButton={nextText} onNext={handleNext} nextButtonColor={nextButtonColor}>
     {isNaiveLowRisk ? <BottomDiv style={centeredTextStyle}>
-      <a style={externalLinkStyle} href="https://maladiecoronavirus.fr/">
-        {t('Passer un diagnostic approfondi')}</a>
+      <div style={{padding: '0 20px'}}>
+        <Link to={Routes.PEDAGOGY_INTRO} style={greenButtonStyle}>
+          {t('Alerter mes contacts quand même')}
+        </Link>
+        <a style={externalLinkStyle} href="https://maladiecoronavirus.fr/">
+          {t('Passer un diagnostic approfondi')}</a>
+      </div>
+      {/* TODO(pascal): DRY with intro_pedagogy module. */}
+      <div style={alertBottomDivStyle}>
+        <ErrorWarningFillIcon style={warningIconStyle} />
+        <Trans>
+          En cas de difficultés respiratoires, contactez le 15 <strong>immédiatement</strong>
+        </Trans>
+      </div>
     </BottomDiv> : null}
   </PedagogyLayout>
 }

@@ -5,7 +5,7 @@ import {useCallback} from 'react'
 import {useTranslation} from 'react-i18next'
 
 import {noDate} from 'store/actions'
-import {dateOption, joinDays, prepareT} from 'store/i18n'
+import {joinDays, prepareT, useDateOption} from 'store/i18n'
 import {DISTANCE_OPTIONS, DURATION_OPTIONS} from 'store/options'
 import {useSelector} from 'store/selections'
 
@@ -20,6 +20,7 @@ const rightBorder = pageWidth - marginHoriz
 function usePDFDownloader(): (() => void) {
   const state = useSelector((state: RootState): RootState => state)
   const {t} = useTranslation()
+  const dateOption = useDateOption()
   return useCallback((): void => {
     const translate = t
     const doc = new jsPDF()
@@ -106,8 +107,10 @@ function usePDFDownloader(): (() => void) {
       doc.text(person.displayName || person.name, marginHoriz, cursorY + 8)
       doc.setFontStyle('normal')
       const days = contacts.map(({date}): Date => date).filter((date): boolean => date !== noDate)
+      const daysText = joinDays(days, 'dd/MM', translate, dateOption)
       doc.text(
-        t('Croisé(e) le {{days}}', {count: days.length, days: joinDays(days, 'dd/MM', translate)}),
+        days.length ?
+          t('Croisé(e) le {{days}}', {count: days.length, days: daysText}) : t('Croisée(e)'),
         rightBorder, cursorY + 8, {align: 'right'})
 
       const alerts = state.alerts[person.personId]
@@ -172,7 +175,7 @@ function usePDFDownloader(): (() => void) {
     printFooter()
 
     doc.save(t('Récapitulatif {{productName}}.pdf', {productName: config.productName}))
-  }, [state, t])
+  }, [dateOption, state, t])
 }
 
 

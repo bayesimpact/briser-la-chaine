@@ -15,9 +15,13 @@ interface DrawerContainerProps {
 const transition = '450ms'
 
 
+const topLevelStyle: React.CSSProperties = {
+  margin: '0 auto',
+  maxWidth: 700,
+}
 const mainStyle: React.CSSProperties = {
   left: '50%',
-  maxHeight: '100vh',
+  maxHeight: window.innerHeight,
   maxWidth: '100vw',
   overflow: 'hidden',
   position: 'absolute',
@@ -35,8 +39,10 @@ const closeIconStyle: React.CSSProperties = {
 } as const
 
 
+// This is a top level page and should never be nested in another one.
+// TOP LEVEL PAGE
 const DrawerContainer = (props: DrawerContainerProps): React.ReactElement => {
-  const {children, drawer, isOpen, onClose, ...otherProps} = props
+  const {children, drawer, isOpen, onClose, style, ...otherProps} = props
   const opaqueStyle: React.CSSProperties = {
     background: '#000',
     bottom: 0,
@@ -52,17 +58,17 @@ const DrawerContainer = (props: DrawerContainerProps): React.ReactElement => {
   const drawerStyle: React.CSSProperties = {
     display: 'flex',
     maxHeight: isOpen ? undefined : 0,
-    minHeight: isOpen ? '100vh' : 0,
+    minHeight: isOpen ? window.innerHeight : 0,
     overflow: isOpen ? 'auto' : 'hidden',
     position: 'relative',
-    transform: isOpen ? '' : 'translateY(100vh)',
+    transform: isOpen ? '' : `translateY(${window.innerHeight}px)`,
     transition,
     zIndex: 2,
   }
   useEffect((): void => {
     window.scrollTo({behavior: 'smooth', top: 1})
   }, [isOpen])
-  return <div {...otherProps}>
+  return <div {...otherProps} style={{...topLevelStyle, ...style}}>
     <div style={isOpen ? mainStyle : undefined}>
       {children}
     </div>

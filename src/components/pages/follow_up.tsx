@@ -5,6 +5,7 @@ import PinDistanceFillIcon from 'remixicon-react/PinDistanceFillIcon'
 import LineChartLineIcon from 'remixicon-react/LineChartLineIcon'
 import HandHeartFillIcon from 'remixicon-react/HandHeartFillIcon'
 import HospitalFillIcon from 'remixicon-react/HospitalFillIcon'
+import Number7Icon from 'remixicon-react/Number7Icon'
 import SurveyLineIcon from 'remixicon-react/SurveyLineIcon'
 import TempColdLineIcon from 'remixicon-react/TempColdLineIcon'
 import AlarmWarningFillIcon from 'remixicon-react/AlarmWarningFillIcon'
@@ -77,8 +78,9 @@ const sliderCommonContent: readonly ScreenContent[] = [
     content: <div style={contentContainerStyle}>
       <IconBox icon={ShieldUserFillIcon} text={prepareT('Pour protéger vos proches')} />
       <IconBox icon={ShieldCrossFillIcon} text={prepareT('Pour éviter la propagation du virus')} />
+      <IconBox icon={Number7Icon} text={prepareT('Pendant au moins 7 jours')} />
     </div>,
-    isImportant: true,
+    numImportantInstructions: 3,
     title: prepareT('Confinez-vous dès maintenant'),
   },
   {
@@ -89,7 +91,7 @@ const sliderCommonContent: readonly ScreenContent[] = [
         image={faceMask}
         text={prepareT('Minimisez vos déplacements et portez un masque')} />
     </div>,
-    isImportant: true,
+    numImportantInstructions: 3,
     title: prepareT('Pratiquez les gestes barrières'),
   },
   {
@@ -107,7 +109,7 @@ const sliderHighRiskContent: readonly ScreenContent[] = [
         icon={AlarmWarningFillIcon}
         text={prepareT('Appelez le 15 en cas de difficulté respiratoire')} />
     </div>,
-    isImportant: true,
+    numImportantInstructions: 1,
     title: prepareT('Allez-voir un médecin'),
   },
   ...sliderCommonContent,
@@ -149,10 +151,16 @@ const sliderLowRiskContent: readonly ScreenContent[] = [
           text={prepareT('Appelez le 15 en cas de difficulté respiratoire')} />
       </div>
     </div>,
-    isImportant: true,
+    numImportantInstructions: 2,
     title: prepareT('Surveillez vos symptômes pendant 14j'),
   },
 ]
+
+
+interface ImportantInstructionsProps {
+  numInstructions?: number
+}
+
 
 const instructionBoxStyle: React.CSSProperties = {
   alignItems: 'center',
@@ -174,11 +182,12 @@ const instructionEmphasisStyle: React.CSSProperties = {
   fontWeight: 'bold',
   textDecoration: 'underline',
 }
-const ImportantInstructionsBase = ({isHidden}: {isHidden: boolean}): React.ReactElement => {
-  return <div style={isHidden ? hiddenInstructionsBoxStyle : instructionBoxStyle}>
+const ImportantInstructionsBase = (props: ImportantInstructionsProps): React.ReactElement => {
+  const {numInstructions} = props
+  return <div style={!numInstructions ? hiddenInstructionsBoxStyle : instructionBoxStyle}>
     <ErrorWarningFillIcon style={importantIconStyle} size={20} />
-    <Trans>
-      Mesures à prendre <span style={instructionEmphasisStyle}>dès aujourd’hui</span> pour
+    <Trans count={numInstructions || 0}>
+      Mesure à prendre <span style={instructionEmphasisStyle}>dès aujourd'hui</span> pour
       protéger vos proches.
     </Trans>
   </div>
@@ -240,7 +249,7 @@ const BottomButton = React.memo(BottomButtonBase)
 
 interface ScreenContent {
   content?: React.ReactNode
-  isImportant?: boolean
+  numImportantInstructions?: number
   title: LocalizableString
 }
 
@@ -263,6 +272,8 @@ const veryDiscreetLinkStyle: React.CSSProperties = {
   textDecoration: 'none',
 }
 
+// This is a top level page and should never be nested in another one.
+// TOP LEVEL PAGE
 const FollowUpPageBase = (): React.ReactElement => {
   const isHighRisk = useSelector(({user: {contaminationRisk}}) => contaminationRisk === 'high')
   const history = useHistory()
@@ -284,10 +295,10 @@ const FollowUpPageBase = (): React.ReactElement => {
     bulletColor={colors.MEDIUM_GREY} bulletSelectColor="#000" slideStyle={slideStyle}
     onFastForward={handleNextButton} bottomComponent={BottomButton}>
     {(isHighRisk ? sliderHighRiskContent : sliderLowRiskContent).map(
-      ({content, isImportant, title}, index) => <React.Fragment key={index}>
+      ({content, numImportantInstructions, title}, index) => <React.Fragment key={index}>
         <div style={titleStyle}>{translate(title)}</div>
         {content}
-        <ImportantInstructions isHidden={!isImportant} />
+        <ImportantInstructions numInstructions={numImportantInstructions} />
       </React.Fragment>,
     )}
     <React.Fragment key="last-screen">

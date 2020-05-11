@@ -1,15 +1,18 @@
 import React, {useCallback, useState} from 'react'
 import {useTranslation} from 'react-i18next'
+import {useHistory} from 'react-router-dom'
 import ArrowRightLineIcon from 'remixicon-react/ArrowRightLineIcon'
 import ArrowLeftLineIcon from 'remixicon-react/ArrowLeftLineIcon'
 import MenuLineIcon from 'remixicon-react/MenuLineIcon'
 import LightbulbFillIcon from 'remixicon-react/LightbulbFillIcon'
 
+import {Routes} from 'store/url'
+
 import {Modal} from 'components/modal'
 import Privacy from 'components/pages/privacy'
 import Terms from 'components/pages/terms'
 
-interface LinkProps extends React.HTMLProps<HTMLAnchorElement> {
+interface MenuLinkProps extends React.HTMLProps<HTMLAnchorElement> {
   children: React.ReactNode
   style?: React.CSSProperties
 }
@@ -24,7 +27,11 @@ const menuLinkStyle: React.CSSProperties = {
   padding: '20px 0',
   textDecoration: 'none',
 }
-const MenuLinkBase = ({children, style, ...props}: LinkProps): React.ReactElement => <a
+const firstMenuLinkStyle: React.CSSProperties = {
+  borderTop: 'none',
+}
+
+const MenuLinkBase = ({children, style, ...props}: MenuLinkProps): React.ReactElement => <a
   {...props} style={style ? {...menuLinkStyle, ...style} : menuLinkStyle}>
   <span style={{flex: 1}}>{children}</span>
   <ArrowRightLineIcon size={15} />
@@ -42,7 +49,7 @@ const modalStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   fontWeight: 'normal',
-  height: `calc(100vh - ${2 * modalMargin}px`,
+  height: window.innerHeight - 2 * modalMargin,
   margin: modalMargin,
   maxWidth: 400,
   overflow: 'auto',
@@ -82,13 +89,16 @@ const BurgerMenu = (): React.ReactElement => {
   const setMenu = useCallback((): void => setPage('menu'), [])
   const setPrivacy = useCallback((): void => setPage('privacy'), [])
   const setTerms = useCallback((): void => setPage('terms'), [])
+  const history = useHistory()
+  const goHome = useCallback(() => history.push(Routes.SPLASH), [history])
   return <React.Fragment>
     <Modal className="no-scrollbars" style={modalStyle} onClose={closeMenu} isShown={isShown}>
       {page === 'menu' ? null :
         <ArrowLeftLineIcon style={backButtonStyle} onClick={setMenu} size={15} />}
       {page === 'menu' ? <React.Fragment>
         <h3 style={modalTitleStyle}>{t('Menu')}</h3>
-        <MenuLink onClick={setPrivacy} style={{borderTop: 'none'}}>{t('Vie privée')}</MenuLink>
+        <MenuLink style={firstMenuLinkStyle} onClick={goHome}>{t('Accueil')}</MenuLink>
+        <MenuLink onClick={setPrivacy}>{t('Vie privée')}</MenuLink>
         <MenuLink onClick={setTerms}>{t('CGU')}</MenuLink>
         <MenuLink href={contactLink} rel="noopener noreferrer" target="_blank">
           {t('Nous contacter')}

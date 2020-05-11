@@ -1,12 +1,12 @@
 // eslint-disable-next-line import/no-duplicates
 import {format as dateFormat, formatDistance} from 'date-fns'
 // eslint-disable-next-line import/no-duplicates
-import {fr as frDateLocale} from 'date-fns/locale'
+import {enUS as enDateLocale, fr as frDateLocale} from 'date-fns/locale'
 import i18next, {InitOptions, ReadCallback, ResourceKey, Services, TFunction, TOptions,
   i18n} from 'i18next'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import _memoize from 'lodash/memoize'
-import {initReactI18next} from 'react-i18next'
+import {initReactI18next, useTranslation} from 'react-i18next'
 
 // Backend for i18next to load resources for languages only when they are needed.
 // It takes a backend config with a promise per language and per namespace.
@@ -67,7 +67,7 @@ const init = (initOptions?: InitOptions): void => {
       react: {
         defaultTransParent: 'div',
       },
-      whitelist: ['fr'],
+      whitelist: ['fr', 'en'],
       ...initOptions,
     })
 }
@@ -119,26 +119,60 @@ const getLanguage = (locale?: string): string =>
 type PromiseImportFunc = (language: string, namespace: string) => Promise<{default: ResourceKey}>
 
 
-const formatRelativeLocale = {
-  lastWeek: "eeee 'dernier'",
-  nextWeek: "eeee 'prochain'",
-  today: "'aujourd''hui'",
-  tomorrow: "'demain''",
-  yesterday: "'hier'",
+const locales = {
+  en: enDateLocale,
+  fr: frDateLocale,
 } as const
 
-type Token = keyof typeof formatRelativeLocale | 'other'
+
+const formatRelativeLocale = {
+  en: {
+    lastWeek: "'last' eeee",
+    nextWeek: "'next' eeee",
+    today: "'today'",
+    tomorrow: "'tomorrow''",
+    yesterday: "'yesterday'",
+  },
+  fr: {
+    lastWeek: "eeee 'dernier'",
+    nextWeek: "eeee 'prochain'",
+    today: "'aujourd''hui'",
+    tomorrow: "'demain''",
+    yesterday: "'hier'",
+  },
+} as const
+
+type LocaleKey = keyof typeof locales
+
+type Token = keyof typeof formatRelativeLocale['en'] | 'other'
+
+type LocaleOption = {
+  locale: typeof frDateLocale
+}
 
 // This is the date locale for date-fns i18n.
-const dateOption = {locale: {
-  ...frDateLocale,
-  formatRelative: (token: Token, date: Date|number, baseDate: Date|number): string => {
-    if (token === 'other') {
-      return `'${formatDistance(date, baseDate, {addSuffix: true, locale: frDateLocale})}'`
-    }
-    return formatRelativeLocale[token]
+const createDateOption = _memoize((language: string): LocaleOption => ({
+  locale: {
+    ...(locales[language as LocaleKey] || locales.fr),
+    formatRelative: (token: Token, date: Date|number, baseDate: Date|number): string => {
+      if (token === 'other') {
+        return `'${formatDistance(
+          date, baseDate, {
+            addSuffix: true,
+            locale: locales[language as LocaleKey] || locales.fr,
+          },
+        )}'`
+      }
+      return (formatRelativeLocale[language as LocaleKey] || formatRelativeLocale.fr)[token]
+    },
   },
-}}
+}))
+
+
+function useDateOption(): LocaleOption {
+  const {i18n} = useTranslation()
+  return createDateOption(i18n.language)
+}
 
 
 const extractSeparator = _memoize((listString: string): readonly [string, string] => {
@@ -150,7 +184,8 @@ const extractSeparator = _memoize((listString: string): readonly [string, string
 })
 
 
-function joinDays(days: readonly Date[], format: string, t: TFunction): string {
+function joinDays(
+  days: readonly Date[], format: string, t: TFunction, dateOption: LocaleOption): string {
   const [separator, lastSeparator] = extractSeparator(t('<0></0>, <1></1> et <2></2>'))
   const formattedDays = days.map((day: Date): string => dateFormat(day, format, dateOption))
   if (formattedDays.length <= 1) {
@@ -160,4 +195,4 @@ function joinDays(days: readonly Date[], format: string, t: TFunction): string {
 }
 
 
-export {init, dateOption, getLanguage, joinDays, localizeOptions, prepareT, prepareNamespace}
+export {init, useDateOption, getLanguage, joinDays, localizeOptions, prepareT, prepareNamespace}

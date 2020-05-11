@@ -9,7 +9,7 @@ import ArrowRightSLineIcon from 'remixicon-react/ArrowRightSLineIcon'
 import {useFastForward} from 'hooks/fast_forward'
 import {saveSymptomsOnsetDate, useDispatch} from 'store/actions'
 import {useSymptomsOnsetDate} from 'store/selections'
-import {dateOption} from 'store/i18n'
+import {useDateOption} from 'store/i18n'
 import {Routes} from 'store/url'
 
 import {PageWithNav} from 'components/navigation'
@@ -37,6 +37,7 @@ const flexCenterStyle: React.CSSProperties = {
 
 const DayCardBase = (props: DayCardProps): React.ReactElement => {
   const {date, isHidden, isMain, onClick, style} = props
+  const dateOption = useDateOption()
   const isClickable = !!onClick
   const containerStyle: React.CSSProperties = useMemo(() => ({
     ...flexCenterStyle,
@@ -65,8 +66,8 @@ const DayCardBase = (props: DayCardProps): React.ReactElement => {
     opacity: isMain ? 1 : 0,
     transition,
   }
-  const weekDay = useMemo(() => dateFormat(date, 'EEE', dateOption), [date])
-  const month = useMemo(() => dateFormat(date, 'MMMM', dateOption), [date])
+  const weekDay = useMemo(() => dateFormat(date, 'EEE', dateOption), [date, dateOption])
+  const month = useMemo(() => dateFormat(date, 'MMMM', dateOption), [date, dateOption])
   const handleClick = useCallback((): void => onClick?.(date), [date, onClick])
   return <div style={containerStyle} onClick={onClick && handleClick}>
     <span style={textStyle}>{weekDay || 'lun.'}</span>
@@ -205,6 +206,7 @@ const nextDayStyle: React.CSSProperties = {
 
 const TextDateNavBase = (props: DayCardsProps): React.ReactElement => {
   const {currentDay, firstDay, onDayChange, lastDay} = props
+  const dateOption = useDateOption()
 
   const previousDay = useMemo(() => subDays(currentDay, 1), [currentDay])
   const nextDay = useMemo(() => addDays(currentDay, 1), [currentDay])

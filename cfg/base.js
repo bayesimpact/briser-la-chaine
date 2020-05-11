@@ -14,6 +14,7 @@ const srcPath = path.join(__dirname, '../src')
 const sslPath = '/etc/ssl/webpack-dev'
 
 const mainSrcFolders = [
+  'analytics',
   'components',
   'hooks',
   'images',

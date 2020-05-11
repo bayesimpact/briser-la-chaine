@@ -1,6 +1,4 @@
-import ArrowLeftIcon from 'remixicon-react/ArrowLeftLineIcon'
 import React, {useEffect, useMemo, useRef, useState} from 'react'
-import {Link} from 'react-router-dom'
 import {RemixiconReactIconComponentType} from 'remixicon-react/dist/typings'
 
 import BurgerMenu from 'components/burger_menu'
@@ -54,7 +52,6 @@ const BottomDiv = React.memo(BottomDivBase)
 
 
 interface PageWithNavProps {
-  backTo?: string
   children?: React.ReactNode
   nextButton?: React.ReactNode
   nextButtonColor?: string
@@ -65,7 +62,9 @@ interface PageWithNavProps {
 const containerStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
-  minHeight: '100vh',
+  margin: '0 auto',
+  maxWidth: 700,
+  minHeight: window.innerHeight,
   position: 'relative',
 }
 const contentStyle: React.CSSProperties = {
@@ -74,23 +73,19 @@ const contentStyle: React.CSSProperties = {
   flex: 1,
   flexDirection: 'column',
   // TODO(cyrille): Consider dropping this.
-  justifyContent: 'space-around',
+  justifyContent: 'space-evenly',
   padding: '0 20px',
 }
-const backToLinkStyle: React.CSSProperties = {
-  left: 0,
-  padding: 20,
-  position: 'absolute',
-  top: 0,
-}
-const mobileOnDesktopStyle: React.CSSProperties = {
+export const mobileOnDesktopStyle: React.CSSProperties = {
   margin: 'auto',
   maxWidth: 420,
 }
 
 
+// This is a top level page and should never be nested in another one.
+// TOP LEVEL PAGE
 const PageWithNav = (props: PageWithNavProps): React.ReactElement => {
-  const {backTo, children, nextButton, nextButtonColor, onNext, style} = props
+  const {children, nextButton, nextButtonColor, onNext, style} = props
   const buttonStyle: React.CSSProperties = {
     ...darkButtonStyle,
     ...nextButtonColor ? {backgroundColor: nextButtonColor} : {},
@@ -98,9 +93,6 @@ const PageWithNav = (props: PageWithNavProps): React.ReactElement => {
   }
   return <div style={style ? {...containerStyle, ...style} : containerStyle}>
     <BurgerMenu />
-    {backTo ? <Link style={backToLinkStyle} to={backTo}>
-      <ArrowLeftIcon size={20} color={colors.BUTTON_GREY} />
-    </Link> : null}
     <div style={contentStyle}>
       {children}
     </div>
@@ -168,6 +160,7 @@ const darkStyle: React.CSSProperties = {
   color: '#fff',
 }
 
+// TODO(pascal): Do not use this as a top page layout, otherwise it cannot be used in slider.
 const PedagogyLayout = (props: PedagogyLayoutProps): React.ReactElement => {
   const {icon: Icon, iconText, isDark, children, subtitle, title, ...otherProps} = props
   const iconImage = useMemo(

@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser'
 import {ConnectedRouter, connectRouter, routerMiddleware, RouterState} from 'connected-react-router'
 import {History, createBrowserHistory} from 'history'
-import React, {Suspense, useLayoutEffect, useState} from 'react'
+import React, {Suspense, useEffect, useLayoutEffect, useState} from 'react'
 import {Provider} from 'react-redux'
 import {useHistory, useLocation} from 'react-router'
 import {Switch, Redirect, Route} from 'react-router-dom'
@@ -11,8 +11,10 @@ import createReduxSentryMiddleware from 'redux-sentry-middleware'
 import thunk from 'redux-thunk'
 import {polyfill as smoothscrollPolyfill} from 'smoothscroll-polyfill'
 
+import {createAmplitudeMiddleware} from 'analytics/amplitude'
+import Logger from 'analytics/logger'
 import {alerts, contacts, people, user} from 'store/app_reducer'
-import {AllActions} from 'store/actions'
+import {ACTIONS_TO_LOG, AllActions, pageIsLoaded, useDispatch} from 'store/actions'
 import {init as i18nInit} from 'store/i18n'
 import {useSymptomsOnsetDate} from 'store/selections'
 import {Routes} from 'store/url'
@@ -36,6 +38,7 @@ import SplashPage from 'components/pages/splash'
 import TermsPage from 'components/pages/terms'
 
 import 'styles/fonts/Lato/font.css'
+import 'styles/fonts/Poppins/font.css'
 
 require('styles/app.css')
 
@@ -70,10 +73,20 @@ function useScrollToTopOnNewPage(location: ReturnType<typeof useLocation>): void
 }
 
 
+function usePageLogger(location: ReturnType<typeof useLocation>): void {
+  const {pathname} = location
+  const dispatch = useDispatch()
+  useEffect((): void => {
+    dispatch(pageIsLoaded(pathname))
+  }, [dispatch, pathname])
+}
+
+
 const App = (): React.ReactElement => {
   const location = useLocation()
   usePathnameInQueryString(location)
   useScrollToTopOnNewPage(location)
+  usePageLogger(location)
   // TODO(cyrille): Add possibility to drop the onset date without cleaning the local storage.
   // FIXME(sil): Check the conditions for which each page is available.
   const hasOnsetDate = !!useSymptomsOnsetDate()
@@ -97,6 +110,7 @@ const App = (): React.ReactElement => {
     <Route path={Routes.FINAL} component={FinalPage} />
     <Route path={Routes.PRIVACY} component={PrivacyPage} />
     <Route path={Routes.TERMS} component={TermsPage} />
+    {/* FIXME(cyrille): Redirect to CONTACTS_LIST if user has validated all days. */}
     <Redirect to={hasOnsetDate ? Routes.CONTACTS_SEARCH : Routes.SPLASH} />
   </Switch>
 }
@@ -106,8 +120,7 @@ type ReduxState = RootState & {router: RouterState<{}|null|undefined>}
 
 function createHistoryAndStore(): AppState {
   const history = createBrowserHistory()
-  // TODO(cyrille): Add amplitude middleware.
-  // TODO(cyrille): Add analytics middlewares.
+  // TODO(cyrille): Add 3rd party analytics middlewares.
 
   Sentry.init({
     dsn: config.sentryDsn,
@@ -124,8 +137,12 @@ function createHistoryAndStore(): AppState {
     }),
   })
 
+  const amplitudeMiddleware = createAmplitudeMiddleware(new Logger(ACTIONS_TO_LOG))
+
   const finalCreateStore = composeWithDevTools(applyMiddleware(
+    // Sentry middleware needs to be first to correctly catch exception down the line.
     reduxSentryMiddleware,
+    amplitudeMiddleware,
     thunk,
     routerMiddleware(history),
   ))(createStore)
