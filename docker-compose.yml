@@ -1,0 +1,36 @@
+version: "3.4"
+services:
+  dev:
+    image: bayesimpact/cas-contact-dev:${CIRCLE_BUILD_NUM:-latest}
+    build:
+      context: .
+      target: dev
+    command: npm start
+    entrypoint: ./entrypoint.sh
+    tty: true
+    ports:
+      - "9394:80"
+  test:
+    image: bayesimpact/cas-contact-test:${CIRCLE_BUILD_NUM:-latest}
+    build:
+      context: .
+      target: test
+  nginx:
+    image: bayesimpact/cas-contact:${CIRCLE_BUILD_NUM:-latest}
+    build:
+      context: .
+      target: nginx
+    ports:
+      - 80
+  mailjet-proxy:
+    image: bayesimpact/mailjet-proxy:${CIRCLE_BUILD_NUM:-latest}
+    build:
+      context: mailjet
+      target: proxy
+    ports:
+      - 80
+  mailjet-proxy-test:
+    build:
+      context: mailjet
+      target: test
+    network_mode: none

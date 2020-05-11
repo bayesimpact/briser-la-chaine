@@ -1,0 +1,13 @@
+# Distribution / packaging
+env/
+build/
+dist/
+
+# Sublime Text project files
+*.sublime-workspace
+
+# Files containing personal credentials related to this project.
+/ssl
+
+# NPM Packages installed locally
+/node_modules

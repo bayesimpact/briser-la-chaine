@@ -1,0 +1,13 @@
+{
+  amplitudeToken: 'a1067533ce6148de5bcac9df0ea0d508',
+  canonicalUrl: 'www.BriserLaChaine.org',
+  facebookSSOAppId: 'whatever',
+  followUpMail: 'suivi@briserlachaine.org',
+  mailjetProxyUrl: 'https://mailjet-proxy.briserlachaine.org',
+  numDaysContagious: 35,
+  numDaysContagiousBeforeSymptoms: 1,
+  numDaysSymptoms: 21,
+  productName: 'BriserLaChaine.org DEV',
+  sentryDsn: 'https://1423edf320fe498a8b3e5326737e3f06@o87797.ingest.sentry.io/5223962',
+}
+

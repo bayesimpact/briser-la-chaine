@@ -1,0 +1,43 @@
+# Overrides of Compose services used to help develop faster without rebuilding
+# the container on every change.
+version: "3.4"
+services:
+  dev:
+    volumes:
+      - ./cfg:/usr/app/cfg:ro
+      - ./ssl:/etc/ssl/webpack-dev:ro
+      - ./.babelrc:/usr/app/.babelrc:ro
+      - ./src:/usr/app/src
+      - ./check-color-config.sh:/usr/app/check-color-config.sh:ro
+      - ./custom.d.ts:/usr/app/custom.d.ts:ro
+      - ./jsonlint.sh:/usr/app/jsonlint.sh
+      - ./entrypoint.sh:/usr/app/entrypoint.sh:ro
+      - ./package.json:/usr/app/package.json:ro
+      - ./tsconfig.json:/usr/app/tsconfig.json:ro
+      # For linting.
+      - ./.eslintrc.json:/usr/app/.eslintrc.json:ro
+      - ./.eslintignore:/usr/app/.eslintignore:ro
+      # For testing.
+      - ./test:/usr/app/test
+      - ./karma.conf.js:/usr/app/karma.conf.js:ro
+      # For translation.
+      - ./i18n.babelrc.js:/usr/app/i18n.babelrc.js:ro
+      # For releasing.
+      - ./dist:/usr/app/dist
+    environment:
+      AIRTABLE_API_KEY:
+      CLIENT_VERSION: dev
+  mailjet-proxy:
+    environment:
+      MAILJET_APIKEY_PUBLIC:
+      MAILJET_SECRET:
+      MAILJET_SMS_TOKEN:
+      MAIL_SENDER_EMAIL: contact@briserlachaine.org
+      MAIL_SENDER_NAME: "Briser la chaîne"
+      SMS_SENDER: "BayesImpact"
+      SMS_TEMPLATE_risky: "Un(e) de vos proches vous a croisé alors qu'il ou elle était contagieux(se). Pour briser la chaine de contagion: www.briserlachaine.org"
+    volumes:
+      - ./mailjet:/usr/app:ro
+  mailjet-proxy-test:
+    volumes:
+      - ./mailjet:/usr/app:ro
