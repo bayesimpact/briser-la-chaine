@@ -1,0 +1,183 @@
+{
+  "DistributionConfig": {
+    "Aliases": {
+      "Items": [
+        "www.briserlachaine.org"
+      ],
+      "Quantity": 1
+    },
+    "CacheBehaviors": {
+      "Items": [
+        {
+          "AllowedMethods": {
+            "CachedMethods": {
+              "Items": [
+                "HEAD",
+                "GET"
+              ],
+              "Quantity": 2
+            },
+            "Items": [
+              "HEAD",
+              "GET"
+            ],
+            "Quantity": 2
+          },
+          "Compress": true,
+          "DefaultTTL": 86400,
+          "FieldLevelEncryptionId": "",
+          "ForwardedValues": {
+            "Cookies": {
+              "Forward": "none"
+            },
+            "Headers": {
+              "Quantity": 0
+            },
+            "QueryString": false,
+            "QueryStringCacheKeys": {
+              "Quantity": 0
+            }
+          },
+          "LambdaFunctionAssociations": {
+            "Quantity": 0
+          },
+          "MaxTTL": 31536000,
+          "MinTTL": 0,
+          "PathPattern": "assets/*",
+          "SmoothStreaming": false,
+          "TargetOriginId": "OVH-briser-la-chaine",
+          "TrustedSigners": {
+            "Enabled": false,
+            "Quantity": 0
+          },
+          "ViewerProtocolPolicy": "redirect-to-https"
+        }
+      ],
+      "Quantity": 1
+    },
+    "CallerReference": "1587461772317",
+    "Comment": "",
+    "CustomErrorResponses": {
+      "Items": [
+        {
+          "ErrorCachingMinTTL": 300,
+          "ErrorCode": 404,
+          "ResponseCode": "200",
+          "ResponsePagePath": "/index.html"
+        }
+      ],
+      "Quantity": 1
+    },
+    "DefaultCacheBehavior": {
+      "AllowedMethods": {
+        "CachedMethods": {
+          "Items": [
+            "HEAD",
+            "GET"
+          ],
+          "Quantity": 2
+        },
+        "Items": [
+          "HEAD",
+          "GET"
+        ],
+        "Quantity": 2
+      },
+      "Compress": false,
+      "DefaultTTL": 600,
+      "FieldLevelEncryptionId": "",
+      "ForwardedValues": {
+        "Cookies": {
+          "Forward": "none"
+        },
+        "Headers": {
+          "Quantity": 0
+        },
+        "QueryString": false,
+        "QueryStringCacheKeys": {
+          "Quantity": 0
+        }
+      },
+      "LambdaFunctionAssociations": {
+        "Quantity": 0
+      },
+      "MaxTTL": 600,
+      "MinTTL": 0,
+      "SmoothStreaming": false,
+      "TargetOriginId": "OVH-briser-la-chaine",
+      "TrustedSigners": {
+        "Enabled": false,
+        "Quantity": 0
+      },
+      "ViewerProtocolPolicy": "redirect-to-https"
+    },
+    "DefaultRootObject": "index.html",
+    "Enabled": true,
+    "HttpVersion": "http2",
+    "IsIPV6Enabled": true,
+    "Logging": {
+      "Bucket": "",
+      "Enabled": false,
+      "IncludeCookies": false,
+      "Prefix": ""
+    },
+    "OriginGroups": {
+      "Quantity": 0
+    },
+    "Origins": {
+      "Items": [
+        {
+          "CustomHeaders": {
+            "Quantity": 0
+          },
+          "CustomOriginConfig": {
+            "HTTPPort": 80,
+            "HTTPSPort": 443,
+            "OriginKeepaliveTimeout": 5,
+            "OriginProtocolPolicy": "https-only",
+            "OriginReadTimeout": 30,
+            "OriginSslProtocols": {
+              "Items": [
+                "TLSv1",
+                "TLSv1.1",
+                "TLSv1.2"
+              ],
+              "Quantity": 3
+            }
+          },
+          "DomainName": "storage.gra.cloud.ovh.net",
+          "Id": "OVH-briser-la-chaine",
+          "OriginPath": "/v1/AUTH_7b9ade05d5f84f719adc2cbc76c07eec/briser-la-chaine"
+        },
+        {
+          "CustomHeaders": {
+            "Quantity": 0
+          },
+          "DomainName": "cas-contact-client.s3.amazonaws.com",
+          "Id": "S3-cas-contact-client",
+          "OriginPath": "",
+          "S3OriginConfig": {
+            "OriginAccessIdentity": "origin-access-identity/cloudfront/E18EZCUC01ULI2"
+          }
+        }
+      ],
+      "Quantity": 2
+    },
+    "PriceClass": "PriceClass_100",
+    "Restrictions": {
+      "GeoRestriction": {
+        "Quantity": 0,
+        "RestrictionType": "none"
+      }
+    },
+    "ViewerCertificate": {
+      "ACMCertificateArn": "arn:aws:acm:us-east-1:951168128976:certificate/b66295f6-6e39-4d4c-98bf-8c1d2da830d0",
+      "Certificate": "arn:aws:acm:us-east-1:951168128976:certificate/b66295f6-6e39-4d4c-98bf-8c1d2da830d0",
+      "CertificateSource": "acm",
+      "MinimumProtocolVersion": "TLSv1.1_2016",
+      "SSLSupportMethod": "sni-only"
+    },
+    "WebACLId": ""
+  },
+  "ETag": "E2XSM7JW5Y13YK"
+}

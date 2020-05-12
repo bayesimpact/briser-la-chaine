@@ -1,0 +1,77 @@
+# Votre vie privée est aussi importante que votre santé
+
+Le respect de votre vie privée et la confidentialité de vos données est très important aux yeux de notre association. Par conséquent, le site internet {{productName}} a été élaboré afin de participer à préserver la santé de ses usagers tout en veillant à garantir leur droit au respect de la vie privée. Nous nous conformons ainsi strictement aux lois en vigueur sur la protection de la vie privée notamment au règlement général sur la protection des données (RGPD). Voici comment nous procédons :
+
+**Vous restez le seul détenteur de vos données personnelles qui restent stockées sur votre téléphone ou votre ordinateur**
+
+Le système que nous avons conçu est spécialement pensé afin que vos symptômes et votre liste de contacts restent intégralement dans votre téléphone ou votre ordinateur.
+
+Elles ne sont pas enregistrées sur un quelconque serveur.
+
+Elles ne sont ni accessibles à notre organisation ni à nos salarié(e)s.
+
+Ces données personnelles ne sont pas transmises à des organismes tiers.
+
+**Persistance des informations**
+
+Afin de permettre aux usagers de ne pas avoir à recommencer plusieurs fois le parcours de {{productName}}, nous avons mis en place un système de stockage et de persistance des informations fournies sur l'interface usager grâce au cache du navigateur.
+
+Ce système ne permet aucun accès à distance et nous ne pouvons donc jamais accéder à vos données personnelles via cette fonctionnalité.
+
+Vous pouvez à tout moment supprimer ces données de votre téléphone ou votre ordinateur. Pour plus d'informations : [Wikipedia](https://fr.wikipedia.org/wiki/Aide:Purge_du_cache_du_navigateur)
+
+**Les parcours d'usage sont entièrement anonymisés et ne sont pas partagés**
+
+Nous recueillons des informations statistiques pour mesurer l'audience de notre site internet et ses modalités d'usage afin de mieux relever les éventuels points de blocage de nos usagers pour proposer des améliorations utiles pour tous.
+
+Ces indications statistiques sur les utilisations de {{productName}} sont relevées à travers nos “parcours d'usage”.
+
+Sans exception, ces informations d'usage modalisées par les parcours sont anonymes et ne collectent pas de données personnelles.
+
+Par conséquent, elles ne comprennent aucune donnée sur votre état de santé ou sur vos contacts.
+
+Par exemple : nous pouvons savoir combien d'usagers au total ont envoyé un message de prévention à leurs proches (donnée statistique anonyme) mais nous ne pouvons pas savoir de qui il s'agit ni même qui sont les proches concernés (donnée personnelle conservée par l'usager uniquement).
+
+Pour ces besoins de statistiques et d'amélioration fonctionnel, nous pouvons ainsi être amenés à utiliser des cookies.
+
+Il s'agit de petits fichiers textes ou d'ensemble de données stockés sur votre disque dur afin d'enregistrer des données techniques sur votre navigation.
+
+Nous utilisons également le service Amplitude.com pour analyser ces parcours d'usage d'un point de vue statistique. Comme pour {{productName}}, Amplitude n'accède pas à vos données personnelles. Les informations contenues dans les parcours d'usage ne sont ni utilisées à des fins commerciales, ni cédées à des tiers.
+
+Pour plus d'informations sur la manière de gérer ses cookies : [site de la CNIL](https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser)
+
+**La fonction suivi par e-mail préserve aussi vos données personnelles sensibles**
+
+Parmi nos fonctionnalités, nous permettons aux usagers dont notre algorithme a révélé qu'ils n'étaient a priori pas atteints du COVID19 ou qui le déclarent pro-activement, d'être suivis par email sur 14 jours, si ils ou elles le souhaitent.
+
+Dans ce cadre, nous demandons donc leurs adresses mail.
+
+Ce suivi s'arrête automatiquement 14 jours après inscription et l'adresse email collectée est alors supprimée.
+
+Vous restez libre de vous désinscrire à tout moment en contactant l'adresse suivante : [privacy@bayesimpact.org](mailto:privacy@bayesimpact.org)
+
+**Vos informations sont utilisées de manière transparente**
+
+Lorsque notre algorithme indique que vous êtes susceptible d'être contagieux(se), notre site internet vous demande des informations sur votre état de santé et sur les personnes que vous auriez pu croiser afin de vous aider à les informer d'une probable contagion.
+
+Afin de vous faciliter la tâche, notre site internet vous propose de transmettre ces informations à vos contacts. Pour chaque contact, ces informations ne sont transmises qu'avec votre accord explicite.
+
+Comme déjà précisé, ces informations restent intégralement dans votre téléphone ou votre ordinateur. Elles ne sont pas enregistrées sur un quelconque serveur.
+
+Elles ne sont ni accessibles à notre organisation ni à nos salarié(e)s et ne sont pas transmises à des organismes tiers.
+
+**Le code informatique de notre site internet est open-source**
+
+Nous sommes 100% transparents sur le code de notre site internet et la façon dont il fonctionne.
+
+Vous pouvez ainsi retrouver le code source de notre site internet sur GitHub, afin de vérifier que nous tenons nos engagements.
+
+[GitHub](https://www.github.com/bayesimpact/briser-la-chaine)
+
+Seul le code du site internet est accessible sur GitHub.
+
+Aucune des données usagers (personnelles ou d'usage) n'est partagée.
+
+Si vous avez la moindre question sur notre politique de protection et gestion des données, vous pouvez nous contacter à [privacy@bayesimpact.org](mailto:privacy@bayesimpact.org)
+
+Notre site est hébergé chez OVH dont les serveurs sont situés à Gravelines, en France.

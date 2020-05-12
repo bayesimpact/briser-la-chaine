@@ -1,0 +1,262 @@
+# Conditions générales d'utilisation au 2 mai 2020
+
+### Préambule
+
+Le 2 mai 2020
+
+L'objectif du projet et le fonctionnement de l'association sont dédiés à l'intérêt général. Le Code Source du logiciel est mis à disposition en logiciel libre.
+
+Aucune donnée personnelle n'est stockée en dehors de l'interface de l'usager. Aucun traçage de l'usager n'est effectué, par GPS ou par bluetooth.
+
+Les données personnelles de l'usager (comme ses éventuels symptômes ou sa liste de contact) sont stockées sur son interface (téléphone ou ordinateur) , ne sont transmises à personne (pas même {{owner}}). Elles restent sous contrôle unique de l'usager de l'interface.
+
+Les données anonymisées d'utilisation des usagers (comme le nombre total de personnes effectuant le parcours de {{productName}} jusqu'au bout) permettent à {{owner}} l'amélioration continue du service et l'étude d'impact de {{productName}}. Ces données ne permettent en aucun cas l'identification d'un usager.
+
+Lorsque la fonction optionnelle et volontaire de suivi est activée par l'usager, celui-ci peut recevoir régulièrement des mails d'information. {{owner}} est alors amené à stocker l'adresse email de l'usager volontaire pour une durée maximale de 14 jours puis celle-ci est automatiquement supprimée. Si l'usager le souhaite, il peut à tout moment demander la suppression de cette adresse auprès de {{owner}} (à l'adresse : privacy@bayesimpact.org).
+
+L'ensemble de ces données ne seront ni utilisées commercialement, ni cédées à des tiers.
+
+## 1. Définitions
+
+« {{productName}} » ou « LE SERVICE » est une interface permettant d'aider, de façon non médicale, au diagnostic d'une infection au covid-19, d'en connaître sa potentielle période de contagiosité. Elle facilite l'identification des personnes susceptibles d'avoir été rencontrées, et propose de les contacter anonymement ou non. Enfin, elle permet de bénéficier d'un suivi par email sur la base du volontariat lorsque la personne est susceptible d'être un cas-contact.
+
+Le développeur du site internet est l'association « {{owner}} ».
+
+L'hébergeur de la plate-forme est OVH.
+
+Les « usagers » sont les personnes qui utilisent la plate-forme.
+
+Le service est accessible sur « LE SITE » à l'adresse : [{{canonicalUrl}}]({{canonicalUrl}})
+
+## 2. Validité et acceptation
+
+Les présentes conditions sont accessibles à tout moment sur le site internet {{canonicalUrl}} et communiquées à tout usager qui en ferait la demande.
+
+Elles régissent les relations entre les usagers et {{productName}} dans le cadre de l'utilisation du service.
+
+Les usagers reconnaissent avoir le droit d'exploiter le service.
+
+L'utilisation du service et l'exploitation des informations implique leur acceptation entière et sans réserve des conditions générales. Leur non-acceptation entraîne la renonciation à l'utilisation du service ainsi qu'à l'exploitation des informations.
+
+## 3. Champ d'application
+
+Le présent contrat régit exclusivement l'utilisation de {{productName}} par les usagers.
+
+Cette prestation est effectuée par {{owner}} gratuitement et sans autre contrepartie que le respect des présentes conditions d'utilisation.
+
+La responsabilité de {{owner}} se limite exclusivement à faciliter l'accès à la plate-forme.
+
+{{owner}} ne saurait être tenue pour responsable en aucune manière d'une mauvaise utilisation du service.
+
+## 4. Description du service
+
+{{productName}} est une plate-forme indépendante développée par l'association de loi 1901 BAYES IMPACT.
+
+Ce service suppose la validation de plusieurs étapes.
+
+### 4.1. Diagnostic non médical des symptômes
+
+En premier lieu, {{productName}} émet un diagnostic consultatif non médical à partir d'un algorithme sur la probabilité de contamination au covid-19 par l'usager à partir de l'étude des symptômes décrits par ce dernier. Cet avis ne saurait en aucun cas se substituer à celui d'un médecin, d'un membre du personnel soignant,une procédure de test certifiée ou d'une quelconque procédure agréée par les autorités.
+
+Si l'individu a déjà été testé positif via un dispositif médical ou par le diagnostic d'un professionnel de santé, il pourra directement renseigner cette information auprès du site internet et n'aura pas à fournir des informations sur son état de santé pour bénéficier du service {{productName}}.
+
+Ce diagnostic non médicale est basé sur l'état actuel des recherches scientifiques concernant le covid-19. Il peut donc être amené à évoluer.
+
+### 4.2. Indication de la période de contagiosité
+
+Suite à cette étape, le service dresse la probable période de contagiosité de l'individu afin de l'aider à se rappeler des personnes croisées durant ces quelques jours.
+
+Cette période est purement indicative . Elle n'est nullement une donnée médicale certifiée.
+
+Le dispositif de calcul de la période de contagiosité est également basé sur l'état actuel des recherches scientifiques concernant le covid-19 et peut donc être amené à évoluer.
+
+### 4.3. Aide à la recherche des personnes croisées durant la période de contagiosité
+
+Le service {{productName}} propose par la suite d'aider l'usager à se rappeler de chaque personne croisée durant la période de contagion. Le service propose pour cela des aides-mémoires et des questions mémo-techniques récurrentes sur les activités de la journée.
+
+L'usager, si il le souhaite et l'approuve uniquement, peut donner accès à certaines informations personnelles (comme le calendrier, les contacts téléphoniques…) via des systèmes d'API.
+
+Le service propose également deux questions permettant également d'évaluer via deux questions le niveau de proximité du contact, en se basant sur la durée du contact et la distance déclarée par l'usager entre les deux personnes durant le contact.
+
+L'ensemble de ces informations personnelles ne sont utilisées et stockées que localement sur l'appareil de l'utilisateur. Elles ne sont pas transmises, ni directement, ni sous aucune forme dérivée. Elles sont ainsi conservées par le seul utilisateur du service.
+
+### 4.4. Aide à la notification des personnes croisées durant la période de contagiosité
+
+Le service propose ensuite de notifier les personnes identifiées comme contact de l'usager (“les cas-contact”).
+
+Pour cela, l'usager peut copier le message généré automatiquement par le service et l'envoyer en le copiant dans la plateforme de messagerie de son choix, ou en passant volontairement par des API de son choix.
+
+L'usager peut aussi demander au service {{productName}}, un envoi anonyme de ce message à la personne en question. L'association {{owner}} et le service {{productName}} ne conservent aucune trace identifiable de ces interactions entre l'usager et son contact.
+
+### 4.5 Suivi pour les cas contacts
+
+Si une personne extérieure à l'utilisation initiale du service est identifiée comme “cas-contact” par un usager du service suspecté d'être porteur du covid-19, cette dernière est invitée à accéder également au service.
+
+Un lien lui permet de prendre connaissance de son statut de probable “cas-contact” et l'invite à entreprendre une démarche de vérification des symptômes.
+
+Si une contamination au covid-19 est présumée par le diagnostic non médical offert par le service {{productName}}, ce dernier est à son tour invité à effectuer le parcours d'identification et de signalement de ses propres cas-contacts comme tout usager.
+
+Si les symptômes déclarés ne permettent de supposer pune contamination aucovid-19, il lui est proposé de communiquer son email afin de bénéficier de la fonction suivi. Pour rappel, cette dernière consiste en l'envoi régulier d'e-mails de conseils et de rappels à la vigilance sur les symptômes révélateurs du covid-19. Cette démarche d'inscription à la fonction de suivi est volontaire et réversible.
+
+Au bout de 14 jours après l'inscription à la fonction suivi, cette dernière prend fin. L'email de l'utilisateur est alors automatiquement supprimé.
+
+## 5. Usage du service
+
+### 5.1. Utilisation de {{productName}}
+
+Dans le cadre de leur utilisation de la plate-forme, les usagers s'engagent à respecter les lois et règlements en vigueur et à ne pas porter atteinte aux droits de tiers ou à l'ordre public.
+
+Les usagers sont seuls responsables du bon accomplissement de toutes les formalités administratives ou médicales nécessaires concernant leur état de santé. Concernant les procédures d'assistance ou de test médicales, il est de leur seule responsabilité d'obtenir les garanties et les moyens de les effectuer. A ce titre, la responsabilité de {{owner}} ne serait en aucun cas être engagée.
+
+Les usagers reconnaissent avoir pris connaissance des caractéristiques et contraintes, notamment techniques, de la plate-forme. Il sont seuls responsables de son utilisation. Les usagers sont informés et acceptent que la mise en œuvre de la plate-forme nécessite une connexion à internet dont ils sont seuls responsables, et dont la qualité du service en dépend directement.
+
+Les usagers sont également seuls responsables des relations qu'ils pourront nouer avec les responsables des services, notamment les organismes d'assistance médicale ou de tests, auxquels ils feront appel en suivant les suggestions du service.
+
+### 5.2. Persistance des informations du parcours usager sur son navigateur web
+
+Via un système de cookies, l'usager peut interrompre et reprendre le parcours du service sur une même interface et à différents intervalles dans le temps. Cette persistance est optionnelle, l'usager peut choisir de ne pas en bénéficier. Cette persistance n'implique en rien le fait que les données personnelles de l'usage soit enregistrées par {{productName}}. Cette persistance ne peut pas être assimilée à une fonctionnalité de compte utilisateur.
+
+Comme {{productName}} n'enregistre aucune des données fournies, le service ne peut alors garantir les usagers en cas de perte éventuelle des informations remplies au cours du parcours. Il appartient aux usagers de sauvegarder une copie de leurs informations. Ils ne peuvent prétendre à aucun dédommagement en raison de quelque perte de données que ce soit.
+
+### 5.3. Gratuité de l'usage de {{productName}}
+
+L'usage de la plate-forme {{productName}} est gratuit.
+
+## 6. Responsabilités et garanties
+
+### 6.1. Absence de responsabilité au regard des recommandations et du diagnostic non médical
+
+Le diagnostic non médical de {{productName}} se base sur de nombreuses ressources médicales officielles, sur les recommandations et le suivi du comité scientifique appuyant l'initiative.
+
+Au vu de la crise sanitaire en cours, les recommandations affichées et le système de diagnostic non médical sont amenées à évoluer suivant l'état de l'art clinique et l'avis des autorités de santé.
+
+Par conséquent, les résultats affichés peuvent différer dans le temps, même si les données d'entrée sont identiques.
+
+{{productName}} n'est pas un dispositif médical.l ne délivre pas d'avis médical, il ne remplace pas une consultation ni l'avis d'un médecin ou d'un pharmacien ou de tout autre professionnel de santé. Il ne saurait non plus se substituer aux recommandations des autorités compétentes.
+
+{{productName}} est un service d'information conçu pour répondre à une alerte sanitaire. Il ne peut pas être utilisé dans le cadre d'une télésurveillance médicale à domicile.
+
+### 6.2. Absence de responsabilité au regard du fonctionnement de {{productName}}
+
+{{productName}} ne peut garantir que son service ne subira aucune interruption. {{productName}} s'engage à fournir son service avec diligence et selon les règles de l'art, étant précisé qu'il ne s'agit que d'une obligation de moyens, excluant toute obligation de résultat.
+
+{{productName}} ne saurait être tenu responsable des difficultés ou impossibilités momentanées d'accès à la plate-forme qui auraient pour origine des circonstances qui lui sont extérieures, la force majeure, ou encore qui seraient dues à des perturbations des réseaux de télécommunication.
+
+Le service est fourni en l'état. {{productName}} ne peut garantir aux usagers qu'elle soit totalement exempte d'erreurs, de vices, de défauts. Le service est développé de façon standardisée pour l'ensemble des usagers. Elle n'est nullement conçue pour s'adapter à leurs contraintes personnelles.
+
+{{productName}} se réserve expressément la faculté d'interrompre momentanément l'accès à son service pour des raisons de maintenance.
+
+Si vous constatez une lacune, erreur ou ce qui paraît être un dysfonctionnement, nous vous invitons à nous le signaler par email à l'adresse suivante : [contact@briserlachaine.org](mailto:contact@briserlachaine.org)
+
+### 6.3. Comportements interdits
+
+Au-delà des autres interdictions prévues dans les présentes conditions, les usagers s'engagent à utiliser la plate-forme de façon vertueuse.
+
+Ils s'interdisent notamment d'utiliser la plate-forme aux fins suivantes : l'exercice d'activités illégales, frauduleuses ou portant atteinte aux droits ou à la sécurité des tiers ; l'atteinte à l'ordre public ou la violation des lois et règlements en vigueur ; l'intrusion dans le système informatique d'un tiers ou toute activité de nature à nuire, contrôler, interférer, ou intercepter tout ou partie du système informatique d'un tiers, en violer l'intégrité ou la sécurité ; l'envoi d'emails ou de sollicitations commerciales non sollicités ; les manipulations destinées à améliorer le référencement d'un site tiers ; l'aide ou l'incitation, sous quelque forme et de quelque manière que ce soit, à un ou plusieurs des actes et activités décrits ci-dessus ; et plus généralement toute pratique détournant le service à des fins autres que celles pour lesquelles il a été conçu.
+
+Les usagers s'engagent à respecter la continuité de service de la plate-forme. Ils s'interdisent notamment : tous comportements de nature à interrompre, suspendre, ralentir ou empêcher la continuité du service ; toutes intrusions ou tentatives d'intrusion dans le service ; tous détournements des ressources système du service ; toutes actions de nature à imposer une charge disproportionnée sur les infrastructures du service ; toutes atteintes aux mesures de sécurité et d'authentification ; tous actes de nature à porter atteinte aux droits et intérêts financiers, commerciaux ou moraux de {{productName}} ou des usagers du service.
+
+Les usagers s'engagent à respecter la valeur de la plate-forme. Ils s'interdisent de monnayer, vendre ou concéder tout ou partie de l'accès à la plate-forme.
+
+### 6.4. Garantie des usagers envers Bayes Impact France
+
+Les usagers garantissent {{owner}} contre toutes plaintes, réclamations, actions, revendications quelconques que {{owner}} pourrait subir du fait de la violation par eux de l'une quelconque de leurs obligations ou garanties aux termes des présentes conditions générales.
+
+Les usagers s'engagent à indemniser {{owner}} de tout préjudice subi et à payer tous les frais, charges, condamnations supportés de ce fait.
+
+## 7. Liens vers d'autres sites
+
+{{productName}} peut proposer des liens vers des sites internet de tiers. Les renvois vers des sites liés par hyperlien ne saurait engager la responsabilité de {{owner}}, qui ne peut être tenu responsable de leur contenu et n'offre aucune garantie à leur égard. Il appartient aux usagers de faire toutes les vérifications nécessaires ou opportunes avant de procéder à une quelconque transaction avec l'un de ces tiers.
+
+Aucun lien commercial ou partenariat financier ne lie {{owner}} avec les tiers vers lesquels {{productName}} peut renvoyer ses usagers. Ces derniers sont proposés à titre purement indicatif et en tenant compte des recommandations en vigueur.
+
+## 8. Licence et propriété intellectuelle
+
+Les usagers reconnaissent expressément la propriété de {{owner}} sur l'ensemble de la plate-forme, et notamment sur les systèmes, logiciels, structures, infrastructures, bases de données et contenus de toute nature (textes, images, visuels, musiques, logos, marques, base de données, etc.) qui sont exploités par {{owner}} pour le service et sont protégés par les droits d'auteur, les droits de propriété intellectuelle, les droits de propriété industrielle ou les droits des producteurs de bases de données en vigueur.
+
+Le Code Source du logiciel est mis à disposition en logiciel libre.
+
+Les usagers s'interdisent de copier et de détourner à leurs fins ou à celles de tiers le concept, les technologies ou tout autre élément de la plate-forme. Tous désassemblages, décompilations, décryptages, extractions, réutilisations, copies et plus généralement, tous actes de reproduction, représentation, diffusion et utilisation de l'un quelconque de ces éléments, en tout ou partie, sans l'autorisation de {{owner}} sont strictement interdits et pourront faire l'objet de poursuites judiciaires.
+
+{{owner}} ne revendique aucune propriété sur les éventuels contenus mis en ligne par les usagers sur la plate-forme, ni sur leurs données personnelles.
+
+## 9. Données personnelles
+
+L'association {{owner}} est soucieuse de la protection des données personnelles. Elle s'engage à respecter le meilleur niveau de protection en conformité avec la réglementation Informatique et Libertés.
+
+Le responsable du traitement est l'association {{owner}}.
+
+Afin de proposer le service, {{productName}} demande, sans les enregistrer, des données personnelles sur les usagers, notamment : symptômes éventuelles, premier jour des symptômes, listes de contact croisés lors de la période contagieuse. Elles ne sont ni conservées par {{owner}} ou par {{productName}}, ni cédées à des tiers, ni exploitées à des fins commerciales.
+
+L'usager peut également donner accès, via un système d'API, à des fonctionnalités externes au fonctionnement de {{productName}} (comme l'accès à son agenda ou son historique d'appel). Cet accès est donné sur la base du consentement de l'usager. Il est notifié auprès de lui, demeure temporaire et les données ne sont pas non plus transmises à {{owner}}.
+
+Dans le cadre de la fonction “suivi”, les usagers acceptent de communiquer une adresse email afin d'être contactés pour recevoir des informations par {{productName}}. La durée maximum de cette fonction suivi est de 14 jours. {{owner}} s'engage à supprimer les adresses emails des usagers à la fin du suivi. Les usagers disposent à tout moment d'un droit d'accès, de rectification et de suppression de cette adresse email en adressant une demande à cet effet à : privacy@bayesimpact.org
+
+La désinscription à la fonction de suivi est effective immédiatement, à l'issu des 14 jours. Les adresses emails sont supprimées dès lors que le processus informatique est enclenché et ce dans un délais maximum de deux semaines.
+
+Les personnes identifiées par des usagers de {{productName}} comme des “cas-contacts” et contactées par {{productName}} bénéficient des mêmes standards concernant la protection des données.
+
+Afin de garantir au mieux la protection des données personnelles de ses usagers, l'association {{owner}} est dotée d'un Délégué à la Protection des Données.
+
+Pour plus de détails, une page dédiée à notre politique de protection et de gestion des données des usagers est disponible [ici]({{privacyPageUrl}}).
+
+## 10. Dispositions générales
+
+Au cas où des dispositions des présentes conditions seraient déclarées invalides ou inapplicables, les autres resteraient en vigueur et de plein effet.
+
+Les usagers conviennent que ni les présentes conditions, ni l'usage du service ne créent de société ou d'entreprise commune, de contrat de travail ou de mandat entre eux et {{owner}}.
+
+Dans l'hypothèse d'une traduction des présentes conditions dans une ou plusieurs langues, la langue d'interprétation sera la langue française en cas de contradiction ou de contestation sur la signification d'un terme ou d'une disposition.
+
+Les présentes conditions sont souscrites pour une durée indéterminée.
+
+## 11. Modification
+
+{{owner}} se réserve le droit de modifier les présentes conditions générales à tout moment.
+
+Les usagers seront informés de ces modifications par tout moyen utile, dont notamment la publication sur {{productName}}.
+
+La date de mise à jour sera toujours indiquée en haut et en bas des présentes conditions.
+
+L'utilisation du service après affichage des ne modifications des présentes conditions générales sur {{productName}} implique l'acceptation pleine et entière des conditions modifiées.
+
+La seule façon de refuser l'acceptation d'une modification des présentes conditions est de cesser d'utiliser {{productName}}.
+
+L'usager qui n'accepte pas les conditions générales modifiées ne peut bénéficier du service.
+
+Tout usager qui a recours au service postérieurement à l'entrée en vigueur des conditions générales modifiées est réputé avoir accepté ces modifications.
+
+## 12. Litiges
+
+{{owner}} se réserve le droit de prendre toute mesure appropriée en cas de manquement par les usagers aux présentes conditions, ou d'infraction aux lois et règlements en vigueur, et notamment :
+
+ * publier tout message d'information utile ;
+ * avertir toute autorité concernée ;
+ * engager toute action judiciaire.
+
+L'utilisation du service est soumise à la loi française.
+
+En cas de litige, les tribunaux du ressort de Paris sont seuls compétents.
+
+Préalablement à tout recours au juge arbitral ou étatique, les usagers s'obligent à négocier avec {{owner}} dans un esprit de loyauté et de bonne foi un accord amiable en cas de survenance de tout conflit relatif à la plate-forme ou aux présentes conditions, y compris portant sur leur validité.
+
+Les usagers souhaitant mettre en œuvre le processus de négociation devront en informer {{owner}} par lettre recommandée avec accusé de réception en indiquant les éléments du conflit. Un temps d'échange physique ou par voie dématérialisée sera alors organisée entre les usagers et {{owner}}. Si, au terme d'un délai de six mois, les usagers et {{owner}} ne parvenaient pas à s'entendre, le différend sera soumis à la juridiction compétente désignée ci-dessus. Le cours de la prescription sera suspendu à compter de la mise en œuvre du processus de négociation soit la date de réception de l'acte d'information envoyé par lettre recommandée avec accusé de réception. La suspension du cours de la prescription prendra fin à la date de la signature du procès-verbal de conciliation ou de non-conciliation. En cas de refus des usagers ou de {{owner}} de signer ledit procès-verbal, l'autre partie peut prendre acte de ce refus en l'informant qu'à défaut de réaction de sa part dans un délai d'un mois, la saisine du juge compétent sera possible. Durant tout le processus de négociation et jusqu'à son issue, les usagers s'interdisent d'exercer toute action en justice contre {{owner}} pour le conflit objet de la négociation.
+
+## 13. Coordonnées du responsable et de l'hébergeur
+
+**Éditeur du site :**
+
+{{productName}} est édité par l'association {{owner}} domiciliée au 9 rue d'Alexandrie, 75002, Paris, 06 71 91 18 09
+
+**Responsable de la publication :**
+
+Le responsable de la publication est : Paul DUAN Adresse : 9 rue d'Alexandrie, 75002, Paris Contact mail : [contact@briserlachaine.org](contact@briserlachaine.org)
+
+**Hébergeur du site :**
+
+{{productName}} est hébergé par la société OVH, dont le siège est situé au 2 rue Kellermann, 59100, Roubaix, téléphone 09 72 10 10 07.
+Les serveurs d'OVH hébergeant {{productName}} sont situés à Gravelines, France.
+
+## 15. Date
+
+Les présentes conditions générales sont entrées en vigueur le 2 mai 2020
