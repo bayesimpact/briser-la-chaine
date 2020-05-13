@@ -38,6 +38,7 @@ const discreetLink: React.CSSProperties = {
 }
 const bayesHorizontalLogoStyle: React.CSSProperties = {
   filter: 'grayscale(1) brightness(0)',
+  height: 21.52, // 300 / 2370 * 170
   opacity: .3,
   width: 170,
 }
@@ -142,17 +143,19 @@ const TitleBase = (props: TitleProps): React.ReactElement => {
       src={logoImage} alt={config.productName} width={200}
       style={isMobileVersion ? {display: 'block', marginBottom: 30} : {display: 'none'}} />
     {isHighRisk ? <Trans parent={null}>
-      Un(e) proche atteint(e) du COVID-19 a indiqué vous
+      Un(e) proche atteint(e) du {{diseaseName: config.diseaseName}} a indiqué vous
       avoir <span style={riskyContactStyle}>
         probablement contaminé(e)
       </span> pendant sa période contagieuse.
     </Trans> : isModerateRisk ? <Trans parent={null}>
-      Un(e) proche atteint(e) du COVID-19 a indiqué vous
+      Un(e) proche atteint(e) du {{diseaseName: config.diseaseName}} a indiqué vous
       avoir <span style={lowRiskContactStyle}>
         peut-être contaminé(e)
       </span> pendant sa période contagieuse.
     </Trans> : <Trans>
-      Peut-être atteint(e) du <span style={{whiteSpace: 'nowrap'}}>COVID-19&nbsp;?</span>
+      Peut-être atteint(e) du <span style={{whiteSpace: 'nowrap'}}>
+        {{diseaseName: config.diseaseName}}&nbsp;?
+      </span>
     </Trans>}
     {isMobileVersion ? null : <React.Fragment>
       <img src={logoImage} alt="" style={{display: 'block', marginTop: 50, width: 285}} />

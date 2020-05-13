@@ -1,9 +1,12 @@
 import Chat3FillIcon from 'remixicon-react/Chat3FillIcon'
 import MailLineIcon from 'remixicon-react/MailLineIcon'
 import MessengerFillIcon from 'remixicon-react/MessengerFillIcon'
+import ShareBoxFillIcon from 'remixicon-react/ShareBoxFillIcon'
 import WhatsappLineIcon from 'remixicon-react/WhatsappLineIcon'
 import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import {useTranslation} from 'react-i18next'
+
+import {shareAction, useDispatch} from 'store/actions'
 
 
 type LinkProps = React.HTMLProps<HTMLAnchorElement>
@@ -11,6 +14,9 @@ type LinkProps = React.HTMLProps<HTMLAnchorElement>
 const ExternalLinkBase: React.FC<LinkProps> = (props: LinkProps): React.ReactElement =>
   <a rel="noopener noreferrer" target="_blank" {...props} />
 const ExternalLink = React.memo(ExternalLinkBase)
+
+
+const hasNavigatorShare = !!navigator.share
 
 
 interface ShareButtonsProps {
@@ -49,33 +55,48 @@ const shareIconSize = 26
 const ShareButtons = (props: ShareButtonsProps): React.ReactElement => {
   const {buttonStyle, onMessengerClick, sharedText, title} = props
   const {t} = useTranslation()
+  const dispatch = useDispatch()
   const whatsappLink = `https://wa.me/?text=${sharedText}`
   const messengerLink = `fb-messenger://share?link=${sharedText}`
   const isApple = /(mac|iphone|ipod|ipad)/i.test(navigator.platform)
   const smsLink = isApple ? `sms:?&body=${sharedText}` : `sms:?body=${sharedText}`
   const [isMessengerOpening, setIsMessengerOpening] = useState(false)
-  const handleMail = useCallback(
-    (): void => void window.open(
+  const handleShare = useCallback((): void => {
+    dispatch(shareAction)
+  }, [dispatch])
+  const handleMail = useCallback((): void => {
+    handleShare()
+    window.open(
       `mailto:?subject=${encodeURIComponent(config.productName)}&` +
-      `body=${encodeURIComponent(sharedText)}`, '_blank'),
-    [sharedText])
+      `body=${encodeURIComponent(sharedText)}`, '_blank')
+  }, [handleShare, sharedText])
   const handleMessengerClick = useCallback(() => {
     onMessengerClick?.()
     setIsMessengerOpening(true)
   }, [onMessengerClick])
+  const handleNativeShare = useCallback((): void => {
+    handleShare()
+    navigator.share?.({text: sharedText, title: config.productName, url: config.canonicalUrl})
+  }, [handleShare, sharedText])
   useEffect((): (() => void) => {
     if (!isMessengerOpening) {
       return (): void => void 0
     }
     const timeout = window.setTimeout((): void => {
+      handleShare()
       window.open(messengerLink, '_blank')
       setIsMessengerOpening(false)
     }, 1000)
     return (): void => window.clearTimeout(timeout)
-  }, [isMessengerOpening, messengerLink])
+  }, [isMessengerOpening, handleShare, messengerLink])
   const whatsappStyle = useMemo((): React.CSSProperties => ({
     ...shareButtonStyle,
     backgroundColor: colors.WHATSAPP_GREEN,
+    ...buttonStyle,
+  }), [buttonStyle])
+  const nativeShareStyle = useMemo((): React.CSSProperties => ({
+    ...shareButtonStyle,
+    backgroundColor: '#000',
     ...buttonStyle,
   }), [buttonStyle])
   const messengerStyle = useMemo((): React.CSSProperties => ({
@@ -97,14 +118,19 @@ const ShareButtons = (props: ShareButtonsProps): React.ReactElement => {
   return <React.Fragment>
     {title ? <div style={shareTextStyle}>{title}</div> : undefined}
     <div style={shareButtonsContainerStyle} aria-label={t('Envoyer par SMS')}>
-      <ExternalLink href={smsLink} style={smsStyle}>
+      <ExternalLink href={smsLink} style={smsStyle} onClick={handleShare}>
         <Chat3FillIcon size={shareIconSize} />
       </ExternalLink>
       <div style={mailStyle} onClick={handleMail} aria-label={t('Envoyer par email')}>
         <MailLineIcon size={shareIconSize} />
       </div>
+      {hasNavigatorShare ? <div
+        style={nativeShareStyle} onClick={handleNativeShare} aria-label={t('Partager')}>
+        <ShareBoxFillIcon size={shareIconSize} />
+      </div> : null}
       <ExternalLink
-        href={whatsappLink} style={whatsappStyle} aria-label={t('Partager sur WhatsApp')}>
+        href={whatsappLink} style={whatsappStyle} aria-label={t('Partager sur WhatsApp')}
+        onClick={handleShare}>
         <WhatsappLineIcon size={shareIconSize} />
       </ExternalLink>
       {isApple ? <div
@@ -112,7 +138,8 @@ const ShareButtons = (props: ShareButtonsProps): React.ReactElement => {
         aria-label={t('Partager sur Messenger')}>
         <MessengerFillIcon size={shareIconSize} />
       </div> : <ExternalLink
-        href={messengerLink} style={messengerStyle} aria-label={t('Partager sur Messenger')}>
+        href={messengerLink} style={messengerStyle} aria-label={t('Partager sur Messenger')}
+        onClick={handleShare}>
         <MessengerFillIcon size={shareIconSize} />
       </ExternalLink>}
     </div>

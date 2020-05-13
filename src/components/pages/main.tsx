@@ -102,8 +102,8 @@ const App = (): React.ReactElement => {
     <Route path={Routes.COME_BACK_LATER} component={ComeBackLaterPage} />
     <Route path={Routes.REFERRAL} component={ReferralPage} />
     <Route path={Routes.PEDAGOGY_OUTRO} component={PedagogyOutroPage} />
-    {hasOnsetDate ? null : <Route path={Routes.SYMPTOMS_ONSET} component={Symptoms} />}
-    {hasOnsetDate ? <Route path={Routes.CALENDAR} component={CalendarPage} /> : null}
+    <Route path={Routes.SYMPTOMS_ONSET} component={Symptoms} />
+    <Route path={Routes.CALENDAR} component={CalendarPage} />
     <Route path={Routes.CONTACTS_SEARCH} component={ContagiousPeriod} />
     <Route path={Routes.MEMORY_OUTRO} component={MemoryOutroPage} />
     <Route path={Routes.CONTACTS_LIST} component={ContactsListPage} />

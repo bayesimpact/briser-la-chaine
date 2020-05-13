@@ -18,7 +18,9 @@ export default (): string => '<!doctype html>' + ReactDOMServer.renderToString(
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         id="viewport" />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content="Briser la chaîne de contamination du Covid-19" />
+      <meta
+        property="og:title"
+        content={`Briser la chaîne de contamination du ${config.diseaseName}`} />
       <meta property="og:description" name="description" content={description} />
       <meta property="og:image" content={`https://${config.canonicalUrl}${snippetImage}`} />
       <meta property="og:url" content={`https://${config.canonicalUrl}`} />

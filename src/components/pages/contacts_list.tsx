@@ -18,12 +18,12 @@ import UserAddLineIcon from 'remixicon-react/UserAddLineIcon'
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router'
-import {Redirect} from 'react-router-dom'
 
 import {useFastForward} from 'hooks/fast_forward'
-import {alertPerson, noDate, noOp, useDispatch} from 'store/actions'
+import {alertPerson, copyPersonalMessage, noDate, noOp, showAnonymousMessageContentAction,
+  useDispatch} from 'store/actions'
 import {useDateOption} from 'store/i18n'
-import {useAlert, useIsHighRisk, usePersonContactDays, useReferralUrl,
+import {useAlert, useIsHighRisk, usePersonContactDays, useReferralUrl, usePeopleToAlert,
   useSelector} from 'store/selections'
 import {Routes} from 'store/url'
 import {beautifyPhone, normalizeEmail, normalizePhone, validateEmail,
@@ -218,9 +218,9 @@ const ThankYouPopUp = React.memo(ThankYouPopUpBase)
 
 interface MessageSectionProps {
   isHighRisk: boolean
-  period: string
   person: bayes.casContact.Person
   onAlert?: () => void
+  startDate?: string
 }
 
 const anonymousContainerStyle: React.CSSProperties = {
@@ -252,7 +252,7 @@ const showContentButtonStyle = {
   display: 'flex',
 }
 const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactElement => {
-  const {isHighRisk, onAlert, period, person: {personId}} = props
+  const {isHighRisk, onAlert, person: {personId}} = props
   const {alertMediums: alertedMediums = []} = useAlert(personId) || {}
   const {t} = useTranslation()
   const [isContentShown, setIsContentShown] = useState(false)
@@ -274,8 +274,12 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
     justifyContent: 'center',
     margin: '24px 0',
   }
-  const toggleContentShown =
-    useCallback((): void => setIsContentShown(contentShown => !contentShown), [])
+  const toggleContentShown = useCallback((): void => {
+    setIsContentShown(contentShown => !contentShown)
+    if (!isContentShown) {
+      dispatch(showAnonymousMessageContentAction)
+    }
+  }, [dispatch, isContentShown])
   const [isValidated, setValidated] = useState(false)
   useEffect((): void => {
     if (newAlertMedium) {
@@ -307,13 +311,36 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
         <ArrowDownSLineIcon style={arrowStyle} />}
     </div>
     {isContentShown ? <Trans style={messageTextStyle}>
-      Bonjour, une personne potentiellement atteinte du COVID-19 a indiqué vous avoir croisé(e) lors
-      de sa période contagieuse du {{period: period}}.
-      Il est important que vous preniez les précautions nécessaires dès aujourd'hui
-      (précaution + confinement).<br />
-      Ce site gratuit vous donnera toutes les étapes en fonction de votre degré d'exposition
-      au virus&nbsp;:<br />
-      {{referralUrl}}</Trans> : null}
+      Bonjour,<br /><br />
+
+      Nous vous écrivons de la part d'une personne porteuse du {{diseaseName: config.diseaseName}}
+      {' '}qui a indiqué vous avoir croisé(e) récemment pendant sa période contagieuse.<br /><br />
+
+      Le respect de la vie privée de nos utilisateurs est notre priorité, voilà pourquoi votre
+      connaissance est anonyme elle aussi.<br /><br />
+
+      Même si vous n'avez pas de symptômes aujourd'hui, il est possible que vous soyez porteur(se)
+      du virus et que vous soyez déjà contagieux(se).<br /><br />
+
+      Ne paniquez pas, nous sommes là pour vous aider. Afin de vous protéger ainsi que vos proches,
+      il est indispensable que vous preniez toutes les précautions nécessaires
+      dès aujourd'hui.<br /><br />
+
+      Pour briser la chaîne de contamination, nous vous invitons à venir sur notre site où vous
+      pourrez notamment vérifier vos symptômes et accéder à un suivi personnalisé.<br /><br />
+
+      <a rel="noopener noreferrer" target="_blank" href={referralUrl}>
+        Briser La Chaine
+      </a><br /><br />
+
+      {{productName: config.productName}} est un site entièrement gratuit réalisé par Bayes Impact,
+      une ONG citoyenne engagée dans la lutte contre la propagation du virus.<br /><br />
+
+      Ensemble, brisons la chaîne de contamination.<br /><br />
+
+      L'équipe de BriserLaChaîne.org,<br />
+      Une initiative de l'ONG citoyenne Bayes Impact.
+    </Trans> : null}
     <form onSubmit={handleSubmit}>
       {isNewAlertMediumShown ? <PhoneEmailInput
         value={newAlertMedium} onChange={setNewAlertMedium} style={phoneInputStyle}
@@ -378,24 +405,25 @@ const textCopiedCheckStyle: React.CSSProperties = {
   transform: 'translateY(-50%)',
 }
 const PersonalMessageSectionBase =
-  ({onAlert, period, person}: MessageSectionProps): React.ReactElement => {
+  ({onAlert, person, startDate}: MessageSectionProps): React.ReactElement => {
     const {t} = useTranslation()
     const dispatch = useDispatch()
     const {name, displayName = name, personId} = person
     const referralUrl = useReferralUrl(personId)
     const isAlerted = useAlert(personId)
     const defaultText = useMemo((): string => t("Bonjour, j'ai découvert que j'étais " +
-      "probablement atteint(e) du COVID-19. Je t'écris car nous nous sommes croisés pendant " +
-      "ma période contagieuse du {{period}}, et donc je t'ai peut-être contaminé(e). " +
+      "probablement atteint(e) du {{diseaseName}}. Je t'écris car nous nous sommes " +
+      'croisé(e)s pendant ma période contagieuse qui a commencé le {{startDate}}, ' +
+      "je t'ai donc peut-être contaminé(e). \n\n" +
       'Je tenais donc à te prévenir car il est très important que tu prennes les précautions ' +
       'nécessaires pour vous protéger toi et tes proches. Même sans symptôme, il est possible ' +
-      'que tu sois déjà contagieux(se). ' +
+      'que tu sois déjà contagieux(se). \n\n' +
       "Pour briser la chaîne de contamination, je te conseille d'aller sur le site que " +
       "j'ai utilisé pour te prévenir, où tu pourras notamment vérifier tes symptômes et " +
-      'accéder à un suivi personnalisé\u00A0: {{url}} ' +
-      "(c'est ce que j'ai utilisé pour te prévenir) " +
+      'accéder à un suivi personnalisé\u00A0: \n\n{{url}} \n' +
+      "(c'est ce que j'ai utilisé pour te prévenir) \n\n" +
       "PS\u00A0: Le site a été créé par une ONG citoyenne, c'est entièrement gratuit et anonyme.",
-    {period: period, url: referralUrl}), [period, referralUrl, t])
+    {diseaseName: config.diseaseName, startDate, url: referralUrl}), [startDate, referralUrl, t])
     const [isCustomText, setIsCustomText] = useState(false)
     const radioButtonStyle: React.CSSProperties = {
       backgroundColor: isAlerted ? '#000' : 'initial',
@@ -432,8 +460,9 @@ const PersonalMessageSectionBase =
     const [isTextCopied, setIsTextCopied] = useState(false)
     const handleCopy = useCallback((): void => {
       copyToClipboard(text)
+      dispatch(copyPersonalMessage(text.includes(referralUrl), !isCustomText))
       setIsTextCopied(true)
-    }, [text])
+    }, [dispatch, isCustomText, referralUrl, text])
     useEffect((): (() => void) => {
       if (!isTextCopied) {
         return (): void => void 0
@@ -659,14 +688,12 @@ const ContactsListBase = (props: ContactsListProps): React.ReactElement => {
     }
     onSelectPerson(personId)
   }, [onSelectPerson, people, selectNavItem])
-  if (!people.length) {
-    return <Redirect to={Routes.ROOT} />
-  }
   const numAlertedPeople = people.filter(({personId}): boolean => !!alerts[personId]).length
   return <div style={contactsListStyle}>
-    <Trans parent="header" style={contactsListHeaderStyle} count={numAlertedPeople}>
-      {{numAlertedPeople}}/{{numTotalPeople: people.length}} personne alertée
-    </Trans>
+    {people.length ?
+      <Trans parent="header" style={contactsListHeaderStyle} count={numAlertedPeople}>
+        {{numAlertedPeople}}/{{numTotalPeople: people.length}} personne alertée
+      </Trans> : null}
     <BurgerMenu />
     <div style={contactsListContainerStyle} ref={scrollableListRef} className="no-scrollbars">
       <NavItem
@@ -710,29 +737,20 @@ const alertedIconStyle: React.CSSProperties = {
   marginRight: 8,
 }
 
-interface ContagiousPeriod {
-  contagiousPeriodEnd: Date|undefined
-  contagiousPeriodStart: Date|undefined
-}
-
 const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElement => {
   const {onDone, person} = props
   const {t} = useTranslation()
   const dateOption = useDateOption()
   const dispatch = useDispatch()
-  const {contagiousPeriodEnd = new Date(), contagiousPeriodStart = subDays(new Date(), 1)} =
-    useSelector(({user: {contagiousPeriodEnd, contagiousPeriodStart}}): ContagiousPeriod =>
-      ({contagiousPeriodEnd, contagiousPeriodStart}))
-  const period = useMemo(() =>
-    t('{{start}} au {{end}}', {
-      end: dateFormat(contagiousPeriodEnd, 'd MMMM yyyy', dateOption),
-      start: dateFormat(contagiousPeriodStart, 'd MMMM', dateOption)}),
-  [contagiousPeriodEnd, contagiousPeriodStart, dateOption, t])
+  const contagiousPeriodStart =
+    useSelector(({user: {contagiousPeriodStart}}): Date|undefined => contagiousPeriodStart) ||
+    subDays(new Date(), 1)
+  const contagiousStartDate = useMemo(() =>
+    dateFormat(contagiousPeriodStart, 'd MMMM', dateOption), [contagiousPeriodStart, dateOption])
   const alerted = useAlert(person.personId)
-  const [isSenderAnonymous, setIsSenderAnonymous] =
-    useState(alerted?.isAlertedAnonymously !== false)
+  const [isSenderAnonymous, setIsSenderAnonymous] = useState(!!alerted?.isAlertedAnonymously)
   useLayoutEffect((): void => {
-    setIsSenderAnonymous(alerted?.isAlertedAnonymously !== false)
+    setIsSenderAnonymous(!!alerted?.isAlertedAnonymously)
   }, [alerted, person.personId])
   const [isThanksShown, setIsThanksShown] = useState(false)
   useEffect((): (() => void) => {
@@ -768,8 +786,8 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
     dispatch(alertPerson(person.personId))
   }, [dispatch, isThanksShown, openThanks, person.personId])
   const tabs = useMemo((): readonly string[] => [
-    t('Alerter anonymement'),
     t('Alerter moi-même'),
+    t('Alerter anonymement'),
   ], [t])
   const {alertMediums: alertedMediums = []} = useAlert(person.personId) || {}
   return <div style={{margin: '24px 30px 0'}}>
@@ -805,12 +823,13 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
       {t('Contacter à nouveau')}
     </BottomDiv> : <div style={{display: 'flex', flexDirection: 'column', margin: '30px 0 0'}}>
       <Tabs
-        style={tabsStyle} onChangeTab={handleChangeTab} tabSelected={isSenderAnonymous ? 0 : 1}
+        style={tabsStyle} onChangeTab={handleChangeTab} tabSelected={isSenderAnonymous ? 1 : 0}
         tabs={tabs} />
       {isSenderAnonymous ? <AnonymousMessageSection
-        period={period} person={person} onAlert={openThanks} isHighRisk={isHighRisk} /> :
+        person={person} onAlert={openThanks} isHighRisk={isHighRisk} /> :
         <PersonalMessageSection
-          onAlert={openThanks} period={period} person={person} isHighRisk={isHighRisk} />}
+          onAlert={openThanks} startDate={contagiousStartDate}
+          person={person} isHighRisk={isHighRisk} />}
     </div>}
   </div>
 }
@@ -821,17 +840,8 @@ const fadeoutMillisec = 1500
 
 
 const ContactsListPage = (): React.ReactElement => {
-  // TODO(pascal): Filter people in validated state.
   const history = useHistory()
-  const allPeople = useSelector(({people}: RootState) => people)
-  const contacts = useSelector(({contacts}: RootState) => contacts)
-  const people = useMemo(
-    (): readonly bayes.casContact.Person[] => allPeople.
-      filter((person: bayes.casContact.Person): boolean => Object.values(contacts).
-        some(({contacts: dayContacts = [], isDayConfirmed = false}): boolean =>
-          isDayConfirmed && dayContacts.
-            some(({personId}): boolean => person.personId === personId))),
-    [allPeople, contacts])
+  const people = usePeopleToAlert()
   const alerts = useSelector(({alerts}): AlertsState => alerts)
   const findNextNotAlerted = useCallback(
     () => people.find(({personId}) => !alerts[personId]), [alerts, people])

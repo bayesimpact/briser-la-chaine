@@ -125,7 +125,7 @@
     "webpack-pwa-manifest": "^4.x.x",
     "whatwg-fetch": "^3.x.x"
   },
-  "description": "Find and warn your contacts to prevent covid-19 spread",
+  "description": "Find and warn your contacts to prevent COVID-19 spread",
   "name": "CasContact",
   "private": true,
   "scripts": {

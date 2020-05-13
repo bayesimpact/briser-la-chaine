@@ -1,3 +1,4 @@
+import Storage from 'local-storage-fallback'
 import {Action, Dispatch} from 'redux'
 import {useDispatch as reactUseDispatch} from 'react-redux'
 import {ThunkAction, ThunkDispatch} from 'redux-thunk'
@@ -9,21 +10,31 @@ import {useSelector} from './selections'
 export type AllActions =
   | AlertPerson
   | ComputeContagiousPeriod
+  | CleanStorage
+  | CopyPersonalMessage
   | CreateContact
   | CreateNewPerson
   | Diagnose
   | DropContact
+  | GoToExternalDiagnostic
   | PageIsLoaded
   | SaveContacts
   | SaveKnownRisk
   | SaveSymptomsOnsetDate
+  | ShareApp
+  | ShowAnonymousMessageContent
   | UpdateContact
   | UpdatePerson
 
 // FIXME(cyrille): Add actions to log.
 export const ACTIONS_TO_LOG: {[K in AllActions['type']]?: string} = {
+  ALERT_PERSON: 'Alert a contacted person',
+  COPY_PERSONAL_MESSAGE: 'Copy personal message',
   DIAGNOSE: 'Diagnostic computed',
+  GO_TO_EXTERNAL_DIAG: 'Go to external diagnostic',
   PAGE_IS_LOADED: 'Page is loaded',
+  SHARE_APP: 'Share the app',
+  SHOW_ANONYMOUS_MESSAGE_CONTENT: 'Anonymous message content is shown',
 }
 
 type DispatchAllActions =
@@ -103,6 +114,12 @@ const saveKnownRisk: SaveKnownRisk = {
   type: 'SET_KNOWN_RISK',
 }
 
+export type ShareApp = Readonly<Action<'SHARE_APP'>>
+
+const shareAction: ShareApp = {
+  type: 'SHARE_APP',
+}
+
 interface CreateNewPerson extends Readonly<Action<'CREATE_NEW_PERSON'>> {
   readonly name: string
   readonly personId: string
@@ -155,6 +172,12 @@ function dropContact(contact: bayes.casContact.Contact): DropContact {
   return {contact, date: contact.date, type: 'DROP_CONTACT'}
 }
 
+type GoToExternalDiagnostic = Readonly<Action<'GO_TO_EXTERNAL_DIAG'>>
+
+const goToExternalDiagnosticAction: GoToExternalDiagnostic = {
+  type: 'GO_TO_EXTERNAL_DIAG',
+}
+
 interface PageIsLoaded extends Readonly<Action<'PAGE_IS_LOADED'>> {
   readonly pathname: string
 }
@@ -182,8 +205,38 @@ interface Diagnose extends Readonly<Action<'DIAGNOSE'>> {
 
 function diagnose(symptoms: readonly bayes.casContact.Symptom[]): Diagnose {
   return {symptoms, type: 'DIAGNOSE'}
-
 }
+
+interface CopyPersonalMessage extends Readonly<Action<'COPY_PERSONAL_MESSAGE'>> {
+  hasReferralUrl: boolean
+  isDefaultText: boolean
+}
+
+function copyPersonalMessage(hasReferralUrl: boolean, isDefaultText: boolean): CopyPersonalMessage {
+  return {
+    // Whether the text that was copied actually contained the referral URL.
+    hasReferralUrl,
+    // Whether the text that was copied is the text we suggested.
+    isDefaultText,
+    type: 'COPY_PERSONAL_MESSAGE',
+  }
+}
+
+export type CleanStorage = Readonly<Action<'CLEAN_STORAGE'>>
+
+function cleanStorage(): CleanStorage {
+  Storage.clear()
+  return {type: 'CLEAN_STORAGE'}
+}
+
+type ShowAnonymousMessageContent = Readonly<Action<'SHOW_ANONYMOUS_MESSAGE_CONTENT'>>
+
+const showAnonymousMessageContentAction: ShowAnonymousMessageContent = {
+  type: 'SHOW_ANONYMOUS_MESSAGE_CONTENT',
+}
+
 export {alertPerson, computeContagiousPeriodAction, createContact, createNewPerson, diagnose,
   dropContact, isDateAction, saveContacts, saveSymptomsOnsetDate, updatePerson, updateContact,
-  saveKnownRisk, useDispatch, useSelector, noOp, pageIsLoaded}
+  saveKnownRisk, useDispatch, useSelector, noOp, pageIsLoaded, goToExternalDiagnosticAction,
+  shareAction, copyPersonalMessage, cleanStorage, showAnonymousMessageContentAction}
+

@@ -1,22 +1,25 @@
-import {eachDayOfInterval, format as dateFormat, subDays} from 'date-fns'
+import {format as dateFormat} from 'date-fns'
 import _chunk from 'lodash/chunk'
-import React, {useCallback, useMemo, useState} from 'react'
+import React, {useCallback, useEffect, useMemo, useState} from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router'
 import {Redirect, Link} from 'react-router-dom'
+import LightbulbFillIcon from 'remixicon-react/LightbulbFillIcon'
 import CheckLineIcon from 'remixicon-react/CheckLineIcon'
 import LockFillIcon from 'remixicon-react/LockFillIcon'
 import UserFillIcon from 'remixicon-react/UserFillIcon'
 
 import {useFastForward} from 'hooks/fast_forward'
-import {useNumPeopleToAlert, useSelector, useSymptomsOnsetDate} from 'store/selections'
+import {useDaysToValidate, useNumPeopleToAlert, useSelector,
+  useSymptomsOnsetDate} from 'store/selections'
 import {Routes} from 'store/url'
 import {useDateOption} from 'store/i18n'
 
 import BurgerMenu from 'components/burger_menu'
-import {darkButtonStyle} from 'components/buttons'
+import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import ContactsSearch from 'components/contacts_search'
 import DrawerContainer from 'components/drawer_container'
+import {Modal} from 'components/modal'
 import {BottomDiv} from 'components/navigation'
 
 
@@ -115,7 +118,8 @@ interface DayProgressProps {
 }
 
 
-const textStyle: React.CSSProperties = {
+const progressTextStyle: React.CSSProperties = {
+  fontSize: 15,
   fontStyle: 'italic',
   left: '50%',
   position: 'absolute',
@@ -149,13 +153,60 @@ const DayProgressBase = (props: DayProgressProps): React.ReactElement => {
   }
   return <div style={containerStyle}>
     <div style={progressStyle} />
-    <div style={textStyle}>
+    <div style={progressTextStyle}>
       {t('{{numDaysValidated}}/{{count}} jour à vérifier', {count: numDays, numDaysValidated})}
     </div>
   </div>
 }
 const DayProgress = React.memo(DayProgressBase)
 
+
+interface NoContactModalProps {
+  isShown: boolean
+  onClose: () => void
+  onValidate: () => void
+}
+const modalContainer: React.CSSProperties = {
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  padding: '30px 20px',
+}
+const modalTitle: React.CSSProperties = {
+  fontSize: 19,
+  fontWeight: 'bold',
+  marginBottom: 40,
+  textAlign: 'center',
+}
+const noticeContainerStyle: React.CSSProperties = {
+  alignItems: 'center',
+  backgroundColor: colors.PALE_GREY,
+  borderRadius: 10,
+  display: 'flex',
+  fontSize: 13,
+  justifyContent: 'center',
+  padding: 20,
+}
+const NoContactModalBase = (props: NoContactModalProps): React.ReactElement => {
+  const {onClose, onValidate} = props
+  const {t} = useTranslation()
+  return <Modal style={modalContainer} {...props}>
+    <div style={modalTitle}>
+      {t("Êtes vous sûr(e) de n'avoir croisé personne pendant cette période\u00A0?")}
+    </div>
+    <div>
+      <div style={darkButtonStyle} onClick={onClose} >{t('Vérifier à nouveau')}</div>
+      <div style={lightButtonStyle} onClick={onValidate}>{t("Passer à l'étape suivante")}</div>
+    </div>
+    <div style={noticeContainerStyle}>
+      <LightbulbFillIcon size={21} />
+      <span style={{marginLeft: 19}}>
+        {t("Vous pourrez toujours ajouter des personnes à l'étape suivante")}
+      </span>
+    </div>
+  </Modal>
+}
+const NoContactModal = React.memo(NoContactModalBase)
 
 const todayDate = new Date()
 // Max number of cards per line for contagious period screen.
@@ -192,10 +243,6 @@ const dayProgressStyle: React.CSSProperties = {
 const bottomDivStyle: React.CSSProperties = {
   boxShadow: '0 0 15px 0 rgba(0, 0, 0, 0.15)',
 }
-const validateButtonStyle: React.CSSProperties = {
-  ...darkButtonStyle,
-  backgroundColor: colors.VIBRANT_GREEN,
-}
 
 
 const ContagiousPeriodBase = (): React.ReactElement => {
@@ -203,13 +250,7 @@ const ContagiousPeriodBase = (): React.ReactElement => {
   const {t} = useTranslation()
   const [dateShown, setDateShown] = useState<Date|undefined>()
   const symptomsOnsetDate = useSymptomsOnsetDate()
-  const firstSymptomsDate = symptomsOnsetDate || todayDate
-  // TODO(sil): Get those from Redux.
-  const contagiousStartDate = useMemo(
-    (): Date => subDays(
-      firstSymptomsDate, config.numDaysContagiousBeforeSymptoms), [firstSymptomsDate])
-  const contagiousDays = useMemo((): Date[] => eachDayOfInterval(
-    {end: todayDate, start: contagiousStartDate}), [contagiousStartDate])
+  const contagiousDays = useDaysToValidate()
   const contagiousDaysChunks = useMemo(
     (): Date[][] => _chunk(contagiousDays, numMaxCardPerLine), [contagiousDays])
   const handleCardClick = useCallback((date: Date) => setDateShown(date), [])
@@ -221,8 +262,23 @@ const ContagiousPeriodBase = (): React.ReactElement => {
       length,
   )
   const areEveryDaysValidated = numDaysValidated === contagiousDays.length
+  const [isNoContactModalShown, setIsNoContactModalShown] = useState(areEveryDaysValidated)
+  const [isNoContactValidated, setIsNoContactValidated] = useState(false)
+  const closeModal = useCallback(() => {
+    setIsNoContactModalShown(false)
+    setIsNoContactValidated(true)
+  }, [])
+  const validateNoContact = useCallback(() => {
+    setIsNoContactValidated(true)
+    setIsNoContactModalShown(false)
+  }, [])
 
   const firstDate = contagiousDaysChunks[0][0]
+  useEffect(() => {
+    if (areEveryDaysValidated && !totalContactsCount && !isNoContactValidated) {
+      setIsNoContactModalShown(true)
+    }
+  }, [areEveryDaysValidated, isNoContactValidated, totalContactsCount])
   useFastForward((): void => {
     if (dateShown) {
       handleDetailClose()
@@ -247,10 +303,24 @@ const ContagiousPeriodBase = (): React.ReactElement => {
     flexDirection: 'column',
     padding: 20,
   }
+  const bottomTextStyle: React.CSSProperties = {
+    backgroundColor: '#fff',
+    fontSize: 19,
+    fontWeight: 'bold',
+    paddingTop: 20,
+    textAlign: 'center',
+  }
+  const validateButtonStyle: React.CSSProperties = isNoContactValidated ?
+    lightButtonStyle : {
+      ...darkButtonStyle,
+      backgroundColor: colors.VIBRANT_GREEN,
+    }
   return <DrawerContainer
     drawer={dateShown && <ContactsSearch date={dateShown} onClose={handleDetailClose} />}
     isOpen={!!dateShown} onClose={handleDetailClose}>
     <BurgerMenu />
+    <NoContactModal
+      isShown={isNoContactModalShown} onClose={closeModal} onValidate={validateNoContact} />
     <div style={{marginTop: 20, padding: 20}}>
       <Trans parent="h1" style={titleStyle}>
         Retrouvez les personnes croisées pendant votre période contagieuse
@@ -263,17 +333,24 @@ const ContagiousPeriodBase = (): React.ReactElement => {
           key={index} line={chunk} onCardClick={handleCardClick} />)}
       </div>
       <BottomDiv defaultHeight={0} style={bottomDivStyle}>
-        {totalContactsCount && areEveryDaysValidated ? <div style={goToOutroStyle}>
-          <Link style={validateButtonStyle} to={Routes.MEMORY_OUTRO}>
-            {t('Prévenir mes {{count}} cas contacts', {count: totalContactsCount})}
-          </Link>
-          <div>
-            <LockFillIcon size={12} />{' '}
-            <Trans parent="span" style={{fontSize: 13}}>
-              Nous n'enverrons rien sans <strong>votre autorisation</strong>.
-            </Trans>
-          </div>
-        </div> : null}
+        {isNoContactValidated ?
+          <div style={bottomTextStyle}>
+            {t("J'ai vérifié n'avoir croisé personne")}
+          </div> : null}
+        {areEveryDaysValidated && (isNoContactValidated || totalContactsCount) ?
+          <div style={goToOutroStyle}>
+            <Link style={validateButtonStyle} to={Routes.MEMORY_OUTRO}>
+              {totalContactsCount ?
+                t('Prévenir mes {{count}} cas contacts', {count: totalContactsCount}) :
+                t("Passer à l'étape suivante")}
+            </Link>
+            <div>
+              <LockFillIcon size={12} />{' '}
+              <Trans parent="span" style={{fontSize: 13}}>
+                Nous n'enverrons rien sans <strong>votre autorisation</strong>.
+              </Trans>
+            </div>
+          </div> : null}
       </BottomDiv>
     </div>
   </DrawerContainer>

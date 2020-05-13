@@ -74,6 +74,8 @@ class MailTest(unittest.TestCase):
             'TemplateID': 123,
             'TemplateLanguage': True,
             'To': [{'Email': 'pascal@example.com'}],
+            'TrackOpens': 'disabled',
+            'TrackClicks': 'disabled',
         }]}, request.json())
 
 

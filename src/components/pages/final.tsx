@@ -70,10 +70,10 @@ const FinalPageBase = (): React.ReactElement => {
   const sharedText = t(
     'Je viens de briser ma chaîne de contamination en prévenant {{count}} personne de prendre ' +
     'les précautions nécessaires pour se protéger et protéger son entourage\u00A0! 💪\n\nSi vous ' +
-    "avez des symptômes du Covid-19, je vous recommande d'utiliser ce site gratuit et anonyme " +
-    "qui m'a été très utile\u00A0: {{url}}.\n\n(Site créé par une ONG, il n'y a aucun traçage de " +
-    'données\u00A0!)',
-    {count: numAlertedPeople, url: config.canonicalUrl},
+    "avez des symptômes du {{diseaseName}}, je vous recommande d'utiliser ce site gratuit et " +
+    "anonyme qui m'a été très utile\u00A0: {{url}}.\n\n(Site créé par une ONG, il n'y a aucun " +
+    'traçage de données\u00A0!)',
+    {count: numAlertedPeople, diseaseName: config.diseaseName, url: config.canonicalUrl},
   )
   useEffect(() => {
     const timeout = window.setTimeout((): void => setIsVisible(true), 300)

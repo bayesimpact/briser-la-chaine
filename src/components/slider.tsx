@@ -1,11 +1,11 @@
 import React, {useCallback, useMemo, useState} from 'react'
-import {useHistory, useRouteMatch} from 'react-router'
 import {Swipeable} from 'react-swipeable'
+
+import {ForwardFunc, useFastForward} from 'hooks/fast_forward'
+import {useRouteStepper} from 'hooks/stepper'
 
 import {BottomDiv} from 'components/navigation'
 import Bullets from 'components/bullets'
-
-import {ForwardFunc, useFastForward} from 'hooks/fast_forward'
 
 
 interface SlideProps {
@@ -61,11 +61,6 @@ interface SliderProps {
 }
 
 
-interface SlideRouteParams {
-  slide?: string
-}
-
-
 const pageStyle: React.CSSProperties = {
   margin: '0 auto',
   maxWidth: 700,
@@ -75,28 +70,13 @@ const pageStyle: React.CSSProperties = {
 }
 
 
-function maybeParseInt(value: string|undefined, maxNumber: number): number {
-  const numValue = Number.parseInt(value || '0', 10)
-  if (Number.isNaN(numValue)) {
-    return 0
-  }
-  return Math.min(Math.max(numValue, 0), maxNumber)
-}
-
-
 // This is a top level page and should never be nested in another one.
 // TOP LEVEL PAGE
 const Slider = (props: SliderProps): React.ReactElement => {
   const {arrowColor, borderColor, bottomComponent: BottomComponent, bulletColor,
     bulletSelectColor, children, onFastForward, slideStyle, transition = '1s'} = props
-  const history = useHistory()
-  const {path: route} = useRouteMatch()
-  const selectSlide = useCallback((slide: number): void => {
-    history.push(`${route}/${slide}`)
-  }, [history, route])
-  const match = useRouteMatch<SlideRouteParams>(`${route}/:slide?`)
   const numSlides = React.Children.count(children)
-  const currentSlideIndex = maybeParseInt(match?.params.slide, numSlides - 1)
+  const [currentSlideIndex, selectSlide] = useRouteStepper(numSlides)
   const goBack = useCallback((): void => {
     if (currentSlideIndex > 0) {
       selectSlide(currentSlideIndex - 1)

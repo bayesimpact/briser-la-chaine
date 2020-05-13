@@ -3,7 +3,7 @@ import _mapValues from 'lodash/mapValues'
 import Storage from 'local-storage-fallback'
 
 import {AllActions, isDateAction, getNextNoDate, noDate} from './actions'
-import {isProbablySick} from './symptoms'
+import {computeNeedsAssistanceNow, isProbablySick} from './symptoms'
 
 const today = new Date()
 const SAVED_USER_COOKIE = 'user-info'
@@ -39,7 +39,10 @@ function unsavedUser(state: UserState, action: AllActions): void|UserState {
       return {
         ...state,
         contaminationRisk: isProbablySick(action.symptoms),
+        isAssistanceRequiredNow: computeNeedsAssistanceNow(action.symptoms),
       }
+    case 'CLEAN_STORAGE':
+      return {}
   }
 }
 
@@ -175,6 +178,9 @@ function updateDateAndStore(
 
 // TODO(cyrille): Consider using string dates.
 function contacts(state: ContactState = startingContacts, action: AllActions): ContactState {
+  if (action.type === 'CLEAN_STORAGE') {
+    return {}
+  }
   if (!isDateAction(action)) {
     return state
   }
@@ -227,6 +233,8 @@ function people(state: PeopleState = startingPeople, action: AllActions): People
         ...person,
         ...action.person,
       } : person)
+    case 'CLEAN_STORAGE':
+      return []
   }
   return state
 }
@@ -249,6 +257,8 @@ function alerts(state: AlertsState = startingAlerts, action: AllActions): Alerts
       Storage.setItem(SAVED_ALERT_COOKIE, JSON.stringify(newState))
       return newState
     }
+    case 'CLEAN_STORAGE':
+      return {}
   }
   return state
 }

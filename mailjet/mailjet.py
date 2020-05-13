@@ -79,6 +79,8 @@ def send_email(template_id: str) -> str:
         'TemplateLanguage': True,
         'From': {'Email': _MAIL_SENDER_EMAIL, 'Name': _MAIL_SENDER_NAME},
         'To': recipients,
+        'TrackOpens': 'disabled',
+        'TrackClicks': 'disabled',
     }
 
     if _ADMIN_EMAIL:

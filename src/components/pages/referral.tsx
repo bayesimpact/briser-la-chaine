@@ -20,11 +20,13 @@ const buttonStyle: React.CSSProperties = {
 const ReferralPage = (): React.ReactElement => {
   const {t} = useTranslation()
   const title = <Trans>
-    Un(e) ami(e) malade du covid&nbsp;?<br />
+    Un(e) ami(e) malade du {{diseaseName: config.diseaseName}}&nbsp;?<br />
     Brisez la chaîne&nbsp;!
   </Trans>
   const subtitle = t(
-    'Partagez ce site à vos proches atteints du covid-19, nous les aideront à y faire face\u00A0!',
+    'Partagez ce site à vos proches atteints du {{diseaseName}}, nous les aiderons à y faire ' +
+    'face\u00A0!',
+    {diseaseName: config.diseaseName},
   )
   const text = useDefaultShareText()
   const share = useCallback((): void => {

@@ -15,6 +15,7 @@ const TermsPage = (props: {style?: React.CSSProperties}): React.ReactElement => 
   return <div style={style}>
     <ReactMarkdown source={translate(termsContent, {
       canonicalUrl: config.canonicalUrl,
+      diseaseName: config.diseaseName,
       owner: 'Bayes Impact France'.toLocaleUpperCase(),
       privacyPageUrl: Routes.PRIVACY,
       productName: config.productName.toLocaleUpperCase(),

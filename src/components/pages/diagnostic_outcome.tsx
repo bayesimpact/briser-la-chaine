@@ -8,7 +8,8 @@ import {useHistory} from 'react-router'
 import {Link} from 'react-router-dom'
 
 import {useFastForward} from 'hooks/fast_forward'
-import {useSelector} from 'store/actions'
+import {useRouteStepper} from 'hooks/stepper'
+import {goToExternalDiagnosticAction, useDispatch, useSelector} from 'store/actions'
 import {Routes} from 'store/url'
 
 import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
@@ -55,13 +56,41 @@ const warningIconStyle: React.CSSProperties = {
   flex: 'none',
   marginRight: 15,
 }
+const assistanceWarningStyle: React.CSSProperties = {
+  alignItems: 'center',
+  border: `solid 1px ${colors.SMOKEY_GREY}`,
+  borderRadius: 10,
+  display: 'flex',
+  fontSize: 13,
+  margin: '0 40px',
+  padding: '12px 22px',
+}
+const assistanceWarningNowStyle: React.CSSProperties = {
+  ...assistanceWarningStyle,
+  backgroundColor: colors.SALMON,
+  border: 'none',
+  color: '#fff',
+}
+const boldStyle: React.CSSProperties = {
+  color: 'inherit',
+  fontWeight: 600,
+  textDecoration: 'underline',
+}
+const greenStyle: React.CSSProperties = {
+  color: colors.VIBRANT_GREEN,
+  fontWeight: 600,
+}
 const DiagnosticOutcomePageBase = (): React.ReactElement => {
   const {t} = useTranslation()
   const history = useHistory()
+  const dispatch = useDispatch()
   const risk = useSelector(
     ({user: {contaminationRisk}}): ContaminationRisk|undefined => contaminationRisk)
   const hasKnownRisk = useSelector(
     ({user: {hasKnownRisk}}): boolean|undefined => hasKnownRisk)
+  const isAssistanceRequiredNow = useSelector(
+    ({user: {isAssistanceRequiredNow}}): boolean => !!isAssistanceRequiredNow,
+  )
   // There are 4 possibilities:
   //   - user w/o known risk with symptoms ==> They go to the main slider: app instructions.
   //   - user w/o known risk w/o symptoms ==> End of journey they can re-check outside the app.
@@ -69,57 +98,110 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
   //   - user w/o known risk with symptoms ==> They have specific slider: keep in touch.
   const isNaiveHighRisk = risk === 'high' && !hasKnownRisk
   const isNaiveLowRisk = risk === 'low' && !hasKnownRisk
-  const isReferralHighRisk = risk === 'high' && hasKnownRisk
   const isReferralLowRisk = risk === 'low' && hasKnownRisk
-  const icon = isNaiveLowRisk ? ThumbUpFillIcon : isReferralLowRisk ? Search2LineIcon :
-    UserSearchFillIcon
-  const title = isReferralLowRisk ?
-    <Trans style={normalWeightStyle}>
-      Il est <span style={importantStyle}>trop tôt</span> pour savoir si vous êtes atteint(e).
-      <br /><br />
-      Il reste <span style={veryImportantStyle}>vital</span> que vous
-      preniez toutes les précautions nécessaires.
-    </Trans> : isNaiveHighRisk || isReferralHighRisk ? <Trans style={normalWeightStyle}>
-      Vos symptômes <span style={importantStyle}>pourraient provenir</span> du covid-19.<br /><br />
-      Il est <span style={veryImportantStyle}>indispensable</span> que vous brisiez la chaîne
-      de contamination.
-    </Trans> : t('Vos symptômes ne semblent pas être des symptômes principaux du Covid-19')
-  const subtitle = isNaiveLowRisk ?
-    t("N'hésitez pas à consulter un médecin pour plus d'informations") : ''
-  const nextText = hasKnownRisk ?
-    t('Que dois-je faire\u00A0?') : isNaiveHighRisk ? t('Briser la chaîne') : ''
+  const [step, setStep] = useRouteStepper(isNaiveHighRisk ? 2 : 1)
+  const gotoSecondStep = useCallback((): void => setStep(1), [setStep])
   const handleNext = useCallback((): void => {
     if (isNaiveLowRisk) {
       return
     }
     if (isNaiveHighRisk) {
+      if (!step) {
+        gotoSecondStep()
+        return
+      }
       history.push(Routes.PEDAGOGY_INTRO)
       return
     }
     history.push(Routes.FOLLOW_UP)
-  }, [history, isNaiveLowRisk, isNaiveHighRisk])
+  }, [history, gotoSecondStep, isNaiveLowRisk, isNaiveHighRisk, step])
+  const handleDeeperDiagnostic = useCallback((): void => {
+    dispatch(goToExternalDiagnosticAction)
+  }, [dispatch])
   useFastForward(handleNext)
-  const nextButtonColor = isReferralHighRisk || isNaiveHighRisk ? colors.VIBRANT_GREEN : undefined
-  return <PedagogyLayout
-    title={title} icon={icon} subtitle={subtitle}
-    nextButton={nextText} onNext={handleNext} nextButtonColor={nextButtonColor}>
-    {isNaiveLowRisk ? <BottomDiv style={centeredTextStyle}>
-      <div style={{padding: '0 20px'}}>
-        <Link to={Routes.PEDAGOGY_INTRO} style={greenButtonStyle}>
-          {t('Alerter mes contacts quand même')}
-        </Link>
-        <a style={externalLinkStyle} href="https://maladiecoronavirus.fr/">
-          {t('Passer un diagnostic approfondi')}</a>
-      </div>
-      {/* TODO(pascal): DRY with intro_pedagogy module. */}
-      <div style={alertBottomDivStyle}>
+
+  if (isNaiveLowRisk) {
+    const title = t(
+      'Vos symptômes ne semblent pas être des symptômes principaux du {{diseaseName}}',
+      {diseaseName: config.diseaseName},
+    )
+    return <PedagogyLayout
+      title={title} icon={ThumbUpFillIcon}
+      subtitle={t("N'hésitez pas à consulter un médecin pour plus d'informations.")}>
+      <BottomDiv style={centeredTextStyle}>
+        <div style={{padding: '0 20px'}}>
+          <Link to={Routes.PEDAGOGY_INTRO} style={greenButtonStyle}>
+            {t('Alerter mes contacts quand même')}
+          </Link>
+          <a
+            style={externalLinkStyle} href="https://maladiecoronavirus.fr/" target="_blank"
+            rel="noopener noreferrer" onClick={handleDeeperDiagnostic}>
+            {t('Passer un diagnostic approfondi')}</a>
+        </div>
+        {/* TODO(pascal): DRY with intro_pedagogy module. */}
+        <div style={alertBottomDivStyle}>
+          <ErrorWarningFillIcon style={warningIconStyle} />
+          <Trans>
+            En cas de difficultés respiratoires, contactez le 15 <strong>immédiatement</strong>
+          </Trans>
+        </div>
+      </BottomDiv>
+    </PedagogyLayout>
+  }
+
+  if (isReferralLowRisk) {
+    return <PedagogyLayout
+      title={<Trans style={normalWeightStyle}>
+        Il est <span style={importantStyle}>trop tôt</span> pour savoir si vous êtes atteint(e).
+        <br /><br />
+        Il reste <span style={veryImportantStyle}>vital</span> que vous
+        preniez toutes les précautions nécessaires.
+      </Trans>} icon={Search2LineIcon}
+      nextButton={t('Que dois-je faire\u00A0?')} onNext={handleNext} />
+  }
+
+  if (hasKnownRisk) {
+    // Referral High Risk
+    return <PedagogyLayout
+      title={<Trans style={normalWeightStyle}>
+        Vos symptômes <span style={importantStyle}>pourraient provenir</span> du
+        {' '}{{diseaseName: config.diseaseName}}.<br /><br />
+        Il est <span style={veryImportantStyle}>indispensable</span> que vous brisiez la chaîne
+        de contamination.
+      </Trans>} icon={UserSearchFillIcon}
+      nextButton={t('Que dois-je faire\u00A0?')} onNext={handleNext}
+      nextButtonColor={colors.VIBRANT_GREEN} />
+  }
+
+  // Naive High Risk.
+  if (!step) {
+    return <PedagogyLayout
+      title={<Trans style={normalWeightStyle}>
+        Vos symptômes <span style={importantStyle}>pourraient provenir</span> du
+        {' '}{{diseaseName: config.diseaseName}}.
+      </Trans>} subtitle={t("Consulter votre médecin traitant pour plus d'informations.")}
+      icon={Search2LineIcon} nextButton={t("J'ai compris")} onNext={gotoSecondStep}>
+      <div style={isAssistanceRequiredNow ? assistanceWarningNowStyle : assistanceWarningStyle}>
         <ErrorWarningFillIcon style={warningIconStyle} />
-        <Trans>
-          En cas de difficultés respiratoires, contactez le 15 <strong>immédiatement</strong>
-        </Trans>
+        {isAssistanceRequiredNow ? <Trans>
+          Vous avez indiqué avoir des difficultés respiratoires. <a href="tel:15" style={boldStyle}>
+            Contactez le 15
+          </a> pour être pris(e) en charge rapidement.
+        </Trans> : <Trans>
+          En cas de difficultés respiratoires, <span style={boldStyle}>
+            contactez le 15 immédiatement
+          </span>.
+        </Trans>}
       </div>
-    </BottomDiv> : null}
-  </PedagogyLayout>
+    </PedagogyLayout>
+  }
+  return <PedagogyLayout
+    title={<Trans style={normalWeightStyle}>
+      Maintenant que vous avez pris vos précautions, il est vital de <span style={greenStyle}>
+        notifier vos contacts
+      </span> à votre tour.
+    </Trans>} icon={UserSearchFillIcon}
+    nextButton={t('Briser la chaîne')} onNext={handleNext} nextButtonColor={colors.VIBRANT_GREEN} />
 }
 const DiagnosticOutcomePage = React.memo(DiagnosticOutcomePageBase)
 

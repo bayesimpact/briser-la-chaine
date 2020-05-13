@@ -57,6 +57,8 @@ const init = (initOptions?: InitOptions): void => {
         import(`translations/${language}/${namespace}_i18next.json`),
       detection: {
         lookupQuerystring: 'hl',
+        // TODO(pascal): Add navigator when ready.
+        order: ['querystring', 'cookie', 'localStorage'],
       },
       fallbackLng: 'fr',
       interpolation: {
