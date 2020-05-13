@@ -10,6 +10,7 @@ import UserHeartFillIcon from 'remixicon-react/UserHeartFillIcon'
 import {RemixiconReactIconComponentType} from 'remixicon-react/dist/typings'
 
 import {useFastForward} from 'hooks/fast_forward'
+import {useRouteStepper} from 'hooks/stepper'
 import {computeContagiousPeriodAction, useDispatch} from 'store/actions'
 import {useDateOption} from 'store/i18n'
 import {useSelector, useSymptomsOnsetDate} from 'store/selections'
@@ -191,8 +192,7 @@ const CalendarPage = (): React.ReactElement => {
   const firstSymptomsDate = symptomsOnsetDate || subDays(new Date(), 1)
   const isOnsetToday = isSameDay(new Date(), firstSymptomsDate)
   const contagiousStartDate = subDays(firstSymptomsDate, config.numDaysContagiousBeforeSymptoms)
-  // TODO(pascal): Use a router so that browser navigation works between those steps.
-  const [step, setStep] = useState(0)
+  const [step, setStep] = useRouteStepper(4)
 
   const gotoNext = useCallback((): void => {
     if (!isContagiousPeriodComputed) {
@@ -204,7 +204,7 @@ const CalendarPage = (): React.ReactElement => {
       return
     }
     history.push(Routes.CONTACTS_SEARCH)
-  }, [dispatch, history, isContagiousPeriodComputed, step])
+  }, [dispatch, history, isContagiousPeriodComputed, setStep, step])
   useFastForward(gotoNext)
 
   const hasSymptomsOnsetDate = !!symptomsOnsetDate

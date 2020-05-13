@@ -12,6 +12,7 @@ const PrivacyPage = (props: {style?: React.CSSProperties}): React.ReactElement =
   const {style = {padding: '40px 30px'}} = props
   return <div style={style}>
     <ReactMarkdown source={translate(privacyContent, {
+      diseaseName: config.diseaseName,
       productName: config.productName,
     })} />
   </div>

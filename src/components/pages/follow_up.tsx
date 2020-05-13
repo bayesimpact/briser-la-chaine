@@ -277,7 +277,7 @@ const veryDiscreetLinkStyle: React.CSSProperties = {
 const FollowUpPageBase = (): React.ReactElement => {
   const isHighRisk = useSelector(({user: {contaminationRisk}}) => contaminationRisk === 'high')
   const history = useHistory()
-  const {t: translate} = useTranslation()
+  const {t, t: translate} = useTranslation()
   const mailText = translate(
     'Bonjour, Je souhaite être suivi(e) pendant 14 jours. Merci. Bien à vous')
   const handleNextButton = useCallback((): void => {
@@ -309,18 +309,21 @@ const FollowUpPageBase = (): React.ReactElement => {
           votre tour.
         </Trans>
       </React.Fragment> : <React.Fragment>
-        <div style={titleStyle}>{translate('On vous accompagne de bout en bout')}</div>
+        <div style={titleStyle}>{t('On vous accompagne de bout en bout')}</div>
         <div style={{margin: '0 20px'}}>
           <div>
             <Step
               icon={LineChartLineIcon}
-              text={translate('Diagnostic régulier de vos symptômes')} />
+              text={t('Diagnostic régulier de vos symptômes')} />
             <Step
               icon={ShieldCrossFillIcon}
-              text={translate('Suivi(e) au premier signe de covid-19')} />
+              text={t(
+                'Suivi(e) au premier signe de {{diseaseName}}',
+                {diseaseName: config.diseaseName},
+              )} />
             <Step
               icon={HandHeartFillIcon}
-              text={translate('100% gratuit et anonyme')} />
+              text={t('100% gratuit et anonyme')} />
           </div>
           <div style={{alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
             <div

@@ -1,6 +1,7 @@
 {
   amplitudeToken: 'a1067533ce6148de5bcac9df0ea0d508',
   canonicalUrl: 'www.BriserLaChaine.org',
+  diseaseName: 'COVID-19',
   facebookSSOAppId: 'whatever',
   followUpMail: 'suivi@briserlachaine.org',
   mailjetProxyUrl: 'https://mailjet-proxy.briserlachaine.org',

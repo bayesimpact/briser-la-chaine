@@ -1,4 +1,4 @@
-import {parseISO as parseISODate} from 'date-fns'
+import {eachDayOfInterval, parseISO as parseISODate, subDays} from 'date-fns'
 import {TFunction} from 'i18next'
 import {useSelector as reactUseSelector} from 'react-redux'
 
@@ -34,13 +34,16 @@ const usePersonContactDays = (
     return joinDays(days.map((day): Date => parseISODate(day)), 'EEEE d MMMM', t, dateOption)
   })
 
-const useNumPeopleToAlert = (): number => useSelector(({contacts}): number => {
-  const personIds = new Set<string>([])
-  Object.values(contacts).
-    filter(({isDayConfirmed}): boolean => !!isDayConfirmed).
-    forEach(({contacts}) => contacts?.forEach(({personId}) => personIds.add(personId)))
-  return personIds.size
-})
+const getPeopleToAlert = ({contacts, people}: RootState): readonly bayes.casContact.Person[] =>
+  people.filter((person: bayes.casContact.Person): boolean => Object.values(contacts).
+    some(({contacts: dayContacts = [], isDayConfirmed = false}): boolean =>
+      isDayConfirmed && dayContacts.some(({personId}): boolean => person.personId === personId)))
+
+const usePeopleToAlert = (): readonly bayes.casContact.Person[] => useSelector(getPeopleToAlert)
+
+// TODO(cyrille): Save this number in the state.
+const useNumPeopleToAlert = (): number => useSelector((state: RootState): number =>
+  getPeopleToAlert(state).length)
 
 const useIsHighRisk = (personId: string): boolean => useSelector(({contacts}): boolean =>
   Object.values(contacts).some(({contacts}): boolean =>
@@ -53,5 +56,28 @@ const useReferralUrl = (personId: string): string => {
   return config.canonicalUrl + (isHighRisk ? Routes.HIGH_RISK_SPLASH : Routes.MODERATE_RISK_SPLASH)
 }
 
-export {useAlert, useIsHighRisk, useNumPeopleToAlert, usePersonContactDays, useSelector,
-  useReferralUrl, useSymptomsOnsetDate}
+const getDaysToValidate = ({user}: RootState): readonly Date[] => {
+  const todayDate = new Date()
+  const {contagiousPeriodStart, symptomsOnsetDate} = user
+  const firstSymptomsDate = symptomsOnsetDate || todayDate
+  const contagiousStartDate = contagiousPeriodStart ||
+    subDays(firstSymptomsDate, config.numDaysContagiousBeforeSymptoms)
+  return eachDayOfInterval({end: todayDate, start: contagiousStartDate})
+}
+
+const useDaysToValidate = (): readonly Date[] => useSelector(getDaysToValidate)
+
+export {
+  getDaysToValidate,
+  getPeopleToAlert,
+  useAlert,
+  useDaysToValidate,
+  useIsHighRisk,
+  useNumPeopleToAlert,
+  usePeopleToAlert,
+  usePersonContactDays,
+  useReferralUrl,
+  useSelector,
+  useSymptomsOnsetDate,
+}
+

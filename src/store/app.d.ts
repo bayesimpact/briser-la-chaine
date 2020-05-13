@@ -62,6 +62,7 @@ type UserState = {
   contagiousPeriodStart?: Date
   contaminationRisk?: ContaminationRisk
   hasKnownRisk?: true
+  isAssistanceRequiredNow?: boolean
   symptomsOnsetDate?: Date
 }
 

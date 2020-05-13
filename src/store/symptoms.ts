@@ -39,6 +39,10 @@ function isProbablySick(symptoms: readonly bayes.casContact.Symptom[]): Contamin
   return score >= 3 ? 'high' : 'low'
 }
 
+function computeNeedsAssistanceNow(symptoms: readonly bayes.casContact.Symptom[]): boolean {
+  return symptoms.includes('SHORT_BREATH')
+}
+
 const SORTED_SYMPTOMS = _sortBy(SYMPTOMS.filter(({potential}) => potential), 'potential')
 
-export {SYMPTOMS, SORTED_SYMPTOMS, isProbablySick}
+export {SYMPTOMS, SORTED_SYMPTOMS, computeNeedsAssistanceNow, isProbablySick}

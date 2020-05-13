@@ -42,7 +42,7 @@ Pour plus d'informations sur la manière de gérer ses cookies : [site de la CN
 
 **La fonction suivi par e-mail préserve aussi vos données personnelles sensibles**
 
-Parmi nos fonctionnalités, nous permettons aux usagers dont notre algorithme a révélé qu'ils n'étaient a priori pas atteints du COVID19 ou qui le déclarent pro-activement, d'être suivis par email sur 14 jours, si ils ou elles le souhaitent.
+Parmi nos fonctionnalités, nous permettons aux usagers dont notre algorithme a révélé qu'ils n'étaient a priori pas atteints du {{diseaseName}} ou qui le déclarent pro-activement, d'être suivis par email sur 14 jours, si ils ou elles le souhaitent.
 
 Dans ce cadre, nous demandons donc leurs adresses mail.
 

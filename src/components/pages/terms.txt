@@ -8,7 +8,7 @@ L'objectif du projet et le fonctionnement de l'association sont dédiés à l'in
 
 Aucune donnée personnelle n'est stockée en dehors de l'interface de l'usager. Aucun traçage de l'usager n'est effectué, par GPS ou par bluetooth.
 
-Les données personnelles de l'usager (comme ses éventuels symptômes ou sa liste de contact) sont stockées sur son interface (téléphone ou ordinateur) , ne sont transmises à personne (pas même {{owner}}). Elles restent sous contrôle unique de l'usager de l'interface.
+Les données personnelles de l'usager (comme ses éventuels symptômes ou sa liste de contacts) sont stockées sur son interface (téléphone ou ordinateur) , ne sont transmises à personne (pas même {{owner}}). Elles restent sous contrôle unique de l'usager de l'interface.
 
 Les données anonymisées d'utilisation des usagers (comme le nombre total de personnes effectuant le parcours de {{productName}} jusqu'au bout) permettent à {{owner}} l'amélioration continue du service et l'étude d'impact de {{productName}}. Ces données ne permettent en aucun cas l'identification d'un usager.
 
@@ -18,7 +18,7 @@ L'ensemble de ces données ne seront ni utilisées commercialement, ni cédées 
 
 ## 1. Définitions
 
-« {{productName}} » ou « LE SERVICE » est une interface permettant d'aider, de façon non médicale, au diagnostic d'une infection au covid-19, d'en connaître sa potentielle période de contagiosité. Elle facilite l'identification des personnes susceptibles d'avoir été rencontrées, et propose de les contacter anonymement ou non. Enfin, elle permet de bénéficier d'un suivi par email sur la base du volontariat lorsque la personne est susceptible d'être un cas-contact.
+« {{productName}} » ou « LE SERVICE » est une interface permettant d'aider, de façon non médicale, au diagnostic d'une infection au {{diseaseName}}, d'en connaître sa potentielle période de contagiosité. Elle facilite l'identification des personnes susceptibles d'avoir été rencontrées, et propose de les contacter anonymement ou non. Enfin, elle permet de bénéficier d'un suivi par email sur la base du volontariat lorsque la personne est susceptible d'être un cas-contact.
 
 Le développeur du site internet est l'association « {{owner}} ».
 
@@ -56,11 +56,11 @@ Ce service suppose la validation de plusieurs étapes.
 
 ### 4.1. Diagnostic non médical des symptômes
 
-En premier lieu, {{productName}} émet un diagnostic consultatif non médical à partir d'un algorithme sur la probabilité de contamination au covid-19 par l'usager à partir de l'étude des symptômes décrits par ce dernier. Cet avis ne saurait en aucun cas se substituer à celui d'un médecin, d'un membre du personnel soignant,une procédure de test certifiée ou d'une quelconque procédure agréée par les autorités.
+En premier lieu, {{productName}} émet un diagnostic consultatif non médical à partir d'un algorithme sur la probabilité de contamination au {{diseaseName}} par l'usager à partir de l'étude des symptômes décrits par ce dernier. Cet avis ne saurait en aucun cas se substituer à celui d'un médecin, d'un membre du personnel soignant,une procédure de test certifiée ou d'une quelconque procédure agréée par les autorités.
 
 Si l'individu a déjà été testé positif via un dispositif médical ou par le diagnostic d'un professionnel de santé, il pourra directement renseigner cette information auprès du site internet et n'aura pas à fournir des informations sur son état de santé pour bénéficier du service {{productName}}.
 
-Ce diagnostic non médicale est basé sur l'état actuel des recherches scientifiques concernant le covid-19. Il peut donc être amené à évoluer.
+Ce diagnostic non médical est basé sur l'état actuel des recherches scientifiques concernant le {{diseaseName}}. Il peut donc être amené à évoluer.
 
 ### 4.2. Indication de la période de contagiosité
 
@@ -68,7 +68,7 @@ Suite à cette étape, le service dresse la probable période de contagiosité d
 
 Cette période est purement indicative . Elle n'est nullement une donnée médicale certifiée.
 
-Le dispositif de calcul de la période de contagiosité est également basé sur l'état actuel des recherches scientifiques concernant le covid-19 et peut donc être amené à évoluer.
+Le dispositif de calcul de la période de contagiosité est également basé sur l'état actuel des recherches scientifiques concernant le {{diseaseName}} et peut donc être amené à évoluer.
 
 ### 4.3. Aide à la recherche des personnes croisées durant la période de contagiosité
 
@@ -90,13 +90,13 @@ L'usager peut aussi demander au service {{productName}}, un envoi anonyme de ce 
 
 ### 4.5 Suivi pour les cas contacts
 
-Si une personne extérieure à l'utilisation initiale du service est identifiée comme “cas-contact” par un usager du service suspecté d'être porteur du covid-19, cette dernière est invitée à accéder également au service.
+Si une personne extérieure à l'utilisation initiale du service est identifiée comme “cas-contact” par un usager du service suspecté d'être porteur du {{diseaseName}}, cette dernière est invitée à accéder également au service.
 
 Un lien lui permet de prendre connaissance de son statut de probable “cas-contact” et l'invite à entreprendre une démarche de vérification des symptômes.
 
-Si une contamination au covid-19 est présumée par le diagnostic non médical offert par le service {{productName}}, ce dernier est à son tour invité à effectuer le parcours d'identification et de signalement de ses propres cas-contacts comme tout usager.
+Si une contamination au {{diseaseName}} est présumée par le diagnostic non médical offert par le service {{productName}}, ce dernier est à son tour invité à effectuer le parcours d'identification et de signalement de ses propres cas-contacts comme tout usager.
 
-Si les symptômes déclarés ne permettent de supposer pune contamination aucovid-19, il lui est proposé de communiquer son email afin de bénéficier de la fonction suivi. Pour rappel, cette dernière consiste en l'envoi régulier d'e-mails de conseils et de rappels à la vigilance sur les symptômes révélateurs du covid-19. Cette démarche d'inscription à la fonction de suivi est volontaire et réversible.
+Si les symptômes déclarés ne permettent de supposer une contamination au {{diseaseName}}, il lui est proposé de communiquer son email afin de bénéficier de la fonction suivi. Pour rappel, cette dernière consiste en l'envoi régulier d'e-mails de conseils et de rappels à la vigilance sur les symptômes révélateurs du {{diseaseName}}. Cette démarche d'inscription à la fonction de suivi est volontaire et réversible.
 
 Au bout de 14 jours après l'inscription à la fonction suivi, cette dernière prend fin. L'email de l'utilisateur est alors automatiquement supprimé.
 
@@ -108,13 +108,13 @@ Dans le cadre de leur utilisation de la plate-forme, les usagers s'engagent à r
 
 Les usagers sont seuls responsables du bon accomplissement de toutes les formalités administratives ou médicales nécessaires concernant leur état de santé. Concernant les procédures d'assistance ou de test médicales, il est de leur seule responsabilité d'obtenir les garanties et les moyens de les effectuer. A ce titre, la responsabilité de {{owner}} ne serait en aucun cas être engagée.
 
-Les usagers reconnaissent avoir pris connaissance des caractéristiques et contraintes, notamment techniques, de la plate-forme. Il sont seuls responsables de son utilisation. Les usagers sont informés et acceptent que la mise en œuvre de la plate-forme nécessite une connexion à internet dont ils sont seuls responsables, et dont la qualité du service en dépend directement.
+Les usagers reconnaissent avoir pris connaissance des caractéristiques et contraintes, notamment techniques, de la plate-forme. Ils sont seuls responsables de son utilisation. Les usagers sont informés et acceptent que la mise en œuvre de la plate-forme nécessite une connexion à internet dont ils sont seuls responsables, et dont la qualité du service en dépend directement.
 
 Les usagers sont également seuls responsables des relations qu'ils pourront nouer avec les responsables des services, notamment les organismes d'assistance médicale ou de tests, auxquels ils feront appel en suivant les suggestions du service.
 
 ### 5.2. Persistance des informations du parcours usager sur son navigateur web
 
-Via un système de cookies, l'usager peut interrompre et reprendre le parcours du service sur une même interface et à différents intervalles dans le temps. Cette persistance est optionnelle, l'usager peut choisir de ne pas en bénéficier. Cette persistance n'implique en rien le fait que les données personnelles de l'usage soit enregistrées par {{productName}}. Cette persistance ne peut pas être assimilée à une fonctionnalité de compte utilisateur.
+Via un système de cookies, l'usager peut interrompre et reprendre le parcours du service sur une même interface et à différents intervalles dans le temps. Cette persistance est optionnelle, l'usager peut choisir de ne pas en bénéficier. Cette persistance n'implique en rien le fait que les données personnelles de l'usage soient enregistrées par {{productName}}. Cette persistance ne peut pas être assimilée à une fonctionnalité de compte utilisateur.
 
 Comme {{productName}} n'enregistre aucune des données fournies, le service ne peut alors garantir les usagers en cas de perte éventuelle des informations remplies au cours du parcours. Il appartient aux usagers de sauvegarder une copie de leurs informations. Ils ne peuvent prétendre à aucun dédommagement en raison de quelque perte de données que ce soit.
 
@@ -128,11 +128,11 @@ L'usage de la plate-forme {{productName}} est gratuit.
 
 Le diagnostic non médical de {{productName}} se base sur de nombreuses ressources médicales officielles, sur les recommandations et le suivi du comité scientifique appuyant l'initiative.
 
-Au vu de la crise sanitaire en cours, les recommandations affichées et le système de diagnostic non médical sont amenées à évoluer suivant l'état de l'art clinique et l'avis des autorités de santé.
+Au vu de la crise sanitaire en cours, les recommandations affichées et le système de diagnostic non médical sont amenés à évoluer suivant l'état de l'art clinique et l'avis des autorités de santé.
 
 Par conséquent, les résultats affichés peuvent différer dans le temps, même si les données d'entrée sont identiques.
 
-{{productName}} n'est pas un dispositif médical.l ne délivre pas d'avis médical, il ne remplace pas une consultation ni l'avis d'un médecin ou d'un pharmacien ou de tout autre professionnel de santé. Il ne saurait non plus se substituer aux recommandations des autorités compétentes.
+{{productName}} n'est pas un dispositif médical. Il ne délivre pas d'avis médical, il ne remplace pas une consultation ni l'avis d'un médecin ou d'un pharmacien ou de tout autre professionnel de santé. Il ne saurait non plus se substituer aux recommandations des autorités compétentes.
 
 {{productName}} est un service d'information conçu pour répondre à une alerte sanitaire. Il ne peut pas être utilisé dans le cadre d'une télésurveillance médicale à domicile.
 
@@ -166,7 +166,7 @@ Les usagers s'engagent à indemniser {{owner}} de tout préjudice subi et à pay
 
 ## 7. Liens vers d'autres sites
 
-{{productName}} peut proposer des liens vers des sites internet de tiers. Les renvois vers des sites liés par hyperlien ne saurait engager la responsabilité de {{owner}}, qui ne peut être tenu responsable de leur contenu et n'offre aucune garantie à leur égard. Il appartient aux usagers de faire toutes les vérifications nécessaires ou opportunes avant de procéder à une quelconque transaction avec l'un de ces tiers.
+{{productName}} peut proposer des liens vers des sites internet de tiers. Les renvois vers des sites liés par hyperlien ne sauraient engager la responsabilité de {{owner}}, qui ne peut être tenu responsable de leur contenu et n'offre aucune garantie à leur égard. Il appartient aux usagers de faire toutes les vérifications nécessaires ou opportunes avant de procéder à une quelconque transaction avec l'un de ces tiers.
 
 Aucun lien commercial ou partenariat financier ne lie {{owner}} avec les tiers vers lesquels {{productName}} peut renvoyer ses usagers. Ces derniers sont proposés à titre purement indicatif et en tenant compte des recommandations en vigueur.
 
@@ -192,7 +192,7 @@ L'usager peut également donner accès, via un système d'API, à des fonctionna
 
 Dans le cadre de la fonction “suivi”, les usagers acceptent de communiquer une adresse email afin d'être contactés pour recevoir des informations par {{productName}}. La durée maximum de cette fonction suivi est de 14 jours. {{owner}} s'engage à supprimer les adresses emails des usagers à la fin du suivi. Les usagers disposent à tout moment d'un droit d'accès, de rectification et de suppression de cette adresse email en adressant une demande à cet effet à : privacy@bayesimpact.org
 
-La désinscription à la fonction de suivi est effective immédiatement, à l'issu des 14 jours. Les adresses emails sont supprimées dès lors que le processus informatique est enclenché et ce dans un délais maximum de deux semaines.
+La désinscription à la fonction de suivi est effective immédiatement, à l'issue des 14 jours. Les adresses emails sont supprimées dès lors que le processus informatique est enclenché et ce dans un délai maximum de deux semaines.
 
 Les personnes identifiées par des usagers de {{productName}} comme des “cas-contacts” et contactées par {{productName}} bénéficient des mêmes standards concernant la protection des données.
 
@@ -218,7 +218,7 @@ Les usagers seront informés de ces modifications par tout moyen utile, dont not
 
 La date de mise à jour sera toujours indiquée en haut et en bas des présentes conditions.
 
-L'utilisation du service après affichage des ne modifications des présentes conditions générales sur {{productName}} implique l'acceptation pleine et entière des conditions modifiées.
+L'utilisation du service après affichage des modifications des présentes conditions générales sur {{productName}} implique l'acceptation pleine et entière des conditions modifiées.
 
 La seule façon de refuser l'acceptation d'une modification des présentes conditions est de cesser d'utiliser {{productName}}.
 
@@ -240,7 +240,7 @@ En cas de litige, les tribunaux du ressort de Paris sont seuls compétents.
 
 Préalablement à tout recours au juge arbitral ou étatique, les usagers s'obligent à négocier avec {{owner}} dans un esprit de loyauté et de bonne foi un accord amiable en cas de survenance de tout conflit relatif à la plate-forme ou aux présentes conditions, y compris portant sur leur validité.
 
-Les usagers souhaitant mettre en œuvre le processus de négociation devront en informer {{owner}} par lettre recommandée avec accusé de réception en indiquant les éléments du conflit. Un temps d'échange physique ou par voie dématérialisée sera alors organisée entre les usagers et {{owner}}. Si, au terme d'un délai de six mois, les usagers et {{owner}} ne parvenaient pas à s'entendre, le différend sera soumis à la juridiction compétente désignée ci-dessus. Le cours de la prescription sera suspendu à compter de la mise en œuvre du processus de négociation soit la date de réception de l'acte d'information envoyé par lettre recommandée avec accusé de réception. La suspension du cours de la prescription prendra fin à la date de la signature du procès-verbal de conciliation ou de non-conciliation. En cas de refus des usagers ou de {{owner}} de signer ledit procès-verbal, l'autre partie peut prendre acte de ce refus en l'informant qu'à défaut de réaction de sa part dans un délai d'un mois, la saisine du juge compétent sera possible. Durant tout le processus de négociation et jusqu'à son issue, les usagers s'interdisent d'exercer toute action en justice contre {{owner}} pour le conflit objet de la négociation.
+Les usagers souhaitant mettre en œuvre le processus de négociation devront en informer {{owner}} par lettre recommandée avec accusé de réception en indiquant les éléments du conflit. Un temps d'échange physique ou par voie dématérialisée sera alors organisé entre les usagers et {{owner}}. Si, au terme d'un délai de six mois, les usagers et {{owner}} ne parvenaient pas à s'entendre, le différend sera soumis à la juridiction compétente désignée ci-dessus. Le cours de la prescription sera suspendu à compter de la mise en œuvre du processus de négociation soit la date de réception de l'acte d'information envoyé par lettre recommandée avec accusé de réception. La suspension du cours de la prescription prendra fin à la date de la signature du procès-verbal de conciliation ou de non-conciliation. En cas de refus des usagers ou de {{owner}} de signer ledit procès-verbal, l'autre partie peut prendre acte de ce refus en l'informant qu'à défaut de réaction de sa part dans un délai d'un mois, la saisine du juge compétent sera possible. Durant tout le processus de négociation et jusqu'à son issue, les usagers s'interdisent d'exercer toute action en justice contre {{owner}} pour le conflit objet de la négociation.
 
 ## 13. Coordonnées du responsable et de l'hébergeur
 

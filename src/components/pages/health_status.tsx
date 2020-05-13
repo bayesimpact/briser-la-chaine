@@ -14,7 +14,7 @@ const titleStyle: React.CSSProperties = {
   fontSize: 28,
 }
 const VirusIcon = {
-  alt: 'covid',
+  alt: config.diseaseName,
   src: VirusIconSrc,
 }
 
@@ -22,7 +22,8 @@ const HealthStatusPage = (): React.ReactElement => {
   const {t} = useTranslation()
   const history = useHistory()
   const title = <div style={titleStyle}>{
-    t('Pensez-vous être atteint(e) du covid-19\u00A0?')}</div>
+    t('Pensez-vous être atteint(e) du {{diseaseName}}\u00A0?', {diseaseName: config.diseaseName})
+  }</div>
   const subtitle = t('Ou avoir été atteint(e) dans le passé.')
   const goToStart = useCallback((): void => {
     history.push(Routes.PEDAGOGY_INTRO)
