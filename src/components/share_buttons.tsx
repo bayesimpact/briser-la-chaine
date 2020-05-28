@@ -46,7 +46,7 @@ const shareButtonsContainerStyle: React.CSSProperties = {
 const shareTextStyle: React.CSSProperties = {
   alignSelf: 'center',
   fontSize: 15,
-  fontWeight: 'bold',
+  fontWeight: 600,
   margin: '25px 0px 15px',
 }
 const messageButtonGradient = `linear-gradient(${colors.LIGHT_GREEN}, ${colors.MEDIUM_GREEN})`
@@ -67,16 +67,16 @@ const ShareButtons = (props: ShareButtonsProps): React.ReactElement => {
   const handleMail = useCallback((): void => {
     handleShare()
     window.open(
-      `mailto:?subject=${encodeURIComponent(config.productName)}&` +
+      `mailto:?subject=${encodeURIComponent(t('productName') as string)}&` +
       `body=${encodeURIComponent(sharedText)}`, '_blank')
-  }, [handleShare, sharedText])
+  }, [handleShare, sharedText, t])
   const handleMessengerClick = useCallback(() => {
     onMessengerClick?.()
     setIsMessengerOpening(true)
   }, [onMessengerClick])
   const handleNativeShare = useCallback((): void => {
     handleShare()
-    navigator.share?.({text: sharedText, title: config.productName, url: config.canonicalUrl})
+    navigator.share?.({text: sharedText})
   }, [handleShare, sharedText])
   useEffect((): (() => void) => {
     if (!isMessengerOpening) {

@@ -8,6 +8,7 @@ Routes.CALENDAR = Routes.ROOT + 'calendrier'
 Routes.COME_BACK_LATER = Routes.ROOT + 'plus-tard'
 Routes.CONTACTS_LIST = Routes.ROOT + 'liste-contacts'
 Routes.CONTACTS_SEARCH = Routes.ROOT + 'recherche-contacts'
+Routes.DIAGNOSED_SPLASH = Routes.ROOT + 'positif'
 Routes.DIAGNOSTIC = Routes.ROOT + 'symptomes'
 Routes.DIAGNOSTIC_OUTCOME = Routes.ROOT + 'resultat-diagnostic'
 Routes.FINAL = Routes.ROOT + 'merci'
@@ -24,4 +25,10 @@ Routes.SPLASH = Routes.ROOT + 'accueil'
 Routes.SYMPTOMS_ONSET = Routes.ROOT + 'debut-symptomes'
 Routes.TERMS = Routes.ROOT + 'cgu'
 
-export {Routes}
+
+const Params: {[varName: string]: string} = {
+  DEPTH: 'p',
+} as const
+
+
+export {Params, Routes}

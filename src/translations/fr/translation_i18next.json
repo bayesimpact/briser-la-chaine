@@ -14,6 +14,12 @@
   "Prévenir mes {{count}} cas contacts": "Prévenir mon cas contact",
   "Prévenir mes {{count}} cas contacts_plural": "Prévenir mes {{count}} cas contacts",
   "Télécharger le récapitulatif de la personne contactée_plural": "Télécharger le récapitulatif des personnes contactées",
+  "canonicalUrl": "www.BriserLaChaine.org",
+  "productName": "BriserLaChaine.org",
+  "mailjetEmailTemplateId": "1389855",
+  "mailjetSmsTemplateId": "low",
+  "mailjetSmsTemplateId_high": "high",
+  "mailjetSmsTemplateId_low": "low",
   "{{count}} personne croisée ce jour_plural": "{{count}} personnes croisées ce jour",
   "{{numAlertedPeople}}/{{numTotalPeople}} personne alertée_plural": "{{numAlertedPeople}}/{{numTotalPeople}} personnes alertées",
   "{{numDaysValidated}}/{{count}} jour à vérifier_plural": "{{numDaysValidated}}/{{count}} jours à vérifier"

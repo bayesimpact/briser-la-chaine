@@ -49,17 +49,18 @@ interface WrappedInputConfig extends WrappedInputProps {
 
 const CheckboxBase =
 (props: WrappedInputConfig, ref: React.Ref<HTMLDivElement>): React.ReactElement => {
-  const {isSelected, size = 20, style} = props
+  const {isSelected, size = 25, style} = props
   const {isHighlighted, ...otherProps} = useWrappedInput(props)
   const {onClick} = otherProps
 
   const outerBoxStyle: React.CSSProperties = {
     alignItems: 'center',
-    backgroundColor: isSelected ? colors.BRIGHT_SKY_BLUE : '#fff',
-    borderColor: isHighlighted || isSelected ? colors.BRIGHT_SKY_BLUE : colors.MEDIUM_GREY,
+    backgroundColor: isSelected ? '#000' : '#fff',
+    borderColor: isHighlighted || isSelected ? '#000' : colors.MEDIUM_GREY,
     borderRadius: 4,
     borderStyle: 'solid',
     borderWidth: 1,
+    boxSizing: 'border-box',
     color: '#fff',
     ...onClick && {cursor: 'pointer'},
     display: 'flex',

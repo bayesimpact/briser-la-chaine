@@ -1,4 +1,4 @@
-import {addDays, format as dateFormat, formatRelative, subDays} from 'date-fns'
+import {addDays, format as dateFormat, formatRelative, startOfDay, subDays} from 'date-fns'
 import React, {useCallback, useMemo, useState} from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router'
@@ -15,7 +15,7 @@ import {Routes} from 'store/url'
 import {PageWithNav} from 'components/navigation'
 
 
-const todayDate = new Date()
+const todayDate = startOfDay(new Date())
 const fartherDate = subDays(todayDate, 30)
 
 const transition = '450ms'
@@ -41,14 +41,12 @@ const DayCardBase = (props: DayCardProps): React.ReactElement => {
   const isClickable = !!onClick
   const containerStyle: React.CSSProperties = useMemo(() => ({
     ...flexCenterStyle,
-    backgroundColor: colors.BRIGHT_SKY_BLUE,
-    borderRadius: 160,
-    color: '#fff',
+    backgroundColor: isMain ? colors.MINTY_GREEN : colors.PALE_GREY,
+    borderRadius: 45,
+    color: isMain ? '#000' : colors.DARK_GREY_BLUE,
     cursor: isClickable ? 'pointer' : undefined,
     flex: 'none',
     flexDirection: 'column',
-    fontSize: 52.8,
-    fontWeight: 800,
     height: 160,
     left: '50%',
     // TODO(cyrille): Move positional style to parent.
@@ -59,19 +57,25 @@ const DayCardBase = (props: DayCardProps): React.ReactElement => {
     ...style,
     opacity: isHidden ? 0 : (style?.opacity || 1),
     transform: 'translate(-50%, -50%) ' + (style?.transform || ''),
-  }), [isClickable, isHidden, style])
+  }), [isClickable, isHidden, isMain, style])
   const textStyle: React.CSSProperties = {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: 600,
     opacity: isMain ? 1 : 0,
     transition,
+  }
+  const bigTextStyle: React.CSSProperties = {
+    fontFamily: 'Poppins',
+    fontSize: 55,
+    fontWeight: 800,
+    margin: -12,
   }
   const weekDay = useMemo(() => dateFormat(date, 'EEE', dateOption), [date, dateOption])
   const month = useMemo(() => dateFormat(date, 'MMMM', dateOption), [date, dateOption])
   const handleClick = useCallback((): void => onClick?.(date), [date, onClick])
   return <div style={containerStyle} onClick={onClick && handleClick}>
     <span style={textStyle}>{weekDay || 'lun.'}</span>
-    <span>{date.getDate()}</span>
+    <span style={bigTextStyle}>{date.getDate()}</span>
     <span style={textStyle}>{month || 'mars'}</span>
   </div>
 }
@@ -94,19 +98,17 @@ const cardsContainerStyle: React.CSSProperties = {
 }
 const veryLeftCardStyle: React.CSSProperties = {
   opacity: 0,
-  transform: 'translateX(-160%) scale(.5)',
+  transform: 'translateX(-150%) scale(.5)',
 }
 const leftCardStyle: React.CSSProperties = {
-  opacity: .3,
-  transform: 'translateX(-120%) scale(.75)',
+  transform: 'translateX(-106%) scale(.75)',
 }
 const rightCardStyle: React.CSSProperties = {
-  opacity: .3,
-  transform: 'translateX(120%) scale(.75)',
+  transform: 'translateX(106%) scale(.75)',
 }
 const veryRightCardStyle: React.CSSProperties = {
   opacity: 0,
-  transform: 'translateX(160%) scale(.5)',
+  transform: 'translateX(150%) scale(.5)',
 }
 
 
@@ -176,7 +178,7 @@ const hiddenArrowButtonStyle: React.CSSProperties = {
 const dayTextContainerStyle: React.CSSProperties = {
   fontSize: 17,
   fontStyle: 'italic',
-  fontWeight: 'bold',
+  fontWeight: 600,
   position: 'relative',
   textAlign: 'center',
   width: 145,
@@ -254,7 +256,8 @@ const Symptoms = (): React.ReactElement => {
   const history = useHistory()
   const dispatch = useDispatch()
   const symptomsOnsetDate = useSymptomsOnsetDate()
-  const [onsetDay, setOnsetDay] = useState<Date>(symptomsOnsetDate || todayDate)
+  const [onsetDay, setOnsetDay] = useState<Date>((): Date =>
+    startOfDay(symptomsOnsetDate || todayDate))
 
   const handleDayChange = useCallback((day: Date): void => {
     if (day < fartherDate || day > todayDate) {
@@ -270,7 +273,7 @@ const Symptoms = (): React.ReactElement => {
 
   const headerStyle: React.CSSProperties = {
     fontSize: 25,
-    fontWeight: 'bold',
+    fontWeight: 600,
     padding: '0 20px',
   }
   const subTextStyle: React.CSSProperties = {

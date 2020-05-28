@@ -55,6 +55,7 @@ interface SliderProps {
   bulletColor?: string
   bulletSelectColor?: string
   children: readonly React.ReactNode[]
+  chevronColor?: string
   onFastForward?: ForwardFunc
   slideStyle?: React.CSSProperties
   transition?: string
@@ -74,7 +75,7 @@ const pageStyle: React.CSSProperties = {
 // TOP LEVEL PAGE
 const Slider = (props: SliderProps): React.ReactElement => {
   const {arrowColor, borderColor, bottomComponent: BottomComponent, bulletColor,
-    bulletSelectColor, children, onFastForward, slideStyle, transition = '1s'} = props
+    bulletSelectColor, chevronColor, children, onFastForward, slideStyle, transition = '1s'} = props
   const numSlides = React.Children.count(children)
   const [currentSlideIndex, selectSlide] = useRouteStepper(numSlides)
   const goBack = useCallback((): void => {
@@ -114,7 +115,7 @@ const Slider = (props: SliderProps): React.ReactElement => {
       <Bullets
         indexVisible={currentSlideIndex} numBullets={numSlides} onSelect={selectSlide}
         color={bulletColor} selectColor={bulletSelectColor} transition={transition}
-        arrowColor={arrowColor} borderColor={borderColor} />
+        arrowColor={arrowColor} borderColor={borderColor} chevronColor={chevronColor} />
     </BottomDiv>
   </div>
 }

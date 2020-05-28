@@ -15,12 +15,14 @@ import {useHistory} from 'react-router'
 import {Link} from 'react-router-dom'
 import {Trans, useTranslation} from 'react-i18next'
 
+import {useBackgroundColor} from 'hooks/background_color'
+import {followUpAction, useDispatch} from 'store/actions'
 import {LocalizableString, prepareT} from 'store/i18n'
 import {useSelector} from 'store/selections'
 import {SORTED_SYMPTOMS} from 'store/symptoms'
 import {Routes} from 'store/url'
 
-import {darkButtonStyle} from 'components/buttons'
+import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import {Modal, ModalConfig} from 'components/modal'
 import PrivacyNote from 'components/privacy_note'
 import Slider, {SliderChildProps} from 'components/slider'
@@ -35,7 +37,7 @@ interface IconBoxProps {
 const iconBoxStyle: React.CSSProperties = {
   alignItems: 'center',
   alignSelf: 'stretch',
-  backgroundColor: colors.BRIGHT_SKY_BLUE,
+  backgroundColor: colors.MINTY_GREEN,
   borderRadius: 20,
   display: 'flex',
   height: 100,
@@ -56,7 +58,7 @@ const IconBoxBase = ({icon, image, text}: IconBoxProps): React.ReactElement => {
   const Icon = icon
   return <div style={iconBoxContainerStyle}>
     <div style={iconBoxStyle}>
-      {Icon ? <Icon size={36} color="#fff" /> : <img width={36} src={image} alt="" />}
+      {Icon ? <Icon size={36} color="#000" /> : <img width={36} src={image} alt="" />}
     </div>
     <span style={{height: 60, marginTop: 20, maxWidth: 140, textAlign: 'center'}}>
       {translate(text)}
@@ -71,6 +73,12 @@ const contentContainerStyle: React.CSSProperties = {
   alignSelf: 'stretch',
   display: 'flex',
   justifyContent: 'center',
+}
+const ctaButtonStyle: React.CSSProperties = {
+  ...lightButtonStyle,
+  backgroundColor: 'transparent',
+  margin: '0px 20px',
+  textDecoration: 'none',
 }
 
 const sliderCommonContent: readonly ScreenContent[] = [
@@ -95,6 +103,10 @@ const sliderCommonContent: readonly ScreenContent[] = [
     title: prepareT('Pratiquez les gestes barrières'),
   },
   {
+    button: <a
+      target="_blank" rel="noopener noreferrer"
+      href="https://sante.fr/recherche/trouver/DepistageCovid" style={ctaButtonStyle}>
+      {prepareT('Trouver un centre de dépistage')}</a>,
     content: <div style={contentContainerStyle}>
       <IconBox icon={SurveyLineIcon} text={prepareT('Vérifiez si vous êtes vraiment porteur')} />
       <IconBox icon={HospitalFillIcon} text={prepareT('Recevez un avis médical certifié')} />
@@ -132,7 +144,7 @@ const SymptomsModalLinkBase = (props: ModalProps): React.ReactElement => {
       <ul>{SORTED_SYMPTOMS.map(({name, value}) => <li key={value}>{name}</li>)}</ul>
     </Modal>
     <a href="#" style={{color: 'inherit'}} onClick={toggleShown}>
-      {t('Quels sont les symptômes à surveiller')}
+      {t('Quels sont les symptômes à surveiller\u00A0?')}
     </a>
   </div>
 }
@@ -141,8 +153,8 @@ const SymptomsModalLink = React.memo(SymptomsModalLinkBase)
 const sliderLowRiskContent: readonly ScreenContent[] = [
   ...sliderCommonContent,
   {
-    content: <div>
-      <SymptomsModalLink style={{marginBottom: 30}} />
+    content: <div style={{alignSelf: 'stretch'}}>
+      <SymptomsModalLink style={{marginBottom: 30, textAlign: 'center'}} />
       <div style={contentContainerStyle}>
         <IconBox
           icon={TempColdLineIcon} text={prepareT('Prenez votre température tous les jours')} />
@@ -179,7 +191,7 @@ const importantIconStyle: React.CSSProperties = {
   marginRight: 8,
 }
 const instructionEmphasisStyle: React.CSSProperties = {
-  fontWeight: 'bold',
+  fontWeight: 600,
   textDecoration: 'underline',
 }
 const ImportantInstructionsBase = (props: ImportantInstructionsProps): React.ReactElement => {
@@ -199,9 +211,16 @@ interface StepProps {
   icon: RemixiconReactIconComponentType
   text: string
 }
+const stepStyle: React.CSSProperties = {
+  alignItems: 'center',
+  display: 'flex',
+  fontSize: 15,
+  fontWeight: 600,
+  marginBottom: 30,
+}
 const iconContainerStyle: React.CSSProperties = {
   alignItems: 'center',
-  backgroundColor: colors.BRIGHT_SKY_BLUE,
+  backgroundColor: colors.MINTY_GREEN,
   borderRadius: 17,
   display: 'flex',
   height: 30,
@@ -211,9 +230,9 @@ const iconContainerStyle: React.CSSProperties = {
 }
 const StepBase = ({icon, text}: StepProps): React.ReactElement => {
   const Icon = icon
-  return <div style={{alignItems: 'center', display: 'flex', marginBottom: 30}}>
+  return <div style={stepStyle}>
     <div style={iconContainerStyle}>
-      <Icon size={18} color="#fff" />
+      <Icon size={18} color="#000" />
     </div>
     {text}
   </div>
@@ -232,15 +251,22 @@ const BottomButtonBase = (props: SliderChildProps): React.ReactElement|null => {
   const {t} = useTranslation()
   const history = useHistory()
   const isHighRisk = useSelector(({user: {contaminationRisk}}) => contaminationRisk === 'high')
+  const bottomContainerStyle: React.CSSProperties = {
+    margin: '0 20px',
+    opacity: isLastPage ? 1 : 0,
+    transition: '1s',
+  }
   const handleNextButton = useCallback((): void => {
     history.push(Routes.PEDAGOGY_INTRO)
   }, [history])
   if (!isHighRisk) {
     return null
   }
-  return <div style={{margin: '0 20px', opacity: isLastPage ? 1 : 0, transition: '1s'}}>
-    <div onClick={handleNextButton} style={{...mobileOnDesktopStyle, ...darkButtonStyle}}>
-      {t('Briser la chaîne')}
+  return <div style={bottomContainerStyle}>
+    <div style={{margin: 'auto', maxWidth: 420}}>
+      <div onClick={handleNextButton} style={{...mobileOnDesktopStyle, ...darkButtonStyle}}>
+        {t('Briser la chaîne')}
+      </div>
     </div>
   </div>
 }
@@ -248,15 +274,18 @@ const BottomButton = React.memo(BottomButtonBase)
 
 
 interface ScreenContent {
+  button?: React.ReactNode
   content?: React.ReactNode
   numImportantInstructions?: number
   title: LocalizableString
 }
 
 const titleStyle: React.CSSProperties = {
-  fontSize: 22,
-  fontWeight: 'bold',
-  maxWidth: 175,
+  fontFamily: 'Poppins',
+  fontSize: 21,
+  fontWeight: 800,
+  lineHeight: 1.29,
+  maxWidth: 180,
   textAlign: 'center',
 }
 
@@ -267,9 +296,16 @@ const slideStyle: React.CSSProperties = {
   justifyContent: 'space-evenly',
 }
 
-const veryDiscreetLinkStyle: React.CSSProperties = {
+const discreetLinkStyle: React.CSSProperties = {
   color: 'inherit',
-  textDecoration: 'none',
+}
+
+const finalSlideCtaBlockStyle: React.CSSProperties = {
+  alignItems: 'center',
+  alignSelf: 'stretch',
+  display: 'flex',
+  flexDirection: 'column',
+  margin: '0 20px',
 }
 
 // This is a top level page and should never be nested in another one.
@@ -278,6 +314,7 @@ const FollowUpPageBase = (): React.ReactElement => {
   const isHighRisk = useSelector(({user: {contaminationRisk}}) => contaminationRisk === 'high')
   const history = useHistory()
   const {t, t: translate} = useTranslation()
+  const dispatch = useDispatch()
   const mailText = translate(
     'Bonjour, Je souhaite être suivi(e) pendant 14 jours. Merci. Bien à vous')
   const handleNextButton = useCallback((): void => {
@@ -285,57 +322,57 @@ const FollowUpPageBase = (): React.ReactElement => {
       history.push(Routes.PEDAGOGY_INTRO)
       return
     }
+    dispatch(followUpAction)
     window.open(
       `mailto:?to=${config.followUpMail}&subject=Suivi&` +
       `body=${mailText}`,
       '_blank',
       'noopener,noreferrer')
-  }, [isHighRisk, history, mailText])
+  }, [dispatch, isHighRisk, history, mailText])
+  useBackgroundColor(colors.PALE_GREY)
   return <Slider
-    bulletColor={colors.MEDIUM_GREY} bulletSelectColor="#000" slideStyle={slideStyle}
-    onFastForward={handleNextButton} bottomComponent={BottomButton}>
+    bulletColor="#000" bulletSelectColor={colors.MINTY_GREEN} slideStyle={slideStyle}
+    onFastForward={handleNextButton} bottomComponent={BottomButton}
+    arrowColor={colors.PALE_GREY} borderColor={colors.LIGHT_BLUE_GREY} chevronColor="#000">
     {(isHighRisk ? sliderHighRiskContent : sliderLowRiskContent).map(
-      ({content, numImportantInstructions, title}, index) => <React.Fragment key={index}>
+      ({button, content, numImportantInstructions, title}, index) => <React.Fragment key={index}>
         <div style={titleStyle}>{translate(title)}</div>
         {content}
-        <ImportantInstructions numInstructions={numImportantInstructions} />
-      </React.Fragment>,
-    )}
+        {button ? button : <ImportantInstructions numInstructions={numImportantInstructions} />}
+      </React.Fragment>)}
     <React.Fragment key="last-screen">
       {isHighRisk ? <React.Fragment>
-        <Trans style={{fontSize: 25, fontWeight: 'bold', margin: '0 30px', textAlign: 'center'}}>
+        <Trans style={{fontSize: 25, fontWeight: 600, margin: '0 30px', textAlign: 'center'}}>
           Maintenant que vous avez pris vos précautions, il
-          est vital de <span style={{color: colors.FOREST_GREEN}}>notifier vos contacts</span> à
+          est essentiel de <span style={{color: colors.SEAWEED}}>notifier vos contacts</span> à
           votre tour.
         </Trans>
       </React.Fragment> : <React.Fragment>
         <div style={titleStyle}>{t('On vous accompagne de bout en bout')}</div>
         <div style={{margin: '0 20px'}}>
-          <div>
-            <Step
-              icon={LineChartLineIcon}
-              text={t('Diagnostic régulier de vos symptômes')} />
-            <Step
-              icon={ShieldCrossFillIcon}
-              text={t(
-                'Suivi(e) au premier signe de {{diseaseName}}',
-                {diseaseName: config.diseaseName},
-              )} />
-            <Step
-              icon={HandHeartFillIcon}
-              text={t('100% gratuit et anonyme')} />
+          <Step
+            icon={LineChartLineIcon}
+            text={t('Diagnostic régulier de vos symptômes')} />
+          <Step
+            icon={ShieldCrossFillIcon}
+            text={t(
+              'Suivi(e) au premier signe de {{diseaseName}}',
+              {diseaseName: config.diseaseName},
+            )} />
+          <Step
+            icon={HandHeartFillIcon}
+            text={t('100% gratuit et anonyme')} />
+        </div>
+        <div style={finalSlideCtaBlockStyle}>
+          <div
+            onClick={handleNextButton}
+            style={{...darkButtonStyle, marginTop: 40, maxWidth: '420'}}>
+            {translate('Être suivi(e) pendant 14j')}
           </div>
-          <div style={{alignItems: 'center', display: 'flex', flexDirection: 'column'}}>
-            <div
-              onClick={handleNextButton}
-              style={{...darkButtonStyle, marginTop: 40}}>
-              {translate('Être suivi(e) pendant 14j')}
-            </div>
-            <PrivacyNote text={translate('Nous ne partagerons aucune information')} />
-            <Link to={Routes.COME_BACK_LATER} style={veryDiscreetLinkStyle}>
-              {translate('Non merci')}
-            </Link>
-          </div>
+          <PrivacyNote text={translate('Nous ne partagerons aucune information')} />
+          <Link to={Routes.COME_BACK_LATER} style={discreetLinkStyle}>
+            {translate('Non merci')}
+          </Link>
         </div>
       </React.Fragment>
       }

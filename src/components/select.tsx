@@ -138,7 +138,7 @@ const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElemen
         borderRadius: menuIsOpen && options.length ?
           `${borderRadius}px ${borderRadius}px 0 0` : borderRadius,
         borderWidth: 0,
-        boxShadow: '0 3px 15px 0 rgba(0, 0, 0, 0.25)',
+        boxShadow: '0 11px 18px 0 rgba(60, 128, 209, 0.15)',
         height: selectStyle.height,
       }),
       group: (base): React.CSSProperties => ({
@@ -148,10 +148,10 @@ const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElemen
       }),
       groupHeading: (base): React.CSSProperties => ({
         ...base,
-        backgroundColor: colors.SMOKEY_GREY,
+        backgroundColor: colors.LIGHT_BLUE_GREY,
         color: 'inherit',
         fontSize: 11,
-        fontWeight: 'bold',
+        fontWeight: 600,
         marginBottom: 0,
         paddingBottom: 9,
         paddingTop: 9,
@@ -160,9 +160,9 @@ const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElemen
       menu: (base): React.CSSProperties => ({
         ...base,
         borderRadius: `0 0 ${borderRadius}px ${borderRadius}px`,
-        borderTop: `solid 1px ${colors.SMOKEY_GREY}`,
+        borderTop: `solid 1px ${colors.LIGHT_BLUE_GREY}`,
         borderWidth: '1px 0 0 0',
-        boxShadow: '0 10px 10px 0 rgba(0, 0, 0, 0.25)',
+        boxShadow: '0 10px 10px 0 rgba(60, 128, 209, 0.15)',
         marginBottom: 0,
         marginTop: 0,
       }),

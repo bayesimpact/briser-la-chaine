@@ -15,7 +15,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(png|jpg|gif|svg|woff|woff2|css|sass|scss|less|styl)$/,
+        test: /\.(png|jpg|gif|svg|woff|woff2|css|sass|scss|less|styl|txt)$/,
         use: 'null-loader',
       },
       {
@@ -47,8 +47,11 @@ module.exports = {
     new webpack.DefinePlugin({
       ...mapKeys(mapValues(colors, () => '""'), (color, name) => `colors.${name}`),
       ...mapKeys(mapValues(constants, () => '""'), (value, key) => `config.${key}`),
+      'config.canonicalUrl': '"https://www.example.com"',
       'config.clientVersion': '""',
       'config.environment': '"test"',
+      'config.numDaysContagious': '10',
+      'config.numDaysContagiousBeforeSymptoms': '2',
     }),
   ],
   resolve: baseConfig.resolve,

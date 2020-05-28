@@ -1,3 +1,4 @@
+import {TFunction} from 'i18next'
 import Storage from 'local-storage-fallback'
 import {Action, Dispatch} from 'redux'
 import {useDispatch as reactUseDispatch} from 'react-redux'
@@ -11,12 +12,16 @@ export type AllActions =
   | AlertPerson
   | ComputeContagiousPeriod
   | CleanStorage
+  | ConfirmContacts
   | CopyPersonalMessage
   | CreateContact
   | CreateNewPerson
   | Diagnose
   | DropContact
+  | FollowUp
   | GoToExternalDiagnostic
+  | GoToGoogleMapsHistory
+  | OpenMemoryDay
   | PageIsLoaded
   | SaveContacts
   | SaveKnownRisk
@@ -29,10 +34,15 @@ export type AllActions =
 // FIXME(cyrille): Add actions to log.
 export const ACTIONS_TO_LOG: {[K in AllActions['type']]?: string} = {
   ALERT_PERSON: 'Alert a contacted person',
+  CONFIRM_CONTACTS: 'Confirm all contacts to alert',
   COPY_PERSONAL_MESSAGE: 'Copy personal message',
   DIAGNOSE: 'Diagnostic computed',
   GO_TO_EXTERNAL_DIAG: 'Go to external diagnostic',
+  GO_TO_GOOGLE_MAPS_HISTORY: 'Go to Google Maps History',
+  OPEN_MEMORY_DAY: 'Open a Day View to add contacts',
   PAGE_IS_LOADED: 'Page is loaded',
+  REQUIRED_FOLLOW_UP: 'Require a follow-up',
+  SAVE_CONTACTS: 'Add contacts to alert',
   SHARE_APP: 'Share the app',
   SHOW_ANONYMOUS_MESSAGE_CONTENT: 'Anonymous message content is shown',
 }
@@ -53,6 +63,7 @@ export interface AlertPerson extends PersonAction<'ALERT_PERSON'> {
 
 const NO_DATE = 'NO_DATE'
 export const noDate = new Date('2020-01-01')
+// TODO(pascal): Cleanup.
 export const getNextNoDate = (state: ContactState): string => {
   const completedNoDate = Object.entries(state).
     filter(([dateString, {isDayConfirmed}]) => isDayConfirmed && dateString.startsWith(NO_DATE)).
@@ -60,12 +71,14 @@ export const getNextNoDate = (state: ContactState): string => {
   return `${NO_DATE}_${completedNoDate}`
 }
 
-function alertPerson(personId: string): ThunkAction<AlertPerson, RootState, {}, AllActions>
+function alertPerson(translate: TFunction, personId: string):
+ThunkAction<AlertPerson, RootState, {}, AllActions>
 function alertPerson(
-  personId: string, alertMedium: bayes.casContact.AlertMedium,
+  translate: TFunction, personId: string, alertMedium: bayes.casContact.AlertMedium,
   risk: ContaminationRisk): ThunkAction<AlertPerson, RootState, {}, AllActions>
 function alertPerson(
-  personId: string, alertMedium?: bayes.casContact.AlertMedium, risk?: ContaminationRisk,
+  translate: TFunction, personId: string, alertMedium?: bayes.casContact.AlertMedium,
+  risk?: ContaminationRisk,
 ): ThunkAction<AlertPerson, RootState, {}, AllActions> {
   return (dispatch): AlertPerson => {
     const action = {
@@ -75,9 +88,9 @@ function alertPerson(
     } as const
     dispatch(action)
     if (alertMedium?.medium === 'email') {
-      sendEmail(alertMedium?.value, risk || 'low')
+      sendEmail(alertMedium?.value, risk || 'low', translate)
     } else if (alertMedium?.medium === 'SMS') {
-      sendSMS(alertMedium?.value, risk || 'low')
+      sendSMS(alertMedium?.value, risk || 'low', translate)
     }
     return action
   }
@@ -108,10 +121,15 @@ function saveSymptomsOnsetDate(symptomsOnsetDate: Date): SaveSymptomsOnsetDate {
   return {symptomsOnsetDate, type: 'SET_SYMPTOMS_ONSET_DATE'}
 }
 
-export type SaveKnownRisk = Readonly<Action<'SET_KNOWN_RISK'>>
+export interface SaveKnownRisk extends Readonly<Action<'SET_KNOWN_RISK'>> {
+  chainDepth: number
+}
 
-const saveKnownRisk: SaveKnownRisk = {
-  type: 'SET_KNOWN_RISK',
+function saveKnownRisk(chainDepth: number): SaveKnownRisk {
+  return {
+    chainDepth,
+    type: 'SET_KNOWN_RISK',
+  }
 }
 
 export type ShareApp = Readonly<Action<'SHARE_APP'>>
@@ -156,18 +174,21 @@ const isDateAction = <T extends string>(action: Action<T>): action is DateAction
 
 type CreateContact = ContactAction<'CREATE_CONTACT'>
 
+// TODO(pascal): Cleanup.
 function createContact(personId: string, date: Date): CreateContact {
   return {contact: {date, personId}, date, type: 'CREATE_CONTACT'}
 }
 
 type UpdateContact = ContactAction<'UPDATE_CONTACT'>
 
+// TODO(pascal): Cleanup.
 function updateContact(contact: bayes.casContact.Contact): UpdateContact {
   return {contact, date: contact.date, type: 'UPDATE_CONTACT'}
 }
 
 type DropContact = ContactAction<'DROP_CONTACT'>
 
+// TODO(pascal): Cleanup.
 function dropContact(contact: bayes.casContact.Contact): DropContact {
   return {contact, date: contact.date, type: 'DROP_CONTACT'}
 }
@@ -176,6 +197,18 @@ type GoToExternalDiagnostic = Readonly<Action<'GO_TO_EXTERNAL_DIAG'>>
 
 const goToExternalDiagnosticAction: GoToExternalDiagnostic = {
   type: 'GO_TO_EXTERNAL_DIAG',
+}
+
+type GoToGoogleMapsHistory = Readonly<Action<'GO_TO_GOOGLE_MAPS_HISTORY'>>
+
+const goToGoogleMapsHistoryAction: GoToGoogleMapsHistory = {
+  type: 'GO_TO_GOOGLE_MAPS_HISTORY',
+}
+
+type OpenMemoryDay = Readonly<Action<'OPEN_MEMORY_DAY'>>
+
+const openMemoryDayAction: OpenMemoryDay = {
+  type: 'OPEN_MEMORY_DAY',
 }
 
 interface PageIsLoaded extends Readonly<Action<'PAGE_IS_LOADED'>> {
@@ -189,10 +222,12 @@ function pageIsLoaded(pathname: string): PageIsLoaded {
   }
 }
 
-type SaveContacts = DateAction<'SAVE_CONTACTS'>
+interface SaveContacts extends DateAction<'SAVE_CONTACTS'> {
+  readonly contacts: readonly bayes.casContact.Contact[]
+}
 
-function saveContacts(date: Date): SaveContacts {
-  return {date, type: 'SAVE_CONTACTS'}
+function saveContacts(date: Date, contacts: readonly bayes.casContact.Contact[]): SaveContacts {
+  return {contacts, date, type: 'SAVE_CONTACTS'}
 }
 
 const useDispatch: () => DispatchAllActions = reactUseDispatch
@@ -205,6 +240,17 @@ interface Diagnose extends Readonly<Action<'DIAGNOSE'>> {
 
 function diagnose(symptoms: readonly bayes.casContact.Symptom[]): Diagnose {
   return {symptoms, type: 'DIAGNOSE'}
+}
+
+interface ConfirmContacts extends Readonly<Action<'CONFIRM_CONTACTS'>> {
+  readonly numContacts: number
+}
+
+function confirmContacts(numContacts: number): ConfirmContacts {
+  return {
+    numContacts,
+    type: 'CONFIRM_CONTACTS',
+  }
 }
 
 interface CopyPersonalMessage extends Readonly<Action<'COPY_PERSONAL_MESSAGE'>> {
@@ -235,8 +281,14 @@ const showAnonymousMessageContentAction: ShowAnonymousMessageContent = {
   type: 'SHOW_ANONYMOUS_MESSAGE_CONTENT',
 }
 
+type FollowUp = Readonly<Action<'REQUIRED_FOLLOW_UP'>>
+
+const followUpAction: FollowUp = {type: 'REQUIRED_FOLLOW_UP'}
+
 export {alertPerson, computeContagiousPeriodAction, createContact, createNewPerson, diagnose,
   dropContact, isDateAction, saveContacts, saveSymptomsOnsetDate, updatePerson, updateContact,
   saveKnownRisk, useDispatch, useSelector, noOp, pageIsLoaded, goToExternalDiagnosticAction,
-  shareAction, copyPersonalMessage, cleanStorage, showAnonymousMessageContentAction}
+  shareAction, copyPersonalMessage, cleanStorage, showAnonymousMessageContentAction,
+  goToGoogleMapsHistoryAction, openMemoryDayAction, confirmContacts, followUpAction,
+}
 

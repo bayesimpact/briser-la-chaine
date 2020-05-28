@@ -13,11 +13,16 @@ import CheckboxList from 'components/checkbox_list'
 import {BottomDiv, PageWithNav} from 'components/navigation'
 
 
-const boldStyle: React.CSSProperties = {fontWeight: 'bold'}
+const boldStyle: React.CSSProperties = {fontWeight: 600}
 // TODO(pascal): Factorize this style somewhere.
 const mobileOnDesktopStyle: React.CSSProperties = {
   margin: 'auto',
   maxWidth: 420,
+}
+const titleStyle: React.CSSProperties = {
+  fontFamily: 'Poppins',
+  fontSize: 21,
+  fontWeight: 800,
 }
 
 
@@ -65,8 +70,8 @@ const DiagnosticPageBase = (): React.ReactElement => {
   }
   return <PageWithNav>
     <section style={{alignSelf: 'stretch'}}>
-      <header style={{marginBottom: 20}}>
-        <h2>{t('Quels sont vos symptômes\u00A0?')}</h2>
+      <header style={{marginBottom: 35, marginTop: 40}}>
+        <h2 style={titleStyle}>{t('Quels sont vos symptômes\u00A0?')}</h2>
         {t('Cochez les symptômes que vous avez')}
       </header>
       <CheckboxList

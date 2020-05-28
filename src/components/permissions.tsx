@@ -3,6 +3,7 @@ import {format as dateFormat} from 'date-fns'
 import React, {useCallback, useState} from 'react'
 import {useTranslation} from 'react-i18next'
 
+import {goToGoogleMapsHistoryAction, useDispatch} from 'store/actions'
 import {useDateOption} from 'store/i18n'
 
 import googleAgendaIcon from 'images/google-agenda-ico.png'
@@ -57,6 +58,7 @@ interface PermissionsProps {
 const Permissions = ({date}: PermissionsProps): React.ReactElement => {
   const {t} = useTranslation()
   const dateOption = useDateOption()
+  const dispatch = useDispatch()
   const mapUrl = 'https://www.google.com/maps/timeline?pb=!1m2!1m1!1s' +
     `${dateFormat(date, 'yyyy-MM-dd', dateOption)}`
 
@@ -70,9 +72,10 @@ const Permissions = ({date}: PermissionsProps): React.ReactElement => {
   // TODO(sil): Fix as this one is not a proper permission.
   const [hasGoogleMapPermission, setHasGoogleMapPermission] = useState(false)
   const enableGoogleMapPermission = useCallback((): void => {
+    dispatch(goToGoogleMapsHistoryAction)
     setHasGoogleMapPermission(true)
     window.open(mapUrl, '_blank', 'noopener noreferrer')
-  }, [mapUrl])
+  }, [dispatch, mapUrl])
 
   // FIXME(pascal): Use the API instead.
   const [hasGoogleAgendaPermission, setHasGoogleAgendaPermission] = useState(false)

@@ -22,10 +22,10 @@ const BulletBase = (props: BulletProps): React.ReactElement => {
     backgroundColor: isSelected ? selectColor : color,
     borderRadius: 10,
     cursor: 'pointer',
-    height: 13,
-    marginRight: isLast ? 0 : 14,
+    height: 11,
+    marginRight: isLast ? 0 : 10,
     transition,
-    width: 13,
+    width: 11,
   }
   return <div style={bulletStyle} onClick={handleClick} />
 }
@@ -35,6 +35,7 @@ const Bullet = React.memo(BulletBase)
 interface BulletsProps {
   arrowColor?: string
   borderColor?: string
+  chevronColor?: string
   color?: string
   indexVisible: number
   numBullets: number
@@ -53,14 +54,23 @@ const bulletsContainerStyle: React.CSSProperties = {
 
 
 const Bullets = (props: BulletsProps): React.ReactElement => {
-  const {arrowColor = '#fff', borderColor = colors.MEDIUM_GREY, color, indexVisible, numBullets,
-    onSelect, selectColor, transition} = props
+  const {
+    arrowColor = '#fff',
+    borderColor = colors.MEDIUM_GREY,
+    color,
+    chevronColor = undefined,
+    indexVisible,
+    numBullets,
+    onSelect,
+    selectColor,
+    transition,
+  } = props
   const arrowButtonStyle: React.CSSProperties = {
     alignItems: 'center',
     backgroundColor: arrowColor,
     border: `solid 1px ${borderColor}`,
     borderRadius: 45,
-    color: selectColor,
+    color: chevronColor || selectColor,
     cursor: 'pointer',
     display: 'flex',
     flex: 'none',

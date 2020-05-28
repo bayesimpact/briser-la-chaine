@@ -60,6 +60,22 @@ Comme déjà précisé, ces informations restent intégralement dans votre tél�
 
 Elles ne sont ni accessibles à notre organisation ni à nos salarié(e)s et ne sont pas transmises à des organismes tiers.
 
+**Un système d'API entièrement sécurisé et optionnel**
+
+{{productName}} permet, via un système sécurisé et optionnel, de faciliter votre démarche de notification des personnes que vous avez peut-être contaminées.
+
+Voici les différentes APIs que nous utilisons :
+
+* Google Calendar (en cours de développement)
+
+Cette API vous permet de retrouver rapidement les événements renseignés sur votre Google Agenda pendant votre période contagieuse, afin de vous rappeler facilement les personnes que vous avez pu croiser.
+
+* Google Contacts (en cours de développement)
+
+Cette API simplifie la saisie des personnes croisées ainsi que le pré-remplissage des contacts pour les prévenir que vous les avez peut-être contaminés, en utilisant les informations de contacts (numéro de téléphone, mail) stockées dans vos contacts Google. Cela vous évite d'avoir à renseigner les informations des contacts un par un, à la main.
+
+Nous ne stockons aucune des données provenant de ces API et ces systèmes n'ont pas non plus accès aux données personnelles renseignées sur BriserLaChaine.org.
+
 **Le code informatique de notre site internet est open-source**
 
 Nous sommes 100% transparents sur le code de notre site internet et la façon dont il fonctionne.

@@ -6,12 +6,14 @@ import {useFastForward} from 'hooks/fast_forward'
 import {Routes} from 'store/url'
 
 import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
-import {PedagogyLayout} from 'components/navigation'
+import {PedagogyPage} from 'components/navigation'
 import VirusIconSrc from 'images/virus_icon.svg'
 
 
 const titleStyle: React.CSSProperties = {
-  fontSize: 28,
+  fontFamily: 'Poppins',
+  fontSize: 26,
+  fontWeight: 800,
 }
 const VirusIcon = {
   alt: config.diseaseName,
@@ -35,18 +37,18 @@ const HealthStatusPage = (): React.ReactElement => {
     history.push(Routes.REFERRAL)
   }, [history])
   useFastForward(goToDiagnostic)
-  return <PedagogyLayout title={title} subtitle={subtitle} icon={VirusIcon}>
-    <div style={{...darkButtonStyle, marginTop: 16}} onClick={goToStart}>
+  return <PedagogyPage title={title} subtitle={subtitle} icon={VirusIcon}>
+    <div style={{...darkButtonStyle, margin: '16px 0 10px'}} onClick={goToStart}>
       {t("Oui, j'ai été diagnostiqué(e)")}
     </div>
-    <div style={darkButtonStyle} onClick={goToDiagnostic}>
+    <div style={{...darkButtonStyle, margin: '0 0 10px'}} onClick={goToDiagnostic}>
       {t('Je pense avoir des symptômes')}
     </div>
     <div style={lightButtonStyle} onClick={goToReferral}>
       {t('Non')}
     </div>
-  </PedagogyLayout>
+  </PedagogyPage>
 }
-const MemoPage = React.memo(HealthStatusPage)
 
-export {MemoPage as HealthStatusPage}
+
+export default React.memo(HealthStatusPage)

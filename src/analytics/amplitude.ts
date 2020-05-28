@@ -66,34 +66,32 @@ export const createAmplitudeMiddleware =
               amplitude.setUserId(userId)
             }
 
+            const newUserProps = logger.getUserProperties(action, state) || undefined
+            const newUtms = {
+              ...utms,
+              ..._pickBy(
+                parseQueryString(window.location.search),
+                (value, key): boolean => key.startsWith('utm_')),
+            }
+            if (!_isEqual(userProps, newUserProps) || !_isEqual(utms, newUtms)) {
+              userProps = newUserProps
+              utms = newUtms
+              const identify = new amplitude.Identify()
+              if (newUserProps) {
+                Object.keys(newUserProps).forEach((key: string): void => {
+                  identify.set(key, newUserProps[key])
+                })
+              }
+              Object.keys(utms).forEach((key): void => {
+                identify.set(key, utms[key])
+                identify.setOnce(`initial_${key}`, utms[key])
+              })
+              amplitude.identify(identify)
+            }
             if (logger.shouldLogAction(action)) {
               amplitude.logEvent(
                 logger.getEventName(action),
                 logger.getEventProperties(action, state))
-              const newUserProps = logger.getUserProperties(action, state) || undefined
-              const newUtms = {
-                ...utms,
-                ..._pickBy(
-                  parseQueryString(window.location.search),
-                  (value, key): boolean => key.startsWith('utm_')),
-              }
-              if (!_isEqual(userProps, newUserProps) || !_isEqual(utms, newUtms)) {
-                userProps = newUserProps
-                utms = newUtms
-                const identify = new amplitude.Identify()
-                if (userProps) {
-                  Object.keys(userProps).forEach((key: string): void => {
-                    if (userProps) {
-                      identify.set(key, userProps[key])
-                    }
-                  })
-                }
-                Object.keys(utms).forEach((key): void => {
-                  identify.set(key, utms[key])
-                  identify.setOnce(`initial_${key}`, utms[key])
-                })
-                amplitude.identify(identify)
-              }
             }
           }
 
