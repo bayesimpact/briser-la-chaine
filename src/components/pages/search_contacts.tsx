@@ -9,7 +9,9 @@ import CheckLineIcon from 'remixicon-react/CheckLineIcon'
 import LockFillIcon from 'remixicon-react/LockFillIcon'
 import UserFillIcon from 'remixicon-react/UserFillIcon'
 
+import {useBackgroundColor} from 'hooks/background_color'
 import {useFastForward} from 'hooks/fast_forward'
+import {confirmContacts, openMemoryDayAction, useDispatch} from 'store/actions'
 import {useDaysToValidate, useNumPeopleToAlert, useSelector,
   useSymptomsOnsetDate} from 'store/selections'
 import {Routes} from 'store/url'
@@ -35,9 +37,9 @@ const contactCountStyle: React.CSSProperties = {
   alignItems: 'center',
   display: 'flex',
   fontSize: 13,
-  fontWeight: 'bold',
+  fontWeight: 600,
   justifyContent: 'center',
-  marginTop: 10,
+  marginTop: 22,
 }
 
 
@@ -54,47 +56,57 @@ const DayCardBase = ({date, isHidden, onClick, style}: DayCardProps): React.Reac
     opacity: isHidden ? 0 : 1,
     ...style,
   }), [isHidden, style])
+  const squareContainerStyle: React.CSSProperties = {
+    position: 'relative',
+  }
   const squareStyle: React.CSSProperties = {
     alignItems: 'center',
-    backgroundColor: isDayConfirmed ? colors.ICE_BLUE : colors.BRIGHT_SKY_BLUE,
+    backgroundColor: '#fff',
     borderRadius: 30,
-    color: isDayConfirmed ? colors.LIGHT_GREY_BLUE : '#fff',
+    boxShadow: '0 11px 18px 0 rgba(60, 128, 209, 0.09)',
+    color: '#000',
     cursor: isClickable ? 'pointer' : undefined,
     display: 'flex',
     flexDirection: 'column',
-    fontSize: 35,
-    fontWeight: 800,
-    height: 105,
+    height: 93,
     justifyContent: 'center',
-    position: 'relative',
+    opacity: isDayConfirmed ? .5 : 1,
     transition: '450ms',
-    width: 105,
+    width: 93,
   }
   const textStyle: React.CSSProperties = {
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: 600,
+  }
+  const bigTextStyle: React.CSSProperties = {
+    fontFamily: 'Poppins',
+    fontSize: 35,
+    fontWeight: 800,
+    margin: -12,
   }
   const checkStyle: React.CSSProperties = {
     alignItems: 'center',
-    backgroundColor: colors.VIBRANT_GREEN,
+    backgroundColor: colors.MINTY_GREEN,
     borderRadius: 30,
-    bottom: 0,
+    bottom: 1,
     display: 'flex',
-    height: 24,
+    height: 34,
     justifyContent: 'center',
     opacity: isDayConfirmed ? 1 : 0,
     position: 'absolute',
-    right: 0,
-    width: 24,
+    right: 1,
+    width: 34,
   }
   const weekDay = useMemo(() => dateFormat(date, 'EEE', dateOption), [date, dateOption])
   const month = useMemo(() => dateFormat(date, 'MMMM', dateOption), [date, dateOption])
   const handleClick = useCallback((): void => onClick?.(date), [date, onClick])
   return <div style={containerStyle} onClick={onClick && handleClick}>
-    <div style={squareStyle} onClick={onClick && handleClick}>
-      <span style={textStyle}>{weekDay || 'lundi'}</span>
-      <span>{date.getDate()}</span>
-      <span style={textStyle}>{month || 'mars'}</span>
+    <div style={squareContainerStyle}>
+      <div style={squareStyle}>
+        <span style={textStyle}>{weekDay || 'lundi'}</span>
+        <span style={bigTextStyle}>{date.getDate()}</span>
+        <span style={textStyle}>{month || 'mars'}</span>
+      </div>
       <div style={checkStyle}>
         <CheckLineIcon size={18} color="#fff" />
       </div>
@@ -118,32 +130,28 @@ interface DayProgressProps {
 }
 
 
+const progressContainerStyle: React.CSSProperties = {
+  backgroundColor: 'rgb(212, 220, 231, .6)',
+  borderRadius: 10,
+  height: 12,
+  overflow: 'hidden',
+  position: 'relative',
+  // Stunt to enforce overflow hidden on Firefox.
+  transform: 'scale(1)',
+}
 const progressTextStyle: React.CSSProperties = {
   fontSize: 15,
   fontStyle: 'italic',
-  left: '50%',
-  position: 'absolute',
+  marginTop: 15,
   textAlign: 'center',
-  top: '50%',
-  transform: 'translate(-50%, -50%)',
 }
 
 
 const DayProgressBase = (props: DayProgressProps): React.ReactElement => {
   const {numDays, numDaysValidated, style} = props
   const {t} = useTranslation()
-  const containerStyle: React.CSSProperties = {
-    backgroundColor: colors.ICE_BLUE,
-    borderRadius: 20,
-    height: 35,
-    overflow: 'hidden',
-    position: 'relative',
-    // Stunt to enforce overflow hidden on Firefox.
-    transform: 'scale(1)',
-    ...style,
-  }
   const progressStyle: React.CSSProperties = {
-    backgroundColor: colors.BRIGHT_SKY_BLUE,
+    backgroundColor: colors.MINTY_GREEN,
     bottom: 0,
     left: 0,
     position: 'absolute',
@@ -151,8 +159,10 @@ const DayProgressBase = (props: DayProgressProps): React.ReactElement => {
     transition: '200ms 500ms',
     width: `${Math.max(3, numDaysValidated * 100 / (numDays || 1))}%`,
   }
-  return <div style={containerStyle}>
-    <div style={progressStyle} />
+  return <div style={style}>
+    <div style={progressContainerStyle}>
+      <div style={progressStyle} />
+    </div>
     <div style={progressTextStyle}>
       {t('{{numDaysValidated}}/{{count}} jour à vérifier', {count: numDays, numDaysValidated})}
     </div>
@@ -174,7 +184,7 @@ const modalContainer: React.CSSProperties = {
 }
 const modalTitle: React.CSSProperties = {
   fontSize: 19,
-  fontWeight: 'bold',
+  fontWeight: 600,
   marginBottom: 40,
   textAlign: 'center',
 }
@@ -219,7 +229,7 @@ interface ContagiousPeriodLineProps {
 }
 
 const cardStyle = {
-  margin: '10px 5px',
+  margin: '10px 9px',
 } as const
 const ContagiousPeriodLineBase = (props: ContagiousPeriodLineProps): React.ReactElement => {
   const {line, onCardClick} = props
@@ -233,15 +243,20 @@ const ContagiousPeriodLine = React.memo(ContagiousPeriodLineBase)
 
 
 const titleStyle: React.CSSProperties = {
-  fontSize: 19,
-  fontWeight: 'bold',
-  textAlign: 'center',
+  fontSize: 20,
+  fontWeight: 'normal',
 }
 const dayProgressStyle: React.CSSProperties = {
   margin: '20px 0',
 }
 const bottomDivStyle: React.CSSProperties = {
+  backgroundColor: '#fff',
+  borderRadius: '25px 25px 0 0',
   boxShadow: '0 0 15px 0 rgba(0, 0, 0, 0.15)',
+}
+const strongStyle: React.CSSProperties = {
+  fontFamily: 'Poppins',
+  fontWeight: 800,
 }
 
 
@@ -249,11 +264,15 @@ const ContagiousPeriodBase = (): React.ReactElement => {
   const history = useHistory()
   const {t} = useTranslation()
   const [dateShown, setDateShown] = useState<Date|undefined>()
+  const dispatch = useDispatch()
   const symptomsOnsetDate = useSymptomsOnsetDate()
   const contagiousDays = useDaysToValidate()
   const contagiousDaysChunks = useMemo(
     (): Date[][] => _chunk(contagiousDays, numMaxCardPerLine), [contagiousDays])
-  const handleCardClick = useCallback((date: Date) => setDateShown(date), [])
+  const handleCardClick = useCallback((date: Date) => {
+    dispatch(openMemoryDayAction)
+    setDateShown(date)
+  }, [dispatch])
   const handleDetailClose = useCallback(() => setDateShown(undefined), [])
   const totalContactsCount = useNumPeopleToAlert()
   const numDaysValidated = useSelector(({contacts}): number =>
@@ -262,7 +281,8 @@ const ContagiousPeriodBase = (): React.ReactElement => {
       length,
   )
   const areEveryDaysValidated = numDaysValidated === contagiousDays.length
-  const [isNoContactModalShown, setIsNoContactModalShown] = useState(areEveryDaysValidated)
+  const [isNoContactModalShown, setIsNoContactModalShown] =
+    useState(areEveryDaysValidated && !totalContactsCount)
   const [isNoContactValidated, setIsNoContactValidated] = useState(false)
   const closeModal = useCallback(() => {
     setIsNoContactModalShown(false)
@@ -279,18 +299,31 @@ const ContagiousPeriodBase = (): React.ReactElement => {
       setIsNoContactModalShown(true)
     }
   }, [areEveryDaysValidated, isNoContactValidated, totalContactsCount])
+
+  const confirmAllDays = useCallback((): void => {
+    dispatch(confirmContacts(totalContactsCount))
+  }, [dispatch, totalContactsCount])
+
   useFastForward((): void => {
     if (dateShown) {
       handleDetailClose()
       return
     }
     if (totalContactsCount && areEveryDaysValidated) {
+      confirmAllDays()
       history.push(Routes.MEMORY_OUTRO)
       return
     }
     handleCardClick(firstDate)
-  }, [areEveryDaysValidated, dateShown, firstDate, handleCardClick, handleDetailClose,
-    history, totalContactsCount])
+  }, [areEveryDaysValidated, confirmAllDays, dateShown, firstDate, handleCardClick,
+    handleDetailClose, history, totalContactsCount])
+
+  useBackgroundColor(symptomsOnsetDate ? colors.PALE_GREY : undefined)
+
+  const validateButtonStyle: React.CSSProperties = useMemo((): React.CSSProperties => ({
+    ...(isNoContactValidated ? lightButtonStyle : darkButtonStyle),
+    margin: '0 0 12px 0',
+  }), [isNoContactValidated])
 
   if (!symptomsOnsetDate) {
     return <Redirect to={Routes.SYMPTOMS_ONSET} />
@@ -298,32 +331,26 @@ const ContagiousPeriodBase = (): React.ReactElement => {
 
   const goToOutroStyle: React.CSSProperties = {
     alignItems: 'center',
-    backgroundColor: '#fff',
     display: 'flex',
     flexDirection: 'column',
-    padding: 20,
+    padding: '20px 20px 12px',
   }
   const bottomTextStyle: React.CSSProperties = {
-    backgroundColor: '#fff',
     fontSize: 19,
-    fontWeight: 'bold',
+    fontWeight: 600,
     paddingTop: 20,
     textAlign: 'center',
   }
-  const validateButtonStyle: React.CSSProperties = isNoContactValidated ?
-    lightButtonStyle : {
-      ...darkButtonStyle,
-      backgroundColor: colors.VIBRANT_GREEN,
-    }
   return <DrawerContainer
     drawer={dateShown && <ContactsSearch date={dateShown} onClose={handleDetailClose} />}
     isOpen={!!dateShown} onClose={handleDetailClose}>
-    <BurgerMenu />
+    <BurgerMenu color="#000" />
     <NoContactModal
       isShown={isNoContactModalShown} onClose={closeModal} onValidate={validateNoContact} />
     <div style={{marginTop: 20, padding: 20}}>
       <Trans parent="h1" style={titleStyle}>
-        Retrouvez les personnes croisées pendant votre période contagieuse
+        Retrouvez <strong style={strongStyle}>les personnes croisées</strong> pendant votre période
+        contagieuse
       </Trans>
       <DayProgress
         numDays={contagiousDays.length} numDaysValidated={numDaysValidated}
@@ -339,7 +366,7 @@ const ContagiousPeriodBase = (): React.ReactElement => {
           </div> : null}
         {areEveryDaysValidated && (isNoContactValidated || totalContactsCount) ?
           <div style={goToOutroStyle}>
-            <Link style={validateButtonStyle} to={Routes.MEMORY_OUTRO}>
+            <Link style={validateButtonStyle} to={Routes.MEMORY_OUTRO} onClick={confirmAllDays}>
               {totalContactsCount ?
                 t('Prévenir mes {{count}} cas contacts', {count: totalContactsCount}) :
                 t("Passer à l'étape suivante")}

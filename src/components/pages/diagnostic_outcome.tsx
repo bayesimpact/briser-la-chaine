@@ -13,18 +13,20 @@ import {goToExternalDiagnosticAction, useDispatch, useSelector} from 'store/acti
 import {Routes} from 'store/url'
 
 import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
-import {BottomDiv, PedagogyLayout} from 'components/navigation'
+import {BottomDiv, PedagogyPage} from 'components/navigation'
 
 
 const normalWeightStyle: React.CSSProperties = {
   fontWeight: 'normal',
 }
 const importantStyle: React.CSSProperties = {
-  fontWeight: 'bold',
+  fontFamily: 'Poppins',
+  fontWeight: 800,
 }
 const veryImportantStyle: React.CSSProperties = {
-  color: colors.SALMON,
-  fontWeight: 'bold',
+  color: colors.BARBIE_PINK,
+  fontFamily: 'Poppins',
+  fontWeight: 800,
 }
 const centeredTextStyle: React.CSSProperties = {
   textAlign: 'center',
@@ -38,7 +40,8 @@ const externalLinkStyle: React.CSSProperties = {
 }
 const greenButtonStyle: React.CSSProperties = {
   ...darkButtonStyle,
-  backgroundColor: colors.VIBRANT_GREEN,
+  backgroundColor: colors.MINTY_GREEN,
+  color: '#000',
   display: 'block',
   margin: '20px auto',
   maxWidth: 420,
@@ -67,7 +70,7 @@ const assistanceWarningStyle: React.CSSProperties = {
 }
 const assistanceWarningNowStyle: React.CSSProperties = {
   ...assistanceWarningStyle,
-  backgroundColor: colors.SALMON,
+  backgroundColor: colors.BARBIE_PINK,
   border: 'none',
   color: '#fff',
 }
@@ -77,8 +80,9 @@ const boldStyle: React.CSSProperties = {
   textDecoration: 'underline',
 }
 const greenStyle: React.CSSProperties = {
-  color: colors.VIBRANT_GREEN,
-  fontWeight: 600,
+  color: colors.MINTY_GREEN,
+  fontFamily: 'Poppins',
+  fontWeight: 800,
 }
 const DiagnosticOutcomePageBase = (): React.ReactElement => {
   const {t} = useTranslation()
@@ -125,8 +129,8 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
       'Vos symptômes ne semblent pas être des symptômes principaux du {{diseaseName}}',
       {diseaseName: config.diseaseName},
     )
-    return <PedagogyLayout
-      title={title} icon={ThumbUpFillIcon}
+    return <PedagogyPage
+      title={<span style={importantStyle}>{title}</span>} icon={ThumbUpFillIcon}
       subtitle={t("N'hésitez pas à consulter un médecin pour plus d'informations.")}>
       <BottomDiv style={centeredTextStyle}>
         <div style={{padding: '0 20px'}}>
@@ -146,15 +150,15 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
           </Trans>
         </div>
       </BottomDiv>
-    </PedagogyLayout>
+    </PedagogyPage>
   }
 
   if (isReferralLowRisk) {
-    return <PedagogyLayout
+    return <PedagogyPage
       title={<Trans style={normalWeightStyle}>
         Il est <span style={importantStyle}>trop tôt</span> pour savoir si vous êtes atteint(e).
         <br /><br />
-        Il reste <span style={veryImportantStyle}>vital</span> que vous
+        Il reste <span style={veryImportantStyle}>essentiel</span> que vous
         preniez toutes les précautions nécessaires.
       </Trans>} icon={Search2LineIcon}
       nextButton={t('Que dois-je faire\u00A0?')} onNext={handleNext} />
@@ -162,7 +166,7 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
 
   if (hasKnownRisk) {
     // Referral High Risk
-    return <PedagogyLayout
+    return <PedagogyPage
       title={<Trans style={normalWeightStyle}>
         Vos symptômes <span style={importantStyle}>pourraient provenir</span> du
         {' '}{{diseaseName: config.diseaseName}}.<br /><br />
@@ -170,16 +174,16 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
         de contamination.
       </Trans>} icon={UserSearchFillIcon}
       nextButton={t('Que dois-je faire\u00A0?')} onNext={handleNext}
-      nextButtonColor={colors.VIBRANT_GREEN} />
+      nextButtonColor={colors.MINTY_GREEN} />
   }
 
   // Naive High Risk.
   if (!step) {
-    return <PedagogyLayout
+    return <PedagogyPage
       title={<Trans style={normalWeightStyle}>
         Vos symptômes <span style={importantStyle}>pourraient provenir</span> du
         {' '}{{diseaseName: config.diseaseName}}.
-      </Trans>} subtitle={t("Consulter votre médecin traitant pour plus d'informations.")}
+      </Trans>} subtitle={t("Consultez votre médecin traitant pour plus d'informations.")}
       icon={Search2LineIcon} nextButton={t("J'ai compris")} onNext={gotoSecondStep}>
       <div style={isAssistanceRequiredNow ? assistanceWarningNowStyle : assistanceWarningStyle}>
         <ErrorWarningFillIcon style={warningIconStyle} />
@@ -193,15 +197,15 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
           </span>.
         </Trans>}
       </div>
-    </PedagogyLayout>
+    </PedagogyPage>
   }
-  return <PedagogyLayout
+  return <PedagogyPage
     title={<Trans style={normalWeightStyle}>
-      Maintenant que vous avez pris vos précautions, il est vital de <span style={greenStyle}>
+      Maintenant que vous avez pris vos précautions, il est essentiel de <span style={greenStyle}>
         notifier vos contacts
       </span> à votre tour.
     </Trans>} icon={UserSearchFillIcon}
-    nextButton={t('Briser la chaîne')} onNext={handleNext} nextButtonColor={colors.VIBRANT_GREEN} />
+    nextButton={t('Briser la chaîne')} onNext={handleNext} nextButtonColor={colors.MINTY_GREEN} />
 }
 const DiagnosticOutcomePage = React.memo(DiagnosticOutcomePageBase)
 

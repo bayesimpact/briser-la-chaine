@@ -11,6 +11,7 @@ import createReduxSentryMiddleware from 'redux-sentry-middleware'
 import thunk from 'redux-thunk'
 import {polyfill as smoothscrollPolyfill} from 'smoothscroll-polyfill'
 
+import {parseQueryString} from 'analytics/parse'
 import {createAmplitudeMiddleware} from 'analytics/amplitude'
 import Logger from 'analytics/logger'
 import {alerts, contacts, people, user} from 'store/app_reducer'
@@ -28,10 +29,10 @@ import DiagnosticPage from 'components/pages/diagnostic'
 import DiagnosticOutcomePage from 'components/pages/diagnostic_outcome'
 import FinalPage from 'components/pages/final'
 import FollowUpPage from 'components/pages/follow_up'
-import {HealthStatusPage} from 'components/pages/health_status'
+import HealthStatusPage from 'components/pages/health_status'
 import MemoryOutroPage from 'components/pages/outro_memory'
 import PedagogyIntroPage from 'components/pages/intro_pedagogy'
-import {PedagogyOutroPage} from 'components/pages/outro_pedagogy'
+import PedagogyOutroPage from 'components/pages/outro_pedagogy'
 import PrivacyPage from 'components/pages/privacy'
 import ReferralPage from 'components/pages/referral'
 import SplashPage from 'components/pages/splash'
@@ -42,8 +43,17 @@ import 'styles/fonts/Poppins/font.css'
 
 require('styles/app.css')
 
+const hostnameToLng = {
+  briserlachaine: 'fr',
+  conotify: 'en',
+}
 smoothscrollPolyfill()
-i18nInit()
+i18nInit({
+  lng: (Object.entries(hostnameToLng).
+    find(([hostname]) => window.location.hostname.toLowerCase().includes(hostname)) ||
+    ['dev', parseQueryString(window.location.search)['hl'] || 'fr']
+  )[1],
+})
 
 interface AppState {
   history: History
@@ -87,11 +97,13 @@ const App = (): React.ReactElement => {
   usePathnameInQueryString(location)
   useScrollToTopOnNewPage(location)
   usePageLogger(location)
+  const {search, hash} = location
   // TODO(cyrille): Add possibility to drop the onset date without cleaning the local storage.
   // FIXME(sil): Check the conditions for which each page is available.
   const hasOnsetDate = !!useSymptomsOnsetDate()
   return <Switch>
     <Route path={Routes.SPLASH} component={SplashPage} />
+    <Route path={Routes.DIAGNOSED_SPLASH} component={SplashPage} />
     <Route path={Routes.MODERATE_RISK_SPLASH} component={SplashPage} />
     <Route path={Routes.HIGH_RISK_SPLASH} component={SplashPage} />
     <Route path={Routes.PEDAGOGY_INTRO} component={PedagogyIntroPage} />
@@ -111,7 +123,7 @@ const App = (): React.ReactElement => {
     <Route path={Routes.PRIVACY} component={PrivacyPage} />
     <Route path={Routes.TERMS} component={TermsPage} />
     {/* FIXME(cyrille): Redirect to CONTACTS_LIST if user has validated all days. */}
-    <Redirect to={hasOnsetDate ? Routes.CONTACTS_SEARCH : Routes.SPLASH} />
+    <Redirect to={(hasOnsetDate ? Routes.CONTACTS_SEARCH : Routes.SPLASH) + search + hash} />
   </Switch>
 }
 const MemoApp = React.memo(App)

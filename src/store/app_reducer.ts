@@ -21,17 +21,26 @@ function unsavedUser(state: UserState, action: AllActions): void|UserState {
     case 'SET_KNOWN_RISK':
       return {
         ...state,
+        chainDepth: (action.chainDepth || 0),
         hasKnownRisk: true,
       }
-    case 'SET_SYMPTOMS_ONSET_DATE':
+    case 'SET_SYMPTOMS_ONSET_DATE': {
+      const {
+        contagiousPeriodEnd: omittedEnd,
+        contagiousPeriodStart: omittedStart,
+        ...otherState
+      } = state
       return {
-        ...state,
+        ...otherState,
         symptomsOnsetDate: action.symptomsOnsetDate,
       }
+    }
     case 'COMPUTE_CONTAGIOUS_PERIOD':
       return {
         ...state,
-        contagiousPeriodEnd: addDays(state.symptomsOnsetDate || today, config.numDaysContagious),
+        contagiousPeriodEnd: addDays(
+          state.symptomsOnsetDate || today,
+          config.numDaysContagious - config.numDaysContagiousBeforeSymptoms),
         contagiousPeriodStart: subDays(
           state.symptomsOnsetDate || today, config.numDaysContagiousBeforeSymptoms),
       }
@@ -78,7 +87,11 @@ function user(state: UserState = initUser, action: AllActions): UserState {
   if (!newState) {
     return state
   }
-  Storage.setItem(SAVED_USER_COOKIE, JSON.stringify(serializeUser(newState)))
+  if (Object.keys(newState).length) {
+    Storage.setItem(SAVED_USER_COOKIE, JSON.stringify(serializeUser(newState)))
+  } else {
+    Storage.removeItem(SAVED_USER_COOKIE)
+  }
   return newState
 }
 
@@ -203,8 +216,11 @@ function contacts(state: ContactState = startingContacts, action: AllActions): C
           filter((contact): boolean => !isSameDayContact(contact, action.contact)),
       }))
     case 'SAVE_CONTACTS': {
+      // TODO(cyrille): Consider not saving them by date anymore (while still being compatible with
+      // old users' cache).
       return updateDateAndStore(state, action.date, dateState => ({
         ...dateState,
+        contacts: action.contacts,
         isDayConfirmed: true,
       }))
     }

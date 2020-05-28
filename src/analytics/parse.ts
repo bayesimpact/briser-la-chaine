@@ -2,6 +2,8 @@ import _mapValues from 'lodash/mapValues'
 import _pickBy from 'lodash/pickBy'
 import {parse} from 'query-string'
 
+// TODO(cyrille): Move out of analytics.
+
 
 const flattenArray = {
   first: (values: readonly string[]): string => values[0],

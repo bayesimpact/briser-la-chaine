@@ -21,7 +21,7 @@ COPY cfg cfg/
 COPY src src/
 COPY test test/
 # TODO(cyrille): Add a favicon.
-COPY .babelrc i18n.babelrc.js entrypoint.sh .eslintrc.json .eslintignore karma.conf.js check-color-config.sh jsonlint.sh tsconfig.json custom.d.ts ./
+COPY .babelrc diff_i18n_folder.sh i18n.babelrc.js entrypoint.sh .eslintrc.json .eslintignore karma.conf.js check-color-config.sh jsonlint.sh tsconfig.json custom.d.ts ./
 
 COPY vendor/patch-babel-plugin-i18next-extract.sh ./vendor/patch-babel-plugin-i18next-extract.sh
 RUN ./vendor/patch-babel-plugin-i18next-extract.sh

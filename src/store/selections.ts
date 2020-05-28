@@ -1,9 +1,11 @@
-import {eachDayOfInterval, parseISO as parseISODate, subDays} from 'date-fns'
+import {addDays, eachDayOfInterval, min as minDates, parseISO as parseISODate,
+  subDays} from 'date-fns'
 import {TFunction} from 'i18next'
+import {useTranslation} from 'react-i18next'
 import {useSelector as reactUseSelector} from 'react-redux'
 
 import {joinDays, useDateOption} from 'store/i18n'
-import {Routes} from 'store/url'
+import {Params, Routes} from 'store/url'
 
 const useSelector: <T>(
   selector: ((state: RootState) => T),
@@ -52,26 +54,45 @@ const useIsHighRisk = (personId: string): boolean => useSelector(({contacts}): b
       !!(duration && duration > 10 || distance && distance !== 'far'))))
 
 const useReferralUrl = (personId: string): string => {
+  const chainDepth = useSelector(({user: {chainDepth = 0} = {}}): number => chainDepth)
   const isHighRisk = useIsHighRisk(personId)
-  return config.canonicalUrl + (isHighRisk ? Routes.HIGH_RISK_SPLASH : Routes.MODERATE_RISK_SPLASH)
+  const {t} = useTranslation()
+  const pathname =
+    t('canonicalUrl') + (isHighRisk ? Routes.HIGH_RISK_SPLASH : Routes.MODERATE_RISK_SPLASH)
+  if (!chainDepth) {
+    return pathname
+  }
+  return pathname + `?${encodeURIComponent(Params.DEPTH)}=${chainDepth}`
 }
 
+// TODO(sil): Update this for reduced days to review.
+// TODO(sil): Add a test.
 const getDaysToValidate = ({user}: RootState): readonly Date[] => {
   const todayDate = new Date()
-  const {contagiousPeriodStart, symptomsOnsetDate} = user
+  const {contagiousPeriodEnd, contagiousPeriodStart, symptomsOnsetDate} = user
   const firstSymptomsDate = symptomsOnsetDate || todayDate
   const contagiousStartDate = contagiousPeriodStart ||
     subDays(firstSymptomsDate, config.numDaysContagiousBeforeSymptoms)
-  return eachDayOfInterval({end: todayDate, start: contagiousStartDate})
+  const contagiousEndDate = contagiousPeriodEnd ||
+    addDays(contagiousStartDate, config.numDaysContagious)
+  return eachDayOfInterval(
+    {end: minDates([todayDate, contagiousEndDate]), start: contagiousStartDate})
 }
 
 const useDaysToValidate = (): readonly Date[] => useSelector(getDaysToValidate)
+
+// TODO(pascal): Add a test.
+const useHasCache = (): boolean => useSelector(({alerts, contacts, people, user}): boolean =>
+  !!people.length || !!Object.keys(alerts).length || !!Object.keys(contacts).length ||
+  !!Object.keys(user).length,
+)
 
 export {
   getDaysToValidate,
   getPeopleToAlert,
   useAlert,
   useDaysToValidate,
+  useHasCache,
   useIsHighRisk,
   useNumPeopleToAlert,
   usePeopleToAlert,

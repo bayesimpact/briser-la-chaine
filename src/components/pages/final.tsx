@@ -40,7 +40,7 @@ const contentStyle: React.CSSProperties = {
 }
 const circleStyle: React.CSSProperties = {
   alignItems: 'center',
-  backgroundColor: colors.ICE_BLUE,
+  backgroundColor: colors.PALE_GREY,
   borderRadius: 165,
   display: 'flex',
   height: 165,
@@ -50,9 +50,10 @@ const circleStyle: React.CSSProperties = {
   width: 165,
 }
 const thankYouStyle: React.CSSProperties = {
-  bottom: 15,
+  bottom: 10,
+  fontFamily: 'Poppins',
   fontSize: 32,
-  fontWeight: 900,
+  fontWeight: 800,
   left: '50%',
   position: 'absolute',
   transform: 'translateX(-50%)',
@@ -73,7 +74,7 @@ const FinalPageBase = (): React.ReactElement => {
     "avez des symptômes du {{diseaseName}}, je vous recommande d'utiliser ce site gratuit et " +
     "anonyme qui m'a été très utile\u00A0: {{url}}.\n\n(Site créé par une ONG, il n'y a aucun " +
     'traçage de données\u00A0!)',
-    {count: numAlertedPeople, diseaseName: config.diseaseName, url: config.canonicalUrl},
+    {count: numAlertedPeople, diseaseName: config.diseaseName, url: t('canonicalUrl')},
   )
   useEffect(() => {
     const timeout = window.setTimeout((): void => setIsVisible(true), 300)
@@ -101,7 +102,7 @@ const FinalPageBase = (): React.ReactElement => {
         <div style={thankYouStyle}>{thankYou}</div>
       </div>
       <Trans style={titleStyle} count={numAlertedPeople}>
-        Grâce à vous, <strong style={{color: colors.VIBRANT_GREEN}}>
+        Grâce à vous, <strong style={{color: colors.SEAWEED}}>
           {{numAlert: numAlertedPeople}} personne
         </strong> va pouvoir se protéger et briser la chaîne à son tour&nbsp;!
       </Trans>

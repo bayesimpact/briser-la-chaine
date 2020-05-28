@@ -1,4 +1,4 @@
-import {AllActions} from 'store/actions'
+import {AllActions, noDate} from 'store/actions'
 import {getDaysToValidate, getPeopleToAlert} from 'store/selections'
 
 import {Routes} from 'store/url'
@@ -28,7 +28,7 @@ export default class Logger implements AmplitudeLogger<AllActions, RootState> {
 
   getEventProperties(action: AllActions, state: RootState): Properties {
     if (action.type === 'PAGE_IS_LOADED') {
-      const properties: {isFirstPage?: boolean; numDaysToValidate?: number} = {}
+      const properties: Properties = {}
       if (this.isFirstPage) {
         properties.isFirstPage = true
         this.isFirstPage = false
@@ -36,7 +36,7 @@ export default class Logger implements AmplitudeLogger<AllActions, RootState> {
       if (action.pathname === Routes.CONTACTS_SEARCH) {
         properties.numDaysToValidate = getDaysToValidate(state).length
       }
-      return properties as Properties
+      return properties
     }
     if (action.type === 'ALERT_PERSON') {
       return {
@@ -44,9 +44,23 @@ export default class Logger implements AmplitudeLogger<AllActions, RootState> {
         medium: action.alertMedium?.medium || 'self',
       }
     }
+    if (action.type === 'CONFIRM_CONTACTS') {
+      return {
+        numContacts: action.numContacts,
+      }
+    }
     if (action.type === 'COPY_PERSONAL_MESSAGE') {
       const {hasReferralUrl, isDefaultText} = action
       return {hasReferralUrl, isDefaultText}
+    }
+    if (action.type === 'SAVE_CONTACTS') {
+      const properties: Properties = {
+        numContacts: action.contacts.length,
+      }
+      if (action.date !== noDate) {
+        properties.isForADay = true
+      }
+      return properties
     }
     return {}
   }
@@ -55,12 +69,14 @@ export default class Logger implements AmplitudeLogger<AllActions, RootState> {
     return undefined
   }
 
-  getUserProperties(unusedAction: AllActions, state: RootState): Properties|null {
-    const {alerts, user: {hasKnownRisk}} = state
+  getUserProperties(action: AllActions, state: RootState): Properties|null {
+    const {alerts, user: {chainDepth: stateChainDepth = 0, hasKnownRisk}} = state
+    const chainDepth = action.type === 'SET_KNOWN_RISK' ? action.chainDepth : stateChainDepth
     return {
       countAlertedPeople: Object.keys(alerts).length,
       countAllPeople: getPeopleToAlert(state).length,
       isReferral: !!hasKnownRisk,
+      referralDepth: chainDepth,
     }
   }
 }

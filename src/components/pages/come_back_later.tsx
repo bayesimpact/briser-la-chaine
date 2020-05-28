@@ -22,9 +22,17 @@ const pageStyle: React.CSSProperties = {
 }
 const titleStyle: React.CSSProperties = {
   fontSize: 22,
-  fontWeight: 'bold',
+  lineHeight: 1.27,
   maxWidth: 250,
   textAlign: 'center',
+}
+const strongStyle: React.CSSProperties = {
+  fontFamily: 'Poppins',
+  fontWeight: 800,
+}
+const greenStyle: React.CSSProperties = {
+  ...strongStyle,
+  color: colors.SEAWEED,
 }
 const contentContainerStyle: React.CSSProperties = {
   alignItems: 'flex-start',
@@ -51,8 +59,8 @@ const ComeBackLaterPage = (): React.ReactElement => {
   return <div style={pageStyle}>
     <div />
     <Trans style={titleStyle}>
-      Si des symptômes apparaissent, il est vital
-      de <span style={{color: colors.VIBRANT_GREEN}}>prévenir vos contacts</span> à votre tour.
+      Si des symptômes apparaissent, il est <strong style={strongStyle}>essentiel</strong>{' '}
+      de <strong style={greenStyle}>prévenir vos contacts</strong> à votre tour.
     </Trans>
     <div style={contentContainerStyle}>
       <IconBox

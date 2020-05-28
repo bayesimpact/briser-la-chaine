@@ -13,12 +13,12 @@ import MailLineIcon from 'remixicon-react/MailLineIcon'
 import MailSendLineIcon from 'remixicon-react/MailSendLineIcon'
 import PhoneLineIcon from 'remixicon-react/PhoneLineIcon'
 import RestartLineIcon from 'remixicon-react/RestartLineIcon'
-import UserAddLineIcon from 'remixicon-react/UserAddLineIcon'
 
 import React, {useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState} from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router'
 
+import {useBackgroundColor} from 'hooks/background_color'
 import {useFastForward} from 'hooks/fast_forward'
 import {alertPerson, copyPersonalMessage, noDate, noOp, showAnonymousMessageContentAction,
   useDispatch} from 'store/actions'
@@ -42,9 +42,10 @@ import Textarea from 'components/textarea'
 import heartCelebrationImage from 'images/heart_celebration.svg'
 
 
+// TODO(pascal): Remove once we upgrade TypeScript to v3.9+
 declare global {
   interface Navigator {
-    share?: (options: {text: string; title?: string; url: string}) => void
+    share(data?: {text?: string; title?: string; url?: string}): Promise<void>
   }
 }
 
@@ -125,34 +126,45 @@ const PhoneEmailInputBase = (props: PhoneEmailInputProps): React.ReactElement =>
     isInvalid ? ErrorWarningLineIcon :
       isValid ? CheckLineIcon :
         null
-  const iconSize = 24
+  const iconSize = 34
+  const iconMarginLeft = 10
+  const iconMarginRight = 10
   const iconContainerStyle: React.CSSProperties = {
     alignItems: 'center',
-    bottom: 0,
+    backgroundColor: Icon === AddLineIcon ? colors.MINTY_GREEN : 'transparent',
+    borderRadius: iconSize,
+    color: Icon === AddLineIcon ? '#fff' : '#000',
     cursor: 'text',
     display: 'flex',
     fontSize: 20,
-    margin: 1,
-    paddingLeft: 5,
-    paddingRight: 5,
+    height: iconSize,
+    justifyContent: 'center',
+    marginLeft: iconMarginLeft,
+    marginRight: iconMarginRight,
     position: 'absolute',
-    top: 0,
+    top: '50%',
+    transform: 'translateY(-50%)',
+    width: iconSize,
   }
   const rightIconStyle: React.CSSProperties = {
     ...iconContainerStyle,
-    color: isInvalid ? colors.ORANGE_RED : isValid ? colors.VIBRANT_GREEN : 'inherit',
-    right: 0,
+    backgroundColor: isValid && !isDone ? colors.MINTY_GREEN : 'transparent',
+    color: isInvalid ? colors.BARBIE_PINK :
+      isDone ? colors.MINTY_GREEN : isValid ? '#fff' : 'inherit',
+    right: 1,
   }
   const paddedInputStyle = useMemo((): React.CSSProperties => ({
-    borderRadius: 5,
-    ...isInvalid ? {borderColor: colors.ORANGE_RED} : {},
+    borderRadius: 23,
+    ...isInvalid ? {borderColor: colors.BARBIE_PINK} : {},
+    boxShadow: '0 12px 19px 0 rgba(60, 128, 209, 0.09)',
     flex: 1,
-    paddingLeft: iconSize + 10,
+    height: 58,
+    paddingLeft: iconSize + iconMarginLeft + iconMarginRight,
     paddingRight: RightIcon ? iconSize + 10 : 0,
   }), [RightIcon, isInvalid])
   const errorStyle: React.CSSProperties = {
     alignSelf: 'flex-start',
-    color: colors.ORANGE_RED,
+    color: colors.BARBIE_PINK,
     fontSize: 13,
     marginTop: 10,
   }
@@ -165,11 +177,11 @@ const PhoneEmailInputBase = (props: PhoneEmailInputProps): React.ReactElement =>
   }
   return <div style={style}>
     <div style={inputContainerStyle} onClick={focus}>
-      <div style={{...iconContainerStyle, left: 0}}>
-        <Icon size={iconSize} />
+      <div style={{...iconContainerStyle, left: 1}}>
+        <Icon size={iconSize * .7} />
       </div>
       {RightIcon ? <div style={rightIconStyle}>
-        <RightIcon size={iconSize} />
+        <RightIcon size={iconSize * .7} />
       </div> : null}
       <Input
       // FIXME(cyrille): Show "Numéro de téléphone" or "Adresse e-mail" above
@@ -192,13 +204,24 @@ interface ThankYouPopProps extends Omit<ModalConfig, 'children'|'style'> {
   name: string
 }
 const heartIconStyle: React.CSSProperties = {
-  color: colors.ORANGE,
   height: 75,
   marginBottom: 16,
 }
+const thankYouTextStyle: React.CSSProperties = {
+  fontFamily: 'Poppins',
+  fontSize: 22,
+  fontWeight: 800,
+  textAlign: 'center',
+}
+const thankYouNameStyle: React.CSSProperties = {
+  fontFamily: 'Lato, Helvetica',
+  fontSize: 14,
+  fontWeight: 'normal',
+}
 const thanksContainerStyle: React.CSSProperties = {
   alignItems: 'center',
-  borderRadius: 210,
+  borderRadius: 45,
+  color: '#000',
   display: 'flex',
   flexDirection: 'column',
   fontSize: 14,
@@ -209,8 +232,9 @@ const thanksContainerStyle: React.CSSProperties = {
 const ThankYouPopUpBase = ({name, ...otherProps}: ThankYouPopProps): React.ReactElement => {
   return <Modal {...otherProps} style={thanksContainerStyle}>
     <img src={heartCelebrationImage} alt="" style={heartIconStyle} />
-    <Trans parent="span" style={{fontSize: 22, fontWeight: 900}}>Merci pour</Trans>
-    <span>{name}</span>
+    <Trans parent="div" style={thankYouTextStyle}>
+      Merci pour <div style={thankYouNameStyle}>{{name}}</div>
+    </Trans>
   </Modal>
 }
 const ThankYouPopUp = React.memo(ThankYouPopUpBase)
@@ -225,6 +249,7 @@ interface MessageSectionProps {
 
 const anonymousContainerStyle: React.CSSProperties = {
   display: 'flex',
+  flex: 1,
   flexDirection: 'column',
   fontSize: 15,
   marginTop: 11,
@@ -233,15 +258,17 @@ const arrowStyle: React.CSSProperties = {
   height: 16,
 }
 const messageTextStyle: React.CSSProperties = {
-  backgroundColor: colors.WHITE_TWO,
+  backgroundColor: '#fff',
   border: `solid 1px ${colors.MEDIUM_GREY}`,
-  borderRadius: 5,
+  borderRadius: 23,
+  boxShadow: '0 12px 19px 0 rgba(60, 128, 209, 0.09)',
   color: '#000',
+  fontFamily: 'inherit',
   fontSize: 14,
   marginBottom: 10,
   marginTop: 15,
   minHeight: 100,
-  padding: '16px 8px',
+  padding: '16px 15px',
 }
 const phoneInputStyle = {
   marginTop: 16,
@@ -254,7 +281,7 @@ const showContentButtonStyle = {
 const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactElement => {
   const {isHighRisk, onAlert, person: {personId}} = props
   const {alertMediums: alertedMediums = []} = useAlert(personId) || {}
-  const {t} = useTranslation()
+  const {t, t: translate} = useTranslation()
   const [isContentShown, setIsContentShown] = useState(false)
   const dispatch = useDispatch()
   const [isNewAlertMediumShown, setNewAlertMediumShown] = useState(!alertedMediums.length)
@@ -268,11 +295,11 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
   const alertButtonStyle: React.CSSProperties = {
     ...darkButtonStyle,
     alignItems: 'center',
-    backgroundColor: newAlertMedium ? colors.VIBRANT_GREEN : colors.MEDIUM_GREY,
+    backgroundColor: newAlertMedium ? colors.MINTY_GREEN : colors.MEDIUM_GREY,
+    color: newAlertMedium ? '#000' : '#fff',
     display: 'flex',
-    fontWeight: 'normal',
     justifyContent: 'center',
-    margin: '24px 0',
+    margin: '24px 0 0',
   }
   const toggleContentShown = useCallback((): void => {
     setIsContentShown(contentShown => !contentShown)
@@ -291,10 +318,10 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
     if (!newAlertMedium) {
       return
     }
-    dispatch(alertPerson(personId, newAlertMedium, isHighRisk ? 'high' : 'low'))
+    dispatch(alertPerson(translate, personId, newAlertMedium, isHighRisk ? 'high' : 'low'))
     setNewAlertMedium(undefined)
     onAlert?.()
-  }, [newAlertMedium, dispatch, isHighRisk, onAlert, personId])
+  }, [newAlertMedium, dispatch, isHighRisk, onAlert, personId, translate])
   const buttonCallToAction = isNewAlertMediumShown ?
     newAlertMedium ? sendAlert : validateInput :
     showNewAlertMedium
@@ -333,8 +360,9 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
         Briser La Chaine
       </a><br /><br />
 
-      {{productName: config.productName}} est un site entièrement gratuit réalisé par Bayes Impact,
-      une ONG citoyenne engagée dans la lutte contre la propagation du virus.<br /><br />
+      {{productName: t('productName')}} est un site entièrement gratuit réalisé par
+      Bayes Impact, une ONG citoyenne engagée dans la lutte contre la propagation du virus.
+      <br /><br />
 
       Ensemble, brisons la chaîne de contamination.<br /><br />
 
@@ -346,6 +374,7 @@ const AnonymousMessageSectionBase = (props: MessageSectionProps): React.ReactEle
         value={newAlertMedium} onChange={setNewAlertMedium} style={phoneInputStyle}
         isValidated={isValidated} placeholder={t('Entrer email ou numéro de téléphone')} /> : null}
     </form>
+    <div style={{flex: 1}} />
     <div onClick={buttonCallToAction} style={alertButtonStyle}>
       {isNewAlertMediumShown ? <React.Fragment>
         {t('Alerter anonymement')} <MailSendLineIcon style={{marginLeft: 8}} />
@@ -364,8 +393,10 @@ const interactIconStyle: React.CSSProperties = {
 const basicButtonStyle: React.CSSProperties = {
   ...lightButtonStyle,
   alignItems: 'center',
+  borderRadius: 40,
   display: 'flex',
   flex: 1,
+  fontFamily: 'inherit',
   fontSize: 15,
   fontWeight: 'normal',
   justifyContent: 'center',
@@ -375,23 +406,25 @@ const basicButtonStyle: React.CSSProperties = {
 }
 const personalAlertContainer: React.CSSProperties = {
   alignItems: 'center',
-  backgroundColor: '#fff',
+  backgroundColor: colors.BRIGHT_SKY_BLUE,
+  borderRadius: '25px 25px 0 0',
   boxShadow: '0 0 15px 0 rgba(0, 0, 0, 0.15)',
+  color: '#fff',
   cursor: 'pointer',
   display: 'flex',
-  fontSize: 14,
-  padding: '15px 20px',
+  fontSize: 18,
+  padding: '15px 30px',
 }
 const editInstructionsStyle: React.CSSProperties = {
   color: colors.WARM_GREY,
   cursor: 'pointer',
-  fontSize: 10,
-  marginBottom: 8,
+  fontSize: 11,
   textAlign: 'center',
 }
 const buttonsContainerStyle: React.CSSProperties = {
   display: 'flex',
   justifyContent: 'center',
+  marginTop: 15,
 }
 const restartIconStyle: React.CSSProperties = {
   ...interactIconStyle,
@@ -406,7 +439,7 @@ const textCopiedCheckStyle: React.CSSProperties = {
 }
 const PersonalMessageSectionBase =
   ({onAlert, person, startDate}: MessageSectionProps): React.ReactElement => {
-    const {t} = useTranslation()
+    const {t, t: translate} = useTranslation()
     const dispatch = useDispatch()
     const {name, displayName = name, personId} = person
     const referralUrl = useReferralUrl(personId)
@@ -426,13 +459,13 @@ const PersonalMessageSectionBase =
     {diseaseName: config.diseaseName, startDate, url: referralUrl}), [startDate, referralUrl, t])
     const [isCustomText, setIsCustomText] = useState(false)
     const radioButtonStyle: React.CSSProperties = {
-      backgroundColor: isAlerted ? '#000' : 'initial',
-      border: 'solid 2px #000',
-      borderRadius: 15,
+      backgroundColor: isAlerted ? 'currentColor' : 'initial',
+      border: 'solid 2px',
+      borderRadius: 4,
       flexShrink: 0,
-      height: 18,
-      marginRight: 12,
-      width: 18,
+      height: 22,
+      marginRight: 22,
+      width: 22,
     }
     const [text, setText] = useState(defaultText)
     useEffect((): void => {
@@ -447,8 +480,8 @@ const PersonalMessageSectionBase =
     }, [])
     const handleAlert = useCallback((): void => {
       onAlert?.()
-      dispatch(alertPerson(person.personId))
-    }, [dispatch, onAlert, person.personId])
+      dispatch(alertPerson(translate, person.personId))
+    }, [dispatch, onAlert, person.personId, translate])
 
     const textAreaRef = useRef<Inputable>(null)
     const handleEditText = useCallback((): void => textAreaRef.current?.focus(), [])
@@ -481,7 +514,7 @@ const PersonalMessageSectionBase =
       borderRadius: 40,
       color: '#fff',
       display: 'flex',
-      fontWeight: 'bold',
+      fontWeight: 600,
       justifyContent: 'center',
       left: 40,
       opacity: isTextCopied ? 1 : 0,
@@ -521,8 +554,12 @@ const PersonalMessageSectionBase =
         onMessengerClick={handleCopy}
         title={t('Envoyer le message via\u00A0:')} sharedText={text} />
       <BottomDiv style={personalAlertContainer} onClick={handleAlert}>
-        <Trans style={{flex: 1, fontSize: 16}}>J'ai contacté {{name: displayName}}</Trans>
         <div style={radioButtonStyle} />
+        <Trans>
+          Je confirme avoir alerté <strong style={{fontWeight: 600}}>
+            {{name: displayName}}
+          </strong>
+        </Trans>
       </BottomDiv>
     </React.Fragment>
   }
@@ -530,12 +567,11 @@ const PersonalMessageSection = React.memo(PersonalMessageSectionBase)
 
 
 const navTitleStyle: React.CSSProperties = {
-  fontSize: 10,
-  fontWeight: 'bold',
+  fontSize: 12,
+  height: '2.2em',
   overflow: 'hidden',
   textAlign: 'center',
   textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
 }
 
 
@@ -550,27 +586,27 @@ interface NavItemProps {
 const NavItemBase = (props: NavItemProps): React.ReactElement => {
   const {children, onClick, title} = props
   const containerStyle: React.CSSProperties = {
-    backgroundColor: colors.AZURE,
-    borderRadius: 12,
-    color: '#fff',
+    backgroundColor: '#fff',
+    borderRadius: 23,
+    color: colors.DARK_GREY_BLUE,
     cursor: 'pointer',
     flex: 'none',
-    margin: '0 7.5px',
+    margin: '0 5px',
     padding: '14px 16px',
-    width: 40,
+    width: 57,
     ...props.containerStyle,
   }
   const style: React.CSSProperties = {
     alignItems: 'center',
-    backgroundColor: colors.BRIGHT_SKY_BLUE,
+    backgroundColor: colors.LIGHT_BLUE_GREY,
     borderRadius: 40,
     display: 'flex',
     fontSize: 14,
-    fontWeight: 'bold',
-    height: 40,
+    fontWeight: 600,
+    height: 34,
     justifyContent: 'center',
     margin: '0 auto 10px',
-    width: 40,
+    width: 34,
     ...props.style,
   }
   return <div onClick={onClick} style={containerStyle}>
@@ -596,19 +632,20 @@ interface ContactInListProps {
 const contactInListContainerStyle: React.CSSProperties = {
 }
 const contactInListSelectedContainerStyle: React.CSSProperties = {
-  backgroundColor: '#fff',
-  boxShadow: '0 5px 10px 0 rgba(0, 0, 0, 0.3)',
-  color: '#000',
+  backgroundColor: '#000',
+  color: '#fff',
+  fontWeight: 600,
 }
 const contactInListSelectedStyle: React.CSSProperties = {
-  color: '#fff',
+  backgroundColor: '#fff',
+  color: colors.DARK_GREY_BLUE,
 }
 const contactInListWasAlertedStyle: React.CSSProperties = {
-  backgroundColor: '#fff',
-  color: colors.VIBRANT_GREEN,
+  backgroundColor: colors.MINTY_GREEN,
+  color: '#fff',
 }
 const contactInListWasAlertedSelectedStyle: React.CSSProperties = {
-  backgroundColor: colors.VIBRANT_GREEN,
+  backgroundColor: colors.MINTY_GREEN,
   color: '#fff',
 }
 
@@ -644,16 +681,11 @@ interface ContactsListProps {
 }
 
 
-const contactsListStyle: React.CSSProperties = {
-  backgroundColor: colors.BRIGHT_SKY_BLUE,
-  color: '#fff',
-  maxWidth: 700,
-  width: '100vw',
-}
 const contactsListHeaderStyle: React.CSSProperties = {
-  fontSize: 25,
-  fontWeight: 'bold',
-  padding: '25px 20px 0',
+  fontFamily: 'Poppins',
+  fontSize: 20,
+  fontWeight: 800,
+  padding: '25px 30px 0',
 }
 const contactsListContainerStyle: React.CSSProperties = {
   display: 'flex',
@@ -661,10 +693,14 @@ const contactsListContainerStyle: React.CSSProperties = {
   padding: '15px 0 23px',
 }
 const addContactNavContainerItemStyle: React.CSSProperties = {
-  backgroundColor: 'transparent',
+  backgroundColor: colors.LIGHT_BLUE_GREY,
+  color: colors.DARK_GREY_BLUE,
+  width: 42,
 }
 const addContactNavItemStyle: React.CSSProperties = {
-  backgroundColor: colors.AZURE,
+  backgroundColor: '#fff',
+  borderRadius: 10,
+  color: colors.DARK_GREY_BLUE,
 }
 
 
@@ -689,22 +725,24 @@ const ContactsListBase = (props: ContactsListProps): React.ReactElement => {
     onSelectPerson(personId)
   }, [onSelectPerson, people, selectNavItem])
   const numAlertedPeople = people.filter(({personId}): boolean => !!alerts[personId]).length
-  return <div style={contactsListStyle}>
+  return <div>
     {people.length ?
       <Trans parent="header" style={contactsListHeaderStyle} count={numAlertedPeople}>
         {{numAlertedPeople}}/{{numTotalPeople: people.length}} personne alertée
       </Trans> : null}
     <BurgerMenu />
     <div style={contactsListContainerStyle} ref={scrollableListRef} className="no-scrollbars">
+      <div style={{flex: 'none', width: 25}} />
       <NavItem
         title={t('Ajouter')} onClick={handleAddContact} style={addContactNavItemStyle}
         containerStyle={addContactNavContainerItemStyle}>
-        <UserAddLineIcon />
+        <AddLineIcon />
       </NavItem>
       {people.map((person) => <ContactInList
         key={person.personId} person={person} onSelect={handleSelectPerson}
         isSelected={selectedPerson?.personId === person.personId}
         wasAlerted={!!alerts[person.personId]} />)}
+      <div style={{flex: 'none', width: 25}} />
     </div>
   </div>
 }
@@ -716,6 +754,16 @@ interface ContactPersonFormProps {
   onDone: () => void
 }
 
+const contactPersonFormStyle: React.CSSProperties = {
+  backgroundColor: '#fff',
+  borderRadius: '40px 40px 0 0',
+  boxShadow: '0 8px 15px 0 rgba(60, 128, 209, 0.2)',
+  display: 'flex',
+  flex: 1,
+  flexDirection: 'column',
+  margin: '0 10px',
+  padding: '25px 20px',
+}
 const alertAgainButtonStyle: React.CSSProperties = {
   ...basicButtonStyle,
   ...mobileOnDesktopStyle,
@@ -733,13 +781,13 @@ const alertedStyle: React.CSSProperties = {
   paddingTop: 15,
 }
 const alertedIconStyle: React.CSSProperties = {
-  color: colors.VIBRANT_GREEN,
+  color: colors.MINTY_GREEN,
   marginRight: 8,
 }
 
 const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElement => {
   const {onDone, person} = props
-  const {t} = useTranslation()
+  const {t, t: translate} = useTranslation()
   const dateOption = useDateOption()
   const dispatch = useDispatch()
   const contagiousPeriodStart =
@@ -783,23 +831,23 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
       return
     }
     openThanks()
-    dispatch(alertPerson(person.personId))
-  }, [dispatch, isThanksShown, openThanks, person.personId])
+    dispatch(alertPerson(translate, person.personId))
+  }, [dispatch, isThanksShown, openThanks, person.personId, translate])
   const tabs = useMemo((): readonly string[] => [
     t('Alerter moi-même'),
     t('Alerter anonymement'),
   ], [t])
   const {alertMediums: alertedMediums = []} = useAlert(person.personId) || {}
-  return <div style={{margin: '24px 30px 0'}}>
+  return <div style={contactPersonFormStyle}>
     <ThankYouPopUp isShown={isThanksShown} name={displayName} onHidden={onDone} />
     <div style={{alignItems: 'center', display: 'flex'}}>
-      <span style={{flex: 1, fontSize: 20, fontWeight: 'bold'}}>
+      <span style={{flex: 1, fontSize: 20, fontWeight: 600}}>
         {displayName}
       </span>
-      <span style={{color: colors.WARM_GREY, fontSize: 12, marginRight: 5}}>
+      <span style={{color: colors.BARBIE_PINK, fontSize: 12, marginRight: 5}}>
         {isHighRisk ? t('Risques importants') : t('Risques modérés')}
       </span>
-      <InformationLineIcon size={15} color={colors.WARM_GREY} />
+      <InformationLineIcon size={15} color={colors.BARBIE_PINK} />
     </div>
     {alerted ? <div style={alertedStyle}>
       <CheckboxCircleFillIcon style={alertedIconStyle} size={24} />
@@ -814,14 +862,14 @@ const ContactPersonFormBase = (props: ContactPersonFormProps): React.ReactElemen
     </div> : <Trans style={{color: colors.WARM_GREY, fontSize: 12, marginTop: 4}}>
       Croisé(e) {{contactDays}}
     </Trans>}
-    <div style={{flex: 1}} />
     {alertedMediums.map((alertMedium) => <PhoneEmailInput
       key={alertMedium.value} isDone={true} value={alertMedium}
       onChange={noOp} style={phoneInputStyle} />)}
     {alerted && !canBeAlertedAgain ? <BottomDiv
       style={alertAgainButtonStyle} onClick={handleAlertAgain}>
       {t('Contacter à nouveau')}
-    </BottomDiv> : <div style={{display: 'flex', flexDirection: 'column', margin: '30px 0 0'}}>
+    </BottomDiv> : <div
+      style={{display: 'flex', flex: 1, flexDirection: 'column', margin: '30px 0 0'}}>
       <Tabs
         style={tabsStyle} onChangeTab={handleChangeTab} tabSelected={isSenderAnonymous ? 1 : 0}
         tabs={tabs} />
@@ -837,6 +885,13 @@ const ContactPersonForm = React.memo(ContactPersonFormBase)
 
 
 const fadeoutMillisec = 1500
+
+
+const contentStyle: React.CSSProperties = {
+  display: 'flex',
+  flexDirection: 'column',
+  minHeight: window.innerHeight,
+}
 
 
 const ContactsListPage = (): React.ReactElement => {
@@ -874,10 +929,11 @@ const ContactsListPage = (): React.ReactElement => {
   const toggleAddingContact = useCallback((): void => {
     setIsAddingContact((wasAddingContact: boolean): boolean => !wasAddingContact)
   }, [])
+  useBackgroundColor(colors.PALE_GREY)
   return <DrawerContainer
     isOpen={isAddingContact}
     drawer={<ContactsSearch onClose={toggleAddingContact} date={noDate} />}
-    onClose={toggleAddingContact} style={leavingStyle}>
+    onClose={toggleAddingContact} style={leavingStyle} mainStyle={contentStyle}>
     <ContactsList
       selectedPerson={selectedPerson} people={people}
       onSelectPerson={selectPerson} onAddContact={toggleAddingContact} />

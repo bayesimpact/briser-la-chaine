@@ -7,6 +7,7 @@ import snippetImage from 'images/snippet.png'
 const description = 'Nous vous aidons à contacter les personnes croisées pendant votre période ' +
   'contagieuse en quelques minutes.'
 
+// TODO(cyrille): Translate this statically.
 export default (): string => '<!doctype html>' + ReactDOMServer.renderToString(
   <html lang="fr">
     <head>

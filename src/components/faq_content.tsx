@@ -12,7 +12,7 @@ interface FAQParagraphProps {
 }
 const titleStyle: React.CSSProperties = {
   fontSize: 18,
-  fontWeight: 'bold',
+  fontWeight: 600,
   marginBottom: 10,
 }
 const contentStyle: React.CSSProperties = {
@@ -55,7 +55,7 @@ const FAQContent = ({isMobileVersion}: FAQContentProps): React.ReactElement => {
       <FAQParagraph
         isMobileVersion={isMobileVersion}
         title={t("Qui est à l'origine de {{productName}}\u00A0?",
-          {productName: config.productName})}
+          {productName: t('productName')})}
         content={<Trans>
           Ce site web a été conçu par l'ONG <a
             href="https://www.bayesimpact.org" target="_blank" rel="noopener noreferrer"

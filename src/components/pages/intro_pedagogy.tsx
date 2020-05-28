@@ -1,9 +1,9 @@
-import CalendarEventLineIcon from 'remixicon-react/CalendarEventLineIcon'
-import ListOrderedIcon from 'remixicon-react/ListOrderedIcon'
+import CalendarEventFillIcon from 'remixicon-react/CalendarEventFillIcon'
 import ErrorWarningFillIcon from 'remixicon-react/ErrorWarningFillIcon'
-import FeedbackLineIcon from 'remixicon-react/FeedbackLineIcon'
 import HeartFillIcon from 'remixicon-react/HeartFillIcon'
 import Lock2FillIcon from 'remixicon-react/Lock2FillIcon'
+import Message2FillIcon from 'remixicon-react/Message2FillIcon'
+import UserAddFillIcon from 'remixicon-react/UserAddFillIcon'
 import {RemixiconReactIconComponentType} from 'remixicon-react/dist/typings'
 import React, {useCallback} from 'react'
 import {Trans, useTranslation} from 'react-i18next'
@@ -15,9 +15,10 @@ import {useFastForward} from 'hooks/fast_forward'
 import {LocalizableString, prepareT} from 'store/i18n'
 import {Routes} from 'store/url'
 
+import BurgerMenu from 'components/burger_menu'
 import {darkButtonStyle} from 'components/buttons'
 import Slider, {SliderChildProps} from 'components/slider'
-import {BottomDiv, PedagogyLayout} from 'components/navigation'
+import {BottomDiv, PedagogyLayout, PedagogyPage} from 'components/navigation'
 
 
 interface PageContent {
@@ -27,23 +28,23 @@ interface PageContent {
 }
 const pagesContent: readonly PageContent[] = [
   {
-    icon: CalendarEventLineIcon,
+    icon: CalendarEventFillIcon,
     subtitle: prepareT("On s'en occupe."),
     title: prepareT('Calculer votre période contagieuse'),
   },
   {
-    icon: ListOrderedIcon,
+    icon: UserAddFillIcon,
     subtitle: prepareT('Sans tracking ni géolocalisation.'),
     title: prepareT('Lister les personnes croisées pendant cette période'),
   },
   {
-    icon: FeedbackLineIcon,
+    icon: Message2FillIcon,
     subtitle: prepareT('Anonymement ou non, à vous de voir.'),
     title: prepareT('Les prévenir pour briser la chaîne de contamination'),
   },
   {
     icon: Lock2FillIcon,
-    subtitle: prepareT('Vous êtes anonyme de bout en bout'),
+    subtitle: prepareT('Vous êtes anonyme de bout en bout.'),
     title: prepareT('Aucune donnée ne sort de votre téléphone'),
   },
 ] as const
@@ -51,8 +52,6 @@ const pagesContent: readonly PageContent[] = [
 
 const lastButtonStyle: React.CSSProperties = {
   ...darkButtonStyle,
-  backgroundColor: '#fff',
-  color: colors.BRIGHT_SKY_BLUE,
   margin: 20,
   transition: '1s',
 }
@@ -108,13 +107,26 @@ const buttonStyle: React.CSSProperties = {
   ...darkButtonStyle,
   display: 'block',
 }
+const titleStyle: React.CSSProperties = {
+  fontFamily: 'Poppins',
+  fontSize: 28,
+  fontWeight: 800,
+}
+const secondaryTitle: React.CSSProperties = {
+  fontFamily: 'Poppins',
+  fontWeight: 800,
+}
+const slideStyle: React.CSSProperties = {
+  display: 'flex',
+  justifyContent: 'center',
+}
 
 
 const PedagogyIntroPage = (): React.ReactElement => {
   const history = useHistory()
   const {t, t: translate} = useTranslation()
   const {pathname} = useLocation()
-  useBackgroundColor(pathname === Routes.PEDAGOGY_INTRO ? undefined : colors.BRIGHT_SKY_BLUE)
+  useBackgroundColor(pathname === Routes.PEDAGOGY_INTRO ? undefined : colors.PALE_GREY)
   const gotoFirst = useCallback((): void => {
     history.push(`${Routes.PEDAGOGY_INTRO}/0`)
   }, [history])
@@ -123,12 +135,13 @@ const PedagogyIntroPage = (): React.ReactElement => {
   }, [history])
   useFastForward(pathname === Routes.PEDAGOGY_INTRO ? gotoFirst : undefined)
   if (pathname === Routes.PEDAGOGY_INTRO) {
-    return <PedagogyLayout
-      title={<Trans>
-        Prêt(e) à <span style={{color: colors.BRIGHT_SKY_BLUE}}>sauver des vies&nbsp;?</span>
+    return <PedagogyPage
+      title={<Trans style={titleStyle}>
+        Prêt(e) à <span style={{color: colors.SEAWEED}}>sauver des vies&nbsp;?</span>
       </Trans>}
       subtitle={t('Nous allons vous aider à contacter les personnes ' +
-      'croisées pendant votre période contagieuse.')} icon={HeartFillIcon}>
+      'croisées pendant votre période contagieuse.')} icon={HeartFillIcon}
+      iconColor={colors.BARBIE_PINK}>
       <BottomDiv>
         <div style={mobileOnDesktopStyle}>
           <Link to={`${Routes.PEDAGOGY_INTRO}/0`} style={buttonStyle}>
@@ -142,16 +155,21 @@ const PedagogyIntroPage = (): React.ReactElement => {
           </Trans>
         </div>
       </BottomDiv>
-    </PedagogyLayout>
+    </PedagogyPage>
   }
-  return <Slider
-    bottomComponent={IntroButton} bulletColor={colors.AZURE} arrowColor={colors.BRIGHT_SKY_BLUE}
-    bulletSelectColor="#fff" borderColor={colors.AZURE} onFastForward={gotoNext}>
-    {pagesContent.map(({icon, subtitle, title}, index): React.ReactElement =>
-      <PedagogyLayout
-        key={index} title={translate(title)} subtitle={translate(subtitle)} icon={icon}
-        isDark={true} />)}
-  </Slider>
+  return <React.Fragment>
+    <Slider
+      bulletColor="#000" bulletSelectColor={colors.MINTY_GREEN} arrowColor={colors.PALE_GREY}
+      borderColor={colors.LIGHT_BLUE_GREY} chevronColor="#000"
+      bottomComponent={IntroButton} onFastForward={gotoNext} slideStyle={slideStyle}>
+      {pagesContent.map(({icon, subtitle, title}, index): React.ReactElement =>
+        <PedagogyLayout
+          key={index} title={<span style={secondaryTitle}>{translate(title)}</span>}
+          subtitle={translate(subtitle)} icon={icon}
+          isDark={true} />)}
+    </Slider>
+    <BurgerMenu />
+  </React.Fragment>
 }
 
 

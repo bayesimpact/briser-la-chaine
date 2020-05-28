@@ -1,0 +1,91 @@
+# Your privacy is equally important as your health
+
+Respecting your privacy and protecting your personal data is very important for our nonprofit organization. We've built {{productName}} founded on these values, to safeguard its users' health whilst continuing to guarantee their right to privacy. We furthermore comply strictly with current legislation on data protection, in particular the General Data Protection Regulation (GDPR). This is how we do this:
+
+**You remain the sole owner of your personal data which is stored on your phone or on your computer**
+
+The system we've built is specially designed so that your symptoms and your contact list remain wholly in your phone or in your computer.
+
+They are not sent to or saved to any server.
+
+They are not accessible by our organization or its employees.
+
+Personal data is never shared with third parties.
+
+** Keeping user information on the user's device**
+
+So that users can return to {{productName}} without having to start the process all over again, we have put in place a storage system where information provided by the user to the interface is stored in the navigator cache.
+
+Such a system does not allow any remote access to the data. It so follows that we cannot access your data using this cache functionality.
+
+You can delete this data at any time from your phone or your computer. To find out how: [Wikipedia](https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache#Cache_clearing_and_disabling)
+
+**The user's navigation on {{productName}} is entirely anonymous and never shared.**
+
+We collect statistical information to measure the audience of our website and how it is being used in order to pick up on the stages where our users may encounter difficulties, so that we can make improvements that benefit all our users.
+
+We can read and analyse these statistical indications of how {{productName}} is being used by looking at how users navigate through the pages of the website.
+
+Without exception, this data on how {{productName}} is being used, based on how a user navigates through it, is anonymous and does not include any personal data.
+
+Therefore the data we can see does not contain any data about the state of your health nor that of your contacts.
+
+For example, we can find out how many users in total have sent a message to alert their contacts (anonymous statistical data); but we cannot find out who sent the messages or to whom (personal data stored only in the user's device, with no possibility of remote access).
+
+We may use cookies as a way to access these statistics, which we use to improve how {{productName}} works.
+
+Cookies are small text files or groups of data stored on your hard drive where technical navigation data (how you navigate around {{productName}}) is stored.
+
+We also use Amplitude.com, a service which analyses user navigation from a statistical point of view. Just like {{productName}}, Amplitude does not access your personal data. The information which contains users' navigation pathways are not used for commercial gain, nor ceded to third parties.
+
+**Email follow-up on {{productName}} also protects your sensitive personal information**
+
+One of the things {{productName}} does is to enable users that our algorithm has found most probably not to have {{diseaseName}} or who have proactively said so to receive follow-up emails for 14 days, if they choose to.
+
+To do this, we ask for their email address.
+
+The follow-up stops 14 days after sign-up and the email address collected is deleted.
+
+You are free to unsubscribe at any time by writing to the following address: [privacy@bayesimpact.org](mailto:privacy@bayesimpact.org)
+
+**Information you enter into {{productName}} is used transparently**
+
+When our algorithm indicates that you may be contagious, our website asks you for information about the state of your health and about the people you may have been in contact with, in order to inform them about the possibility of having been infected.
+
+To make this easier for you, our website asks you to send information to your contacts. For each contact, these informations are only sent with your explicit agreement.
+
+As explained above, this information remains entirely in your phone or your computer. They are not sent nor saved to any server.
+
+They cannot be accessed by our organization nor its employees and are not sent to third parties.
+
+**A fully secure and optional API system**
+
+Via a secure and optional system, {{productName}} offers users an easier way of notifying the people they may have contaminated.
+
+Here are the API we use:
+
+* Google Calendar (currently in development)
+
+This API allows you to quickly find events saved on your Google Calendar during your contagious period, to help you easily remember the people you might have met.
+
+* Google Contacts (currently in development)
+
+This API makes it easier to enter the names of the people you have met, and it also pre-fills the contacts it's suggested you warn that you may have contaminated them, by using their contact details (phone number, email address) stored in your Google contacts. This saves you having to enter your contacts' information one by one, manually.
+
+We do not store any data from these APIs. Neither do these systems have any access to the personal data entered into {{productName}}.
+
+**Our website's code is open source**
+
+We are completely transparent regarding the code used to build our website and about how it works.
+
+You can find the source code on GitHub, so you can check that we honor our commitments.
+
+[GitHub](https://www.github.com/bayesimpact/briser-la-chaine)
+
+Only the website's code is accessible via GitHub.
+
+No user data (whether personal or functional) is shared.
+
+If you have the slightest question about our data protection policy, you can contact us at [privacy@bayesimpact.org](mailto:privacy@bayesimpact.org)
+
+Our site is hosted with OVH, whose servers are situated in Gravelines, France.

@@ -43,9 +43,10 @@ declare const config: {
   mailjetProxyUrl: string
   numDaysContagious: number
   numDaysContagiousBeforeSymptoms: number
-  numDaysSymptoms: number
   productName: string
   sentryDsn: string
 }
 
 type GetProps<T> = T extends React.ComponentType<infer Props> ? Props : never
+
+// TODO(cyrille): Find a way to statically restrict font families and weights.
