@@ -64,11 +64,11 @@ export interface ModalConfig {
 
 const closeIconStyle = {
   cursor: 'pointer',
-  height: 15,
+  height: 32,
   position: 'absolute',
-  right: 15,
-  top: 15,
-  width: 15,
+  right: 20,
+  top: 20,
+  width: 32,
   zIndex: 3,
 } as const
 
@@ -193,9 +193,9 @@ const ModalBase = (props: ModalConfig): React.ReactElement => {
     opacity: isContentShown ? 1 : 0,
     overflow: isTooBigToBeCentered ? 'scroll' : 'hidden',
     position: 'fixed',
+    right: 0,
     textAlign: isTooBigToBeCentered ? 'center' : 'initial',
     top: 0,
-    width: '100vw',
     zIndex: 2,
   }
   const modalStyle: React.CSSProperties = {
@@ -235,7 +235,7 @@ const ModalBase = (props: ModalConfig): React.ReactElement => {
     borderBottom: `solid 2px ${colors.MEDIUM_GREY}`,
     color: colors.DARK_TWO,
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: 600,
     margin: '40px 50px 0',
     paddingBottom: 30,
     textAlign: 'center',

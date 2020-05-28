@@ -58,6 +58,8 @@ declare namespace bayes {
 type ContaminationRisk = 'high' | 'low'
 
 type UserState = {
+  // Number of users in the chain **before** this user.
+  chainDepth?: number
   contagiousPeriodEnd?: Date
   contagiousPeriodStart?: Date
   contaminationRisk?: ContaminationRisk

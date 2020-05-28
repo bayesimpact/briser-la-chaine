@@ -5,7 +5,7 @@ import {useCallback} from 'react'
 import {useTranslation} from 'react-i18next'
 
 import {noDate} from 'store/actions'
-import {joinDays, prepareT, useDateOption} from 'store/i18n'
+import {IMAGE_NAMESPACE, joinDays, prepareT, useDateOption} from 'store/i18n'
 import {DISTANCE_OPTIONS, DURATION_OPTIONS} from 'store/options'
 import {useSelector} from 'store/selections'
 
@@ -29,8 +29,10 @@ function usePDFDownloader(): (() => void) {
     const printHeader = (): void => {
       // TODO(pascal): Drop the hack when https://github.com/MrRio/jsPDF/issues/2201 is released
       const image = new Image()
-      image.src = logoImage
-      doc.addImage(image, 'PNG', 70, 15, pageWidth - 140, (pageWidth - 140) * 45 / 200)
+      image.src = translate(logoImage, {ns: IMAGE_NAMESPACE})
+      const logoRatio = (Number.parseInt(t('pngLogoHeight')) || 45) /
+        (Number.parseInt(t('pngLogoWidth')) || 200)
+      doc.addImage(image, 'PNG', 70, 15, pageWidth - 140, (pageWidth - 140) * logoRatio)
       cursorY = 48
     }
 
@@ -164,7 +166,7 @@ function usePDFDownloader(): (() => void) {
       doc.text(
         t('Personne contactée par {{productName}} ({{count}})', {
           count: peopleAlertedAnonymously.length,
-          productName: config.productName,
+          productName: t('productName'),
         }),
         marginHoriz, cursorY)
       cursorY += 6
@@ -174,7 +176,7 @@ function usePDFDownloader(): (() => void) {
 
     printFooter()
 
-    doc.save(t('Récapitulatif {{productName}}.pdf', {productName: config.productName}))
+    doc.save(t('Récapitulatif {{productName}}.pdf', {productName: t('productName')}))
   }, [dateOption, state, t])
 }
 

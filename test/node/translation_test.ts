@@ -143,9 +143,9 @@ describe('Translation files', (): void => {
 // Populate if we have French sentences with silent plural.
 const _NO_FRENCH_PLURAL: ReadonlySet<string> = new Set([])
 
+// TODO(cyrille): Make sure we have a consistent product name and canonical URL.
 describe('French translations', (): void => {
   // Assumes all strings have been extracted, e.g. if lint_and_test.sh is run.
-  // TODO(cyrille): Handle fr@tu.
   const extractedFiles = translationFiles.filter(file => isExtractedFile(file))
   extractedFiles.forEach(({namespace, resources}): void => {
     const getFrTranslations = (): Translations => {

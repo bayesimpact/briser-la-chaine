@@ -8,7 +8,7 @@ function useDefaultShareText(): string {
     '{{diseaseName}}. \nSi vous avez des symptômes du virus, je vous le recommande ' +
     "vraiment\u00A0: {{url}} \nIl permet de prévenir les personnes qu'on a peut-être contaminées " +
     "des mesures qu'il faut prendre, sans aucun traçage de données\u00A0!",
-    {diseaseName: config.diseaseName, url: config.canonicalUrl},
+    {diseaseName: config.diseaseName, url: t('canonicalUrl')},
   )
 }
 

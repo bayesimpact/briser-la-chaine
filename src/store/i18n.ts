@@ -4,9 +4,18 @@ import {format as dateFormat, formatDistance} from 'date-fns'
 import {enUS as enDateLocale, fr as frDateLocale} from 'date-fns/locale'
 import i18next, {InitOptions, ReadCallback, ResourceKey, Services, TFunction, TOptions,
   i18n} from 'i18next'
-import LanguageDetector from 'i18next-browser-languagedetector'
 import _memoize from 'lodash/memoize'
 import {initReactI18next, useTranslation} from 'react-i18next'
+
+import privacyContent from 'components/pages/privacy.txt'
+import privacyContentEn from 'components/pages/privacy_en.txt'
+import tosContent from 'components/pages/terms.txt'
+import tosContentEn from 'components/pages/terms_en.txt'
+import pngLogo from 'images/logo.png'
+import pngLogoEn from 'images/logo-en.png'
+import svgLogo from 'images/logo.svg'
+import svgLogoEn from 'images/logo-en.svg'
+
 
 // Backend for i18next to load resources for languages only when they are needed.
 // It takes a backend config with a promise per language and per namespace.
@@ -49,17 +58,11 @@ const UpdateDocumentElementLang = {
 const init = (initOptions?: InitOptions): void => {
   i18next.
     use(initReactI18next).
-    use(LanguageDetector).
     use(PromiseI18nBackend).
     use(UpdateDocumentElementLang).
     init({
       backend: (language: string, namespace: string): Promise<{default: ResourceKey}> =>
         import(`translations/${language}/${namespace}_i18next.json`),
-      detection: {
-        lookupQuerystring: 'hl',
-        // TODO(pascal): Add navigator when ready.
-        order: ['querystring', 'cookie', 'localStorage'],
-      },
       fallbackLng: 'fr',
       interpolation: {
         escapeValue: false,
@@ -69,6 +72,7 @@ const init = (initOptions?: InitOptions): void => {
       react: {
         defaultTransParent: 'div',
       },
+      saveMissing: false,
       whitelist: ['fr', 'en'],
       ...initOptions,
     })
@@ -196,5 +200,23 @@ function joinDays(
   return formattedDays.slice(0, -1).join(separator) + lastSeparator + formattedDays.slice(-1)[0]
 }
 
+const IMAGE_NAMESPACE = 'image'
+const STATIC_NAMESPACE = 'static'
+i18next.on('initialized', () => {
+  i18next.addResourceBundle('en', IMAGE_NAMESPACE, {
+    [pngLogo]: pngLogoEn,
+    [svgLogo]: svgLogoEn,
+  })
+  i18next.addResourceBundle('fr', STATIC_NAMESPACE, {
+    privacy: privacyContent,
+    termsOfService: tosContent,
+  })
+  i18next.addResourceBundle('en', STATIC_NAMESPACE, {
+    privacy: privacyContentEn,
+    termsOfService: tosContentEn,
+  })
+})
 
-export {init, useDateOption, getLanguage, joinDays, localizeOptions, prepareT, prepareNamespace}
+
+export {init, useDateOption, getLanguage, joinDays, localizeOptions, prepareT, prepareNamespace,
+  IMAGE_NAMESPACE, STATIC_NAMESPACE}

@@ -5,9 +5,8 @@
   facebookSSOAppId: '',
   followUpMail: 'suivi@briserlachaine.org',
   mailjetProxyUrl: 'https://mailjet-proxy.briserlachaine.org',
-  numDaysContagious: 35,
+  numDaysContagious: 10,
   numDaysContagiousBeforeSymptoms: 2,
-  numDaysSymptoms: 21,
   productName: 'BriserLaChaine.org',
   sentryDsn: 'https://1423edf320fe498a8b3e5326737e3f06@o87797.ingest.sentry.io/5223962',
 }

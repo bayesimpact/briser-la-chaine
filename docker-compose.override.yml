@@ -10,6 +10,7 @@ services:
       - ./src:/usr/app/src
       - ./check-color-config.sh:/usr/app/check-color-config.sh:ro
       - ./custom.d.ts:/usr/app/custom.d.ts:ro
+      - ./diff_i18n_folder.sh:/usr/app/diff_i18n_folder.sh:ro
       - ./jsonlint.sh:/usr/app/jsonlint.sh
       - ./entrypoint.sh:/usr/app/entrypoint.sh:ro
       - ./package.json:/usr/app/package.json:ro

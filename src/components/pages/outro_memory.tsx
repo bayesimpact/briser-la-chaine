@@ -7,7 +7,7 @@ import {useFastForward} from 'hooks/fast_forward'
 import {useNumPeopleToAlert} from 'store/selections'
 import {Routes} from 'store/url'
 
-import {PedagogyLayout} from 'components/navigation'
+import {PedagogyPage} from 'components/navigation'
 
 
 const MemoryOutroPage = (): React.ReactElement => {
@@ -22,11 +22,11 @@ const MemoryOutroPage = (): React.ReactElement => {
     history.push(Routes.CONTACTS_LIST)
   }, [history])
   useFastForward(handleNext)
-  return <PedagogyLayout
+  return <PedagogyPage
     title={title} subtitle={subtitle} icon={CheckLineIcon}
     nextButton={t('La prévenir', {count: totalContactsCount})}
     onNext={handleNext}>
-  </PedagogyLayout>
+  </PedagogyPage>
 }
 const MemoPage = React.memo(MemoryOutroPage)
 
