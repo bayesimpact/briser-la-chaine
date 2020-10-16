@@ -2,7 +2,7 @@ import React from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {Link} from 'react-router-dom'
 
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
 
 interface FAQParagraphProps {
@@ -89,7 +89,9 @@ const FAQContent = ({isMobileVersion}: FAQContentProps): React.ReactElement => {
           Pour nous, votre vie privée est aussi importante que votre santé. Nous ne conservons ni
           ne transmettons vos données personnelles. Nous n'installons aucun traçage GPS ou
           bluetooth.
-          Plus d'information par <Link style={discreetLinkStyle} to={Routes.PRIVACY}>ici</Link>.
+          Plus d'information par <Link style={discreetLinkStyle} to={getPath('PRIVACY', t)}>
+            ici
+          </Link>.
         </Trans>} />
     </div>
   </div>

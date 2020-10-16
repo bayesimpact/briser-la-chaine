@@ -41,7 +41,7 @@ interface OptionProps<T> {
 }
 
 
-const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElement => {
+const Select = <T extends unknown = string>(props: SelectProps<T>): React.ReactElement => {
   const {areUselessChangeEventsMuted = true, defaultMenuScroll, isMulti, onChange, options, style,
     styles, value, ...otherProps} = props
 
@@ -138,7 +138,7 @@ const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElemen
         borderRadius: menuIsOpen && options.length ?
           `${borderRadius}px ${borderRadius}px 0 0` : borderRadius,
         borderWidth: 0,
-        boxShadow: '0 11px 18px 0 rgba(60, 128, 209, 0.15)',
+        boxShadow: '0 6px 18px 0 rgba(60, 128, 209, 0.25)',
         height: selectStyle.height,
       }),
       group: (base): React.CSSProperties => ({
@@ -187,9 +187,12 @@ const Select = <T extends {} = string>(props: SelectProps<T>): React.ReactElemen
         color: colors.BUTTON_GREY,
         fontStyle: 'italic',
       }),
+      // TODO(zozoens31): Make it possible to override the valueContainer from
+      // another component.
+      // Horizontal padding is icon size + icon margins.
       valueContainer: (base): React.CSSProperties => ({
         ...base,
-        padding: '2px 15px',
+        padding: '2px 15px 2px 40px',
       }),
       ...styles,
     }}

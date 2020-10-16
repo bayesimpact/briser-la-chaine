@@ -1,12 +1,10 @@
 {
   amplitudeToken: 'd789e78c35cf582b8a59175137eb53cb',
-  canonicalUrl: 'www.BriserLaChaine.org',
-  // FIXME(cyrille): Use a real app ID.
-  facebookSSOAppId: '',
+  // TODO(cyrille): Use a different one from Bob.
+  facebookSSOAppId: '1576288225722008',
   followUpMail: 'suivi@briserlachaine.org',
   mailjetProxyUrl: 'https://mailjet-proxy.briserlachaine.org',
   numDaysContagious: 10,
   numDaysContagiousBeforeSymptoms: 2,
-  productName: 'BriserLaChaine.org',
   sentryDsn: 'https://1423edf320fe498a8b3e5326737e3f06@o87797.ingest.sentry.io/5223962',
 }

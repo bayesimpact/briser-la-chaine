@@ -2,6 +2,7 @@ import * as Sentry from '@sentry/browser'
 import {ConnectedRouter, connectRouter, routerMiddleware, RouterState} from 'connected-react-router'
 import {History, createBrowserHistory} from 'history'
 import React, {Suspense, useEffect, useLayoutEffect, useState} from 'react'
+import {useTranslation} from 'react-i18next'
 import {Provider} from 'react-redux'
 import {useHistory, useLocation} from 'react-router'
 import {Switch, Redirect, Route} from 'react-router-dom'
@@ -11,28 +12,28 @@ import createReduxSentryMiddleware from 'redux-sentry-middleware'
 import thunk from 'redux-thunk'
 import {polyfill as smoothscrollPolyfill} from 'smoothscroll-polyfill'
 
-import {parseQueryString} from 'analytics/parse'
 import {createAmplitudeMiddleware} from 'analytics/amplitude'
 import Logger from 'analytics/logger'
 import {alerts, contacts, people, user} from 'store/app_reducer'
 import {ACTIONS_TO_LOG, AllActions, pageIsLoaded, useDispatch} from 'store/actions'
 import {init as i18nInit} from 'store/i18n'
-import {useSymptomsOnsetDate} from 'store/selections'
-import {Routes} from 'store/url'
+import {useSelector, useSymptomsOnsetDate} from 'store/selections'
+import {getPath as defineAndGetPath} from 'store/url'
 
 import {ContagiousPeriod} from 'components/pages/search_contacts'
-import {Symptoms} from 'components/pages/symptoms'
+import Symptoms from 'components/pages/symptoms'
 import {CalendarPage} from 'components/pages/calendar'
 import ComeBackLaterPage from 'components/pages/come_back_later'
 import ContactsListPage from 'components/pages/contacts_list'
 import DiagnosticPage from 'components/pages/diagnostic'
 import DiagnosticOutcomePage from 'components/pages/diagnostic_outcome'
+import DownloadPage from 'components/pages/download'
 import FinalPage from 'components/pages/final'
 import FollowUpPage from 'components/pages/follow_up'
 import HealthStatusPage from 'components/pages/health_status'
+import MemoryIntroPage from 'components/pages/intro_memory'
 import MemoryOutroPage from 'components/pages/outro_memory'
 import PedagogyIntroPage from 'components/pages/intro_pedagogy'
-import PedagogyOutroPage from 'components/pages/outro_pedagogy'
 import PrivacyPage from 'components/pages/privacy'
 import ReferralPage from 'components/pages/referral'
 import SplashPage from 'components/pages/splash'
@@ -43,17 +44,8 @@ import 'styles/fonts/Poppins/font.css'
 
 require('styles/app.css')
 
-const hostnameToLng = {
-  briserlachaine: 'fr',
-  conotify: 'en',
-}
 smoothscrollPolyfill()
-i18nInit({
-  lng: (Object.entries(hostnameToLng).
-    find(([hostname]) => window.location.hostname.toLowerCase().includes(hostname)) ||
-    ['dev', parseQueryString(window.location.search)['hl'] || 'fr']
-  )[1],
-})
+i18nInit()
 
 interface AppState {
   history: History
@@ -71,6 +63,12 @@ function usePathnameInQueryString(location: ReturnType<typeof useLocation>): voi
       history.replace(pathnameInSearch)
     }
   }, [history, pathname, pathnameInSearch])
+}
+
+function useTitle(title: string): void {
+  useEffect((): void => {
+    document.title = title
+  }, [title])
 }
 
 
@@ -93,42 +91,61 @@ function usePageLogger(location: ReturnType<typeof useLocation>): void {
 
 
 const App = (): React.ReactElement => {
+  const {t} = useTranslation('url')
   const location = useLocation()
+  useTitle(t('productName', {ns: 'translation'}))
   usePathnameInQueryString(location)
   useScrollToTopOnNewPage(location)
   usePageLogger(location)
+  const hasFinishedMemorySteps =
+    useSelector(({user: {hasFinishedMemorySteps}}) => hasFinishedMemorySteps)
   const {search, hash} = location
-  // TODO(cyrille): Add possibility to drop the onset date without cleaning the local storage.
-  // FIXME(sil): Check the conditions for which each page is available.
+  // TODO(sil): Check the conditions for which each page is available.
   const hasOnsetDate = !!useSymptomsOnsetDate()
+  // i18next-extract-mark-ns-start url
   return <Switch>
-    <Route path={Routes.SPLASH} component={SplashPage} />
-    <Route path={Routes.DIAGNOSED_SPLASH} component={SplashPage} />
-    <Route path={Routes.MODERATE_RISK_SPLASH} component={SplashPage} />
-    <Route path={Routes.HIGH_RISK_SPLASH} component={SplashPage} />
-    <Route path={Routes.PEDAGOGY_INTRO} component={PedagogyIntroPage} />
-    <Route path={Routes.HEALTH_STATUS} component={HealthStatusPage} />
-    <Route path={Routes.DIAGNOSTIC} component={DiagnosticPage} />
-    <Route path={Routes.DIAGNOSTIC_OUTCOME} component={DiagnosticOutcomePage} />
-    <Route path={Routes.FOLLOW_UP} component={FollowUpPage} />
-    <Route path={Routes.COME_BACK_LATER} component={ComeBackLaterPage} />
-    <Route path={Routes.REFERRAL} component={ReferralPage} />
-    <Route path={Routes.PEDAGOGY_OUTRO} component={PedagogyOutroPage} />
-    <Route path={Routes.SYMPTOMS_ONSET} component={Symptoms} />
-    <Route path={Routes.CALENDAR} component={CalendarPage} />
-    <Route path={Routes.CONTACTS_SEARCH} component={ContagiousPeriod} />
-    <Route path={Routes.MEMORY_OUTRO} component={MemoryOutroPage} />
-    <Route path={Routes.CONTACTS_LIST} component={ContactsListPage} />
-    <Route path={Routes.FINAL} component={FinalPage} />
-    <Route path={Routes.PRIVACY} component={PrivacyPage} />
-    <Route path={Routes.TERMS} component={TermsPage} />
-    {/* FIXME(cyrille): Redirect to CONTACTS_LIST if user has validated all days. */}
-    <Redirect to={(hasOnsetDate ? Routes.CONTACTS_SEARCH : Routes.SPLASH) + search + hash} />
+    <Route path={defineAndGetPath('SPLASH', t)} component={SplashPage} />
+    <Route path={defineAndGetPath('DIAGNOSED_SPLASH', t)} component={SplashPage} />
+    <Route path={defineAndGetPath('MODERATE_RISK_SPLASH', t)} component={SplashPage} />
+    <Route path={defineAndGetPath('HIGH_RISK_SPLASH', t)} component={SplashPage} />
+    <Route path={defineAndGetPath('PEDAGOGY_INTRO', t)} component={PedagogyIntroPage} />
+    <Route path={defineAndGetPath('HEALTH_STATUS', t)} component={HealthStatusPage} />
+    <Route path={defineAndGetPath('DIAGNOSTIC', t)} component={DiagnosticPage} />
+    <Route path={defineAndGetPath('DIAGNOSTIC_OUTCOME', t)} component={DiagnosticOutcomePage} />
+    <Route path={defineAndGetPath('FOLLOW_UP', t)} component={FollowUpPage} />
+    <Route path={defineAndGetPath('COME_BACK_LATER', t)} component={ComeBackLaterPage} />
+    <Route path={defineAndGetPath('REFERRAL', t)} component={ReferralPage} />
+    <Route path={defineAndGetPath('SYMPTOMS_ONSET', t)} component={Symptoms} />
+    <Route path={defineAndGetPath('CALENDAR', t)} component={CalendarPage} />
+    <Route path={defineAndGetPath('MEMORY_INTRO', t)} component={MemoryIntroPage} />
+    <Route path={defineAndGetPath('CONTACTS_SEARCH', t)} component={ContagiousPeriod} />
+    <Route path={defineAndGetPath('MEMORY_OUTRO', t)} component={MemoryOutroPage} />
+    <Route path={defineAndGetPath('CONTACTS_LIST', t)} component={ContactsListPage} />
+    <Route path={defineAndGetPath('DOWNLOAD', t)} component={DownloadPage} />
+    <Route path={defineAndGetPath('FINAL', t)} component={FinalPage} />
+    <Route path={defineAndGetPath('PRIVACY', t)} component={PrivacyPage} />
+    <Route path={defineAndGetPath('TERMS', t)} component={TermsPage} />
+    {/* Old Paths kept for users that might arrive here. */}
+    <Route path="/probablement">
+      <Redirect to={defineAndGetPath('HIGH_RISK_SPLASH', t) + search + hash} />
+    </Route>
+    <Route path="/peut-etre">
+      <Redirect to={defineAndGetPath('MODERATE_RISK_SPLASH', t) + search + hash} />
+    </Route>
+    <Route path={defineAndGetPath('ROOT', t)}>
+      <Redirect
+        to={
+          (hasOnsetDate ? hasFinishedMemorySteps ?
+            defineAndGetPath('CONTACTS_LIST', t) : defineAndGetPath('CONTACTS_SEARCH', t) :
+            defineAndGetPath('SPLASH', t)
+          ) + search + hash} />
+    </Route>
   </Switch>
+  // i18next-extract-mark-ns-stop url
 }
 const MemoApp = React.memo(App)
 
-type ReduxState = RootState & {router: RouterState<{}|null|undefined>}
+type ReduxState = RootState & {router: RouterState<unknown>}
 
 function createHistoryAndStore(): AppState {
   const history = createBrowserHistory()

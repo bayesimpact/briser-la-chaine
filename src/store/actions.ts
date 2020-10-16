@@ -4,53 +4,74 @@ import {Action, Dispatch} from 'redux'
 import {useDispatch as reactUseDispatch} from 'react-redux'
 import {ThunkAction, ThunkDispatch} from 'redux-thunk'
 
-import {sendEmail, sendSMS} from './mailjet'
+import {LocaleOption} from './i18n'
+import {sendAnonymousEmail, sendAnonymousSMS, sendEmailOnBehalf, sendSMSOnBehalf} from './mailjet'
 // TODO(cyrille): Change all imports.
 import {useSelector} from './selections'
 
 export type AllActions =
   | AlertPerson
-  | ComputeContagiousPeriod
   | CleanStorage
-  | ConfirmContacts
+  | ClearSender
+  | ClickAlert
+  | ComputeContagiousPeriod
   | CopyPersonalMessage
   | CreateContact
   | CreateNewPerson
   | Diagnose
+  | DownloadReport
   | DropContact
+  | FinishMemory
+  | FinishMemoryStep
   | FollowUp
   | GoToExternalDiagnostic
   | GoToGoogleMapsHistory
   | OpenMemoryDay
   | PageIsLoaded
-  | SaveContacts
   | SaveKnownRisk
   | SaveSymptomsOnsetDate
+  | SaveUserName
+  | ShareAlert
   | ShareApp
   | ShowAnonymousMessageContent
-  | UpdateContact
+  | ShowProductSendingSection
+  | ShowMessage
+  | ShowMoreWays
+  | ShowPhysicianSection
+  | ToggleAnonymous
   | UpdatePerson
+  | VisitDeepLink
 
-// FIXME(cyrille): Add actions to log.
+// TODO(cyrille): Check which actions are unused and drop them.
 export const ACTIONS_TO_LOG: {[K in AllActions['type']]?: string} = {
   ALERT_PERSON: 'Alert a contacted person',
-  CONFIRM_CONTACTS: 'Confirm all contacts to alert',
+  CLICK_ALERT: 'Click on the alert button',
   COPY_PERSONAL_MESSAGE: 'Copy personal message',
+  CREATE_CONTACT: 'Add a person to contact',
   DIAGNOSE: 'Diagnostic computed',
+  DOWNLOAD_REPORT: 'Download a report',
+  DROP_CONTACT: 'Remove a person to contact',
+  FINISH_MEMORY_STEP: 'Finish a step in memory block',
   GO_TO_EXTERNAL_DIAG: 'Go to external diagnostic',
   GO_TO_GOOGLE_MAPS_HISTORY: 'Go to Google Maps History',
   OPEN_MEMORY_DAY: 'Open a Day View to add contacts',
   PAGE_IS_LOADED: 'Page is loaded',
   REQUIRED_FOLLOW_UP: 'Require a follow-up',
-  SAVE_CONTACTS: 'Add contacts to alert',
+  SHARE_ALERT: 'Send a message to alert a contacted person',
   SHARE_APP: 'Share the app',
   SHOW_ANONYMOUS_MESSAGE_CONTENT: 'Anonymous message content is shown',
+  SHOW_MESSAGE: 'Show default alert message',
+  SHOW_MORE_WAYS: 'Show other sending options',
+  SHOW_PHYSICIAN_SECTION: 'Physician option is shown',
+  SHOW_PRODUCT_SENDING_SECTION: 'Show "sending through the app" option',
+  TOGGLE_ANONYMOUS: 'Click on anonymous/not anonymous option',
+  VISIT_DEEP_LINK: 'Visit a deep link',
 }
 
 type DispatchAllActions =
   // Add actions as required.
-  ThunkDispatch<RootState, {}, CreateNewPerson> &
-  ThunkDispatch<RootState, {}, AlertPerson> &
+  ThunkDispatch<RootState, unknown, CreateNewPerson> &
+  ThunkDispatch<RootState, unknown, AlertPerson> &
   Dispatch<AllActions>
 
 interface PersonAction<T extends string> extends Readonly<Action<T>> {
@@ -59,38 +80,60 @@ interface PersonAction<T extends string> extends Readonly<Action<T>> {
 
 export interface AlertPerson extends PersonAction<'ALERT_PERSON'> {
   readonly alertMedium?: bayes.casContact.AlertMedium
+  readonly isAlertedAnonymously: boolean
+  readonly sender: bayes.casContact.Sender
 }
 
-const NO_DATE = 'NO_DATE'
-export const noDate = new Date('2020-01-01')
-// TODO(pascal): Cleanup.
-export const getNextNoDate = (state: ContactState): string => {
-  const completedNoDate = Object.entries(state).
-    filter(([dateString, {isDayConfirmed}]) => isDayConfirmed && dateString.startsWith(NO_DATE)).
-    length
-  return `${NO_DATE}_${completedNoDate}`
-}
-
-function alertPerson(translate: TFunction, personId: string):
-ThunkAction<AlertPerson, RootState, {}, AllActions>
+function alertPerson(personId: string): ThunkAction<AlertPerson, RootState, unknown, AllActions>
 function alertPerson(
-  translate: TFunction, personId: string, alertMedium: bayes.casContact.AlertMedium,
-  risk: ContaminationRisk): ThunkAction<AlertPerson, RootState, {}, AllActions>
+  personId: string, sender: 'product',
+  alertMedium: bayes.casContact.AlertMedium, userName: string|undefined,
+  translate: TFunction, dateOptions: LocaleOption,
+): ThunkAction<AlertPerson, RootState, unknown, AllActions>
 function alertPerson(
-  translate: TFunction, personId: string, alertMedium?: bayes.casContact.AlertMedium,
-  risk?: ContaminationRisk,
-): ThunkAction<AlertPerson, RootState, {}, AllActions> {
-  return (dispatch): AlertPerson => {
+  personId: string, sender: 'physician', alertMedium: bayes.casContact.AlertMedium,
+): ThunkAction<AlertPerson, RootState, unknown, AllActions>
+function alertPerson(
+  personId: string, sender: 'none'): ThunkAction<AlertPerson, RootState, unknown, AllActions>
+function alertPerson(
+  personId: string, sender: bayes.casContact.Sender = 'user',
+  alertMedium?: bayes.casContact.AlertMedium,
+  userName?: string, translate?: TFunction, dateOptions?: LocaleOption,
+): ThunkAction<AlertPerson, RootState, unknown, AllActions> {
+  return (dispatch, getState): AlertPerson => {
     const action = {
       alertMedium,
+      isAlertedAnonymously: !!(sender === 'product' && translate && userName),
       personId,
+      sender,
       type: 'ALERT_PERSON',
     } as const
     dispatch(action)
+    if (sender !== 'product' || !translate) {
+      return action
+    }
     if (alertMedium?.medium === 'email') {
-      sendEmail(alertMedium?.value, risk || 'low', translate)
-    } else if (alertMedium?.medium === 'SMS') {
-      sendSMS(alertMedium?.value, risk || 'low', translate)
+      if (!userName) {
+        sendAnonymousEmail(alertMedium.value, translate)
+      } else {
+        const {user: {contagiousPeriodEnd, contagiousPeriodStart}} = getState()
+        if (!contagiousPeriodStart || !contagiousPeriodEnd || !dateOptions) {
+          // This should never happen as we only allow the action once the contagious period is in
+          // the state.
+          // TODO(pascal): Log the error with Sentry.
+        } else {
+          sendEmailOnBehalf(
+            alertMedium.value, userName, contagiousPeriodStart,
+            contagiousPeriodEnd, translate, dateOptions,
+          )
+        }
+      }
+    } else if (alertMedium?.medium === 'SMS' && config.isSendingSmsAvailable) {
+      if (!userName) {
+        sendAnonymousSMS(alertMedium.value, translate)
+      } else {
+        sendSMSOnBehalf(alertMedium.value, userName, translate)
+      }
     }
     return action
   }
@@ -121,6 +164,14 @@ function saveSymptomsOnsetDate(symptomsOnsetDate: Date): SaveSymptomsOnsetDate {
   return {symptomsOnsetDate, type: 'SET_SYMPTOMS_ONSET_DATE'}
 }
 
+export interface SaveUserName extends Readonly<Action<'SET_USER_NAME'>> {
+  userName: string
+}
+
+function saveUserName(userName: string): SaveUserName {
+  return {type: 'SET_USER_NAME', userName}
+}
+
 export interface SaveKnownRisk extends Readonly<Action<'SET_KNOWN_RISK'>> {
   chainDepth: number
 }
@@ -132,10 +183,28 @@ function saveKnownRisk(chainDepth: number): SaveKnownRisk {
   }
 }
 
-export type ShareApp = Readonly<Action<'SHARE_APP'>>
+export const shareMediums = [
+  'SMS', 'WhatsApp', 'email', 'Messenger', 'native', 'copy'] as const
+export type ShareMedium = (typeof shareMediums)[number]
+export interface ShareApp extends Readonly<Action<'SHARE_APP'>> {
+  medium: ShareMedium
+  visualElement: string
+}
 
-const shareAction: ShareApp = {
-  type: 'SHARE_APP',
+function shareApp(medium: ShareMedium, visualElement: string): ShareApp {
+  return {
+    medium,
+    type: 'SHARE_APP',
+    visualElement,
+  }
+}
+
+interface ShareAlert extends Readonly<Action<'SHARE_ALERT'>> {
+  medium: ShareMedium
+}
+
+function shareAlert(medium: ShareMedium): ShareAlert {
+  return {medium, type: 'SHARE_ALERT'}
 }
 
 interface CreateNewPerson extends Readonly<Action<'CREATE_NEW_PERSON'>> {
@@ -153,7 +222,8 @@ const makeUniquePersonId = (people: PeopleState): string => {
   return candidate
 }
 
-function createNewPerson(name: string): ThunkAction<CreateNewPerson, RootState, {}, AllActions> {
+function createNewPerson(name: string):
+ThunkAction<CreateNewPerson, RootState, unknown, AllActions> {
   return (dispatch, getState): CreateNewPerson => {
     const personId = makeUniquePersonId(getState().people)
     return dispatch({name, personId, type: 'CREATE_NEW_PERSON'})
@@ -164,8 +234,8 @@ export interface DateAction<T extends string> extends Readonly<Action<T>> {
   readonly date: Date
 }
 
-export interface ContactAction<T extends string> extends DateAction<T> {
-  readonly contact: bayes.casContact.Contact
+export interface ContactAction<T extends string> extends Readonly<Action<T>> {
+  readonly personId: string
 }
 
 const isDateAction = <T extends string>(action: Action<T>): action is DateAction<T> =>
@@ -174,23 +244,14 @@ const isDateAction = <T extends string>(action: Action<T>): action is DateAction
 
 type CreateContact = ContactAction<'CREATE_CONTACT'>
 
-// TODO(pascal): Cleanup.
-function createContact(personId: string, date: Date): CreateContact {
-  return {contact: {date, personId}, date, type: 'CREATE_CONTACT'}
-}
-
-type UpdateContact = ContactAction<'UPDATE_CONTACT'>
-
-// TODO(pascal): Cleanup.
-function updateContact(contact: bayes.casContact.Contact): UpdateContact {
-  return {contact, date: contact.date, type: 'UPDATE_CONTACT'}
+function createContact(personId: string): CreateContact {
+  return {personId, type: 'CREATE_CONTACT'}
 }
 
 type DropContact = ContactAction<'DROP_CONTACT'>
 
-// TODO(pascal): Cleanup.
-function dropContact(contact: bayes.casContact.Contact): DropContact {
-  return {contact, date: contact.date, type: 'DROP_CONTACT'}
+function dropContact(personId: string): DropContact {
+  return {personId, type: 'DROP_CONTACT'}
 }
 
 type GoToExternalDiagnostic = Readonly<Action<'GO_TO_EXTERNAL_DIAG'>>
@@ -222,14 +283,6 @@ function pageIsLoaded(pathname: string): PageIsLoaded {
   }
 }
 
-interface SaveContacts extends DateAction<'SAVE_CONTACTS'> {
-  readonly contacts: readonly bayes.casContact.Contact[]
-}
-
-function saveContacts(date: Date, contacts: readonly bayes.casContact.Contact[]): SaveContacts {
-  return {contacts, date, type: 'SAVE_CONTACTS'}
-}
-
 const useDispatch: () => DispatchAllActions = reactUseDispatch
 
 const noOp = (): void => void 0
@@ -242,22 +295,12 @@ function diagnose(symptoms: readonly bayes.casContact.Symptom[]): Diagnose {
   return {symptoms, type: 'DIAGNOSE'}
 }
 
-interface ConfirmContacts extends Readonly<Action<'CONFIRM_CONTACTS'>> {
-  readonly numContacts: number
-}
-
-function confirmContacts(numContacts: number): ConfirmContacts {
-  return {
-    numContacts,
-    type: 'CONFIRM_CONTACTS',
-  }
-}
-
 interface CopyPersonalMessage extends Readonly<Action<'COPY_PERSONAL_MESSAGE'>> {
   hasReferralUrl: boolean
   isDefaultText: boolean
 }
 
+// TODO(cyrille): Drop, since it's been replaced by share('copy').
 function copyPersonalMessage(hasReferralUrl: boolean, isDefaultText: boolean): CopyPersonalMessage {
   return {
     // Whether the text that was copied actually contained the referral URL.
@@ -285,10 +328,60 @@ type FollowUp = Readonly<Action<'REQUIRED_FOLLOW_UP'>>
 
 const followUpAction: FollowUp = {type: 'REQUIRED_FOLLOW_UP'}
 
+type ClearSender = PersonAction<'CLEAR_SENDER'>
+
+function clearSender(personId: string): ClearSender {
+  return {
+    personId,
+    type: 'CLEAR_SENDER',
+  }
+}
+
+type FinishMemory = Readonly<Action<'FINISH_MEMORY'>>
+
+const finishMemoryAction: FinishMemory = {type: 'FINISH_MEMORY'}
+
+interface FinishMemoryStep extends Readonly<Action<'FINISH_MEMORY_STEP'>> {
+  numAddedPeople: number
+  step: string
+}
+
+function finishMemoryStep(step: string, numAddedPeople: number): FinishMemoryStep {
+  return {numAddedPeople, step, type: 'FINISH_MEMORY_STEP'}
+}
+
+type DownloadReport = Readonly<Action<'DOWNLOAD_REPORT'>>
+
+const downloadReportAction: DownloadReport = {type: 'DOWNLOAD_REPORT'}
+
+type ClickAlert = Readonly<Action<'CLICK_ALERT'>>
+type ShowProductSendingSection = Readonly<Action<'SHOW_PRODUCT_SENDING_SECTION'>>
+type ShowPhysicianSection = Readonly<Action<'SHOW_PHYSICIAN_SECTION'>>
+type ShowMessage = Readonly<Action<'SHOW_MESSAGE'>>
+type ShowMoreWays = Readonly<Action<'SHOW_MORE_WAYS'>>
+type ToggleAnonymous = Readonly<Action<'TOGGLE_ANONYMOUS'>>
+const clickAlertAction: ClickAlert = {type: 'CLICK_ALERT'}
+const productSendingSectionAction: ShowProductSendingSection =
+  {type: 'SHOW_PRODUCT_SENDING_SECTION'}
+const physicianSectionShownAction: ShowPhysicianSection = {type: 'SHOW_PHYSICIAN_SECTION'}
+const showMessageAction: ShowMessage = {type: 'SHOW_MESSAGE'}
+const showMoreWaysAction: ShowMoreWays = {type: 'SHOW_MORE_WAYS'}
+const toggleAnonymousAction: ToggleAnonymous = {type: 'TOGGLE_ANONYMOUS'}
+
+interface VisitDeepLink extends Readonly<Action<'VISIT_DEEP_LINK'>> {
+  target: string
+}
+
+function visitDeepLink(target: string): VisitDeepLink {
+  return {target, type: 'VISIT_DEEP_LINK'}
+}
 export {alertPerson, computeContagiousPeriodAction, createContact, createNewPerson, diagnose,
-  dropContact, isDateAction, saveContacts, saveSymptomsOnsetDate, updatePerson, updateContact,
+  dropContact, isDateAction, saveSymptomsOnsetDate, updatePerson,
   saveKnownRisk, useDispatch, useSelector, noOp, pageIsLoaded, goToExternalDiagnosticAction,
-  shareAction, copyPersonalMessage, cleanStorage, showAnonymousMessageContentAction,
-  goToGoogleMapsHistoryAction, openMemoryDayAction, confirmContacts, followUpAction,
+  shareApp, copyPersonalMessage, cleanStorage, showAnonymousMessageContentAction, shareAlert,
+  goToGoogleMapsHistoryAction, openMemoryDayAction, followUpAction, clearSender,
+  downloadReportAction, saveUserName, productSendingSectionAction, physicianSectionShownAction,
+  showMessageAction, toggleAnonymousAction, clickAlertAction, showMoreWaysAction, visitDeepLink,
+  finishMemoryStep, finishMemoryAction,
 }
 

@@ -28,13 +28,13 @@ const SYMPTOMS: readonly NamedValue<bayes.casContact.Symptom>[] = [
 
 const SYMPTOM_BY_VALUE = _keyBy(SYMPTOMS, 'value')
 
-// FIXME(cyrille): Make sure this algorithm is OK.
 function isProbablySick(symptoms: readonly bayes.casContact.Symptom[]): ContaminationRisk {
   if (symptoms.includes('NO_SYMPTOMS')) {
     return 'low'
   }
   const score = symptoms.
     map(symptom => SYMPTOM_BY_VALUE[symptom].potential).
+    // eslint-disable-next-line unicorn/no-reduce
     reduce((a, b) => a + b, 0)
   return score >= 3 ? 'high' : 'low'
 }

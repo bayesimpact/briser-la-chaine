@@ -4,7 +4,7 @@ version: "3.4"
 services:
   dev:
     volumes:
-      - ./cfg:/usr/app/cfg:ro
+      - ./cfg:/usr/app/cfg
       - ./ssl:/etc/ssl/webpack-dev:ro
       - ./.babelrc:/usr/app/.babelrc:ro
       - ./src:/usr/app/src
@@ -26,7 +26,7 @@ services:
       # For releasing.
       - ./dist:/usr/app/dist
     environment:
-      AIRTABLE_API_KEY:
+      TUNNEL_TESTING:
       CLIENT_VERSION: dev
   mailjet-proxy:
     environment:

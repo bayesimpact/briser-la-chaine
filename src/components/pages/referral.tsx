@@ -4,8 +4,8 @@ import {Trans, useTranslation} from 'react-i18next'
 import {Link} from 'react-router-dom'
 
 import {useDefaultShareText} from 'hooks/share'
-import {shareAction, useDispatch} from 'store/actions'
-import {Routes} from 'store/url'
+import {shareApp, useDispatch} from 'store/actions'
+import {getPath} from 'store/url'
 
 import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import {BottomDiv, PedagogyPage} from 'components/navigation'
@@ -16,13 +16,17 @@ const buttonStyle: React.CSSProperties = {
   ...darkButtonStyle,
   backgroundColor: colors.MINTY_GREEN,
   border: `solid 1px ${colors.MINTY_GREEN}`,
-  color: '#000',
+  color: colors.ALMOST_BLACK,
+  marginBottom: 20,
 }
 const strongStyle: React.CSSProperties = {
   fontFamily: 'Poppins',
   fontWeight: 800,
 }
-
+const backButtonStyle: React.CSSProperties = {
+  ...lightButtonStyle,
+  marginBottom: 20,
+}
 
 const ReferralPage = (): React.ReactElement => {
   const {t} = useTranslation()
@@ -40,11 +44,13 @@ const ReferralPage = (): React.ReactElement => {
   const text = useDefaultShareText()
   const dispatch = useDispatch()
   const share = useCallback((): void => {
-    dispatch(shareAction)
+    const visualElement = 'referral'
     if (hasShare) {
+      dispatch(shareApp('native', visualElement))
       navigator.share?.({text})
       return
     }
+    dispatch(shareApp('email', visualElement))
     window.open(
       `mailto:?subject=${encodeURIComponent(t('productName') as string)}&` +
       `body=${encodeURIComponent(text)}`,
@@ -56,7 +62,7 @@ const ReferralPage = (): React.ReactElement => {
         <div style={buttonStyle} onClick={share}>
           {t('Partager {{productName}}', {productName: t('productName')})}
         </div>
-        <Link to={Routes.HEALTH_STATUS} style={lightButtonStyle}>
+        <Link to={getPath('HEALTH_STATUS', t)} style={backButtonStyle}>
           {t('Retour')}
         </Link>
       </div>

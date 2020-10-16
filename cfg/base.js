@@ -12,6 +12,7 @@ require('json5/lib/register')
 
 const srcPath = path.join(__dirname, '../src')
 const sslPath = '/etc/ssl/webpack-dev'
+const isTunnelTest = !!process.env.TUNNEL_TESTING
 
 const mainSrcFolders = [
   'analytics',
@@ -25,12 +26,13 @@ const mainSrcFolders = [
 module.exports = {
   devServer: {
     contentBase: './',
+    disableHostCheck: isTunnelTest,
     historyApiFallback: {
       rewrites: Object.values(entrypoints).filter(({rewrite}) => rewrite).
         map(({rewrite, htmlFilename}) => ({from: rewrite, to: `/${htmlFilename}`})),
     },
     hot: true,
-    https: fs.existsSync(path.join(sslPath, 'key.pem')) ? {
+    https: !isTunnelTest && fs.existsSync(path.join(sslPath, 'key.pem')) ? {
       ca: fs.readFileSync(path.join(sslPath, 'chain.pem')),
       cert: fs.readFileSync(path.join(sslPath, 'cert.pem')),
       key: fs.readFileSync(path.join(sslPath, 'key.pem')),
@@ -112,9 +114,12 @@ module.exports = {
         use: 'raw-loader',
       },
       {
+        loader: 'json5-loader',
+        options: {
+          esModule: false,
+        },
         test: /\.json$/,
         type: 'javascript/auto',
-        use: 'json5-loader',
       },
     ],
   },

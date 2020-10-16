@@ -1,29 +1,32 @@
-// TODO(cyrille): Move to store.
-const Routes: {[varName: string]: string} = {
-  ROOT: '/',
-}
+import {TFunction} from 'i18next'
 
 // TODO(cyrille): Make routes with several segments, rather than hyphenated names.
-Routes.CALENDAR = Routes.ROOT + 'calendrier'
-Routes.COME_BACK_LATER = Routes.ROOT + 'plus-tard'
-Routes.CONTACTS_LIST = Routes.ROOT + 'liste-contacts'
-Routes.CONTACTS_SEARCH = Routes.ROOT + 'recherche-contacts'
-Routes.DIAGNOSED_SPLASH = Routes.ROOT + 'positif'
-Routes.DIAGNOSTIC = Routes.ROOT + 'symptomes'
-Routes.DIAGNOSTIC_OUTCOME = Routes.ROOT + 'resultat-diagnostic'
-Routes.FINAL = Routes.ROOT + 'merci'
-Routes.FOLLOW_UP = Routes.ROOT + 'suivi'
-Routes.HEALTH_STATUS = Routes.ROOT + 'statut'
-Routes.HIGH_RISK_SPLASH = Routes.ROOT + 'probablement'
-Routes.MEMORY_OUTRO = Routes.ROOT + 'validation-contacts'
-Routes.MODERATE_RISK_SPLASH = Routes.ROOT + 'peut-etre'
-Routes.PEDAGOGY_INTRO = Routes.ROOT + 'intro'
-Routes.PEDAGOGY_OUTRO = Routes.ROOT + 'intro-recherche-contacts'
-Routes.PRIVACY = Routes.ROOT + 'confidentialite'
-Routes.REFERRAL = Routes.ROOT + 'envoi-ami'
-Routes.SPLASH = Routes.ROOT + 'accueil'
-Routes.SYMPTOMS_ONSET = Routes.ROOT + 'debut-symptomes'
-Routes.TERMS = Routes.ROOT + 'cgu'
+import Routes from 'translations/fr/url_i18next.json'
+import MemorySteps from 'translations/en/memoryRouter_i18next.json'
+
+
+export type Page = keyof typeof Routes
+export type MemoryStep = keyof typeof MemorySteps
+
+
+const pathCache: {[pathname: string]: Page} = {}
+
+
+function getPath(page: Page, translate: TFunction): string {
+  const path = '/' + translate(page, {ns: 'url'})
+  pathCache[path] = page
+  return path
+}
+
+
+// Find a page that matches a given pathname.
+function getPage(pathname: string): Page|undefined {
+  const page = pathCache[pathname]
+  if (page) {
+    return page
+  }
+  return undefined
+}
 
 
 const Params: {[varName: string]: string} = {
@@ -31,4 +34,4 @@ const Params: {[varName: string]: string} = {
 } as const
 
 
-export {Params, Routes}
+export {Params, getPage, getPath}

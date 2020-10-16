@@ -9,12 +9,13 @@ import {parseQueryString} from 'analytics/parse'
 import {useFastForward} from 'hooks/fast_forward'
 import {useDefaultShareText} from 'hooks/share'
 import {saveKnownRisk, useDispatch} from 'store/actions'
-import {prepareT, IMAGE_NAMESPACE} from 'store/i18n'
-import {Params, Routes} from 'store/url'
+import {LocalizableString, prepareT, IMAGE_NAMESPACE} from 'store/i18n'
+import {Page, Params, getPage, getPath} from 'store/url'
 
 import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import FAQContent from 'components/faq_content'
 import ShareButtons from 'components/share_buttons'
+import BurgerMenu from 'components/burger_menu'
 
 import logoImage from 'images/logo.svg'
 import bayesLogoHorizontallImage from 'images/bayes-logo-horizontal.svg'
@@ -47,13 +48,33 @@ const bayesHorizontalLogoStyle: React.CSSProperties = {
 }
 
 
-const titles = {
-  [Routes.HIGH_RISK_SPLASH]: {
+interface SplashDescription {
+  callToAction?: LocalizableString
+  desktopFontSize?: number
+  lineHeight?: number
+  mobileFontSize?: number
+  nextPage?: Page
+  subtitle?: LocalizableString
+  title: React.ReactNode
+}
+
+
+const titles: {[page in Page]?: SplashDescription} = {
+  DIAGNOSED_SPLASH: {
+    desktopFontSize: 57,
+    nextPage: 'PEDAGOGY_INTRO',
+    title: <Trans parent={null}>
+      Votre situation peut relever d'un <span style={{whiteSpace: 'nowrap'}}>
+        {{diseaseName: config.diseaseName}}
+      </span>
+    </Trans>,
+  },
+  HIGH_RISK_SPLASH: {
     callToAction: prepareT('Que dois je faire\u00A0?'),
     desktopFontSize: 31,
     lineHeight: 1.35,
     mobileFontSize: 20,
-    nextPage: Routes.DIAGNOSTIC,
+    nextPage: 'DIAGNOSTIC',
     subtitle: prepareT('Même sans symptôme, vous êtes peut-être contagieux(se) aussi.'),
     title: <Trans parent={null}>
       Un(e) proche atteint(e) du {{diseaseName: config.diseaseName}} a indiqué vous
@@ -62,27 +83,18 @@ const titles = {
       </span> pendant sa période contagieuse.
     </Trans>,
   },
-  [Routes.MODERATE_RISK_SPLASH]: {
+  MODERATE_RISK_SPLASH: {
     callToAction: prepareT('Que dois je faire\u00A0?'),
     desktopFontSize: 31,
     lineHeight: 1.35,
     mobileFontSize: 20,
-    nextPage: Routes.DIAGNOSTIC,
+    nextPage: 'DIAGNOSTIC',
     subtitle: prepareT('Même sans symptôme, vous êtes peut-être contagieux(se) aussi.'),
     title: <Trans parent={null}>
       Un(e) proche atteint(e) du {{diseaseName: config.diseaseName}} a indiqué vous
       avoir <span style={lowRiskContactStyle}>
         peut-être contaminé(e)
       </span> pendant sa période contagieuse.
-    </Trans>,
-  },
-  [Routes.DIAGNOSED_SPLASH]: {
-    desktopFontSize: 57,
-    nextPage: Routes.PEDAGOGY_INTRO,
-    title: <Trans parent={null}>
-      Votre situation peut relever d'un <span style={{whiteSpace: 'nowrap'}}>
-        {{diseaseName: config.diseaseName}}
-      </span>
     </Trans>,
   },
 } as const
@@ -101,7 +113,7 @@ const StepsSectionBase = (props: StepsSectionProps): React.ReactElement => {
   const {subtitle = prepareT(
     'Nous vous aidons à contacter les personnes croisées pendant votre période ' +
     'contagieuse en quelques minutes.',
-  )} = titles[pathname] || {}
+  )} = titles[getPage(pathname) || 'SPLASH'] || {}
   const {t, t: translate} = useTranslation()
   const ctaButtonStyle: React.CSSProperties = {
     ...darkButtonStyle,
@@ -172,7 +184,7 @@ const TitleBase = (props: TitleProps): React.ReactElement => {
   const {style} = props
   const {pathname} = useLocation()
   const {desktopFontSize = 60, lineHeight = 1.11, mobileFontSize = 38, title = undefined} =
-    titles[pathname] || {}
+    titles[getPage(pathname) || 'SPLASH'] || {}
   const titleStyle: React.CSSProperties = {
     fontFamily: 'Poppins',
     fontSize: isMobileVersion ? mobileFontSize : desktopFontSize,
@@ -227,7 +239,7 @@ const NoticesBase = (props: NoticesProps): React.ReactElement => {
     <Trans style={{marginBottom: 15, textAlign: 'center'}}>
       En cliquant sur <strong>{{callToAction}}</strong> vous acceptez
       nos&nbsp;<a
-        href={Routes.TERMS} style={discreetLink} target="_blank" rel="noopener noreferrer">
+        href={getPath('TERMS', t)} style={discreetLink} target="_blank" rel="noopener noreferrer">
         Conditions Générales d'Utilisation
       </a>.
     </Trans>
@@ -236,7 +248,8 @@ const NoticesBase = (props: NoticesProps): React.ReactElement => {
       <span style={{margin: '0 5px'}}>
         {t('Nous ne collectons aucune donnée.')}
       </span>
-      <a href={Routes.PRIVACY} style={discreetLink} target="_blank" rel="noopener noreferrer">
+      <a
+        href={getPath('PRIVACY', t)} style={discreetLink} target="_blank" rel="noopener noreferrer">
         {t('En savoir plus')}
       </a>
     </div>
@@ -262,17 +275,17 @@ const LandingSectionBase = (): React.ReactElement => {
 
   const dispatch = useDispatch()
   const {pathname, search} = useLocation()
-  const isModerateRisk = pathname === Routes.MODERATE_RISK_SPLASH
-  const isDiagnosed = pathname === Routes.DIAGNOSED_SPLASH
-  const isHighRisk = isDiagnosed || pathname === Routes.HIGH_RISK_SPLASH
+  const isModerateRisk = pathname === getPath('MODERATE_RISK_SPLASH', translate)
+  const isDiagnosed = pathname === getPath('DIAGNOSED_SPLASH', translate)
+  const isHighRisk = isDiagnosed || pathname === getPath('HIGH_RISK_SPLASH', translate)
   const hasRisk = isHighRisk || isModerateRisk
   const params = parseQueryString(search)
   const depth = parseDepth(params[Params.DEPTH]) + ((hasRisk && !isDiagnosed) ? 1 : 0)
 
   const {
     callToAction = prepareT('Commencer'),
-    nextPage = Routes.HEALTH_STATUS,
-  } = titles[pathname] || {}
+    nextPage = 'HEALTH_STATUS',
+  } = titles[getPage(pathname) || 'SPLASH'] || {}
   useEffect((): void => {
     if (!hasRisk) {
       return
@@ -280,7 +293,9 @@ const LandingSectionBase = (): React.ReactElement => {
     dispatch(saveKnownRisk(depth))
   }, [depth, dispatch, hasRisk])
 
-  useFastForward(undefined, undefined, nextPage)
+  const nextPagePath = getPath(nextPage, translate)
+
+  useFastForward(undefined, undefined, nextPagePath)
 
   const translatedCallToAction = translate(callToAction)
 
@@ -288,7 +303,7 @@ const LandingSectionBase = (): React.ReactElement => {
     return <section style={{borderTop: `solid 8px ${colors.MINTY_GREEN}`, padding: '45px 30px'}}>
       <Title />
       <div style={{marginTop: 30}}>
-        <StepsSection callToAction={translatedCallToAction} to={nextPage} />
+        <StepsSection callToAction={translatedCallToAction} to={nextPagePath} />
         <Notices style={{marginTop: 20}} callToAction={translatedCallToAction} />
       </div>
     </section>
@@ -325,7 +340,7 @@ const LandingSectionBase = (): React.ReactElement => {
       <Title style={{maxWidth: 450}} />
       <div style={{maxWidth: 385}}>
         <StepsSection
-          style={innerStepsSectionStyle} callToAction={translatedCallToAction} to={nextPage} />
+          style={innerStepsSectionStyle} callToAction={translatedCallToAction} to={nextPagePath} />
         <Notices style={{marginTop: 20}} callToAction={translatedCallToAction} />
       </div>
     </div>
@@ -337,7 +352,7 @@ const LandingSection = React.memo(LandingSectionBase)
 
 const featuresSectionStyle: React.CSSProperties = {
   backgroundColor: colors.PALE_GREY,
-  color: '#000',
+  color: colors.ALMOST_BLACK,
   padding: isMobileVersion ? '30px 35px' : '80px 20px',
 }
 const featuresTitleStyle: React.CSSProperties = {
@@ -428,7 +443,7 @@ const sectionStyle: React.CSSProperties = {
   padding: isMobileVersion ? '60px 30px 70px' : '80px 20px',
 }
 const recommendedSectionStyle: React.CSSProperties = {
-  backgroundColor: '#000',
+  backgroundColor: colors.ALMOST_BLACK,
   color: '#fff',
   ...sectionStyle,
 }
@@ -553,7 +568,7 @@ const shareButtonStyle: React.CSSProperties = {
   backgroundColor: '#fff',
   border: `solid 1px ${colors.SMOKEY_GREY}`,
   borderRadius: 60,
-  color: '#000',
+  color: colors.ALMOST_BLACK,
   height: 60,
   marginRight: 20,
   width: 60,
@@ -569,7 +584,7 @@ const ShareSectionBase = (): React.ReactElement => {
         <span style={{color: colors.MINTY_GREEN}}>sans gêne</span>
       </Trans>
       <div style={{flex: 1}} />
-      <ShareButtons sharedText={text} buttonStyle={shareButtonStyle} />
+      <ShareButtons sharedText={text} buttonStyle={shareButtonStyle} visualElement="splash" />
     </div>
   </section>
 }
@@ -577,7 +592,7 @@ const ShareSection = React.memo(ShareSectionBase)
 
 
 const footerStyle: React.CSSProperties = {
-  backgroundColor: '#000',
+  backgroundColor: colors.ALMOST_BLACK,
   color: colors.GREY,
   padding: isMobileVersion ? '65px 30px 50px' : '80px 20px 20px',
 }
@@ -627,10 +642,14 @@ const FooterBase = (): React.ReactElement => {
           rel="noopener noreferrer">
           {t('Contact')}
         </a>
-        <a href={Routes.TERMS} style={footerLinkStyle} target="_blank" rel="noopener noreferrer">
+        <a
+          href={getPath('TERMS', t)} style={footerLinkStyle} target="_blank"
+          rel="noopener noreferrer">
           {t('CGU')}
         </a>
-        <a href={Routes.PRIVACY} style={footerLinkStyle} target="_blank" rel="noopener noreferrer">
+        <a
+          href={getPath('PRIVACY', t)} style={footerLinkStyle} target="_blank"
+          rel="noopener noreferrer">
           {t('Vie privée')}
         </a>
         <a
@@ -702,6 +721,7 @@ const cookieBannerButtonStyle: React.CSSProperties = {
   fontFamily: 'Poppins',
   fontSize: 13,
   fontWeight: 800,
+  marginBottom: 20,
   marginTop: 25,
 }
 const cookieBannerLinkStyle: React.CSSProperties = {
@@ -755,7 +775,7 @@ const CookieBannerBase = (): React.ReactElement|null => {
       </li>
     </ul>
     <div onClick={hide} style={cookieBannerButtonStyle}>{t("J'ai compris")}</div>
-    <Link to={Routes.PRIVACY} style={cookieBannerLinkStyle}>
+    <Link to={getPath('PRIVACY', t)} style={cookieBannerLinkStyle}>
       {t('Politique de confidentialité')}
     </Link>
   </div>
@@ -780,6 +800,7 @@ const SplashPage = (): React.ReactElement => {
     <ShareSection />
     <Footer />
     <CookieBanner />
+    <BurgerMenu />
   </React.Fragment>
 }
 

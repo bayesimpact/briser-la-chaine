@@ -1,42 +1,31 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {Trans, useTranslation} from 'react-i18next'
 import {useSelector} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import DownloadFillIcon from 'remixicon-react/DownloadFillIcon'
 
 import {useFastForward} from 'hooks/fast_forward'
-import {usePDFDownloader} from 'hooks/pdf'
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
-import {BottomDiv} from 'components/navigation'
 import ShareButtons from 'components/share_buttons'
 import heartFullCelebrationImage from 'images/heart-full-celebration.svg'
-import pdfIcon from 'images/pdf-ico.svg'
 
 
 const titleStyle: React.CSSProperties = {
   fontSize: 22,
   margin: '0 20px 20px',
 }
-const bottomDivStyle: React.CSSProperties = {
-  alignItems: 'center',
-  backgroundColor: colors.WHITE_TWO,
-  cursor: 'pointer',
-  display: 'flex',
-  padding: 20,
-}
-const downloadTextStyle: React.CSSProperties = {
-  flex: 1,
-  margin: '0 20px',
-}
-const contentStyle: React.CSSProperties = {
+const containerStyle: React.CSSProperties = {
   alignItems: 'center',
   display: 'flex',
   flex: 1,
   flexDirection: 'column',
   justifyContent: 'center',
+  margin: '0 auto',
+  maxWidth: 700,
+  minHeight: window.innerHeight,
   padding: '0 20px',
   textAlign: 'center',
+  transition: '800ms',
 }
 const circleStyle: React.CSSProperties = {
   alignItems: 'center',
@@ -45,26 +34,21 @@ const circleStyle: React.CSSProperties = {
   display: 'flex',
   height: 165,
   justifyContent: 'center',
-  marginBottom: 30,
+  marginBottom: 40,
   position: 'relative',
   width: 165,
 }
 const thankYouStyle: React.CSSProperties = {
-  bottom: 10,
   fontFamily: 'Poppins',
   fontSize: 32,
   fontWeight: 800,
-  left: '50%',
-  position: 'absolute',
-  transform: 'translateX(-50%)',
-  width: '100vw',
+  marginBottom: 20,
 }
 
 // This is a top level page and should never be nested in another one.
 // TOP LEVEL PAGE
 const FinalPageBase = (): React.ReactElement => {
   const {t} = useTranslation()
-  const [isVisible, setIsVisible] = useState(false)
   const numAlertedPeople = useSelector(({alerts}: RootState): number => {
     return [...new Set(Object.keys(alerts))].length
   })
@@ -76,47 +60,23 @@ const FinalPageBase = (): React.ReactElement => {
     'traçage de données\u00A0!)',
     {count: numAlertedPeople, diseaseName: config.diseaseName, url: t('canonicalUrl')},
   )
-  useEffect(() => {
-    const timeout = window.setTimeout((): void => setIsVisible(true), 300)
-    return (): void => clearTimeout(timeout)
-  }, [])
-  useFastForward(undefined, undefined, Routes.SYMPTOMS_ONSET)
-  const downloadPDF = usePDFDownloader()
+  useFastForward(undefined, undefined, getPath('SYMPTOMS_ONSET', t))
   const thankYou = numAlertedPeople > 1 ? t('Merci pour eux') : t('Merci')
-  const containerStyle: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    margin: '0 auto',
-    maxWidth: 700,
-    minHeight: window.innerHeight,
-    opacity: isVisible ? 1 : 0,
-    transition: '800ms',
-  }
   if (!numAlertedPeople) {
-    return <Redirect to={Routes.ROOT} />
+    return <Redirect to={getPath('ROOT', t)} />
   }
   return <div style={containerStyle}>
-    <div style={contentStyle}>
-      <div style={circleStyle}>
-        <img src={heartFullCelebrationImage} alt="" width={100} />
-        <div style={thankYouStyle}>{thankYou}</div>
-      </div>
-      <Trans style={titleStyle} count={numAlertedPeople}>
-        Grâce à vous, <strong style={{color: colors.SEAWEED}}>
-          {{numAlert: numAlertedPeople}} personne
-        </strong> va pouvoir se protéger et briser la chaîne à son tour&nbsp;!
-      </Trans>
-      <ShareButtons title={t('Partagez la nouvelle\u00A0:')} sharedText={sharedText} />
+    <div style={circleStyle}>
+      <img src={heartFullCelebrationImage} alt="" width={100} />
     </div>
-    <BottomDiv>
-      <div style={bottomDivStyle} onClick={downloadPDF}>
-        <img src={pdfIcon} alt="" />
-        <Trans style={downloadTextStyle} count={numAlertedPeople}>
-          Télécharger le récapitulatif de la personne contactée
-        </Trans>
-        <DownloadFillIcon />
-      </div>
-    </BottomDiv>
+    <div style={thankYouStyle}>{thankYou}</div>
+    <Trans style={titleStyle} count={numAlertedPeople}>
+      Grâce à vous, <strong style={{color: colors.SEAWEED}}>
+        {{numAlert: numAlertedPeople}} personne
+      </strong> va pouvoir se protéger et briser la chaîne à son tour&nbsp;!
+    </Trans>
+    <ShareButtons
+      title={t('Partagez la nouvelle\u00A0:')} sharedText={sharedText} visualElement="thank-you" />
   </div>
 }
 const FinalPage = React.memo(FinalPageBase)

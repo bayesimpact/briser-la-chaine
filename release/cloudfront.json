@@ -2,10 +2,9 @@
   "DistributionConfig": {
     "Aliases": {
       "Items": [
-        "www.briserlachaine.org",
-        "www.conotify.org"
+        "www.briserlachaine.org"
       ],
-      "Quantity": 2
+      "Quantity": 1
     },
     "CacheBehaviors": {
       "Items": [
@@ -175,10 +174,10 @@
       "ACMCertificateArn": "arn:aws:acm:us-east-1:951168128976:certificate/555911cd-cdcf-433d-900a-d4bfe9bae203",
       "Certificate": "arn:aws:acm:us-east-1:951168128976:certificate/555911cd-cdcf-433d-900a-d4bfe9bae203",
       "CertificateSource": "acm",
-      "MinimumProtocolVersion": "TLSv1.1_2016",
+      "MinimumProtocolVersion": "TLSv1.2_2018",
       "SSLSupportMethod": "sni-only"
     },
     "WebACLId": ""
   },
-  "ETag": "E30VTTUOB8L54E"
+  "ETag": "E2OQSC83UF3EM8"
 }

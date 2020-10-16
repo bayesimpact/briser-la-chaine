@@ -14,6 +14,7 @@ replace_string 'environment:"production"' 'environment:"demo"' "$JS_APP_FILES"
 
 # TODO(pascal): Read from const.json5 and const_dist.json5
 replace_string 'd789e78c35cf582b8a59175137eb53cb' 'a1067533ce6148de5bcac9df0ea0d508' "$JS_APP_FILES"
+replace_string '1576288225722008' '1048782155234293' "$JS_APP_FILES"
 
 # TODO(pascal): Try to find a way to run the command if any.
 nginx -g 'daemon off;'

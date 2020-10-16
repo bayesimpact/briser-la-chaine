@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router'
 
 import {useFastForward} from 'hooks/fast_forward'
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
 import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import {PedagogyPage} from 'components/navigation'
@@ -20,6 +20,7 @@ const VirusIcon = {
   src: VirusIconSrc,
 }
 
+// TODO(sil): Fix top spacing now that the top bar is here.
 const HealthStatusPage = (): React.ReactElement => {
   const {t} = useTranslation()
   const history = useHistory()
@@ -28,14 +29,14 @@ const HealthStatusPage = (): React.ReactElement => {
   }</div>
   const subtitle = t('Ou avoir été atteint(e) dans le passé.')
   const goToStart = useCallback((): void => {
-    history.push(Routes.PEDAGOGY_INTRO)
-  }, [history])
+    history.push(getPath('SYMPTOMS_ONSET', t))
+  }, [history, t])
   const goToDiagnostic = useCallback((): void => {
-    history.push(Routes.DIAGNOSTIC)
-  }, [history])
+    history.push(getPath('DIAGNOSTIC', t))
+  }, [history, t])
   const goToReferral = useCallback((): void => {
-    history.push(Routes.REFERRAL)
-  }, [history])
+    history.push(getPath('REFERRAL', t))
+  }, [history, t])
   useFastForward(goToDiagnostic)
   return <PedagogyPage title={title} subtitle={subtitle} icon={VirusIcon}>
     <div style={{...darkButtonStyle, margin: '16px 0 10px'}} onClick={goToStart}>
@@ -44,7 +45,7 @@ const HealthStatusPage = (): React.ReactElement => {
     <div style={{...darkButtonStyle, margin: '0 0 10px'}} onClick={goToDiagnostic}>
       {t('Je pense avoir des symptômes')}
     </div>
-    <div style={lightButtonStyle} onClick={goToReferral}>
+    <div style={{...lightButtonStyle, marginBottom: 20}} onClick={goToReferral}>
       {t('Non')}
     </div>
   </PedagogyPage>

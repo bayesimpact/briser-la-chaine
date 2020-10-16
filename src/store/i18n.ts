@@ -1,16 +1,16 @@
 // eslint-disable-next-line import/no-duplicates
 import {format as dateFormat, formatDistance} from 'date-fns'
+import {enUS as enDateLocale, es as esDateLocale, fr as frDateLocale,
 // eslint-disable-next-line import/no-duplicates
-import {enUS as enDateLocale, fr as frDateLocale} from 'date-fns/locale'
-import i18next, {InitOptions, ReadCallback, ResourceKey, Services, TFunction, TOptions,
-  i18n} from 'i18next'
+  ptBR as ptBRDateLocale} from 'date-fns/locale'
+import i18next, {InitOptions, ReadCallback, ResourceKey, Services, TFunction,
+  TOptions, i18n} from 'i18next'
+import LanguageDetector from 'i18next-browser-languagedetector'
 import _memoize from 'lodash/memoize'
-import {initReactI18next, useTranslation} from 'react-i18next'
+import {useEffect, useMemo, useState} from 'react'
+import {UseTranslationResponse, UseTranslationOptions, initReactI18next,
+  useTranslation} from 'react-i18next'
 
-import privacyContent from 'components/pages/privacy.txt'
-import privacyContentEn from 'components/pages/privacy_en.txt'
-import tosContent from 'components/pages/terms.txt'
-import tosContentEn from 'components/pages/terms_en.txt'
 import pngLogo from 'images/logo.png'
 import pngLogoEn from 'images/logo-en.png'
 import svgLogo from 'images/logo.svg'
@@ -39,10 +39,12 @@ class PromiseI18nBackend {
   }
 }
 
+// Whether this is the international version (with locale detection) or the French one.
+const isInternational = document.documentElement.getAttribute('lang') !== 'fr'
 
-const updateDomLang = (lang: string): void =>
+const updateDomLang = (lang: string): void => {
   document.documentElement.setAttribute('lang', lang)
-
+}
 
 // Third party module for i18next to update the "lang" attribute of the document's root element
 // (usually html) so that it stays in sync with i18next language.
@@ -54,16 +56,32 @@ const UpdateDocumentElementLang = {
   type: '3rdParty',
 } as const
 
+const whitelist = ['fr', 'en', 'es', 'pt', 'pt-BR'] as const
+type LocaleKey = (typeof whitelist)[number]
+
+const STATIC_NAMESPACE = 'static'
+const importStatic = (lang: string): Promise<{default: ResourceKey}> => {
+  const privacy = import(`translations/${lang}/privacy.txt`)
+  const terms = import(`translations/${lang}/terms.txt`)
+  return Promise.all([privacy, terms]).then(
+    ([{default: privacy}, {default: termsOfService}]) => ({default: {privacy, termsOfService}}))
+}
 
 const init = (initOptions?: InitOptions): void => {
   i18next.
     use(initReactI18next).
+    use(LanguageDetector).
     use(PromiseI18nBackend).
     use(UpdateDocumentElementLang).
     init({
       backend: (language: string, namespace: string): Promise<{default: ResourceKey}> =>
-        import(`translations/${language}/${namespace}_i18next.json`),
-      fallbackLng: 'fr',
+        namespace === STATIC_NAMESPACE ? importStatic(language) :
+          import(`translations/${language}/${namespace}_i18next.json`),
+      detection: {
+        lookupQuerystring: 'hl',
+        ...isInternational ? {} : {order: ['querystring']},
+      },
+      fallbackLng: isInternational ? 'en' : 'fr',
       interpolation: {
         escapeValue: false,
       },
@@ -73,7 +91,8 @@ const init = (initOptions?: InitOptions): void => {
         defaultTransParent: 'div',
       },
       saveMissing: false,
-      whitelist: ['fr', 'en'],
+      // TODO(cyrille): Update i18next to allow readonly whitelist.
+      whitelist: [...whitelist],
       ...initOptions,
     })
 }
@@ -125,39 +144,38 @@ const getLanguage = (locale?: string): string =>
 type PromiseImportFunc = (language: string, namespace: string) => Promise<{default: ResourceKey}>
 
 
-const locales = {
-  en: enDateLocale,
-  fr: frDateLocale,
+const locales: {[K in LocaleKey]: typeof enDateLocale} = {
+  'en': enDateLocale,
+  'es': esDateLocale,
+  'fr': frDateLocale,
+  'pt': ptBRDateLocale,
+  'pt-BR': ptBRDateLocale,
 } as const
 
+interface RelativeLocale {
+  lastWeek: string
+  nextWeek: string
+  today: string
+  tomorrow: string
+  yesterday: string
+}
 
-const formatRelativeLocale = {
-  en: {
-    lastWeek: "'last' eeee",
-    nextWeek: "'next' eeee",
-    today: "'today'",
-    tomorrow: "'tomorrow''",
-    yesterday: "'yesterday'",
-  },
-  fr: {
-    lastWeek: "eeee 'dernier'",
-    nextWeek: "eeee 'prochain'",
-    today: "'aujourd''hui'",
-    tomorrow: "'demain''",
-    yesterday: "'hier'",
-  },
-} as const
+const formatRelativeLocale = (t: TFunction): RelativeLocale => ({
+  lastWeek: t("{{dayOfWeek}} 'dernier'", {dayOfWeek: 'eeee'}),
+  nextWeek: t("{{dayOfWeek}} 'prochain'", {dayOfWeek: 'eeee'}),
+  today: t("'aujourd''hui'"),
+  tomorrow: t("'demain''"),
+  yesterday: t("'hier'"),
+})
 
-type LocaleKey = keyof typeof locales
+type Token = keyof RelativeLocale | 'other'
 
-type Token = keyof typeof formatRelativeLocale['en'] | 'other'
-
-type LocaleOption = {
+export type LocaleOption = {
   locale: typeof frDateLocale
 }
 
 // This is the date locale for date-fns i18n.
-const createDateOption = _memoize((language: string): LocaleOption => ({
+const createDateOption = (t: TFunction, language: string): LocaleOption => ({
   locale: {
     ...(locales[language as LocaleKey] || locales.fr),
     formatRelative: (token: Token, date: Date|number, baseDate: Date|number): string => {
@@ -169,15 +187,15 @@ const createDateOption = _memoize((language: string): LocaleOption => ({
           },
         )}'`
       }
-      return (formatRelativeLocale[language as LocaleKey] || formatRelativeLocale.fr)[token]
+      return formatRelativeLocale(t)[token]
     },
   },
-}))
+})
 
 
 function useDateOption(): LocaleOption {
-  const {i18n} = useTranslation()
-  return createDateOption(i18n.language)
+  const {t, i18n} = useTranslation()
+  return useMemo(() => createDateOption(t, i18n.language), [i18n, t])
 }
 
 
@@ -201,22 +219,22 @@ function joinDays(
 }
 
 const IMAGE_NAMESPACE = 'image'
-const STATIC_NAMESPACE = 'static'
 i18next.on('initialized', () => {
   i18next.addResourceBundle('en', IMAGE_NAMESPACE, {
     [pngLogo]: pngLogoEn,
     [svgLogo]: svgLogoEn,
   })
-  i18next.addResourceBundle('fr', STATIC_NAMESPACE, {
-    privacy: privacyContent,
-    termsOfService: tosContent,
-  })
-  i18next.addResourceBundle('en', STATIC_NAMESPACE, {
-    privacy: privacyContentEn,
-    termsOfService: tosContentEn,
-  })
 })
 
 
+// TODO(cyrille): Fix useTranslation in react-i18next.
+const useFixedTranslation = (ns: string | string[] | undefined, options?: UseTranslationOptions):
+UseTranslationResponse => {
+  const translation = useTranslation(ns, {...options, useSuspense: false})
+  const refresh = useState({})[1]
+  useEffect(() => refresh({}), [translation.ready, refresh])
+  return translation
+}
+
 export {init, useDateOption, getLanguage, joinDays, localizeOptions, prepareT, prepareNamespace,
-  IMAGE_NAMESPACE, STATIC_NAMESPACE}
+  IMAGE_NAMESPACE, STATIC_NAMESPACE, useFixedTranslation}

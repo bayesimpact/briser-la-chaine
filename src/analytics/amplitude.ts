@@ -12,7 +12,7 @@ interface AmplitudeDefer {
 }
 
 
-type MiddlewareReturnType<State> = ReturnType<Middleware<{}, State, Dispatch<AnyAction>>>
+type MiddlewareReturnType<State> = ReturnType<Middleware<unknown, State, Dispatch<AnyAction>>>
 
 
 export interface Properties {
@@ -32,7 +32,7 @@ export interface AmplitudeLogger<Action, State> {
 export const createAmplitudeMiddleware =
   <A extends Action, State>(
     logger: AmplitudeLogger<A, State>, amplitudeToken = config.amplitudeToken):
-  Middleware<{}, State, Dispatch<AnyAction>> => {
+  Middleware<unknown, State, Dispatch<AnyAction>> => {
     const defer: AmplitudeDefer = {callbacks: []}
     import(/* webpackChunkName: "amplitude" */ 'amplitude-js').then(
       ({default: amplitudeJs}): void => {
@@ -42,6 +42,7 @@ export const createAmplitudeMiddleware =
         // More info about Amplitude client options:
         // https://amplitude.zendesk.com/hc/en-us/articles/115001361248#settings-configuration-options
         instance.init(amplitudeToken, undefined, {
+          disableCookies: true,
           includeGclid: true,
           includeReferrer: true,
           includeUtm: true,

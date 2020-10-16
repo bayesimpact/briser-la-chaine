@@ -8,9 +8,8 @@ import {useHistory} from 'react-router'
 import {Link} from 'react-router-dom'
 
 import {useFastForward} from 'hooks/fast_forward'
-import {useRouteStepper} from 'hooks/stepper'
 import {goToExternalDiagnosticAction, useDispatch, useSelector} from 'store/actions'
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
 import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import {BottomDiv, PedagogyPage} from 'components/navigation'
@@ -33,7 +32,7 @@ const centeredTextStyle: React.CSSProperties = {
 }
 const externalLinkStyle: React.CSSProperties = {
   ...lightButtonStyle,
-  color: '#000',
+  color: colors.ALMOST_BLACK,
   display: 'block',
   margin: '20px auto',
   maxWidth: 420,
@@ -41,7 +40,7 @@ const externalLinkStyle: React.CSSProperties = {
 const greenButtonStyle: React.CSSProperties = {
   ...darkButtonStyle,
   backgroundColor: colors.MINTY_GREEN,
-  color: '#000',
+  color: colors.ALMOST_BLACK,
   display: 'block',
   margin: '20px auto',
   maxWidth: 420,
@@ -79,11 +78,6 @@ const boldStyle: React.CSSProperties = {
   fontWeight: 600,
   textDecoration: 'underline',
 }
-const greenStyle: React.CSSProperties = {
-  color: colors.MINTY_GREEN,
-  fontFamily: 'Poppins',
-  fontWeight: 800,
-}
 const DiagnosticOutcomePageBase = (): React.ReactElement => {
   const {t} = useTranslation()
   const history = useHistory()
@@ -103,22 +97,16 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
   const isNaiveHighRisk = risk === 'high' && !hasKnownRisk
   const isNaiveLowRisk = risk === 'low' && !hasKnownRisk
   const isReferralLowRisk = risk === 'low' && hasKnownRisk
-  const [step, setStep] = useRouteStepper(isNaiveHighRisk ? 2 : 1)
-  const gotoSecondStep = useCallback((): void => setStep(1), [setStep])
   const handleNext = useCallback((): void => {
     if (isNaiveLowRisk) {
       return
     }
     if (isNaiveHighRisk) {
-      if (!step) {
-        gotoSecondStep()
-        return
-      }
-      history.push(Routes.PEDAGOGY_INTRO)
+      history.push(getPath('SYMPTOMS_ONSET', t))
       return
     }
-    history.push(Routes.FOLLOW_UP)
-  }, [history, gotoSecondStep, isNaiveLowRisk, isNaiveHighRisk, step])
+    history.push(getPath('FOLLOW_UP', t))
+  }, [history, isNaiveLowRisk, isNaiveHighRisk, t])
   const handleDeeperDiagnostic = useCallback((): void => {
     dispatch(goToExternalDiagnosticAction)
   }, [dispatch])
@@ -134,11 +122,11 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
       subtitle={t("N'hésitez pas à consulter un médecin pour plus d'informations.")}>
       <BottomDiv style={centeredTextStyle}>
         <div style={{padding: '0 20px'}}>
-          <Link to={Routes.PEDAGOGY_INTRO} style={greenButtonStyle}>
+          <Link to={getPath('SYMPTOMS_ONSET', t)} style={greenButtonStyle}>
             {t('Alerter mes contacts quand même')}
           </Link>
           <a
-            style={externalLinkStyle} href="https://maladiecoronavirus.fr/" target="_blank"
+            style={externalLinkStyle} href={t('diagnosticWebsiteUrl')} target="_blank"
             rel="noopener noreferrer" onClick={handleDeeperDiagnostic}>
             {t('Passer un diagnostic approfondi')}</a>
         </div>
@@ -178,34 +166,25 @@ const DiagnosticOutcomePageBase = (): React.ReactElement => {
   }
 
   // Naive High Risk.
-  if (!step) {
-    return <PedagogyPage
-      title={<Trans style={normalWeightStyle}>
-        Vos symptômes <span style={importantStyle}>pourraient provenir</span> du
-        {' '}{{diseaseName: config.diseaseName}}.
-      </Trans>} subtitle={t("Consultez votre médecin traitant pour plus d'informations.")}
-      icon={Search2LineIcon} nextButton={t("J'ai compris")} onNext={gotoSecondStep}>
-      <div style={isAssistanceRequiredNow ? assistanceWarningNowStyle : assistanceWarningStyle}>
-        <ErrorWarningFillIcon style={warningIconStyle} />
-        {isAssistanceRequiredNow ? <Trans>
-          Vous avez indiqué avoir des difficultés respiratoires. <a href="tel:15" style={boldStyle}>
-            Contactez le 15
-          </a> pour être pris(e) en charge rapidement.
-        </Trans> : <Trans>
-          En cas de difficultés respiratoires, <span style={boldStyle}>
-            contactez le 15 immédiatement
-          </span>.
-        </Trans>}
-      </div>
-    </PedagogyPage>
-  }
   return <PedagogyPage
-    title={<Trans style={normalWeightStyle}>
-      Maintenant que vous avez pris vos précautions, il est essentiel de <span style={greenStyle}>
-        notifier vos contacts
-      </span> à votre tour.
-    </Trans>} icon={UserSearchFillIcon}
-    nextButton={t('Briser la chaîne')} onNext={handleNext} nextButtonColor={colors.MINTY_GREEN} />
+    title={<Trans style={importantStyle}>
+      Vos symptômes pourraient provenir du {{diseaseName: config.diseaseName}}.
+    </Trans>}
+    subtitle={t('Prenez vos précautions en contactant un médecin pour avoir son diagnostic.')}
+    icon={Search2LineIcon} nextButton={t("J'ai pris mes précautions")} onNext={handleNext}>
+    <div style={isAssistanceRequiredNow ? assistanceWarningNowStyle : assistanceWarningStyle}>
+      <ErrorWarningFillIcon style={warningIconStyle} />
+      {isAssistanceRequiredNow ? <Trans>
+        Vous avez indiqué avoir des difficultés respiratoires. <a href="tel:15" style={boldStyle}>
+          Contactez le 15
+        </a> pour être pris(e) en charge rapidement.
+      </Trans> : <Trans>
+        En cas de difficultés respiratoires, <span style={boldStyle}>
+          contactez le 15 immédiatement
+        </span>.
+      </Trans>}
+    </div>
+  </PedagogyPage>
 }
 const DiagnosticOutcomePage = React.memo(DiagnosticOutcomePageBase)
 

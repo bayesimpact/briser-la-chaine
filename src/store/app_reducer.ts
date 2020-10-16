@@ -1,16 +1,18 @@
 import {addDays, subDays} from 'date-fns'
-import _mapValues from 'lodash/mapValues'
+import _flatMap from 'lodash/flatMap'
 import Storage from 'local-storage-fallback'
 
-import {AllActions, isDateAction, getNextNoDate, noDate} from './actions'
+import {AllActions} from './actions'
 import {computeNeedsAssistanceNow, isProbablySick} from './symptoms'
 
 const today = new Date()
 const SAVED_USER_COOKIE = 'user-info'
-const SAVED_CONTACTS_COOKIE = 'contact-list'
+const SAVED_OLD_CONTACTS_COOKIE = 'contact-list'
+const SAVED_CONTACTS_COOKIE = 'contact-set'
 const SAVED_PEOPLE_COOKIE = 'people-list'
 const SAVED_ALERT_COOKIE = 'alerts'
 
+// TODO(cyrille): Replace with lodash/omit
 function dropKey<M, K extends keyof M>(data: M, key: K): Omit<M, K> {
   const {[key]: omittedKey, ...remaining} = data
   return remaining
@@ -52,6 +54,16 @@ function unsavedUser(state: UserState, action: AllActions): void|UserState {
       }
     case 'CLEAN_STORAGE':
       return {}
+    case 'SET_USER_NAME':
+      return {
+        ...state,
+        userName: action.userName,
+      }
+    case 'FINISH_MEMORY':
+      return {
+        ...state,
+        hasFinishedMemorySteps: true,
+      }
   }
 }
 
@@ -88,7 +100,8 @@ function user(state: UserState = initUser, action: AllActions): UserState {
     return state
   }
   if (Object.keys(newState).length) {
-    Storage.setItem(SAVED_USER_COOKIE, JSON.stringify(serializeUser(newState)))
+    const anonymizedState = dropKey(newState, 'userName')
+    Storage.setItem(SAVED_USER_COOKIE, JSON.stringify(serializeUser(anonymizedState)))
   } else {
     Storage.removeItem(SAVED_USER_COOKIE)
   }
@@ -96,141 +109,49 @@ function user(state: UserState = initUser, action: AllActions): UserState {
 }
 
 
-type SerializedContact = Omit<bayes.casContact.Contact, 'date'>
-interface SerializedDayContacts extends Omit<bayes.casContact.DayContacts, 'contacts'> {
-  contacts?: readonly SerializedContact[]
-}
 interface SerializedContactState {
-  [date: string]: SerializedDayContacts
-}
-
-const makeDate = (dateString: string): Date => {
-  try {
-    const date = new Date(dateString)
-    if (Number.isNaN(date.getTime())) {
-      return noDate
-    }
-    return date
-  } catch {
-    return noDate
-  }
+  [date: string]: bayes.casContact.DayContacts
 }
 
 const getStoredContacts = (): ContactState => {
-  const jsonContacts: SerializedContactState =
-    JSON.parse(Storage.getItem(SAVED_CONTACTS_COOKIE) || '{}') || {}
-  return _mapValues(jsonContacts, ({contacts = [], ...rest}, dateString) => ({
-    ...rest,
-    ...contacts.length ? {
-      contacts: contacts.map(({...contact}) => ({
-        ...contact,
-        date: makeDate(dateString),
-      })),
-    } : {},
-  }))
+  const jsonContacts: ContactState =
+    JSON.parse(Storage.getItem(SAVED_CONTACTS_COOKIE) || '[]') || []
+  if (jsonContacts.length) {
+    return jsonContacts
+  }
+  const oldJsonContacts: SerializedContactState =
+    JSON.parse(Storage.getItem(SAVED_OLD_CONTACTS_COOKIE) || '{}') || {}
+  return [...new Set(_flatMap(Object.values(oldJsonContacts), ({contacts}) =>
+    contacts?.map(({personId}) => personId) || []))]
 }
-
-const serializeContacts = (contacts: ContactState): SerializedContactState =>
-  _mapValues(contacts, value => {
-    if (!value) {
-      return value
-    }
-    const {contacts = [], ...rest} = value
-    return {
-      ...rest,
-      ...contacts.length ? {
-        contacts: contacts.map(({date: unusedDate, ...contact}) => contact),
-      } : {},
-    }
-  })
 
 const startingContacts = getStoredContacts()
 
-const isSameDayContact = (contact1: bayes.casContact.Contact, contact2: bayes.casContact.Contact):
-boolean => contact1.personId === contact2.personId
 
-// Update the state of a given date, and drop it or its contacts field if they're empty.
-const updateDate = (
-  state: ContactState,
-  date: Date,
-  updater: (dateState: bayes.casContact.DayContacts) => bayes.casContact.DayContacts,
-): ContactState => {
-  const dateString = date === noDate ? getNextNoDate(state) : date.toISOString()
-  const oldStateDate = state[dateString] || {}
-  const stateDate = updater(oldStateDate)
-  if (!Object.keys(stateDate).length) {
-    return dropKey(state, dateString)
-  }
-  if (Object.keys(stateDate).length === 1 && stateDate.contacts?.length === 0) {
-    return dropKey(state, dateString)
-  }
-  return {
-    ...state,
-    [dateString]: stateDate.contacts?.length ? stateDate : dropKey(stateDate, 'contacts'),
-  }
-}
-
-
-function updateDateAndStore(
-  state: ContactState,
-  date: Date,
-  updater: (dateState: bayes.casContact.DayContacts) => bayes.casContact.DayContacts,
-): ContactState {
-  const dateString = date === noDate ? getNextNoDate(state) : date.toISOString()
-  const savedContacts = getStoredContacts()
-  const updatedState = updateDate(state, date, updater)
-  const serialized = serializeContacts({
-    ...savedContacts,
-    [dateString]: updatedState[dateString],
-  })
-  // TODO(cyrille): Find a middleware to do that with all Redux changes.
-  Storage.setItem(SAVED_CONTACTS_COOKIE, JSON.stringify(serialized))
+function updateAndStore(updatedState: ContactState): ContactState {
+  Storage.setItem(SAVED_CONTACTS_COOKIE, JSON.stringify([...updatedState]))
   return updatedState
 }
 
 
-// TODO(cyrille): Consider using string dates.
 function contacts(state: ContactState = startingContacts, action: AllActions): ContactState {
-  if (action.type === 'CLEAN_STORAGE') {
-    return {}
-  }
-  if (!isDateAction(action)) {
-    return state
-  }
   switch (action.type) {
+    case 'CLEAN_STORAGE':
+      return []
     case 'CREATE_CONTACT':
-      return updateDateAndStore(state, action.date, dateState => ({
-        ...dropKey(dateState, 'isDayConfirmed'),
-        contacts: [...dateState.contacts || [], action.contact],
-      }))
-    case 'UPDATE_CONTACT':
-      return updateDateAndStore(state, action.date, dateState => ({
-        ...dropKey(dateState, 'isDayConfirmed'),
-        contacts: dateState.contacts?.map((contact): bayes.casContact.Contact =>
-          isSameDayContact(contact, action.contact) ? {...contact, ...action.contact} : contact),
-      }))
+      return updateAndStore([...new Set([
+        ...state,
+        action.personId,
+      ])])
     case 'DROP_CONTACT':
-      return updateDateAndStore(state, action.date, dateState => ({
-        ...dropKey(dateState, 'isDayConfirmed'),
-        contacts: dateState.contacts?.
-          filter((contact): boolean => !isSameDayContact(contact, action.contact)),
-      }))
-    case 'SAVE_CONTACTS': {
-      // TODO(cyrille): Consider not saving them by date anymore (while still being compatible with
-      // old users' cache).
-      return updateDateAndStore(state, action.date, dateState => ({
-        ...dateState,
-        contacts: action.contacts,
-        isDayConfirmed: true,
-      }))
-    }
+      return updateAndStore(state.filter(personId => personId !== action.personId))
   }
   return state
 }
 
 const startingPeople = JSON.parse(Storage.getItem(SAVED_PEOPLE_COOKIE) || '[]') || []
 
-function people(state: PeopleState = startingPeople, action: AllActions): PeopleState {
+function unsavedPeople(state: PeopleState, action: AllActions): PeopleState {
   switch (action.type) {
     case 'CREATE_NEW_PERSON':
       return [
@@ -240,10 +161,6 @@ function people(state: PeopleState = startingPeople, action: AllActions): People
           personId: action.personId,
         },
       ]
-    case 'SAVE_CONTACTS': {
-      Storage.setItem(SAVED_PEOPLE_COOKIE, JSON.stringify(state))
-      return state
-    }
     case 'UPDATE_PERSON':
       return state.map((person) => person.personId === action.personId ? {
         ...person,
@@ -253,6 +170,18 @@ function people(state: PeopleState = startingPeople, action: AllActions): People
       return []
   }
   return state
+}
+
+function people(state: PeopleState = startingPeople, action: AllActions): PeopleState {
+  const updatedState = unsavedPeople(state, action)
+  if (updatedState !== state) {
+    if (updatedState.length) {
+      Storage.setItem(SAVED_PEOPLE_COOKIE, JSON.stringify(updatedState))
+    } else {
+      Storage.removeItem(SAVED_PEOPLE_COOKIE)
+    }
+  }
+  return updatedState
 }
 
 const startingAlerts: AlertsState = JSON.parse(Storage.getItem(SAVED_ALERT_COOKIE) || '{}') || {}
@@ -267,8 +196,17 @@ function alerts(state: AlertsState = startingAlerts, action: AllActions): Alerts
             ...state[action.personId]?.alertMediums || [],
             action.alertMedium,
           ]} : {},
-          isAlertedAnonymously: !!action.alertMedium,
+          isAlertedAnonymously: action.isAlertedAnonymously,
+          lastSender: action.sender,
         },
+      }
+      Storage.setItem(SAVED_ALERT_COOKIE, JSON.stringify(newState))
+      return newState
+    }
+    case 'CLEAR_SENDER': {
+      const newState = {
+        ...state,
+        [action.personId]: dropKey(state[action.personId], 'lastSender'),
       }
       Storage.setItem(SAVED_ALERT_COOKIE, JSON.stringify(newState))
       return newState

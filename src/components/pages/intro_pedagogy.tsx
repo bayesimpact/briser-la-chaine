@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom'
 import {useBackgroundColor} from 'hooks/background_color'
 import {useFastForward} from 'hooks/fast_forward'
 import {LocalizableString, prepareT} from 'store/i18n'
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
 import BurgerMenu from 'components/burger_menu'
 import {darkButtonStyle} from 'components/buttons'
@@ -71,8 +71,8 @@ const IntroButtonBase = (props: SliderChildProps): React.ReactElement => {
       goForward()
       return
     }
-    history.push(Routes.PEDAGOGY_OUTRO)
-  }, [goForward, history, isLastPage])
+    history.push(getPath('SYMPTOMS_ONSET', t))
+  }, [goForward, history, isLastPage, t])
   return <div onClick={handleButtonClick} style={isLastPage ? lastButtonStyle : nextButtonStyle}>
     {t('Commencer')}
   </div>
@@ -106,6 +106,7 @@ const warningIconStyle: React.CSSProperties = {
 const buttonStyle: React.CSSProperties = {
   ...darkButtonStyle,
   display: 'block',
+  marginBottom: 20,
 }
 const titleStyle: React.CSSProperties = {
   fontFamily: 'Poppins',
@@ -126,15 +127,15 @@ const PedagogyIntroPage = (): React.ReactElement => {
   const history = useHistory()
   const {t, t: translate} = useTranslation()
   const {pathname} = useLocation()
-  useBackgroundColor(pathname === Routes.PEDAGOGY_INTRO ? undefined : colors.PALE_GREY)
+  useBackgroundColor(pathname === getPath('PEDAGOGY_INTRO', t) ? undefined : colors.PALE_GREY)
   const gotoFirst = useCallback((): void => {
-    history.push(`${Routes.PEDAGOGY_INTRO}/0`)
-  }, [history])
+    history.push(`${getPath('PEDAGOGY_INTRO', t)}/0`)
+  }, [history, t])
   const gotoNext = useCallback((): void => {
-    history.push(Routes.PEDAGOGY_OUTRO)
-  }, [history])
-  useFastForward(pathname === Routes.PEDAGOGY_INTRO ? gotoFirst : undefined)
-  if (pathname === Routes.PEDAGOGY_INTRO) {
+    history.push(getPath('SYMPTOMS_ONSET', t))
+  }, [history, t])
+  useFastForward(pathname === getPath('PEDAGOGY_INTRO', t) ? gotoFirst : undefined)
+  if (pathname === getPath('PEDAGOGY_INTRO', t)) {
     return <PedagogyPage
       title={<Trans style={titleStyle}>
         Prêt(e) à <span style={{color: colors.SEAWEED}}>sauver des vies&nbsp;?</span>
@@ -144,7 +145,7 @@ const PedagogyIntroPage = (): React.ReactElement => {
       iconColor={colors.BARBIE_PINK}>
       <BottomDiv>
         <div style={mobileOnDesktopStyle}>
-          <Link to={`${Routes.PEDAGOGY_INTRO}/0`} style={buttonStyle}>
+          <Link to={`${getPath('PEDAGOGY_INTRO', t)}/0`} style={buttonStyle}>
             {t("C'est parti")}
           </Link>
         </div>
@@ -159,9 +160,10 @@ const PedagogyIntroPage = (): React.ReactElement => {
   }
   return <React.Fragment>
     <Slider
-      bulletColor="#000" bulletSelectColor={colors.MINTY_GREEN} arrowColor={colors.PALE_GREY}
-      borderColor={colors.LIGHT_BLUE_GREY} chevronColor="#000"
-      bottomComponent={IntroButton} onFastForward={gotoNext} slideStyle={slideStyle}>
+      bulletColor={colors.ALMOST_BLACK} bulletSelectColor={colors.MINTY_GREEN}
+      arrowColor={colors.PALE_GREY} borderColor={colors.LIGHT_BLUE_GREY}
+      chevronColor={colors.ALMOST_BLACK} bottomComponent={IntroButton} onFastForward={gotoNext}
+      slideStyle={slideStyle}>
       {pagesContent.map(({icon, subtitle, title}, index): React.ReactElement =>
         <PedagogyLayout
           key={index} title={<span style={secondaryTitle}>{translate(title)}</span>}

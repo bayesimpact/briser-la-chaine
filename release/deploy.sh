@@ -18,6 +18,9 @@
 # Optional:
 # - CIRCLE_STAGE: if "deploy", the script will know it's run as part of Circle CI deployment.
 # - DRY_RUN: do not actually deploy.
+# - GITHUB_TOKEN: If given, updates the prod branch on github to the created tag.
+#     To create a token, go to https://github.com/settings/tokens with an account with write access to this repo.
+#     Not necessary if the `origin` remote already has a write access to github.
 #
 # Usage:
 # release/deploy.sh $CIRCLE_TAG
@@ -48,6 +51,13 @@ if [ -z "$OS_PASSWORD" ]; then
   echo "* Select 'GRA - Gravelines'"
   echo "* Source this file to export the OpenStack environment variables, it will ask for your password."
   exit 3
+fi
+
+if [[ -z "$GITHUB_TOKEN" ]]; then
+  readonly GIT_ORIGIN_WITH_WRITE_PERMISSION="origin"
+  echo "WARNING: No github token has been set. You'll need write access to the origin repo to complete this script successfully."
+else
+  readonly GIT_ORIGIN_WITH_WRITE_PERMISSION="https://$GITHUB_TOKEN@github.com/bayesimpact/bob-emploi-internal.git"
 fi
 
 if ! command -v aws >/dev/null 2>&1; then
@@ -89,6 +99,7 @@ if ! pip show python-keystoneclient > /dev/null; then
   exit 8
 fi
 
+
 readonly DOCKER_TAG="tag-$TAG"
 readonly DOCKER_REPO="bayesimpact/cas-contact"
 readonly DOCKER_IMAGE="$DOCKER_REPO:$DOCKER_TAG"
@@ -110,6 +121,7 @@ if (! docker_tag_exists $DOCKER_REPO $DOCKER_TAG); then
   echo "The tag $DOCKER_TAG is not present in Docker Registry."
   exit 10
 fi
+
 
 # To get the files, this script downloads the Docker Images from Docker
 # Registry, then extract the html folder from the Docker Image (note that to do
@@ -142,10 +154,16 @@ popd
 
 rm -r $TMP_DIR
 
-# TODO(pascal): Update the GitHub release, change the prod branch.
+# TODO(pascal): Update the GitHub release
+echo 'Logging the deployment on GitHub…'
+if [ -z "$DRY_RUN" ]; then
+  if ! git push -f "$GIT_ORIGIN_WITH_WRITE_PERMISSION" $TAG:prod; then
+    readonly WARNING_MESSAGE="\nThe \`prod\` branch hasn't been updated. Please, run \`git push -f origin $TAG:prod\`."
+  fi
+fi
 
 # Ping Slack to say the deployment is done.
-readonly SLACK_MESSAGE="{'text': 'A new version of BriserLaChaine.org has been deployed ($TAG).', 'channel': '#covid-internal'}"
+readonly SLACK_MESSAGE="{\"text\": \"A new version of BriserLaChaine.org has been deployed ($TAG).$WARNING_MESSAGE\", \"channel\": \"#covid-internal\"}"
 if [ -z "$DRY_RUN" ]; then
   curl --data "$SLACK_MESSAGE" "$SLACK_INTEGRATION_URL"
 else

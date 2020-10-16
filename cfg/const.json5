@@ -1,13 +1,12 @@
 {
   amplitudeToken: 'a1067533ce6148de5bcac9df0ea0d508',
-  canonicalUrl: 'www.BriserLaChaine.org',
   diseaseName: 'COVID-19',
-  facebookSSOAppId: 'whatever',
+  facebookSSOAppId: '1048782155234293',
   followUpMail: 'suivi@briserlachaine.org',
+  isSendingSmsAvailable: true,
   mailjetProxyUrl: 'https://mailjet-proxy.briserlachaine.org',
   numDaysContagious: 3,
   numDaysContagiousBeforeSymptoms: 1,
-  productName: 'BriserLaChaine.org DEV',
   sentryDsn: 'https://1423edf320fe498a8b3e5326737e3f06@o87797.ingest.sentry.io/5223962',
 }
 

@@ -1,13 +1,12 @@
-import _max from 'lodash/max'
+import _groupBy from 'lodash/groupBy'
 import {format as dateFormat} from 'date-fns'
 import jsPDF from 'jspdf'
 import {useCallback} from 'react'
 import {useTranslation} from 'react-i18next'
 
-import {noDate} from 'store/actions'
-import {IMAGE_NAMESPACE, joinDays, prepareT, useDateOption} from 'store/i18n'
-import {DISTANCE_OPTIONS, DURATION_OPTIONS} from 'store/options'
-import {useSelector} from 'store/selections'
+import {downloadReportAction, useDispatch} from 'store/actions'
+import {IMAGE_NAMESPACE, prepareT, useDateOption} from 'store/i18n'
+import {useSelector, getPeopleToAlert} from 'store/selections'
 
 import logoImage from 'images/logo.png'
 
@@ -21,6 +20,7 @@ function usePDFDownloader(): (() => void) {
   const state = useSelector((state: RootState): RootState => state)
   const {t} = useTranslation()
   const dateOption = useDateOption()
+  const dispatch = useDispatch()
   return useCallback((): void => {
     const translate = t
     const doc = new jsPDF()
@@ -75,7 +75,10 @@ function usePDFDownloader(): (() => void) {
       doc.setFontSize(10)
       doc.setFontStyle('italic')
       doc.text(
-        t("Le site BriserLaChaîne.org a été réalisé par l'ONG Bayes Impact."),
+        t(
+          "Le site {{productName}} a été réalisé par l'ONG Bayes Impact.",
+          {productName: t('productName')},
+        ),
         pageWidth / 2,
         pageHeight - 8,
         {align: 'center'},
@@ -99,85 +102,66 @@ function usePDFDownloader(): (() => void) {
         doc.rect(marginHoriz / 2, cursorY, pageWidth - marginHoriz, 30, 'F')
       }
 
-      const contacts = Object.values(state.contacts).
-        map(({contacts}): bayes.casContact.Contact|undefined => (contacts || []).
-          find(({personId}): boolean => personId === person.personId) || undefined).
-        filter((contact?: bayes.casContact.Contact): contact is bayes.casContact.Contact =>
-          !!contact)
-
       doc.setFontStyle('bold')
       doc.text(person.displayName || person.name, marginHoriz, cursorY + 8)
       doc.setFontStyle('normal')
-      const days = contacts.map(({date}): Date => date).filter((date): boolean => date !== noDate)
-      const daysText = joinDays(days, 'dd/MM', translate, dateOption)
-      doc.text(
-        days.length ?
-          t('Croisé(e) le {{days}}', {count: days.length, days: daysText}) : t('Croisée(e)'),
-        rightBorder, cursorY + 8, {align: 'right'})
 
       const alerts = state.alerts[person.personId]
-      if (!alerts.isAlertedAnonymously && alerts.alertMediums) {
+      if (!alerts.isAlertedAnonymously && alerts.lastSender !== 'product' &&
+        alerts.alertMediums) {
         doc.setFontStyle('bold')
         doc.text(
           alerts.alertMediums.map(({value}): string => value).join(' / '),
           marginHoriz, cursorY + 15)
       }
 
-      doc.setFontStyle('normal')
-      const distances = new Set(
-        contacts.map(({distance}): bayes.casContact.Distance|undefined => distance),
-      )
-      const distance = distances.has('close') ? 'close' : distances.has('far') ? 'far' : undefined
-      const distanceText =
-        DISTANCE_OPTIONS.find(({value}): boolean => distance === value)?.name || prepareT('?')
-      doc.text(
-        t('Proximité\u00A0: ') + translate(distanceText),
-        rightBorder, cursorY + 15, {align: 'right'})
-
-      const maxDuration = _max(contacts.map(({duration}): number => duration || 0))
-      const durationText =
-        DURATION_OPTIONS.find(({value}): boolean => maxDuration === value)?.name || prepareT('?')
-      doc.text(
-        t('Durée\u00A0: ') + translate(durationText), rightBorder, cursorY + 22, {align: 'right'})
       cursorY += 30
+      doc.setFontStyle('normal')
       doc.setFontSize(16)
     }
 
-    const peopleAlertedPersonally = state.people.
-      filter(({personId}): boolean => state.alerts[personId]?.isAlertedAnonymously === false)
-    if (peopleAlertedPersonally.length) {
+    const alertsBySender = _groupBy(
+      getPeopleToAlert(state),
+      ({personId}: bayes.casContact.Person) => state.alerts[personId]?.lastSender || '',
+    )
+
+    const printSenderGroup = (sender: ''|bayes.casContact.Sender, title: string): void => {
+      const peopleAlertedBySender = alertsBySender[sender]
+      if (!peopleAlertedBySender) {
+        return
+      }
       doc.setFontStyle('bold')
       doc.text(
-        t('Personne contactée moi-même ({{count}})', {count: peopleAlertedPersonally.length}),
+        translate(title, {count: peopleAlertedBySender.length, productName: t('productName')}),
         marginHoriz, cursorY)
       cursorY += 6
-      peopleAlertedPersonally.forEach(printPerson)
+      peopleAlertedBySender.forEach(printPerson)
       cursorY += 6
+
+      if (cursorY > pageHeight - 50) {
+        createNewPage()
+      }
     }
 
-    if (cursorY > pageHeight - 50) {
-      createNewPage()
-    }
+    printSenderGroup('user', prepareT('Personne contactée moi-même ({{count}})', {count: 0}))
 
-    const peopleAlertedAnonymously = state.people.
-      filter(({personId}): boolean => !!state.alerts[personId]?.alertMediums)
-    if (peopleAlertedAnonymously.length) {
-      doc.setFontStyle('bold')
-      doc.text(
-        t('Personne contactée par {{productName}} ({{count}})', {
-          count: peopleAlertedAnonymously.length,
-          productName: t('productName'),
-        }),
-        marginHoriz, cursorY)
-      cursorY += 6
-      peopleAlertedAnonymously.forEach(printPerson)
-      cursorY += 6
-    }
+    printSenderGroup(
+      'product', prepareT('Personne contactée par {{productName}} ({{count}})', {count: 0}))
+
+    printSenderGroup(
+      'physician', prepareT('Personne à contacter par mon médecin ({{count}})', {count: 0}))
+
+    printSenderGroup(
+      'none', prepareT("Personne que je n'ai pas pu contacter ({{count}})", {count: 0}))
+
+    printSenderGroup(
+      '', prepareT("Personne que je n'ai pas essayé de contacter ({{count}})", {count: 0}))
 
     printFooter()
 
     doc.save(t('Récapitulatif {{productName}}.pdf', {productName: t('productName')}))
-  }, [dateOption, state, t])
+    dispatch(downloadReportAction)
+  }, [dispatch, dateOption, state, t])
 }
 
 
