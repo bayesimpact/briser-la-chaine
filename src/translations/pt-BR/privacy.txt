@@ -1,0 +1,103 @@
+# Sua privacidade é tão importante quanto sua saúde
+
+O respeito à sua privacidade e à confidencialidade de seus dados é muito importante para nossa associação. Consequentemente, o site {{productName}} foi desenvolvido para ajudar a preservar a saúde de seus usuários e, ao mesmo tempo, garantir seu direito ao respeito pela vida privada. Portanto, cumprimos rigorosamente as leis em vigor sobre a proteção da privacidade, em particular os regulamentos gerais de proteção de dados (GDPR). Veja aqui como procedemos:
+
+**Você continua sendo o único titular dos seus dados pessoais que permanecem armazenados no seu telefone ou computador**
+
+O sistema que projetamos foi especialmente construído para que seus sintomas e sua lista de contatos permaneçam inteiramente no seu telefone ou computador.
+
+Eles não são salvos em nenhum servidor.
+
+Eles não são acessíveis à nossa organização nem aos nossos funcionários.
+
+Esses dados pessoais não são transmitidos a organizações de terceiros.
+
+
+**Manutenção da informação**
+
+Para permitir que os usuários não precisem repetir as sessões de {{productName}} várias vezes, configuramos um sistema para armazenar e manter as informações fornecidas na interface do usuário, graças ao cache do navegador.
+
+Este sistema não permite nenhum acesso remoto e, portanto, nunca podemos acessar seus dados pessoais por esse recurso.
+
+Você pode excluir esses dados do seu telefone ou computador a qualquer momento. Para mais informações: [Wikipedia](https://pt.wikipedia.org/wiki/Web_cache)
+
+**A navegação pelo site é totalmente anônima e não é compartilhada**
+
+Coletamos informações estatísticas para medir o público-alvo do nosso site e suas formas de utilização, a fim de identificar melhor os pontos de bloqueio de nossos usuários, sugerindo melhorias que são úteis para todos.
+
+Essas indicações estatísticas sobre os usos de {{productName}} são observadas em nossos “navegadores”.
+
+Sem exceção, essas informações de uso modificadas pelas navegações são anônimas e não coletam dados pessoais.
+
+Consequentemente, eles não incluem nenhum dado sobre seu estado de saúde ou sobre seus contatos.
+
+Por exemplo: podemos saber quantos usuários no total enviaram uma mensagem de prevenção para seus próximos (dados estatísticos anônimos), mas não podemos saber quem é ou mesmo quem são as pessoas próximas em questão (dados pessoais mantidos por somente usuário).
+
+Essas necessidades de melhoria estatística e funcional podem, portanto, nos levar a usar cookies.
+
+Trata-se de pequenos arquivos de texto ou conjuntos de dados armazenados no seu disco rígido, a fim de registrar dados técnicos na sua navegação.
+
+Também usamos o serviço Amplitude.com para analisar essas navegações do ponto de vista estatístico. Assim como em {{productName}}, Amplitude não acessa seus dados pessoais. As informações contidas nas navegações não são usadas para fins comerciais, nem transferidas para terceiros.
+
+O que segue são links para informações sobre como gerenciar cookies em alguns dos navegadores mais usados:
+
+Mozilla Firefox
+https://support.mozilla.org/pt-BR/kb/ative-e-desative-os-cookies-que-os-sites-usam
+
+Google Chrome
+https://support.google.com/chrome/answer/95647?hl=pt-BR
+
+Apple Safari
+https://support.apple.com/kb/PH19214?locale=en_US&viewlocale=pt_BR
+
+Internet Explorer
+https://support.microsoft.com/pt-br/help/17442/windows-internet-explorer-delete-manage-cookies
+
+**A função de rastreamento de e-mail também preserva seus dados pessoais sensíveis**
+
+Entre nossos recursos, permitimos que usuários cujo algoritmo tenha revelado que não foram afetados a priori pelo COVID-19 ou que se declarem proativos sejam monitorados por e-mail por 14 dias, se desejarem.
+
+Nesse contexto, solicitamos, então, seus endereços de e-mail.
+
+Esse acompanhamento é interrompido automaticamente 14 dias após o registro e o endereço de e-mail coletado é, então, excluído.
+
+Você pode cancelar a inscrição a qualquer momento, entrando em contato com o seguinte endereço: [privacy@bayesimpact.org](mailto:privacy@bayesimpact.org)
+
+**Suas informações são usadas de forma transparente**
+
+Quando nosso algoritmo indica que é provável que você esteja contagiando, nosso site solicita informações sobre seu estado de saúde e sobre as pessoas com quem você se encontrou para ajudá-lo a informá-las sobre um possível contágio.
+
+Para facilitar sua tarefa, nosso site oferece o envio dessas informações aos seus contatos. Para cada contato, essas informações são transmitidas apenas com o seu acordo explícito.
+Como já foi dito, essas informações permanecem inteiramente no seu telefone ou computador. Elas não são salvas em nenhum servidor.
+
+Elas não são acessíveis à nossa organização nem a nossos funcionários e não são transmitidas a organizações de terceiros.
+
+**Um sistema API totalmente seguro e opcional**
+
+{{productName}} permite, através de um sistema seguro e opcional, facilitar seu processo de notificação às pessoas que você pode ter infectado.
+
+Aqui estão as diferentes APIs que usamos:
+
+* Google Agenda (em desenvolvimento)
+Essa API permite que você encontre rapidamente os eventos inseridos no seu Google Agenda durante seu período contagioso, para que você possa se lembrar facilmente das pessoas com quem se encontrou.
+
+* Google Contatos (em desenvolvimento)
+Essa API simplifica a entrada de pessoas com quem você se encontrou e o pré-preenchimento de contatos para avisar que você pode tê-los infectado, usando as informações de contato (número de telefone, e-mail) armazenadas em seus contatos do Google. Isso evita que você precise inserir as informações de contato manualmente, uma a uma.
+
+Não armazenamos dados dessas APIs e esses sistemas também não têm acesso aos dados pessoais inseridos em {{productName}}.
+
+**O código fonte do nosso site é open-source**
+
+Somos 100% transparentes sobre o código do nosso site e como ele funciona.
+
+Assim, você pode encontrar o código-fonte do nosso site no GitHub, para verificar se mantemos nossos compromissos.
+
+[GitHub](https://www.github.com/bayesimpact/briser-la-chaine)
+
+Somente o código do site está acessível no GitHub.
+
+Nenhum dos dados do usuário (pessoal ou de uso) é compartilhado.
+
+Se você tiver alguma dúvida sobre nossa política de proteção e gerenciamento de dados, entre em contato conosco em [privacy@bayesimpact.org](mailto:privacy@bayesimpact.org)
+
+Nosso site é hospedado pela OVH, cujos servidores estão localizados em Gravelines, França.

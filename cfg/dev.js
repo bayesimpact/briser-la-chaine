@@ -41,7 +41,11 @@ module.exports = {
               ['@babel/plugin-proposal-class-properties', {loose: false}],
               ['@babel/plugin-proposal-optional-chaining', {loose: false}],
             ],
-            presets: [['@babel/env', {modules: false}], '@babel/react', '@babel/typescript'],
+            presets: [
+              ['@babel/env', {corejs: 3, modules: false, useBuiltIns: 'usage'}],
+              '@babel/react',
+              '@babel/typescript',
+            ],
           },
         },
       },
@@ -82,6 +86,13 @@ module.exports = {
         chunks: [key],
         filename: `${entrypoints[key].htmlFilename}`,
         template: './src/index.tsx',
+      }),
+    ),
+    ...Object.keys(entrypoints).filter(key => entrypoints[key].htmlFilename).map(key =>
+      new HtmlWebpackPlugin({
+        chunks: [key],
+        filename: `en.${entrypoints[key].htmlFilename}`,
+        template: './src/en.index.tsx',
       }),
     ),
     new WebpackPwaManifest({

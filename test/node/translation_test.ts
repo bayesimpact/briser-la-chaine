@@ -1,6 +1,17 @@
 const {expect} = require('chai')
 const glob = require('glob')
 const path = require('path')
+require('json5/lib/register')
+const babelExtractConfig = require('../../i18n.babelrc.js')
+
+const extractedLangs: ReadonlySet<string> = new Set(babelExtractConfig.plugins.
+  find((plugin: unknown[]) => plugin[0] === 'i18next-extract')[1].locales)
+
+
+const HTML_TAG_REGEX = /<(\d+)>/g
+const INTERPOLATION_REGEX = /{{(\w+)}}/g
+const getNamedHtmlTag = (name: number): RegExp => new RegExp(`<${name}>.*</${name}>`)
+
 
 interface Translations {
   [key: string]: string
@@ -53,7 +64,6 @@ const [translationFiles, translationTree] = getAllTranslationFiles()
 
 
 const isExtractedFile = (file: TranslationFile): boolean => {
-  const extractedLangs = new Set(['en'])
   return extractedLangs.has(file.lang)
 }
 
@@ -72,6 +82,10 @@ const getExtractedFile = (file: TranslationFile): TranslationFile => {
 
 
 const dropContext = (key: string): string => {
+  if (key === key.toUpperCase()) {
+    // Key is all caps, so most probably a real key, not a French sentence. It can have no context.
+    return key
+  }
   const split = key.split('_')
   if (split.length === 1) {
     return key
@@ -79,6 +93,14 @@ const dropContext = (key: string): string => {
   return split.slice(0, -1).join('_')
 }
 
+
+const emptyTranslations = new Set(['ROOT'])
+const dropHtmlTagExceptions = new Set([
+  // Do not add a link to call the "15", as it won't reach them.
+  // TODO(pascal): Update this translation not to mention the 15 phone number at all.
+  'Você relatou ter dificuldade em respirar. Entre em contato com 15 para receber os cuidados ' +
+  'rapidamente.',
+])
 
 describe('Translation files', (): void => {
   it('should be more than 1', (): void => {
@@ -89,14 +111,57 @@ describe('Translation files', (): void => {
     describe(file.key, (): void => {
       it('should not have empty translations', (): void => {
         for (const key in file.resources) {
-          expect(file.resources[key], key).not.to.be.empty
+          if (!emptyTranslations.has(key)) {
+            expect(file.resources[key], key).not.to.be.empty
+          }
         }
       })
 
       it("should not contain the hardcoded product's name", (): void => {
         for (const key in file.resources) {
-          expect(key).not.to.contain('Bob')
-          expect(file.resources[key]).not.to.contain('Bob')
+          if (key === 'productName' || key === 'canonicalUrl') {
+            continue
+          }
+          expect(key.toLowerCase()).not.to.contain('briserlachaine')
+          expect(key.toLowerCase()).not.to.contain('conotify')
+          expect(file.resources[key].toLowerCase()).not.to.contain('briserlachaine')
+          expect(file.resources[key].toLowerCase()).not.to.contain('conotify')
+        }
+      })
+
+      it('should not forget html tags in translation', (): void => {
+        for (const key in file.resources) {
+          const tags = []
+          let lastMatch
+          while ((lastMatch = HTML_TAG_REGEX.exec(key)) !== null) {
+            tags.push(Number.parseInt(lastMatch[1], 10))
+          }
+          if (!tags.length) {
+            continue
+          }
+          const translation = file.resources[key]
+          tags.forEach(tag => {
+            if (!dropHtmlTagExceptions.has(translation)) {
+              expect(translation).to.match(getNamedHtmlTag(tag))
+            }
+          })
+        }
+      })
+
+      it('should not forget interpolated variables in translation', (): void => {
+        for (const key in file.resources) {
+          const tags = []
+          let lastMatch
+          while ((lastMatch = INTERPOLATION_REGEX.exec(key)) !== null) {
+            tags.push(lastMatch[0])
+          }
+          if (!tags.length) {
+            continue
+          }
+          const translation = file.resources[key]
+          tags.forEach(tag => {
+            expect(translation, `Missing "${tag}" variable`).to.include(tag)
+          })
         }
       })
 
@@ -111,7 +176,7 @@ describe('Translation files', (): void => {
           const extractedFile = getExtractedFile(file)
           for (const key in file.resources) {
             expect(key, `Unused key "${key}" in "${file.key}"`).
-              to.satisfy((key: string): boolean => !!extractedFile.resources[dropContext(key)])
+              to.satisfy((key: string): boolean => dropContext(key) in extractedFile.resources)
           }
         })
       }
@@ -143,7 +208,6 @@ describe('Translation files', (): void => {
 // Populate if we have French sentences with silent plural.
 const _NO_FRENCH_PLURAL: ReadonlySet<string> = new Set([])
 
-// TODO(cyrille): Make sure we have a consistent product name and canonical URL.
 describe('French translations', (): void => {
   // Assumes all strings have been extracted, e.g. if lint_and_test.sh is run.
   const extractedFiles = translationFiles.filter(file => isExtractedFile(file))

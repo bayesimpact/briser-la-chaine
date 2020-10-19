@@ -6,7 +6,7 @@ import {useFastForward} from 'hooks/fast_forward'
 import {diagnose, useDispatch} from 'store/actions'
 import {localizeOptions} from 'store/i18n'
 import {SYMPTOMS} from 'store/symptoms'
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
 import {darkButtonStyle} from 'components/buttons'
 import CheckboxList from 'components/checkbox_list'
@@ -38,8 +38,8 @@ const DiagnosticPageBase = (): React.ReactElement => {
       return
     }
     dispatch(diagnose(selectedOptions))
-    history.push(Routes.DIAGNOSTIC_OUTCOME)
-  }, [dispatch, hasSelection, history, selectedOptions])
+    history.push(getPath('DIAGNOSTIC_OUTCOME', t))
+  }, [dispatch, hasSelection, history, selectedOptions, t])
   useFastForward((): void => {
     if (!hasSelection) {
       setSelected(['SHORT_BREATH'])
@@ -81,7 +81,7 @@ const DiagnosticPageBase = (): React.ReactElement => {
     </section>
     <BottomDiv>
       <div style={buttonContainerStyle}>
-        <div style={darkButtonStyle} onClick={onNext}>
+        <div style={{...darkButtonStyle, marginBottom: 20}} onClick={onNext}>
           {t('Continuer')}
         </div>
       </div>

@@ -17,23 +17,30 @@ declare namespace bayes {
     type Distance = 'close' | 'far'
 
     interface Contact {
-      readonly date: Date
-      readonly duration?: number
-      readonly distance?: Distance
       readonly personId: string
     }
 
     interface DayContacts {
-      readonly isDayConfirmed?: true
       readonly contacts?: readonly Contact[]
     }
 
-    type PersonContact = Person & Contact
+    type Sender =
+      // User has told us that they were not able to alert the contact.
+      | 'none'
+      // User wants their physician to alert the contact.
+      | 'physician'
+      // User wants us to alert the contact.
+      | 'product'
+      // User has alerted the contact themselves.
+      | 'user'
 
-    // FIXME(cyrille): Keep consistent space when alerting through both channels.
+    // TODO(cyrille): Keep consistent state when alerting through both channels.
     interface AlertPersonState {
       alertMediums?: readonly AlertMedium[]
+      // Note that anonymous is only available for the sender 'product' although 'product' can also
+      // alert non anonymously.
       isAlertedAnonymously?: boolean
+      lastSender?: Sender
     }
 
     type Symptom =
@@ -64,14 +71,13 @@ type UserState = {
   contagiousPeriodStart?: Date
   contaminationRisk?: ContaminationRisk
   hasKnownRisk?: true
+  hasFinishedMemorySteps?: boolean
   isAssistanceRequiredNow?: boolean
   symptomsOnsetDate?: Date
+  userName?: string
 }
 
-type ContactState = {
-  // TODO(cyrille): Investigate how to put a ? after the dynamic property.
-  readonly [date: string]: bayes.casContact.DayContacts
-}
+type ContactState = readonly string[]
 type PeopleState = readonly bayes.casContact.Person[]
 
 interface AlertsState {

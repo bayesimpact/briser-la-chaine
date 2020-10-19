@@ -20,7 +20,7 @@ import {followUpAction, useDispatch} from 'store/actions'
 import {LocalizableString, prepareT} from 'store/i18n'
 import {useSelector} from 'store/selections'
 import {SORTED_SYMPTOMS} from 'store/symptoms'
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
 import {darkButtonStyle, lightButtonStyle} from 'components/buttons'
 import {Modal, ModalConfig} from 'components/modal'
@@ -58,7 +58,8 @@ const IconBoxBase = ({icon, image, text}: IconBoxProps): React.ReactElement => {
   const Icon = icon
   return <div style={iconBoxContainerStyle}>
     <div style={iconBoxStyle}>
-      {Icon ? <Icon size={36} color="#000" /> : <img width={36} src={image} alt="" />}
+      {Icon ? <Icon
+        size={36} color={colors.ALMOST_BLACK} /> : <img width={36} src={image} alt="" />}
     </div>
     <span style={{height: 60, marginTop: 20, maxWidth: 140, textAlign: 'center'}}>
       {translate(text)}
@@ -232,7 +233,7 @@ const StepBase = ({icon, text}: StepProps): React.ReactElement => {
   const Icon = icon
   return <div style={stepStyle}>
     <div style={iconContainerStyle}>
-      <Icon size={18} color="#000" />
+      <Icon size={18} color={colors.ALMOST_BLACK} />
     </div>
     {text}
   </div>
@@ -252,13 +253,13 @@ const BottomButtonBase = (props: SliderChildProps): React.ReactElement|null => {
   const history = useHistory()
   const isHighRisk = useSelector(({user: {contaminationRisk}}) => contaminationRisk === 'high')
   const bottomContainerStyle: React.CSSProperties = {
-    margin: '0 20px',
+    margin: 20,
     opacity: isLastPage ? 1 : 0,
     transition: '1s',
   }
   const handleNextButton = useCallback((): void => {
-    history.push(Routes.PEDAGOGY_INTRO)
-  }, [history])
+    history.push(getPath('PEDAGOGY_INTRO', t))
+  }, [history, t])
   if (!isHighRisk) {
     return null
   }
@@ -319,7 +320,7 @@ const FollowUpPageBase = (): React.ReactElement => {
     'Bonjour, Je souhaite être suivi(e) pendant 14 jours. Merci. Bien à vous')
   const handleNextButton = useCallback((): void => {
     if (isHighRisk) {
-      history.push(Routes.PEDAGOGY_INTRO)
+      history.push(getPath('PEDAGOGY_INTRO', t))
       return
     }
     dispatch(followUpAction)
@@ -328,12 +329,12 @@ const FollowUpPageBase = (): React.ReactElement => {
       `body=${mailText}`,
       '_blank',
       'noopener,noreferrer')
-  }, [dispatch, isHighRisk, history, mailText])
+  }, [dispatch, isHighRisk, history, mailText, t])
   useBackgroundColor(colors.PALE_GREY)
   return <Slider
-    bulletColor="#000" bulletSelectColor={colors.MINTY_GREEN} slideStyle={slideStyle}
-    onFastForward={handleNextButton} bottomComponent={BottomButton}
-    arrowColor={colors.PALE_GREY} borderColor={colors.LIGHT_BLUE_GREY} chevronColor="#000">
+    bulletColor={colors.ALMOST_BLACK} bulletSelectColor={colors.MINTY_GREEN} slideStyle={slideStyle}
+    onFastForward={handleNextButton} bottomComponent={BottomButton} arrowColor={colors.PALE_GREY}
+    borderColor={colors.LIGHT_BLUE_GREY} chevronColor={colors.ALMOST_BLACK}>
     {(isHighRisk ? sliderHighRiskContent : sliderLowRiskContent).map(
       ({button, content, numImportantInstructions, title}, index) => <React.Fragment key={index}>
         <div style={titleStyle}>{translate(title)}</div>
@@ -370,7 +371,7 @@ const FollowUpPageBase = (): React.ReactElement => {
             {translate('Être suivi(e) pendant 14j')}
           </div>
           <PrivacyNote text={translate('Nous ne partagerons aucune information')} />
-          <Link to={Routes.COME_BACK_LATER} style={discreetLinkStyle}>
+          <Link to={getPath('COME_BACK_LATER', t)} style={discreetLinkStyle}>
             {translate('Non merci')}
           </Link>
         </div>

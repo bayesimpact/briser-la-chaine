@@ -220,7 +220,7 @@ const ModalBase = (props: ModalConfig): React.ReactElement => {
     ...style,
   }
   const backgroundStyle: React.CSSProperties = {
-    backgroundColor: '#000',
+    backgroundColor: colors.ALMOST_BLACK,
     bottom: isTooBigToBeCentered ? 'initial' : 0,
     height: isTooBigToBeCentered ? (modalHeight + 2 * closeButtonHeight) : '100vh',
     left: 0,

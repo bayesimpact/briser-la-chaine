@@ -1,4 +1,5 @@
 import {useCallback, useEffect} from 'react'
+import {useTranslation} from 'react-i18next'
 import {useHistory} from 'react-router-dom'
 
 import {useKeyListener} from 'hooks/shortkey'
@@ -139,14 +140,16 @@ export type ForwardFunc = () => boolean|undefined|void
 const useFastForward = (onForward?: ForwardFunc, dependencies: readonly any[] = [], to?: string):
 void => {
   const history = useHistory()
+  const {t} = useTranslation()
+  const isFastForwardEnabled = window.location.hostname !== t('canonicalUrl').toLowerCase()
   const handleForward = useCallback((): boolean|undefined|void => {
-    const mayUseAnotherForward = onForward ? onForward() : true
-    to && history.push(to)
+    const mayUseAnotherForward = onForward && isFastForwardEnabled ? onForward() : true
+    to && isFastForwardEnabled && history.push(to)
     if (!to && mayUseAnotherForward) {
       return true
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [...dependencies, history, to, dependencies.length || onForward])
+  }, [...dependencies, history, isFastForwardEnabled, to, dependencies.length || onForward])
   useKeyListener('KeyF', handleForward, {ctrl: true, shift: true})
   useEffect((): void|(() => void) => {
     if (!mobileListener) {

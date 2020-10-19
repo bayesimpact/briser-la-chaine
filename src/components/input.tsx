@@ -98,7 +98,6 @@ const Input = (props: InputProps, ref: React.Ref<Inputable>): React.ReactElement
 
   const inputValue = isDelayed ? stateValue : propValue
   const inputStyle: React.CSSProperties = {
-    background: 'inherit',
     borderRadius: 0,
     color: 'inherit',
     fontSize: 15,

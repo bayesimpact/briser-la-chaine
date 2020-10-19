@@ -1,4 +1,5 @@
 {
+  ALMOST_BLACK: '#030303',
   BARBIE_PINK: '#ff378f',
   BLACK: '#312928',
   BRIGHT_SKY_BLUE: '#0db3fd',
@@ -14,9 +15,9 @@
   MESSENGER_BLUE: '#0084ff',
   MINTY_GREEN: '#0ced71',
   PALE_GREY: '#f3f5f9',
-  PINKISH_GREY: '#c7c7c7',
   SEAWEED: '#1adb71',
   SMOKEY_GREY: '#dcdcdc',
+  STRONG_PINK: '#ff0d8e',
   WARM_GREY: '#979797',
   WHATSAPP_GREEN: '#3ace01',
   WHITE_TWO: '#f5f5f5',

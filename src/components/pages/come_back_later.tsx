@@ -72,7 +72,7 @@ const ComeBackLaterPage = (): React.ReactElement => {
     </div>
     <BottomDiv>
       <div style={mobileOnDesktopStyle}>
-        <div style={darkButtonStyle} onClick={goBack}>
+        <div style={{...darkButtonStyle, marginBottom: 20}} onClick={goBack}>
           {t('Précédent')}
         </div>
       </div>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="97px" height="98px" viewBox="0 0 97 98" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>celebration-final_ico</title>
+    <g id="v2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Alert---10" transform="translate(-139.000000, -155.000000)">
+            <g id="Group-2" transform="translate(105.000000, 120.000000)">
+                <g id="celebration-final_ico" transform="translate(34.000000, 35.000000)">
+                    <g id="decoration_img">
+                        <rect id="Rectangle" fill="#D4DCE7" x="47.4595084" y="0" width="2" height="15" rx="1"></rect>
+                        <rect id="Rectangle" fill="#D4DCE7" transform="translate(80.905515, 23.125173) rotate(51.000000) translate(-80.905515, -23.125173) " x="79.9055149" y="15.6251732" width="2" height="15" rx="1"></rect>
+                        <rect id="Rectangle" fill="#D4DCE7" transform="translate(88.919017, 58.234619) rotate(103.000000) translate(-88.919017, -58.234619) " x="87.9190167" y="50.7346188" width="2" height="15" rx="1"></rect>
+                        <rect id="Rectangle" fill="#D4DCE7" transform="translate(8.000000, 58.234619) rotate(257.000000) translate(-8.000000, -58.234619) " x="7" y="50.7346188" width="2" height="15" rx="1"></rect>
+                        <rect id="Rectangle" fill="#D4DCE7" transform="translate(16.013502, 23.125173) rotate(309.000000) translate(-16.013502, -23.125173) " x="15.0135018" y="15.6251732" width="2" height="15" rx="1"></rect>
+                        <rect id="Rectangle" fill="#464646" transform="translate(64.234818, 15.169627) rotate(26.000000) translate(-64.234818, -15.169627) " x="63.2348179" y="11.6696275" width="2" height="7" rx="1"></rect>
+                        <rect id="Rectangle" fill="#464646" transform="translate(84.396853, 40.712283) rotate(77.000000) translate(-84.396853, -40.712283) " x="83.3968531" y="37.2122833" width="2" height="7" rx="1"></rect>
+                        <rect id="Rectangle" fill="#464646" transform="translate(11.278169, 40.347663) rotate(283.000000) translate(-11.278169, -40.347663) " x="10.2781689" y="36.8476626" width="2" height="7" rx="1"></rect>
+                        <rect id="Rectangle" fill="#464646" transform="translate(31.693942, 15.007356) rotate(335.000000) translate(-31.693942, -15.007356) " x="30.693942" y="11.507356" width="2" height="7" rx="1"></rect>
+                    </g>
+                    <g id="decoration_img-copy" transform="translate(48.500000, 83.500000) scale(1, -1) translate(-48.500000, -83.500000) translate(9.000000, 69.000000)">
+                        <rect id="Rectangle" fill="#D4DCE7" x="38.4595084" y="0" width="2" height="15" rx="1"></rect>
+                        <rect id="Rectangle" fill="#D4DCE7" transform="translate(71.905515, 23.125173) rotate(51.000000) translate(-71.905515, -23.125173) " x="70.9055149" y="15.6251732" width="2" height="15" rx="1"></rect>
+                        <rect id="Rectangle" fill="#D4DCE7" transform="translate(7.013502, 23.125173) rotate(309.000000) translate(-7.013502, -23.125173) " x="6.01350183" y="15.6251732" width="2" height="15" rx="1"></rect>
+                        <rect id="Rectangle" fill="#464646" transform="translate(55.234818, 15.169627) rotate(26.000000) translate(-55.234818, -15.169627) " x="54.2348179" y="11.6696275" width="2" height="7" rx="1"></rect>
+                        <rect id="Rectangle" fill="#464646" transform="translate(22.693942, 15.007356) rotate(335.000000) translate(-22.693942, -15.007356) " x="21.693942" y="11.507356" width="2" height="7" rx="1"></rect>
+                    </g>
+                    <g id="Group" transform="translate(29.000000, 29.000000)">
+                        <polygon id="Path" points="0 0 40 0 40 40 0 40"></polygon>
+                        <path d="M6.66666667,3.33333333 L33.3333333,3.33333333 C34.2538079,3.33333333 35,4.07952542 35,5 L35,37.1266667 C35,37.409208 34.8573925,37.6726506 34.6204052,37.8264903 C34.3834179,37.9803301 34.0846218,38.0036104 33.8266667,37.8883333 L20,31.7166667 L6.17333333,37.8866667 C5.91564814,38.0018231 5.61718687,37.978719 5.38029403,37.8252771 C5.14340119,37.6718351 5,37.4089123 5,37.1266667 L5,5 C5,4.07952542 5.74619208,3.33333333 6.66666667,3.33333333 Z M20,22.5 L24.8983333,25.075 L23.9633333,19.6216667 L27.925,15.7583333 L22.4483333,14.9616667 L20,10 L17.55,14.9616667 L12.075,15.7583333 L16.0366667,19.6216667 L15.1033333,25.075 L20,22.5 Z" id="Shape" fill="#0EB3FD" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

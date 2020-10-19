@@ -1,4 +1,5 @@
-FROM bayesimpact/react-base:latest AS dev
+ARG REACT_BASE_TAG
+FROM bayesimpact/react-base:${REACT_BASE_TAG:-2020-09-24} as dev
 
 RUN apt-get update && apt-get install -qqy --no-install-recommends \
   # Libs for pupeteer HeadlessChrome:
@@ -26,6 +27,8 @@ COPY .babelrc diff_i18n_folder.sh i18n.babelrc.js entrypoint.sh .eslintrc.json .
 COPY vendor/patch-babel-plugin-i18next-extract.sh ./vendor/patch-babel-plugin-i18next-extract.sh
 RUN ./vendor/patch-babel-plugin-i18next-extract.sh
 
+# TODO(pascal): Fix once date-fns allows to have multiple typings.
+RUN rm -r node_modules/@types/react-datepicker/node_modules/date-fns
 
 FROM dev AS test
 CMD ./entrypoint.sh npm run checks

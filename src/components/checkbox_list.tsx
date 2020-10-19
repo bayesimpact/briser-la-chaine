@@ -55,8 +55,8 @@ const CheckboxBase =
 
   const outerBoxStyle: React.CSSProperties = {
     alignItems: 'center',
-    backgroundColor: isSelected ? '#000' : '#fff',
-    borderColor: isHighlighted || isSelected ? '#000' : colors.MEDIUM_GREY,
+    backgroundColor: isSelected ? colors.ALMOST_BLACK : '#fff',
+    borderColor: isHighlighted || isSelected ? colors.ALMOST_BLACK : colors.MEDIUM_GREY,
     borderRadius: 4,
     borderStyle: 'solid',
     borderWidth: 1,

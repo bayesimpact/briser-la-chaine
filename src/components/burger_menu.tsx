@@ -17,7 +17,7 @@ import {RemixiconReactIconComponentType} from 'remixicon-react/dist/typings'
 import {useDefaultShareText} from 'hooks/share'
 import {cleanStorage, useDispatch} from 'store/actions'
 import {useHasCache} from 'store/selections'
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
 import {Modal} from 'components/modal'
 import Privacy from 'components/pages/privacy'
@@ -66,14 +66,14 @@ const MenuLinkBase = (props: MenuLinkProps): React.ReactElement => {
       <Icon size={20} />
     </span>
     <span style={{flex: 1}}>{children}</span>
-    <ArrowRightSLineIcon size={21} color="#000" style={arrowRightStyle} />
+    <ArrowRightSLineIcon size={21} color={colors.ALMOST_BLACK} style={arrowRightStyle} />
   </a>
 }
 const MenuLink = React.memo(MenuLinkBase)
 
 const modalTitleStyle: React.CSSProperties = {
   alignItems: 'center',
-  color: '#000',
+  color: colors.ALMOST_BLACK,
   display: 'flex',
   fontFamily: 'Poppins',
   fontSize: 18,
@@ -112,11 +112,12 @@ const textContentStyle: React.CSSProperties = {
 }
 const burgerStyleBase: React.CSSProperties = {
   color: colors.MEDIUM_GREY,
+  cursor: 'pointer',
   position: 'absolute',
   right: 15,
   top: 15,
 }
-const BurgerMenu = ({color}: {color?: string}): React.ReactElement => {
+const BurgerMenu = ({style}: {style?: React.CSSProperties}): React.ReactElement => {
   const {t} = useTranslation()
   const shareText = useDefaultShareText()
   const dispatch = useDispatch()
@@ -133,24 +134,26 @@ const BurgerMenu = ({color}: {color?: string}): React.ReactElement => {
   const setPrivacy = useCallback((): void => setPage('privacy'), [])
   const setTerms = useCallback((): void => setPage('terms'), [])
   const setShare = useCallback((): void => setPage('share'), [])
-  const goHome = useCallback(() => history.push(Routes.SPLASH), [history])
+  const goHome = useCallback(() => history.push(getPath('SPLASH', t)), [history, t])
   const [isClearCacheValidating, setIsClearCacheValidating] = useState(false)
+  const cancelClearCache = useCallback((event?: React.SyntheticEvent): void => {
+    event?.stopPropagation()
+    setIsClearCacheValidating(false)
+  }, [])
   const clearStorage = useCallback((): void => {
     if (!isClearCacheValidating) {
       setIsClearCacheValidating(true)
       return
     }
     dispatch(cleanStorage())
+    cancelClearCache()
+    closeMenu()
     goHome()
-  }, [dispatch, goHome, isClearCacheValidating])
-  const cancelClearCache = useCallback((event: React.SyntheticEvent): void => {
-    event.stopPropagation()
-    setIsClearCacheValidating(false)
-  }, [])
+  }, [cancelClearCache, closeMenu, dispatch, goHome, isClearCacheValidating])
   const burgerStyle = useMemo((): React.CSSProperties => ({
     ...burgerStyleBase,
-    color,
-  }), [color])
+    ...style,
+  }), [style])
   const backArrow = <ArrowLeftLineIcon style={backButtonStyle} onClick={setMenu} size={25} />
   return <React.Fragment>
     <Modal className="no-scrollbars" style={modalStyle} onClose={closeMenu} isShown={isShown}>
@@ -185,7 +188,7 @@ const BurgerMenu = ({color}: {color?: string}): React.ReactElement => {
         <Terms style={textContentStyle} />
       </React.Fragment> : <React.Fragment>
         <h3 style={modalTitleStyle}>{backArrow} {t('Partager')}</h3>
-        <ShareButtons sharedText={shareText} />
+        <ShareButtons sharedText={shareText} visualElement="menu" />
       </React.Fragment>}
     </Modal>
     <MenuLineIcon style={burgerStyle} size={24} onClick={showMenu} />

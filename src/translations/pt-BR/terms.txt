@@ -1,0 +1,183 @@
+﻿# Condições gerais de uso a partir de 2 de maio de 2020
+
+
+### Prefácio
+2 de maio de 2020
+O objetivo do projeto e o funcionamento da associação são dedicados ao interesse geral. O código fonte do software é disponibilizado como software livre.
+Nenhum dado pessoal é armazenado fora da interface do usuário. Nenhum rastreamento do usuário é realizado, por GPS ou bluetooth.
+
+Os dados pessoais do usuário (como sintomas ou lista de contatos) são armazenados em sua interface (telefone ou computador), não são transmitidos a ninguém (nem mesmo à {{owner}}). Eles permanecem sob o controle exclusivo do usuário da interface.
+Dados anônimos de uso do usuário (como o número total de pessoas que percorrem o {{productName}} até o final) permitem à {{owner}} melhorar continuamente o serviço e o estudo do impacto de {{productName}}. Esses dados não permitem, em nenhum caso, a identificação de um usuário.
+Quando a função de monitoramento opcional e voluntária é ativada pelo usuário, ele poderá receber regularmente e-mails informativos. A {{owner}} terá que armazenar o endereço de e-mail do usuário voluntário por um período máximo de 14 dias, depois ele será excluído automaticamente. Se o usuário desejar, ele poderá a qualquer momento solicitar a exclusão deste endereço à {{owner}} (através do e-mail : [privacy@bayesimpact.org](mailto:privacy@bayesimpact.org)). 
+
+Todos esses dados não serão utilizados comercialmente nem transferidos para terceiros.
+
+
+## 1. Sobre o site
+"{{productName}}" ou "O SERVIÇO" é uma interface que permite ajudar, não de forma médica, no diagnóstico de uma infecção por {{diseaseName}}, e saber o potencial período de contágio. Ela facilita a identificação de pessoas que provavelmente foram encontradas ou cruzaram o caminho do usuário durante esse período e se oferece para entrar em contato com elas de forma anônima ou não. Por fim, permite o benefício de um acompanhamento voluntário por e-mail quando a pessoa provavelmente for um caso de contato.
+
+O programador do site é a associação "{{owner}}".
+O host da plataforma é OVH.
+Os "usuários" são as pessoas que usam a plataforma.
+O serviço está disponível no "SITE" : www.{{productName}}
+
+
+## 2. Validade e aceitação
+Essas condições podem ser acessadas a qualquer momento no site www.{{productName}} e comunicadas a qualquer usuário que solicitá-las.
+Elas administram as relações entre usuários e {{productName}} no contexto do uso do serviço.
+Os usuários reconhecem que têm o direito de explorar o serviço.
+
+O uso do serviço e das informações implicam na aceitação total e sem reservas das condições gerais. Sua não aceitação leva à renúncia ao uso do serviço, bem como das informações.
+
+
+## 3. Âmbito
+Este contrato rege exclusivamente o uso de {{productName}} pelos usuários.
+
+Este serviço é fornecido gratuitamente pela {{owner}} sem qualquer outra consideração que não seja a conformidade com estes termos de uso.
+A responsabilidade da {{owner}} limita-se exclusivamente a facilitar o acesso à plataforma.
+
+{{owner}} não se responsabiliza por qualquer forma de uso indevido do serviço.
+
+
+## 4. Descrição do serviço
+{{productName}} é uma plataforma independente desenvolvida pela associação {{owner}}.
+Este serviço requer a validação de várias etapas.
+## 4.1 Diagnóstico não de forma médica de sintomas
+Em primeiro lugar, o {{productName}} emite um diagnóstico não médico com base em um algoritmo sobre a probabilidade de contaminação do {{diseaseName}} pelo usuário, com base no estudo dos sintomas descritos por ele. Essa opinião não pode de forma alguma substituir a de um médico ou a de um membro da equipe de enfermagem, nem um procedimento de teste certificado ou qualquer procedimento aprovado pelas autoridades.
+Se o indivíduo já tiver testado positivo através de um dispositivo médico ou pelo diagnóstico de um profissional de saúde, ele poderá informar isso diretamente no site e não precisará fornecer outras informações sobre seu estado de saúde para beneficiar do serviço de {{productName}}.
+Esse diagnóstico não médico é baseado no estado atual das pesquisas científicas sobre o {{diseaseName}}. Portanto, pode ser alterando devido à evolução de tais pesquisas.
+## 4.2 Indicação do período de contágio
+Após esta etapa, o serviço elabora o provável período de contágio do indivíduo para ajudá-lo a se lembrar das pessoas com quem ele se encontrou durante esses poucos dias.
+Este período é puramente indicativo. Não é de forma alguma dados médicos certificados.
+O dispositivo para calcular o período contagioso também se baseia no estado atual das pesquisas científicas sobre o {{diseaseName}} e, portanto, pode ser alterando devido à evolução de tais pesquisas.
+
+
+## 4.3 Ajuda na busca de pessoas que cruzaram o caminho do indivíduo durante o período de contágio.
+O serviço {{productName}} propõe, em seguida, uma ajuda ao usuário para ele se lembrar de cada pessoa com quem ele se encontrou durante o período de contágio. Para isso, o serviço oferece ajuda para ativar sua memória através de perguntas memo-técnicas sobre as atividades do dia.
+Apenas se o usuário desejar e aprovar, ele poderá permitir o acesso a determinadas informações pessoais (como agenda, contatos telefônicos etc.) por meio de sistemas API.
+O serviço também oferece duas perguntas que também permitem avaliar o nível de proximidade do contato, com base na duração do contato e na distância declarada pelo usuário entre as duas pessoas durante o contato.
+Todas essas informações pessoais são usadas e armazenadas apenas localmente no dispositivo do usuário. Elas não são transmitidas, nem diretamente, nem em qualquer forma derivada. Elas são mantidas pelo único usuário do serviço.
+## 4.4 Ajuda na notificação de pessoas que cruzaram o caminho do usuário durante o período contagioso
+O serviço propõe então notificar as pessoas identificadas como contato do usuário ("casos de contato").
+
+
+Para isso, o usuário pode copiar a mensagem gerada automaticamente pelo serviço e enviá-la, copiando-a para a plataforma de mensagens de sua escolha ou passando voluntariamente pelas APIs de sua escolha.
+O usuário também pode solicitar o serviço {{productName}} para enviar esta mensagem de forma anônima para a pessoa em questão. A associação {{owner}} e o serviço {{productName}} não mantêm nenhum rastro identificável dessas interações entre o usuário e seu contato.
+## 4.5 Acompanhamento dos casos de contato
+Se uma pessoa fora do uso inicial do serviço for identificada como um "caso de contato" por um usuário suspeito de ser um transmissor do {{diseaseName}}, ela também é convidada a acessar o serviço.
+Um link permite que ela tome conhecimento de seu provável status de "caso de contato" e a convida a realizar um processo de verificação de sintomas.
+Se a contaminação com {{diseaseName}} for presumida pelo diagnóstico não médico oferecido pelo serviço {{productName}}, esse novo usuário será convidado a realizar o processo de identificação e notificação de seus próprios casos de contato, como qualquer outro usuário.
+Se os sintomas declarados não permitirem a suposição de contaminação com {{diseaseName}}, seu e-mail será solicitado para que ele possa se beneficiar da função de monitoramento. Sabendo que essa função consiste no envio regular de e-mails de conselhos e lembretes para estar atento aos sintomas reveladores do {{diseaseName}}. Esse processo de registro para a função de monitoramento é voluntário e reversível.
+A função de monitoramento termina 14 dias depois do seu registro. O e-mail do usuário é, então, automaticamente excluído.
+
+
+## 5. Uso do serviço
+## 5.1 Uso de {{productName}}
+Como parte do uso da plataforma, os usuários concordam em cumprir as leis e regulamentos em vigor e em não infringir os direitos de terceiros ou a ordem pública.
+Os usuários são os únicos responsáveis ​​pelo cumprimento adequado de todas as formalidades administrativas ou médicas necessárias em relação ao seu estado de saúde. Em relação à assistência médica ou aos procedimentos de teste, é de sua exclusiva responsabilidade obter as garantias e os meios para realizá-las. Logo, a responsabilidade da {{owner}} não seria em caso algum assumida.
+
+
+Os usuários reconhecem ter lido as características e restrições, em particular técnicas, da plataforma. Eles são os únicos responsáveis ​​pelo seu uso. Os usuários são informados e aceitam que a execução da plataforma requer uma conexão com a Internet pela qual eles são os únicos responsáveis ​​e cuja qualidade de serviço depende diretamente dela.
+Os usuários também são os únicos responsáveis ​​pelas relações que eles podem estabelecer com os responsáveis ​​dos outros serviços, em particular as organizações de assistência médica ou de teste, às quais eles irão recorrer seguindo as sugestões do serviço.
+## 5.2 Manutenção das informações da sessão do usuário no navegador da web
+Através de um sistema de cookies, o usuário pode interromper e retomar o curso do serviço na mesma interface e em diferentes intervalos de tempo. Essa manutenção é opcional, o usuário pode optar por não se beneficiar dela. Essa manutenção de forma alguma implica que os dados pessoais de uso sejam registrados por {{productName}}. Essa manutenção não pode ser comparada à funcionalidade de uma conta de usuário.
+Como {{productName}} não registra nenhum dado fornecido, o serviço não pode dar garantias aos usuários no caso de perda das informações preenchidas durante a navegação. Os usuários são responsáveis ​​por salvar uma cópia de suas informações. Eles não podem reivindicar qualquer compensação devido a qualquer perda de dados.
+## 5.3 Uso gratuito de {{productName}}
+O uso da plataforma {{productName}} é gratuito.
+
+
+## 6. Responsabilidades e garantias
+## 6.1 Nenhuma responsabilidade por recomendações e diagnóstico não médico
+O diagnóstico não médico de {{productName}} baseia-se em inúmeros recursos médicos oficiais, nas recomendações e nas supervisões do comitê científico que apoia a iniciativa.
+Em vista da atual crise de saúde, as recomendações postadas e o sistema de diagnóstico não médico são levados a evoluir de acordo com o estado das pesquisas e com a opinião das autoridades de saúde.
+Portanto, os resultados exibidos podem diferir com o tempo, mesmo que os dados de entrada sejam os mesmos.
+{{productName}} não é um dispositivo médico. Não fornece uma opinião médica, não substitui uma consulta ou a opinião de um médico ou farmacêutico ou qualquer outro profissional de saúde. Também não pode substituir as recomendações das autoridades competentes.
+
+
+O {{productName}} é um serviço de informações projetado para responder a um alerta sanitário. Não pode ser utilizado no contexto de monitoramento médico remoto a domicílio.
+## 6.2 Ausência de responsabilidade em relação ao funcionamento de {{productName}}
+{{productName}} não pode garantir que seu serviço não sofra nenhuma interrupção. {{productName}} compromete-se a prestar seu serviço diligentemente e de acordo com as devidas regras, sendo especificado que é apenas uma obrigação de meios, excluindo qualquer obrigação de resultado.
+{{productName}} não pode ser responsabilizado por dificuldades ou impossibilidades temporárias de acesso à plataforma decorrentes de circunstâncias externas a ela, de força maior ou devido a distúrbios nas redes de telecomunicações.
+O serviço é fornecido como está. {{productName}} não pode garantir aos usuários que esteja completamente livre de erros ou defeitos. O serviço é desenvolvido de forma padronizada para todos os usuários. Não é de forma alguma projetado para se adaptar às suas restrições pessoais.
+{{productName}} reserva-se expressamente o direito de interromper temporariamente o acesso ao seu serviço por motivos de manutenção.
+Se você notar uma falha, um erro ou algo que pareça ser um mau funcionamento, convidamos você a nos alertar por e-mail no seguinte endereço: [contact@briserlachaine.org](mailto:contact@briserlachaine.org)
+## 6.3 Comportamentos proibidos
+Além das outras proibições previstas nessas condições, os usuários concordam em usar a plataforma de forma honesta.
+Em particular, eles abstêm-se de usar a plataforma para os seguintes fins: realizar atividades ilegais e fraudulentas ou atividades que violem os direitos ou a segurança de terceiros; violação da ordem pública ou violação das leis e regulamentos aplicáveis; intrusão no sistema de computador de terceiros ou qualquer atividade que possa prejudicar, controlar, interferir ou interceptar todo ou parte do sistema de computadores de terceiros, violar sua integridade ou segurança; envio de e-mails ou solicitações comerciais não solicitadas; manipulações destinadas a melhorar a referência de um site de terceiros; auxílio ou incitação, sobre qualquer forma e de qualquer maneira que seja, a um ou mais atos e atividades descritos acima; e mais qualquer prática que desvie o serviço para outros fins que não aqueles para os quais foi projetado.
+Os usuários concordam em respeitar a continuidade do serviço da plataforma. Eles são proibidos em particular de: qualquer comportamento que possa interromper, suspender, desacelerar ou impedir a continuidade do serviço; qualquer intrusão ou tentativa de intrusão no serviço; qualquer desvio de recursos do sistema do serviço; todas as ações que possam impor um encargo desproporcional à infraestrutura do serviço; todas as violações das medidas de segurança e autenticação; todos os atos que possam infringir os direitos e interesses financeiros, comerciais ou morais de {{productName}} ou dos usuários do serviço.
+Os usuários concordam em respeitar o valor da plataforma. Eles se abstêm de monetizar, vender ou conceder todo ou parte do acesso à plataforma.
+## 6.4 Garantia do usuário à {{owner}}
+Os usuários garantem à {{owner}} todas as reclamações, ações e reivindicações que a {{owner}} possa sofrer devido à violação feita por eles de qualquer uma de suas obrigações ou garantias sob estes termos e condições.
+Os usuários comprometem-se a indenizar a {{owner}} por qualquer dano sofrido e a pagar todos os custos, encargos e condenações incorridos como resultado.
+
+
+## 7. Links para outros sites
+{{productName}} pode oferecer links para sites de terceiros. As referências a sites vinculados por hiperlink não podem ser de responsabilidade da {{owner}}, que não pode ser responsabilizada por seu conteúdo e não oferece nenhuma garantia a esse respeito. Cabe aos usuários fazerem todas as verificações necessárias ou oportunas antes de prosseguir com qualquer transação com um desses terceiros.
+Nenhum vínculo comercial ou parceria financeira vincula a {{owner}} a terceiros aos quais {{productName}} pode encaminhar seus usuários. Estes são oferecidos apenas a título de informação, levando em consideração as recomendações em vigor.
+
+
+## 8. Licença e propriedade intelectual
+Os usuários reconhecem expressamente a propriedade da {{owner}} em toda a plataforma e, em particular, em sistemas, software, estruturas, infraestruturas, bancos de dados e conteúdo de todos os tipos (textos, imagens, programação visual, músicas, logotipos, marcas, banco de dados etc.) usados ​​pela {{owner}} para o serviço e protegidos por direitos autorais, direitos de propriedade intelectual, direitos de propriedade industrial ou direitos dos produtores de bancos de dados em vigor.
+O código fonte do software é disponibilizado como software livre.
+Os usuários estão proibidos de copiar e de desviar conceito, tecnologias ou qualquer outro elemento da plataforma para seus próprios fins ou os de terceiros. Toda desmontagem, descompilação, descriptografia, extração, reutilização, cópias e, de maneira mais geral, todos os atos de reprodução, representação, disseminação e uso de qualquer um desses elementos, no todo ou em parte, sem a autorização da {{owner}}, são estritamente proibidos e podem estar sujeitos a procedimentos legais.
+A {{owner}} não reivindica nenhuma propriedade de nenhum conteúdo postado pelos usuários na plataforma ou de seus dados pessoais.
+
+
+
+
+## 9. Dados pessoais
+A associação {{owner}} preocupa-se com a proteção de dados pessoais. Ela se compromete a respeitar o melhor nível de proteção, de acordo com os regulamentos de proteção de dados.
+O responsável é a associação {{owner}}.
+Para oferecer o serviço, {{productName}} solicita, sem registrar, dados pessoais dos usuários, em particular: possíveis sintomas, primeiro dia de sintomas, listas de contatos cruzados durante o período contagioso. Eles não são mantidos pela {{owner}} ou por {{productName}}, nem vendidos a terceiros, nem utilizados para fins comerciais.
+O usuário também pode permitir acesso, através de um sistema de API, a funcionalidades externas à operação de {{productName}} (como acesso ao calendário ou histórico de chamadas). Esse acesso é concedido com base no consentimento do usuário. Ele é notificado, permanece temporário e os dados também não são transmitidos à {{owner}}.
+Como parte da função de "acompanhamento", os usuários concordam em fornecer um endereço de e-mail para serem contatados por {{productName}} para receber informações. A duração máxima dessa função monitorada é de 14 dias. A {{owner}} compromete-se a excluir os endereços de e-mail dos usuários ao final do acompanhamento. Os usuários têm o direito de acessar, retificar e excluir esse endereço de e-mail a qualquer momento, enviando uma solicitação nesse sentido para: privacy@bayesimpact.org
+O cancelamento da inscrição na função de monitoramento entra em vigor imediatamente após 14 dias. Os endereços de e-mail são excluídos assim que o processo de TI é iniciado, no máximo em duas semanas.
+As pessoas identificadas pelos usuários de {{productName}} como “casos de contato” e informadas por {{productName}} se beneficiam dos mesmos padrões de proteção de dados.
+Para garantir melhor a proteção dos dados pessoais de seus usuários, a associação {{owner}} possui um Responsável pela proteção de dados.
+
+Para mais detalhes, uma página dedicada à nossa política de gerenciamento e proteção de dados do usuário está disponível [aqui]({{privacyPageUrl}}).
+
+
+## 10. Disposições gerais
+
+
+Caso as disposições das presentes condições sejam declaradas inválidas ou inexequíveis, as demais permanecem em vigor e com pleno efeito.
+Os usuários concordam que nem essas condições nem o uso do serviço criam sociedade ou joint venture, contrato de trabalho ou mandato entre eles e a {{owner}}.
+No caso de uma tradução dessas condições para um ou mais idiomas, o idioma da interpretação será o idioma francês no caso de contradição ou contestação sobre o significado de um termo ou disposição.
+Essas condições são subscritas por tempo indeterminado.
+
+
+## 11. Modificação
+A {{owner}} reserva-se o direito de modificar estas condições gerais a qualquer momento.
+Os usuários serão informados dessas modificações por meios úteis, incluindo a publicação em {{productName}}.
+A data da atualização sempre será indicada na parte superior e inferior dessas condições.
+O uso do serviço após a publicação de alterações dessas condições gerais em {{productName}} implica a aceitação total das condições modificadas.
+A única maneira de recusar a aceitação de uma modificação dessas condições é parar de usar {{productName}}.
+O usuário que não aceita as condições gerais modificadas não pode se beneficiar do serviço.
+Qualquer usuário que utilize o serviço após a entrada em vigor das condições gerais modificadas é considerado como tendo aceitado essas modificações.
+
+
+## 12. Litígios
+A {{owner}} reserva-se o direito de tomar qualquer medida apropriada em caso de violação por parte dos usuários dessas condições ou violação das leis e regulamentos em vigor e, em particular:
+- publicar qualquer mensagem de informação útil;
+- notificar qualquer autoridade relevante;
+- iniciar qualquer ação legal.
+O uso do serviço está sujeito à lei francesa.
+Em caso de litígio, somente os tribunais da jurisdição de Paris são qualificados.
+Antes de qualquer recurso ao juiz arbitral ou estadual, os usuários comprometem-se a negociar com a {{owner}}, em espírito de lealdade e boa fé, um acordo amigável no caso de qualquer conflito relacionado à plataforma ou a essas condições, incluindo sua validade.
+Os usuários que desejam executar o processo de negociação devem informar a {{owner}} por carta registrada com aviso de recebimento, indicando os elementos do conflito. Será organizado um momento de troca física ou desmaterializada entre os usuários e a {{owner}}. Se, após um período de seis meses, os usuários e a {{owner}} não conseguirem chegar a um acordo, a disputa será submetida ao tribunal competente designado acima. O curso da prescrição será suspenso, contando a partir da execução do processo de negociação, ou seja, da data de recebimento do documento informativo enviado por carta registrada com aviso de recebimento. A suspensão do prazo de prescrição será na data de assinatura do relatório de conciliação ou não conciliação. Em caso de recusa dos usuários ou da {{owner}} em assinar a referida ata, a outra parte poderá tomar nota dessa recusa informando que, se não responderem dentro de um mês, o encaminhamento ao juiz competente será possível. Durante todo o processo de negociação e até o final, os usuários se abstêm de executar qualquer ação legal contra a {{owner}} pelo conflito sujeito a negociação.
+
+
+## 13. Detalhes de contato do responsável e do host
+Editor do site:
+{{productName}} é publicado pela associação {{owner}}, instalado em 9 rue d'Alexandrie, 75002, Paris, 06 71 91 18 09
+
+Responsável de publicação:
+O responsável de publicação é: Paul DUAN Endereço: 9 rue d'Alexandrie, 75002, Paris Email para contato: [contact@briserlachaine.org](mailto:contact@briserlachaine.org)
+Host do site:
+{{productName}} é hospedado pela OVH, cuja sede está localizada na 2 rue Kellermann, 59100, Roubaix, telefone 09 72 10 10 ## 07. Os servidores da OVH que hospedam {{productName}} estão localizados em Gravelines, França.
+Pas du 14????
+
+
+## 15. Data
+Essas condições gerais entraram em vigor em 2 de maio de 2020

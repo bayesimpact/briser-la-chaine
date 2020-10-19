@@ -1,11 +1,13 @@
-import {addDays, eachDayOfInterval, min as minDates, parseISO as parseISODate,
-  subDays} from 'date-fns'
-import {TFunction} from 'i18next'
+import {addDays, eachDayOfInterval, format as dateFormat, isSameDay, formatRelative,
+  min as minDates, subDays} from 'date-fns'
 import {useTranslation} from 'react-i18next'
 import {useSelector as reactUseSelector} from 'react-redux'
 
-import {joinDays, useDateOption} from 'store/i18n'
-import {Params, Routes} from 'store/url'
+import {LocaleOption, useDateOption} from 'store/i18n'
+import {Params, getPath} from 'store/url'
+
+const todayDate = new Date()
+const yesterdayDate = subDays(new Date(), 1)
 
 const useSelector: <T>(
   selector: ((state: RootState) => T),
@@ -20,26 +22,41 @@ const useAlert = (personId: string): undefined|bayes.casContact.AlertPersonState
 const useSymptomsOnsetDate = (): undefined|Date =>
   useSelector(({user: {symptomsOnsetDate}}) => symptomsOnsetDate)
 
-// Select a text with all the days a person has been in contact with the user.
-const usePersonContactDays = (
-  person: bayes.casContact.Person, t: TFunction, dateOption: ReturnType<typeof useDateOption>,
-): string =>
-  useSelector(({contacts}): string => {
-    const days = Object.entries(contacts).
-      filter(
-        ([day, {contacts}]: [string, bayes.casContact.DayContacts]): boolean =>
-          !day.startsWith('NO_DATE') &&
-          !!contacts?.some(({personId}: bayes.casContact.Contact): boolean =>
-            personId === person.personId)).
-      map(([day]: [string, bayes.casContact.DayContacts]): string => day)
-    days.sort()
-    return joinDays(days.map((day): Date => parseISODate(day)), 'EEEE d MMMM', t, dateOption)
-  })
 
-const getPeopleToAlert = ({contacts, people}: RootState): readonly bayes.casContact.Person[] =>
-  people.filter((person: bayes.casContact.Person): boolean => Object.values(contacts).
-    some(({contacts: dayContacts = [], isDayConfirmed = false}): boolean =>
-      isDayConfirmed && dayContacts.some(({personId}): boolean => person.personId === personId)))
+function getRelativeDate(date: Date, dateOption: LocaleOption): string {
+  if (isSameDay(date, todayDate) || isSameDay(date, yesterdayDate)) {
+    return formatRelative(date, todayDate, dateOption)
+  }
+  return dateFormat(date, 'EEEE d MMMM', dateOption)
+}
+
+interface ContagiousPeriod {
+  daysCount: number
+  endDayText: string
+  hasEnded: boolean
+  startDayText: string
+}
+
+const useContagiousPeriod = (): ContagiousPeriod => {
+  const dateOption = useDateOption()
+  const contagiousPeriodEnd = useSelector(
+    ({user: {contagiousPeriodEnd}}) => contagiousPeriodEnd || todayDate)
+  const hasEnded = contagiousPeriodEnd < todayDate
+  const lastDateToReview = hasEnded ? contagiousPeriodEnd : todayDate
+  const contagiousPeriodStart = useSelector(
+    ({user: {contagiousPeriodStart}}) => contagiousPeriodStart) || subDays(todayDate, 1)
+  const startDayText = getRelativeDate(contagiousPeriodStart, dateOption)
+  const endDayText = getRelativeDate(lastDateToReview, dateOption)
+  const daysCount = eachDayOfInterval({end: lastDateToReview, start: contagiousPeriodStart}).length
+  return {daysCount, endDayText, hasEnded, startDayText}
+}
+
+const useContactIds = (): ReadonlySet<string> => new Set(useSelector(({contacts}) => contacts))
+
+const getPeopleToAlert = ({contacts, people}: RootState): readonly bayes.casContact.Person[] => {
+  const contactIds = new Set(contacts)
+  return people.filter(({personId}: bayes.casContact.Person): boolean => contactIds.has(personId))
+}
 
 const usePeopleToAlert = (): readonly bayes.casContact.Person[] => useSelector(getPeopleToAlert)
 
@@ -47,18 +64,10 @@ const usePeopleToAlert = (): readonly bayes.casContact.Person[] => useSelector(g
 const useNumPeopleToAlert = (): number => useSelector((state: RootState): number =>
   getPeopleToAlert(state).length)
 
-const useIsHighRisk = (personId: string): boolean => useSelector(({contacts}): boolean =>
-  Object.values(contacts).some(({contacts}): boolean =>
-    !!contacts?.some(({distance, duration, personId: otherId}): boolean =>
-      personId === otherId &&
-      !!(duration && duration > 10 || distance && distance !== 'far'))))
-
-const useReferralUrl = (personId: string): string => {
+const useReferralUrl = (unusedPersonId?: string): string => {
   const chainDepth = useSelector(({user: {chainDepth = 0} = {}}): number => chainDepth)
-  const isHighRisk = useIsHighRisk(personId)
   const {t} = useTranslation()
-  const pathname =
-    t('canonicalUrl') + (isHighRisk ? Routes.HIGH_RISK_SPLASH : Routes.MODERATE_RISK_SPLASH)
+  const pathname = t('canonicalUrl') + getPath('HIGH_RISK_SPLASH', t)
   if (!chainDepth) {
     return pathname
   }
@@ -79,8 +88,6 @@ const getDaysToValidate = ({user}: RootState): readonly Date[] => {
     {end: minDates([todayDate, contagiousEndDate]), start: contagiousStartDate})
 }
 
-const useDaysToValidate = (): readonly Date[] => useSelector(getDaysToValidate)
-
 // TODO(pascal): Add a test.
 const useHasCache = (): boolean => useSelector(({alerts, contacts, people, user}): boolean =>
   !!people.length || !!Object.keys(alerts).length || !!Object.keys(contacts).length ||
@@ -91,12 +98,11 @@ export {
   getDaysToValidate,
   getPeopleToAlert,
   useAlert,
-  useDaysToValidate,
+  useContactIds,
+  useContagiousPeriod,
   useHasCache,
-  useIsHighRisk,
   useNumPeopleToAlert,
   usePeopleToAlert,
-  usePersonContactDays,
   useReferralUrl,
   useSelector,
   useSymptomsOnsetDate,

@@ -31,19 +31,18 @@ interface RadiumCSSProperties extends React.CSSProperties {
 
 type ReactStylableElement = React.ReactElement<{style?: RadiumCSSProperties}>
 
-declare const colors: {[name: string]: string}
+declare const colors: typeof import('./cfg/colors.json')
 declare const config: {
   amplitudeToken: string
-  canonicalUrl: string
   clientVersion: string
   diseaseName: string
   environment: string
   facebookSSOAppId: string
   followUpMail: string
+  isSendingSmsAvailable: boolean
   mailjetProxyUrl: string
   numDaysContagious: number
   numDaysContagiousBeforeSymptoms: number
-  productName: string
   sentryDsn: string
 }
 

@@ -15,7 +15,7 @@ import {useRouteStepper} from 'hooks/stepper'
 import {computeContagiousPeriodAction, useDispatch} from 'store/actions'
 import {useDateOption} from 'store/i18n'
 import {useSelector, useSymptomsOnsetDate} from 'store/selections'
-import {Routes} from 'store/url'
+import {getPath} from 'store/url'
 
 import {PageWithNav} from 'components/navigation'
 import logoLoopImage from 'images/logo-loop.svg'
@@ -55,7 +55,6 @@ interface PeriodProps {
   height?: number
   linesColor?: string
   numTicks: number
-  style?: React.CSSProperties
   ticksColor?: string
   title?: string
 }
@@ -95,7 +94,7 @@ const PeriodBase = (props: PeriodProps): React.ReactElement => {
   const titleStyle: React.CSSProperties = {
     backgroundColor: '#fff',
     fontSize: 22,
-    fontWeight: 600,
+    fontWeight: 'bold',
     maxWidth: 280,
     opacity: title ? 1 : 0,
     textAlign: 'center',
@@ -178,7 +177,7 @@ const ManyPeople = React.memo(ManyPeopleBase)
 
 const waitingPageStyle: React.CSSProperties = {
   alignItems: 'center',
-  backgroundColor: '#000',
+  backgroundColor: colors.ALMOST_BLACK,
   bottom: 0,
   color: '#fff',
   display: 'flex',
@@ -213,7 +212,7 @@ const todayContainerStyle: React.CSSProperties = {
   top: 0,
 }
 const basicBarStyle: React.CSSProperties = {
-  backgroundColor: '#000',
+  backgroundColor: colors.ALMOST_BLACK,
   height: 2,
 }
 const todayBarStyle: React.CSSProperties = {
@@ -251,8 +250,8 @@ const CalendarPage = (): React.ReactElement => {
       setStep(step + 1)
       return
     }
-    history.push(Routes.CONTACTS_SEARCH)
-  }, [dispatch, history, isContagiousPeriodComputed, setStep, step])
+    history.push(getPath('MEMORY_INTRO', t))
+  }, [dispatch, history, isContagiousPeriodComputed, setStep, step, t])
   useFastForward(gotoNext)
 
   const hasSymptomsOnsetDate = !!symptomsOnsetDate
@@ -276,10 +275,11 @@ const CalendarPage = (): React.ReactElement => {
     }
   }, [])
 
-  useBackgroundColor(!symptomsOnsetDate || isContagiousPeriodComputed ? undefined : '#000')
+  useBackgroundColor(
+    !symptomsOnsetDate || isContagiousPeriodComputed ? undefined : colors.ALMOST_BLACK)
 
   if (!symptomsOnsetDate) {
-    return <Redirect to={Routes.SYMPTOMS_ONSET} />
+    return <Redirect to={getPath('SYMPTOMS_ONSET', t)} />
   }
 
   const titleStyle: React.CSSProperties = {
@@ -290,7 +290,7 @@ const CalendarPage = (): React.ReactElement => {
     marginBottom: 12,
   }
   const startPeriodBarStyle: React.CSSProperties = {
-    backgroundColor: step ? '#000' : colors.BARBIE_PINK,
+    backgroundColor: step ? colors.ALMOST_BLACK : colors.BARBIE_PINK,
     flex: 1,
     height: 2,
     maxWidth: step ? 85 : 400,
@@ -303,7 +303,7 @@ const CalendarPage = (): React.ReactElement => {
     transition: stepTransition,
   }
   const symptomsOnsetBarStyle: React.CSSProperties = {
-    backgroundColor: isOnsetToday ? colors.BARBIE_PINK : '#000',
+    backgroundColor: isOnsetToday ? colors.BARBIE_PINK : colors.ALMOST_BLACK,
     flex: 1,
     height: isOnsetToday ? 1 : 2,
     maxWidth: step || isOnsetToday ? 10 : 400,
@@ -311,7 +311,7 @@ const CalendarPage = (): React.ReactElement => {
   }
   const symptomsOnsetLegendStyle: React.CSSProperties = {
     ...legendTextStyle,
-    color: '#000',
+    color: colors.ALMOST_BLACK,
     minWidth: textSize || 'auto',
     opacity: step || isOnsetToday ? 0 : 1,
     transition: stepTransition,
@@ -332,7 +332,7 @@ const CalendarPage = (): React.ReactElement => {
     t("Confinez-vous et prenez l'avis d'un médecin") : t('Faites-vous tester')
   const isBottomLineShort = (isOnsetToday && !step) || (!isStillContagious && step < 3)
 
-  return <PageWithNav nextButton={t('Suivant')} onNext={gotoNext}>
+  return <PageWithNav nextButton={t("J'ai compris")} onNext={gotoNext}>
     <div style={isContagiousPeriodComputed ? hiddenWaitingPageStyle : waitingPageStyle}>
       <img src={logoLoopImage} alt="" />
       <Trans style={{margin: '20px 40px', maxWidth: 240}}>
@@ -347,13 +347,15 @@ const CalendarPage = (): React.ReactElement => {
             Toutes les personnes rencontrées pendant cette période
             sont <strong style={{color: colors.BARBIE_PINK}}>
               potentiellement contaminées sans le savoir
-            </strong>
+            </strong>.
           </Trans> : step === 2 ? <Trans parent={null}>
             Il est essentiel pour leur santé de <strong style={{color: colors.BARBIE_PINK}}>
-              les alerter le plus rapidement possible.
-            </strong><br /><br />
+              les alerter le plus rapidement possible
+            </strong>.<br /><br />
             Nous sommes là pour ça.
-          </Trans> : t("En résumé, voici ce que vous devez faire dès aujourd'hui\u00A0:")}
+          </Trans> : <Trans parent={null}>
+            En résumé, voici ce que vous devez faire <strong style={{color: colors.BARBIE_PINK}}>
+              dès aujourd'hui</strong>.</Trans>}
       </h1>
       {step ? null : <div style={{fontSize: 15}}>
         {t("Les symptômes peuvent apparaître jusqu'à 14 jours après la contamination.")}
@@ -362,7 +364,7 @@ const CalendarPage = (): React.ReactElement => {
     <div style={{alignSelf: 'stretch'}}>
       <Period
         numTicks={10} height={160} linesColor={colorToAlpha(colors.BARBIE_PINK, .15)}
-        title={step < 3 ? '' : t('Alertez vos contacts')}>
+        title={step < 3 ? '' : t('Alertez ces personnes')}>
         {dateFormat(contagiousStartDate, 'EEEE d MMMM', dateOption)}
         <div style={{display: 'flex', left: 0, position: 'absolute', right: 0, top: 0}}>
           <div style={startPeriodBarStyle} />

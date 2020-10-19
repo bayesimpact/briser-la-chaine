@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "isolatedModules": true,
     "jsx": "react",
-    "lib": ["dom", "dom.iterable", "es5", "es6"],
+    "lib": ["dom", "dom.iterable", "es5", "es2019.object"],
     "module": "esNext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -34,6 +34,7 @@
     "target": "esNext"
   },
   "include": [
+    "cfg/colors.json",
     "custom.d.ts",
     "src",
     "test"

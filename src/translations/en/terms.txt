@@ -1,0 +1,263 @@
+# Terms of Service
+
+Last updated May 2, 2020
+
+## Preamble
+
+{{productName}} is a project by Bayes Impact, a nonprofit organization dedicated to using technology for social good. It is managed by Bayes Impact’s France-based branch (association de loi 1901), {{owner}}.
+
+{{productName}}’s source code is availably under a GPLv3 open source license.
+No personal data are stored outside of the user’s device. No tracking is performed, whether by GPS or Bluetooth.
+The user’s personal data (including their potential symptoms or contact list) are stored locally on their device (phone, laptop, etc.). They are not transmitted to anyone, including {{owner}}. They stay under the sole control of the user.
+Anonymized usage data (such as the aggregate number of users using {{productName}}) allow {{owner}} to continuously improve {{productName}} and estimate its impact. These data do not allow one to personally identify a user.
+An optional symptom monitoring functionality is provided on a voluntary basis within {{productName}}. When this optional feature is activated, the user may communicate their email address, in order to receive regular email check-ins from {{owner}}. {{owner}} will then store the user’s email address for a maximum duration of 14 days. This email address cannot be linked to the user’s activity on {{productName}}. If the user wishes to, they can at any time request the data’s deletion by writing to privacy@bayesimpact.org.
+None of the data mentioned above may be used for any commercial purpose.
+
+## 1. Definitions
+
+"{{productName}}" or "the service" is a tool designed to help users notify individuals they may have met during their contagious period, by helping them establish their contagious period and remember encounters during this period. It also suggests ways to contact them, both personally and anonymously. {{productName}} is not intended as a medical diagnostic tool.
+
+The developer of the website is "{{owner}}", a non-profit organization.
+
+The web host is OVH.
+
+The "users" are individuals that use the platform.
+
+The service is available on "the website": [{{canonicalUrl}}]({{canonicalUrl}})
+
+## 2. Validity and Approval
+
+The hereby terms are always available on the website {{canonicalUrl}} and shared to any user that requires them.
+
+They handle the relationship between the users and {{productName}} in how they use the service.
+
+The users acknowledge their right to utilize the service.
+
+Using the service and its information implies a complete and unconditional approval of these terms. Their rejection leads to renouncing the use of the service and the use of its information.
+
+## 3. Scope
+
+The hereby contract solely governs the use of {{productName}} by the users.
+
+It is delivered free-of-charge by {{owner}} and without any other compensation than the respect of the hereby terms.
+
+The responsibility of {{owner}} is exclusively limited to giving access to the platform.
+
+{{owner}} cannot be held responsible for an unlawful use of the service.
+
+## 4. Description of the Service
+
+{{productName}} is an independant platform developed by {{owner}} which is an "association loi 1901".
+
+The service assumes validation of several steps.
+
+### 4.1. Non-medical Diagnostic from Symptoms
+
+At first, {{productName}} issues to the user a non-binding and non-medical diagnostic from an algorithm on probability for being contaminated by {{diseaseName}} by perusing the symptoms they have declared. This consultative advice can in no way be a substitute for a real diagnostic given by a medical doctor, a member of the nursing staff, a certified testing process or any government-authorized process.
+
+If the user has already been tested positive for {{diseaseName}} by medical means, they can share this information directly and won't be asked any more information on their health status to benefit from the service provided by {{productName}}.
+
+This non-medical diagnostic is based on up-to-date scientific research about {{diseaseName}}. It may evolve.
+
+### 4.2. Establishing the Contagious Period
+
+In the next step, the service establishes the probable contagious period for the user, in order to help them remember the people they met during these days.
+
+The given period is purely indicative, and is in no way a certified medical data.
+
+How this period is computed is also based on up-to-date scientific research on {{diseaseName}} and is subject to change.
+
+### 4.3. Helping to Look for People Met during the Contagious Period
+
+The service entice the user to remember each and every person they've met during the contagious period. To that end, it gives memory joggers and mnemonic questions about everyday activities.
+
+The user may, if they wish so and under their explicit approval, access personal data, such as their calendar or phone contacts, using APIs.
+
+The service also asks the user two questions to estimate the proximity level of the encounters, based on its duration and the physical distance between its protagonists.
+
+All this data is used and stored only on the user's device. They are not transmitted to anyone, either directly or in derived form. They remain in full ownership of the user.
+
+### 4.4. Helping to Notify Met People during the Contagious Period
+
+The service then suggest the user to notify the people that have been identified as "contact cases".
+
+To that end, the user may copy an automatically-generated message from the service and send it through the messaging medium of their choice, or using voluntarily the API they chose.
+
+The user may also ask {{productName}} for an anonymous notification of a given contact case. The organization {{owner}} and the service {{productName}} do not keep any identifiable trace of these interactions between the user and their contact.
+
+### 4.5 Follow-up for Contact Cases
+
+If a person, which is initially a non-user, is identified as a contact case by a possibly {{diseaseName}}-infected user, they are invited to use the service too.
+
+A link allows them to take note of their probable "contact case" status and invite them to evaluate their possible contamination to {{diseaseName}} using the same symptoms-based non-medical diagnostic.
+
+If the diagnostic establishes a possible contamination to {{diseaseName}}, this person is invited to go through the whole identification and notification of contact cases process, as would be any user.
+
+If the declared symptoms do not suggest the person has been contaminated to {{diseaseName}}, the services suggests to subscribe, using the person's email, to the follow-up feature. As a reminder, this feature allows the sending of regular emails advising and reminding the person to be vigilant about their possible symptoms of {{diseaseName}}. Subscribing to this feature is voluntary and cancelable.
+
+The feature's lifetime is of 14 days. After this time, the user's email that had been stored for this purpose is automatically deleted.
+
+## 5. Use of Service
+
+### 5.1. Use of {{productName}}
+
+While using the platform, users commit to abide by applicable laws and regulations, and not to undermine public order or other people's rights.
+
+Users are solely responsible for completing any administrative or medical requirements with regards to their health. Concerning help or medical testing procedures, they are solely responsible to get the means to fulfill them. As such, {{owner}} cannot be liable in any way.
+
+Users acknowledge having taken note of specifications and constraints of the platform, especially technical ones. They are solely responsible for its use. Users are informed and agree that the platform needs an Internet connection to which they endorse full responsibility, and on which the service's quality depends.
+
+Users are also solely responsible of any relationship they may form with people from services they may contact following the service's suggestions, especially medical help or testing organizations.
+
+### 5.2. Persistence of Data during a User's Workflow on their Web Browser
+
+Using cookies and local storage, the user may stop and restart their workflow on the service, using the same device at different times. This persistence is optional, and the user may choose to decline it at any time. It does not imply in any way that the user's personal data may be stored by {{productName}}. This persistence cannot be assimilated with a user account feature.
+
+Since {{productName}} doesn't save any data, the service cannot prevent users from a potential loss of the information they declared on the platform. It is the user's responsibility to keep a copy of their data. They cannot ask for any compensation for any data loss.
+
+### 5.3. {{productName}}'s Free Use
+
+The use of {{productName}} platform is free of charge.
+
+## 6. Warranty and Disclaimer
+
+### 6.1. Disclaimer about Recommendations and Non-medical Diagnostic
+
+{{productName}}'s non-medical diagnostic is based on numerous and official medical resources, and on recommendations from and under the watch of the scientific comitee supporting the initiative.
+
+With regards to the currently ongoing sanitary crisis, shown recommendations and the non-medical diagnostic algorithm are bound to evolve depending on the state-of-the-art clinical research and health authorities.
+
+The shown results may therefore be different at different points in time, even for identical inputs.
+
+{{productName}} is not a medical device. It doesn't deliver any medical opinion, and cannot be a substitute for a medical consultation or advice from a doctor, a pharmacist or any health professional. It cannot be considered as a substitute to competent authorities recommendations either.
+
+{{productName}} is an information service made to answer a sanitary emergency. It cannot be used as a home-based medical remote monitoring.
+
+### 6.2. Disclaimer on {{productName}}'s use
+
+{{productName}} do not warranty any continuation of service. {{productName}} commits to provide its service diligently and according to the rules of the art, acknowledging that it's only bound by an obligation of means, excluding any results requirements whatsoever.
+
+{{productName}} cannot be hold liable for any momentary difficulty or impossibility to access the platform that would have external origins, force majeure or related to network issues.
+
+The service is provided as-is. {{productName}} cannot guarantee to its users that it is without errors, vices or defaults. The service is developed in a standardized way for all users. It is not made to adapt to their personal constraints.
+
+{{productName}} expressly keep the right to discontinue momentarily access to the service for maintenance reasons.
+
+If you find an error or omission or what might look like a dysfunction, we enjoin you to let us know by email: [contact@conotify.org](mailto:contact@conotify.org)
+
+### 6.3. Forbidden Behaviors
+
+
+Beyond the other prohibitions presented in the hereby terms, users commit to use the platform in a virtuous manner.
+
+They forbid explicitly themselves to use the platform to the following ends: exercising activities which are illegal, fraudulent, right-infringing or security-compromising; breach of public order, or breaking existing laws or regulations; trespassing in the computer system of a third party, or any activity likely to harm, control, interfere or intercept a part or the whole of a third party computer system, violating its security or integrity; sending unsollicited emails or commercial sollicitations; rigging intended to improve a third party site SEO; helping or inticing in any way one or several acts or activities hereby described; more generally any usage diverting the service to other ends than the one it was made for.
+
+Users commit to respect continuity of service of the platform. They forbid explicitly to themselves: any behavior likely to interrupt, suspend, slow down or hinder the continuity of the service; any intrusion or attempt of intrusion in the service; any highjacking of resources of the service; any action likely to put a disproportionate load on the service's infrastructures; any infringement on security and authentification measures; any act likely to infringe on financial, commercial or moral rights and interests for {{productName}} or users of the service.
+
+Users commit to respect the platform's value. They forbid themselves to sell or rent partial or total access to the platform.
+
+### 6.4. Warranty of Users towards {{owner}}
+
+Users warrants {{owner}} against any complaint, claim, action of any kind that {{owner}} might undergo following their violation of any of their obligations according to the hereby terms.
+
+Users commit to compensate {{owner}} for any sustained prejudice, and to pay all costs, charges and conviction thereby incurred.
+
+## 7. Links towards other Websites
+
+{{productName}} may suggest links towards third-party websites. Redirection towards websites through hyperlinks do not engage {{owner}}’s liability, {{owner}} cannot be held responsible for their content. It is the user’s responsibility to make the necessary or useful precautions before going through a transaction of any kind with said third-party.
+
+{{owner}} has no relationship with these third party websites, whether commercial or financial. They are suggested for information only.
+
+## 8. License and Intellectual Property
+
+Users explicitly acknowledge {{owner}}’s property of the whole platform, and in particular systems, software, infrastructures, databases and content of all natures (texts, pictures, visuals, musics, logos, brands, etc.) that are utilized by {{owner}} for the service and are protected under copyright, intellectual property rights, industrial property rights or database rights.
+
+The software’s Source Code is available in OpenSource license [GPL v3](https://github.com/bayesimpact/briser-la-chaine/blob/master/LICENSE).
+
+Users forbid themselves to copy or use as their own or for a third party the idea, the technologies or any other element of the platform. Any disassembly, decompilation, decryption, extraction, re-use, copy and more generally any act of reproducing, representing, broadcasting and using any of these elements, in part or as a whole without the explicit consent of {{owner}} are strictly forbidden and may be suggest to legal proceedings.
+
+{{owner}} does not claim any property on the content users might upload on the platform, nor on their personal data.
+
+## 9. Personal Data
+
+The organization {{owner}} is concerned about privacy and personal data protection. It commits to respect the best level of protection, in full conformity with GDPR.
+
+The controller is {{owner}}.
+
+For the service to work, {{productName}} asks, without storing them, personal data from users, amongst which: possible symptoms, first day of symptoms, list of people encountered during the contagious period. These are stored neither by {{owner}} nor {{productName}}. Moreover, they aren’t transfered to a third party, nor utilized to a commercial end.
+
+The user may give {{productName}} access rights, to external features, through APIs (such as access to their calendar or their call history). This right is only given after the user’s consent, it is notified to them, and the acquired data is not transmitted to {{owner}}.
+
+As part of the “follow-up” feature, users accept to share an email address, so that they can be contacted by {{productName}} with information. This feature is active up to 14 days. {{owner}} commits to delete the users’ email addresses once the feature ends. At any time, users may ask for access, modification or deletion of this email address by sending a request to that end at [privacy@bayesimpact.org](privacy@bayesimpact.org).
+
+Unsubscribing to the “follow-up” feature is effective immediately, once the 14-days period has ended. Email addresses are deleted as soon as the automatized process is run, which is less than two weeks later.
+
+People identified by {{productName}}’s users as “contact cases” and contacted by {{productName}} benefit from the same protection with regards to privacy.
+
+In order to guarantee users’ privacy at best, the organization {{owner}} has a Data Protection Officer.
+
+For more details, a dedicated page about our privacy policy is available [here]({{privacyPageUrl}}).
+
+## 10.General Provisions
+
+Were it to happen that any of the present terms be declared invalid or inapplicable, the others would stay active and with full effect.
+
+Users admit that neither the hereby terms nor the use of the service make a company, a business or business contract or work mandate between them and {{owner}}.
+
+The interpretation language of the hereby terms is French, in the case where there’s a contradiction or dispute on the meaning of a word or disposition.
+
+The hereby terms are subscribed for an indefinite period.
+
+## 11. Modification
+
+{{owner}} reserves itself the right to modify the hereby terms at any time.
+
+Users will be informed of any such change by any available mean, and in particular publication on {{productName}}.
+
+The modification date will always be clearly shown at the top and bottom of the hereby terms.
+
+Using the service after seeing the modification of the hereby terms on {{productName}} implies full acceptance of the updated terms.
+
+The only way to refuse the modification of the hereby terms is to stop using {{productName}}.
+
+The user that does not accept the modified terms cannot benefit from the service.
+
+Any user that uses the service after the modified terms comes into force is recognized as having accepted the modified terms.
+
+## 12. Litigation
+
+{{owner}} reserves itself the right to take any appropriate measures in case of unlawful use by service users, including:
+
+ * publishing any relevant informational message;
+ * notifying any relevant authorities;
+ * engaging in any legal action.
+
+The service’s usage falls under French law.
+
+In case of litigation, Paris courts are the sole competent authorities.
+
+Before any recourse to legal action, users obligate themselves to negotiate with {{owner}} in good faith to reach an amicable agreement in case of any conflict related to the service or the present terms, including pertaining to these term’s validity.
+
+Users wishing to initiate the negotiating process must inform {{owner}} by registered mail and indicate the elements of the conflict. A meeting either in person or through digital means will then be organized between users and {{owner}}. If within six months, users and {{owner}} do not reach an agreement, the conflict will be referred to the aforementioned competent jurisdiction.
+
+The limitation period will be suspended starting on the start of the negociation process implementation, i.e. the date of receipt of the information act sent by registered letter with acknowledgment of receipt. The suspension of the limitation period will end at the date of signature of the conciliation or non-conciliation report. In case of refusal of the users or {{owner}} to sign said report, the other party may take note of this refusal by informing them that unless they react in a one-month delay, referral to the competent judge may happen. During the whole negociation process, and until its end, users forbid themselves to exercise any lawsuit against {{owner}} on the conflict the negociation is about.
+
+## 13. Contact Information
+
+**Website editor :**
+
+{{productName}} is edited by {{owner}}, headquartered at 9 rue d’Alexandrie, 75002 Paris, France. Their phone number is +33 6 71 91 18 09
+
+**Publication Manager:**
+
+The publication manager is Paul Duan, based at 9 rue d'Alexandrie, 75002 Paris, France.
+Contact email:: [contact@briserlachaine.org](contact@briserlachaine.org)
+
+**Hosting:**
+
+{{productName}} is hosted by OVH, headquarted at 2 rue Kellermann, 59100 Roubaix, France. Their phone number is +33 9 72 10 10 07.
+The OVH servers hosting {{productName}} are based in Gravelines, France.
+
+## 15. Date
+
+The present terms came into effect on May 2, 2020.

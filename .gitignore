@@ -11,3 +11,6 @@ dist/
 
 # NPM Packages installed locally
 /node_modules
+
+# Files generated automatically
+cfg/colors.json

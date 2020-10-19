@@ -8,6 +8,7 @@ interface DrawerContainerProps {
   drawer: React.ReactNode
   isOpen: boolean
   mainStyle?: React.CSSProperties
+  margin?: number
   onClose?: () => void
   style?: React.CSSProperties
 }
@@ -31,7 +32,7 @@ const mainOpeningStyle: React.CSSProperties = {
   zIndex: 0,
 }
 const closeIconStyle: React.CSSProperties = {
-  color: '#000',
+  color: colors.ALMOST_BLACK,
   cursor: 'pointer',
   position: 'absolute',
   right: 15,
@@ -43,10 +44,10 @@ const closeIconStyle: React.CSSProperties = {
 // This is a top level page and should never be nested in another one.
 // TOP LEVEL PAGE
 const DrawerContainer = (props: DrawerContainerProps): React.ReactElement => {
-  const {children, drawer, isOpen, mainStyle, onClose, style, ...otherProps} = props
+  const {children, drawer, isOpen, mainStyle, margin = 0, onClose, style, ...otherProps} = props
   const [mainWidth, setMainWidth] = useState(0)
   const opaqueStyle: React.CSSProperties = {
-    background: '#000',
+    background: colors.ALMOST_BLACK,
     bottom: 0,
     left: 0,
     opacity: isOpen ? .5 : 0,
@@ -59,8 +60,9 @@ const DrawerContainer = (props: DrawerContainerProps): React.ReactElement => {
   }
   const drawerStyle: React.CSSProperties = {
     display: 'flex',
+    marginTop: isOpen ? margin : 0,
     maxHeight: isOpen ? undefined : 0,
-    minHeight: isOpen ? window.innerHeight : 0,
+    minHeight: isOpen ? (window.innerHeight - margin) : 0,
     overflow: isOpen ? 'auto' : 'hidden',
     position: 'relative',
     transform: isOpen ? '' : `translateY(${window.innerHeight}px)`,

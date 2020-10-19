@@ -1,8 +1,13 @@
+import {format as dateFormat} from 'date-fns'
 import {TFunction} from 'i18next'
 
-function sendEmail(emailAddress: string, risk: ContaminationRisk, t: TFunction): void {
+import {LocaleOption} from 'store/i18n'
+
+
+function sendAnonymousEmail(emailAddress: string, t: TFunction): void {
   fetch(`${config.mailjetProxyUrl}/email/${t('mailjetEmailTemplateId')}`, {
-    body: JSON.stringify({To: [{Email: emailAddress}], Variables: {risk}}),
+    // TODO(cyrille): Drop the risk in mail template.
+    body: JSON.stringify({To: [{Email: emailAddress}], Variables: {risk: 'high'}}),
     credentials: 'omit',
     method: 'post',
     mode: 'no-cors',
@@ -10,11 +15,35 @@ function sendEmail(emailAddress: string, risk: ContaminationRisk, t: TFunction):
 }
 
 
-function sendSMS(phoneNumber: string, risk: ContaminationRisk, t: TFunction): void {
-  const internationalPhoneNumber = phoneNumber.replace(/ /g, '').replace(/^0/, '+33')
-  // i18next-extract-mark-context-start ["", "high", "low"]
-  const mailjetSmsTemplateId = t('mailjetSmsTemplateId', {context: risk})
-  // i18next-extract-mark-context-stop
+function sendEmailOnBehalf(
+  emailAddress: string, userName: string,
+  contagiousStartDate: Date, contagiousEndDate: Date, t: TFunction, dateOptions: LocaleOption,
+): void {
+  fetch(`${config.mailjetProxyUrl}/email/${t('mailjetEmailOnBehalfTemplateId')}`, {
+    // TODO(cyrille): Drop the risk in mail template.
+    body: JSON.stringify({To: [{Email: emailAddress}], Variables: {
+      contagiousEndDate: dateFormat(contagiousEndDate, 'd MMM', dateOptions),
+      contagiousStartDate: dateFormat(contagiousStartDate, 'd MMM', dateOptions),
+      risk: 'high',
+      userName,
+    }}),
+    credentials: 'omit',
+    method: 'post',
+    mode: 'no-cors',
+  })
+}
+
+function makeIntlPhoneNumber(number: string, t: TFunction): string {
+  if (number.startsWith('+')) {
+    return number
+  }
+  const phoneSuffix = number.replace(new RegExp(`^${t('phoneTrunkPrefix')}`), '')
+  return `+${t('phoneInternationalPrefix')}${phoneSuffix}`
+}
+
+function sendAnonymousSMS(phoneNumber: string, t: TFunction): void {
+  const internationalPhoneNumber = makeIntlPhoneNumber(phoneNumber, t)
+  const mailjetSmsTemplateId = t('mailjetSmsTemplateId')
   fetch(`${config.mailjetProxyUrl}/sms/${mailjetSmsTemplateId}`, {
     body: JSON.stringify({To: internationalPhoneNumber}),
     credentials: 'omit',
@@ -23,7 +52,24 @@ function sendSMS(phoneNumber: string, risk: ContaminationRisk, t: TFunction): vo
   })
 }
 
+
+function sendSMSOnBehalf(phoneNumber: string, userName: string, t: TFunction): void {
+  const internationalPhoneNumber = makeIntlPhoneNumber(phoneNumber, t)
+  const mailjetSmsOnBehalfTemplateId = t('mailjetSmsOnBehalfTemplateId')
+  fetch(`${config.mailjetProxyUrl}/sms/${mailjetSmsOnBehalfTemplateId}`, {
+    body: JSON.stringify({To: internationalPhoneNumber, Variables: {
+      userName: userName.slice(0, 19),
+    }}),
+    credentials: 'omit',
+    method: 'post',
+    mode: 'no-cors',
+  })
+}
+
+
 export {
-  sendEmail,
-  sendSMS,
+  sendAnonymousEmail,
+  sendAnonymousSMS,
+  sendEmailOnBehalf,
+  sendSMSOnBehalf,
 }

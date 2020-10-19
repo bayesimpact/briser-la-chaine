@@ -97,7 +97,7 @@ const Slider = (props: SliderProps): React.ReactElement => {
       return onFastForward()
     }
     return true
-  }, [currentSlideIndex, onFastForward, selectSlide])
+  }, [currentSlideIndex, numSlides, onFastForward, selectSlide])
   const [bottomDivSize, setBottomDivSize] = useState(0)
   return <div style={pageStyle}>
     {React.Children.map(children, (slide: React.ReactNode, index: number): React.ReactElement =>
